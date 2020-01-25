@@ -1,11 +1,9 @@
-# base-hexagonal-repository
-Its a base project to develop the microservices based in hexagonal architecture.
-
+# viabilización
 ## Quick start
 
 To obtain the source code, just clone the repository at github
 ```
-git clone git@github.com:jmorenor1986/base-hexagonal-repository.git
+git clone git@github.com:jmorenor1986/viabilizacion.git
 ``` 
 
 ## Build
@@ -27,30 +25,30 @@ $ mvn clean install
 
 you must see a sucessful build
 ```
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Summary for base-hexagonal-architecture 1.0-SNAPSHOT:
+[INFO] Reactor Summary for base-hexagonal-architecture 1.0.2:
 [INFO]
-[INFO] base-hexagonal-architecture ........................ SUCCESS [  4.653 s]
-[INFO] base-hexagonal-architecture-web .................... SUCCESS [ 32.682 s]
-[INFO] base-hexagonal-architecture-acceptance-tests ....... SUCCESS [  0.962 s]
+[INFO] base-hexagonal-architecture ........................ SUCCESS [  2.210 s]
+[INFO] base-hexagonal-architecture-web .................... SUCCESS [ 38.584 s]
+[INFO] base-hexagonal-architecture-acceptance-tests ....... SUCCESS [  0.869 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  39.055 s
-[INFO] Finished at: 2020-01-24T16:10:37+01:00
+[INFO] Total time:  42.404 s
+[INFO] Finished at: 2020-01-25T16:59:22+01:00
 [INFO] ------------------------------------------------------------------------
 ```
 To the run application, just use maven
 ```
-mvn -pl base-hexagonal-architecture-web spring-boot:run
+mvn -pl viabilizacion-web spring-boot:run
 ```
 To validate the service you have two ways:
 
 Open the browser with next url:
 ```
-http://localhost:5000/example/v1/keepalive/
+http://localhost:5000/viabilizacion/v1/keepalive/
 ```
-and
+or
+
 ```
-curl -X GET "http://localhost:5000/example/v1/keepalive/" -H "accept: */*"
+curl -X GET "http://localhost:5000/viabilizacion/v1/keepalive/" -H "accept: */*"
 ```

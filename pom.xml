@@ -9,8 +9,8 @@
         <version>2.2.1.RELEASE</version>
         <relativePath/>
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>base-hexagonal-architecture</artifactId>
+    <groupId>com.samtel</groupId>
+    <artifactId>viabilizacion</artifactId>
     <packaging>pom</packaging>
     <version>1.0.2</version>
 
@@ -67,7 +67,7 @@
     </dependencies>
 
     <modules>
-        <module>base-hexagonal-architecture-web</module>
-        <module>base-hexagonal-architecture-acceptance-tests</module>
+        <module>viabilizacion-web</module>
+        <module>viabilizacion-acceptance-tests</module>
     </modules>
 </project>
