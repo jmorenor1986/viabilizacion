@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -19,15 +20,17 @@ public class SolicitudControllerTest {
 
     @Mock
     private ClientePayLoad clientePayLoad;
+    @Mock
+    private ModelMapper modelMapper;
 
     @Before
-    public void setup(){
-        solicitudController = new SolicitudController(solicitudService);
+    public void setup() {
+        solicitudController = new SolicitudController(solicitudService, modelMapper);
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void testCumplimientoSolicitudSuccess(){
+    public void testCumplimientoSolicitudSuccess() {
         String result = solicitudController.solicitud(clientePayLoad);
     }
 }
