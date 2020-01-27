@@ -15,6 +15,7 @@ public class SolicitudController {
     }
 
     public String solicitud(ClientePayLoad clientePayLoad) {
-        return solicitudService.cumplimientoSolicitud(modelMapper.map(clientePayLoad, Cliente.class));
+        Cliente cliente = modelMapper.map(clientePayLoad, Cliente.class);
+        return solicitudService.cumplimientoSolicitud(cliente);
     }
 }
