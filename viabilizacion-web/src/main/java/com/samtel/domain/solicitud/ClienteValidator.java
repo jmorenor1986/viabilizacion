@@ -7,7 +7,21 @@ import org.springframework.stereotype.Component;
 public class ClienteValidator extends GenericValidator<Cliente> {
 
     @Override
-    protected boolean validateObject(Cliente dto) {
+    public boolean validateObject(Cliente dto) {
+        if (validateMandatory(dto.getActividad())
+                && validateMandatory(dto.getAnoNacimiento())
+                && validateMandatory(dto.getApellidos())
+                && validateMandatory(dto.getCelular())
+                && validateMandatory(dto.getCorreoElectronico())
+                && validateMandatory(dto.getDireccion())
+                && validateMandatory(dto.getIngresos())
+                && validateMandatory(dto.getNombres())
+                && validateMandatory(dto.getNumeroIdentificacion())
+                && validateMandatory(dto.getPlazo())
+                && validateMandatory(dto.getTelefono())
+                && validateMandatory(dto.getTipoIdentificacion())
+                && validateMandatory(dto.getValorSolicitado()))
+            return true;
         return false;
     }
 }

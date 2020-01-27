@@ -1,8 +1,10 @@
 package com.samtel.domain.solicitud;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
+@Getter
+@Builder
 public class Cliente {
     private String tipoIdentificacion;
     private String numeroIdentificacion;
@@ -17,5 +19,4 @@ public class Cliente {
     private String ingresos;
     private String plazo;
     private String actividad;
-
 }
