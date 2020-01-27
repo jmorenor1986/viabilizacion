@@ -13,6 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SolicitudControllerTest {
@@ -35,12 +37,11 @@ public class SolicitudControllerTest {
     }
 
     @Test
-    //TODO fix test
     public void testCumplimientoSolicitudSuccess() {
         Mockito.when(modelMapper.map(clientePayLoad, Cliente.class)).thenReturn(cliente);
-        Mockito.when(solicitudService.cumplimientoSolicitud(cliente)).thenReturn(EXPECTED_RESULT);
-        String result = solicitudController.solicitud(clientePayLoad);
-        Assert.assertNull(result);
+        Mockito.when(solicitudService.cumplimientoSolicitud(cliente)).thenReturn(Optional.empty());
+        String result = solicitudController.solicitud(clientePayLoad).orElse("RESULT");
+        Assert.assertEquals("RESULT", result);
     }
 
 }

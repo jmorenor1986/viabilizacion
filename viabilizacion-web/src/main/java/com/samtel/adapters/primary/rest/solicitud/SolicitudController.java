@@ -4,6 +4,8 @@ import com.samtel.domain.solicitud.Cliente;
 import com.samtel.ports.primary.solicitud.SolicitudService;
 import org.modelmapper.ModelMapper;
 
+import java.util.Optional;
+
 public class SolicitudController {
 
     private final SolicitudService solicitudService;
@@ -14,8 +16,7 @@ public class SolicitudController {
         this.modelMapper = modelMapper;
     }
 
-    public String solicitud(ClientePayLoad clientePayLoad) {
-        Cliente cliente = modelMapper.map(clientePayLoad, Cliente.class);
-        return solicitudService.cumplimientoSolicitud(cliente);
+    public Optional<String> solicitud(ClientePayLoad clientePayLoad) {
+        return solicitudService.cumplimientoSolicitud(modelMapper.map(clientePayLoad, Cliente.class));
     }
 }

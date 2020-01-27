@@ -2,6 +2,8 @@ package com.samtel.ports.primary.solicitud;
 
 import com.samtel.domain.solicitud.Cliente;
 
+import java.util.Optional;
+
 public interface SolicitudService {
-    String cumplimientoSolicitud(Cliente cliente);
+    Optional<String> cumplimientoSolicitud(Cliente cliente);
 }
