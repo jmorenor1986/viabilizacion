@@ -11,6 +11,6 @@ public class SolicitudController {
     }
 
     public String solicitud(ClientePayLoad clientePayLoad) {
-        return solicitudService.cumplimientoSolicitud()
+        return solicitudService.cumplimientoSolicitud(null);
     }
 }
