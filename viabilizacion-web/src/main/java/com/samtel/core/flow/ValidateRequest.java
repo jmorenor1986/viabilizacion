@@ -1,10 +1,11 @@
 package com.samtel.core.flow;
 
+import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 
 import java.util.Optional;
 
 public interface ValidateRequest {
 
-    Optional<Boolean> process(Cliente cliente);
+    Optional<ResponseFlow> process(Cliente cliente);
 }

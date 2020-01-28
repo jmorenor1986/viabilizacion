@@ -1,6 +1,7 @@
 package com.samtel.core.flow;
 
 import com.samtel.core.SearchReconocerImpl;
+import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,8 +30,8 @@ public class SearchReconocerImplTest {
 
     @Test
     public void testSearchReconocerImplSuccess(){
-        Boolean result = validateRequest.process(cliente).orElse(Boolean.FALSE);
-        Assert.assertEquals(result, Boolean.TRUE);
+        ResponseFlow result = validateRequest.process(cliente).orElse(ResponseFlow.DENIED);
+        Assert.assertNotNull(result);
     }
 
 }

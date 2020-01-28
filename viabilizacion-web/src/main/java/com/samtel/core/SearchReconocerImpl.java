@@ -1,6 +1,7 @@
 package com.samtel.core;
 
 import com.samtel.core.flow.ValidateRequest;
+import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,8 +23,8 @@ public class SearchReconocerImpl implements ValidateRequest {
     }
 
     @Override
-    public Optional<Boolean> process(Cliente cliente) {
+    public Optional<ResponseFlow> process(Cliente cliente) {
         setCliente(cliente);
-        return Optional.of(Boolean.TRUE);
+        return Optional.of( ResponseFlow.FAST_TRACK );
     }
 }

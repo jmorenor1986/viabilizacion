@@ -1,6 +1,7 @@
 package com.samtel.core;
 
 import com.samtel.core.flow.ValidateRequest;
+import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,9 +28,9 @@ public class SearchCacheImpl implements ValidateRequest {
     }
 
     @Override
-    public Optional<Boolean> process(Cliente cliente) {
+    public Optional<ResponseFlow> process(Cliente cliente) {
         setCliente(cliente);
-        validateRequest.process(getCliente());
-        return Optional.of(Boolean.TRUE);
+        return validateRequest.process(getCliente());
+
     }
 }
