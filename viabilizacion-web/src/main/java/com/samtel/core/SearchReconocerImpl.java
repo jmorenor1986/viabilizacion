@@ -1,7 +1,7 @@
 package com.samtel.core;
 
 import com.samtel.core.flow.ValidateRequest;
-import com.samtel.domain.solicitud.RequestData;
+import com.samtel.domain.solicitud.Cliente;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -16,15 +16,14 @@ public class SearchReconocerImpl implements ValidateRequest {
     private static final Logger log= LoggerFactory.getLogger(SearchReconocerImpl.class);
 
     @Getter @Setter
-    private RequestData data;
+    private Cliente cliente;
 
     public SearchReconocerImpl() {
     }
 
     @Override
-    public Optional<Boolean> process(RequestData data) {
-        setData(data);
-        log.info("Llego al final del proceso");
+    public Optional<Boolean> process(Cliente cliente) {
+        setCliente(cliente);
         return Optional.of(Boolean.TRUE);
     }
 }

@@ -1,9 +1,8 @@
 package com.samtel.core.flow;
 
 
-import com.samtel.core.SearchReconocerImpl;
 import com.samtel.core.ValidateCityImpl;
-import com.samtel.domain.solicitud.RequestData;
+import com.samtel.domain.solicitud.Cliente;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,20 +20,17 @@ public class ValidateCityImplTest {
     @Mock
     private ValidateRequest next;
 
-    private RequestData data;
+    private Cliente cliente;
 
     @Before
     public void setUp(){
         validateRequest = new ValidateCityImpl(next);
         MockitoAnnotations.initMocks(this);
-        data = new RequestData();
-        data.setData("Nicolas");
     }
 
     @Test
     public void testValidateCityImplSuccess() {
-        Assert.assertNotNull(data.toString());
-        Boolean result = validateRequest.process(data).orElse(Boolean.FALSE);
+        Boolean result = validateRequest.process(cliente).orElse(Boolean.FALSE);
         Assert.assertEquals(result, Boolean.TRUE);
     }
 }

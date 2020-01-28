@@ -1,8 +1,7 @@
 package com.samtel.core.flow;
 
-import com.samtel.core.SearchCacheImpl;
 import com.samtel.core.SearchReconocerImpl;
-import com.samtel.domain.solicitud.RequestData;
+import com.samtel.domain.solicitud.Cliente;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,23 +19,18 @@ public class SearchReconocerImplTest {
     @Mock
     private ValidateRequest next;
 
-    private RequestData data;
+    private Cliente cliente;
 
     @Before
     public void setUp(){
         validateRequest = new SearchReconocerImpl();
         MockitoAnnotations.initMocks(this);
-        data = new RequestData();
-        data.setData("Esto esa una prueba");
     }
 
     @Test
     public void testSearchReconocerImplSuccess(){
-        Boolean result = validateRequest.process(data).orElse(Boolean.FALSE);
+        Boolean result = validateRequest.process(cliente).orElse(Boolean.FALSE);
         Assert.assertEquals(result, Boolean.TRUE);
     }
-    @Test
-    public void testData(){
-        Assert.assertNotNull(data.getData());
-    }
+
 }
