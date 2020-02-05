@@ -7,8 +7,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class CiudadApplication extends SpringBootServletInitializer {
+public class ValidationApplication extends SpringBootServletInitializer {
     public static void main(String... args) {
-        SpringApplication.run(CiudadApplication.class, args);
+        SpringApplication.run(ValidationApplication.class, args);
     }
 }

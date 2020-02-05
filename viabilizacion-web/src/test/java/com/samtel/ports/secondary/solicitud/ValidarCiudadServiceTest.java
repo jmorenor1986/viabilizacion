@@ -1,7 +1,6 @@
 package com.samtel.ports.secondary.solicitud;
 
-import com.samtel.adapters.secondary.database.solicitud.ValidarCiudadRepository;
-import com.samtel.adapters.secondary.database.solicitud.ValidarCiudadServiceImpl;
+import com.samtel.adapters.secondary.rest.ValidarCiudadServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
