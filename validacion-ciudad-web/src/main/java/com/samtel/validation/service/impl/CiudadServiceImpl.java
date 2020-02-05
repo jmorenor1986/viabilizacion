@@ -4,6 +4,7 @@ import com.samtel.validation.common.BadRequestException;
 import com.samtel.validation.entity.Ciudad;
 import com.samtel.validation.service.CiudadRepository;
 import com.samtel.validation.service.CiudadService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
@@ -12,6 +13,7 @@ public class CiudadServiceImpl implements CiudadService {
     public static final String ESTADO_CIUDAD_ACTIVO = "ACTIVO";
     private final CiudadRepository ciudadRepository;
 
+    @Autowired
     public CiudadServiceImpl(CiudadRepository ciudadRepository) {
         this.ciudadRepository = ciudadRepository;
     }

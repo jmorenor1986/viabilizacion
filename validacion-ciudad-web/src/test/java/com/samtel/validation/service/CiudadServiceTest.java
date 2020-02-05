@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class CiudadServiceTest {
 
@@ -29,8 +29,9 @@ public class CiudadServiceTest {
 
     @Before
     public void setUp() {
-        ciudadService = new CiudadServiceImpl(ciudadRepository);
         MockitoAnnotations.initMocks(this);
+        ciudadService = new CiudadServiceImpl(ciudadRepository);
+
     }
 
     @Test(expected = BadRequestException.class)
@@ -40,24 +41,20 @@ public class CiudadServiceTest {
     }
 
     @Test
-    @Ignore
     public void testBuscaCodigoONombreSuccessFalse() {
         Ciudad ciudad = new Ciudad();
         ciudad.setEstado(RESPUESTA_FALSE);
         Mockito.when(ciudadRepository.buscarPorCodigoONombre(NOMBRE_CIUDAD)).thenReturn(ciudad);
         Boolean respuesta = ciudadService.validarCiudad(NOMBRE_CIUDAD);
-        Mockito.verify(ciudadRepository, Mockito.times(1));
         Assert.assertEquals(Boolean.FALSE, respuesta);
     }
 
     @Test
-    @Ignore
     public void testBuscaCodigoONombreSuccessTrue() {
         Ciudad ciudad = new Ciudad();
         ciudad.setEstado(RESPUESTA_TRUE);
         Mockito.when(ciudadRepository.buscarPorCodigoONombre(NOMBRE_CIUDAD)).thenReturn(ciudad);
         Boolean respuesta = ciudadService.validarCiudad(NOMBRE_CIUDAD);
-        Mockito.verify(ciudadRepository, Mockito.times(1));
         Assert.assertEquals(Boolean.TRUE, respuesta);
     }
 }
