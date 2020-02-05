@@ -1,13 +1,11 @@
 package com.samtel.validation.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NamedQuery(name = "Ciudad.buscarPorCodigoONombre", query = "FROM Ciudad where codigo  = ?1 or nombre = ?1")
 public class Ciudad {
     @Id

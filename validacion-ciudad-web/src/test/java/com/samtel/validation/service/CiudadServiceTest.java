@@ -1,9 +1,11 @@
 package com.samtel.validation.service;
 
+import com.samtel.validation.common.BadRequestException;
 import com.samtel.validation.entity.Ciudad;
 import com.samtel.validation.service.impl.CiudadServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -17,12 +19,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CiudadServiceTest {
 
     public static final String NOMBRE_CIUDAD = "BOGOTA";
+    public static final String RESPUESTA_FALSE = "INACTIVO";
+    public static final String RESPUESTA_TRUE = "ACTIVO";
     private CiudadService ciudadService;
 
     @Mock
     private CiudadRepository ciudadRepository;
-    @Mock
-    private Ciudad ciudad;
+
 
     @Before
     public void setUp() {
@@ -30,11 +33,31 @@ public class CiudadServiceTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void testBuscaCodigoONombreSuccess() {
-        Mockito.when(ciudadRepository.buscarPorCodigoONombre(NOMBRE_CIUDAD)).thenReturn(ciudad);
-        Ciudad ciudadLocal = ciudadService.validarCiudad(NOMBRE_CIUDAD);
-        Assert.assertNull(ciudadLocal);
+    @Test(expected = BadRequestException.class)
+    public void testBuscaCodigoONombreErrorNull() {
+        Mockito.when(ciudadRepository.buscarPorCodigoONombre(NOMBRE_CIUDAD)).thenReturn(null);
+        Boolean respuesta = ciudadService.validarCiudad(NOMBRE_CIUDAD);
+    }
 
+    @Test
+    @Ignore
+    public void testBuscaCodigoONombreSuccessFalse() {
+        Ciudad ciudad = new Ciudad();
+        ciudad.setEstado(RESPUESTA_FALSE);
+        Mockito.when(ciudadRepository.buscarPorCodigoONombre(NOMBRE_CIUDAD)).thenReturn(ciudad);
+        Boolean respuesta = ciudadService.validarCiudad(NOMBRE_CIUDAD);
+        Mockito.verify(ciudadRepository, Mockito.times(1));
+        Assert.assertEquals(Boolean.FALSE, respuesta);
+    }
+
+    @Test
+    @Ignore
+    public void testBuscaCodigoONombreSuccessTrue() {
+        Ciudad ciudad = new Ciudad();
+        ciudad.setEstado(RESPUESTA_TRUE);
+        Mockito.when(ciudadRepository.buscarPorCodigoONombre(NOMBRE_CIUDAD)).thenReturn(ciudad);
+        Boolean respuesta = ciudadService.validarCiudad(NOMBRE_CIUDAD);
+        Mockito.verify(ciudadRepository, Mockito.times(1));
+        Assert.assertEquals(Boolean.TRUE, respuesta);
     }
 }
