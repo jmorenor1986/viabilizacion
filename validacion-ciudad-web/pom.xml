@@ -62,6 +62,7 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>com.samtel.ValidationApplication</exclude>
+                                        <exclude>com.samtel.validation.common.config.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>

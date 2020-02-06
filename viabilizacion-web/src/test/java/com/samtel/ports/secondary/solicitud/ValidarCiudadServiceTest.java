@@ -16,17 +16,14 @@ public class ValidarCiudadServiceTest {
     public static final String CODIGO_CIUDAD = "001";
     private ValidarCiudadService validarCiudadService;
 
-    @Mock
-    private ValidarCiudadRepository validarCiudadRepository;
 
     @Before
     public void setUp() {
-        validarCiudadService = new ValidarCiudadServiceImpl(validarCiudadRepository);
+        validarCiudadService = new ValidarCiudadServiceImpl();
     }
 
     @Test
     public void testValidarCiudadSuccess() {
-        Mockito.when(validarCiudadRepository.validarCodigoCiudad(CODIGO_CIUDAD)).thenReturn(Boolean.TRUE);
         Boolean result = validarCiudadService.validarCodigoCiudad(CODIGO_CIUDAD);
         Assert.assertEquals(result, Boolean.TRUE);
     }
