@@ -83,5 +83,6 @@
 
     <modules>
         <module>viabilizacion-web</module>
+        <module>validacion-ciudad-web</module>
     </modules>
 </project>
