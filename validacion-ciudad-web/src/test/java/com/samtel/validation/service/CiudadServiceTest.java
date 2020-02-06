@@ -1,6 +1,6 @@
 package com.samtel.validation.service;
 
-import com.samtel.validation.common.BadRequestException;
+import com.samtel.validation.common.exception.BadRequestException;
 import com.samtel.validation.entity.Ciudad;
 import com.samtel.validation.service.impl.CiudadServiceImpl;
 import org.junit.Assert;

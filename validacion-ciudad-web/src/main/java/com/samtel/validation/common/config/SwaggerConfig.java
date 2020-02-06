@@ -1,4 +1,4 @@
-package com.samtel.config;
+package com.samtel.validation.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.basePackage("com.samtel.adapters.primary.rest"))
+                .apis(RequestHandlerSelectors.basePackage("com.samtel.validation.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

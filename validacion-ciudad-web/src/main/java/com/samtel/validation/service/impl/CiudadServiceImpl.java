@@ -1,13 +1,15 @@
 package com.samtel.validation.service.impl;
 
-import com.samtel.validation.common.BadRequestException;
+import com.samtel.validation.common.exception.BadRequestException;
 import com.samtel.validation.entity.Ciudad;
 import com.samtel.validation.service.CiudadRepository;
 import com.samtel.validation.service.CiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class CiudadServiceImpl implements CiudadService {
     public static final String ERROR_CIUDAD_INVALIDA = "LA CIUDAD INGRESADA NO EXISTE";
     public static final String ESTADO_CIUDAD_ACTIVO = "ACTIVO";

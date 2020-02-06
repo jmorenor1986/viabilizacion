@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("v1/validacion/ciudad")
+@RequestMapping("v1/ciudad")
 public class CiudadController {
     private final CiudadService ciudadService;
 
