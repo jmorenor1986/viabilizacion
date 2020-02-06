@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("v1/keepalive")
+@RequestMapping("/v1/keepalive")
 public class KeepAliveController {
     private final KeepAliveService keepAliveService;
 

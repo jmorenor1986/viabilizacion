@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.samtel.core.repository.ILogOperationRepository;
 import com.samtel.domain.log.LogGeneral;
-import com.samtel.domain.repository.entity.LogOperationEntity;
+import com.samtel.domain.repository.entity.LogEntity;
 import com.samtel.ports.primary.log.LogService;
 
 @Service
@@ -23,7 +23,7 @@ public class LogServiceImpl implements LogService {
 
 	@Override
 	public void insertLogOperation(LogGeneral log) {
-		logOperationRepository.save(modelMapper.map(log, LogOperationEntity.class));	
+		logOperationRepository.save(modelMapper.map(log, LogEntity.class));	
 	}
 
 }

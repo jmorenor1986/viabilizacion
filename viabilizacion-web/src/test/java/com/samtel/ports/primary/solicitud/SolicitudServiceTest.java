@@ -3,6 +3,7 @@ package com.samtel.ports.primary.solicitud;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.ClienteValidator;
 import com.samtel.errors.MandatoryFieldException;
+import com.samtel.ports.primary.log.LogService;
 import com.samtel.services.solicitud.SolicitudServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,6 +28,8 @@ public class SolicitudServiceTest {
     private Cliente cliente;
 
     private ClienteValidator clienteValidator;
+    @Mock
+    private LogService logService;
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -34,7 +37,7 @@ public class SolicitudServiceTest {
     @Before
     public void setUp() {
         clienteValidator = new ClienteValidator();
-        solicitudService = new SolicitudServiceImpl(clienteValidator);
+        solicitudService = new SolicitudServiceImpl(clienteValidator,logService);
         MockitoAnnotations.initMocks(this);
     }
 
