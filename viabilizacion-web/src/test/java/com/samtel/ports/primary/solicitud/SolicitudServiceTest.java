@@ -1,5 +1,6 @@
 package com.samtel.ports.primary.solicitud;
 
+import com.samtel.core.flow.ValidateRequest;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.ClienteValidator;
 import com.samtel.errors.MandatoryFieldException;
@@ -31,13 +32,15 @@ public class SolicitudServiceTest {
     @Mock
     private LogService logService;
 
+    @Mock
+    private ValidateRequest validateRequest;
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp() {
         clienteValidator = new ClienteValidator();
-        solicitudService = new SolicitudServiceImpl(clienteValidator,logService);
+        solicitudService = new SolicitudServiceImpl(clienteValidator,logService,validateRequest);
         MockitoAnnotations.initMocks(this);
     }
 

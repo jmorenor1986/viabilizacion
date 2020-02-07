@@ -1,4 +1,4 @@
-package com.samtel.core;
+package com.samtel.core.flow.impl;
 
 import com.samtel.core.flow.ValidateRequest;
 import com.samtel.core.response.ResponseFlow;
@@ -23,7 +23,7 @@ public class SearchReconocerImpl implements ValidateRequest {
     }
 
     @Override
-    public Optional<ResponseFlow> process(Cliente cliente) {
+    public Optional<ResponseFlow> process(Cliente cliente, String requestId) {
         setCliente(cliente);
         return Optional.of( ResponseFlow.FAST_TRACK );
     }

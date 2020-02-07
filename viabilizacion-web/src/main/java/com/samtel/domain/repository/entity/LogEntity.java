@@ -41,7 +41,7 @@ public class LogEntity {
 	private String traza;
 	
 	@Column(name = "id_request")
-	private Long idRequest;
+	private String idRequest;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fecha")

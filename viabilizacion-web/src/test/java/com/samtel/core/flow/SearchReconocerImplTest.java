@@ -1,6 +1,6 @@
 package com.samtel.core.flow;
 
-import com.samtel.core.SearchReconocerImpl;
+import com.samtel.core.flow.impl.SearchReconocerImpl;
 import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import org.junit.Assert;

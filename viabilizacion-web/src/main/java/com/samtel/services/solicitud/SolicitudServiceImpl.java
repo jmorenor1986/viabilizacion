@@ -1,6 +1,17 @@
 package com.samtel.services.solicitud;
 
+import java.security.SecureRandom;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
+import com.samtel.core.flow.ValidateRequest;
 import com.samtel.domain.log.LogGeneral;
 import com.samtel.domain.repository.entity.FlowOperationEnum;
 import com.samtel.domain.solicitud.Cliente;
@@ -9,40 +20,56 @@ import com.samtel.errors.MandatoryFieldException;
 import com.samtel.ports.primary.log.LogService;
 import com.samtel.ports.primary.solicitud.SolicitudService;
 
-import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.Getter;
+import lombok.Setter;
 
 @Service
 public class SolicitudServiceImpl implements SolicitudService {
-    private final ClienteValidator clienteValidator;
-    private final LogService logService;
-    
-    private Logger log = LoggerFactory.getLogger(SolicitudServiceImpl.class);
 
-    @Autowired
-    public SolicitudServiceImpl(ClienteValidator clienteValidator, LogService logService) {
-        this.clienteValidator = clienteValidator;
-        this.logService = logService;
-    }
+	private final ClienteValidator clienteValidator;
+	private final LogService logService;
+	private final ValidateRequest validateRequest;
 
-    @Override
-    public Optional<String> cumplimientoSolicitud(Cliente cliente) {
-        if (clienteValidator.validateObject(cliente)) {
-        	String gsonCliente = new Gson().toJson(cliente); 
-        	log.info("Este es el json: " + gsonCliente);
-        	logService.insertLogOperation(LogGeneral.builder()
-        			.usuarioMicro("jsierra")
-        			.idRequest(Long.valueOf("1"))
-        			.traza(gsonCliente)
-        			.tipo(FlowOperationEnum.VALIDATE_CLIENT)
-        			.build());
-        	return Optional.of("Validation Ok");
-        }            
-        throw new MandatoryFieldException("Request invalido", 400);
-    }
-    
+	private Logger log = LoggerFactory.getLogger(SolicitudServiceImpl.class);
+	private static final SecureRandom rng = new SecureRandom();
+	@Getter @Setter
+	private String requestId;
+
+	@Autowired
+	public SolicitudServiceImpl(ClienteValidator clienteValidator, LogService logService,
+			@Qualifier("ProxyLogValidateCity") ValidateRequest validateRequest) {
+		this.clienteValidator = clienteValidator;
+		this.logService = logService;
+		this.validateRequest = validateRequest;
+	}
+
+	@Override
+	public Optional<String> cumplimientoSolicitud(Cliente cliente) {
+		log.info("Inicia solicitud de validación");
+		if (clienteValidator.validateObject(cliente)) {
+			setRequestId(generateRandomString(Long.valueOf(12)));
+			generarLog(cliente);
+			validateRequest.process(cliente, getRequestId() );
+			return Optional.of("Validation Ok");
+		}
+		throw new MandatoryFieldException("Request invalido", 400);
+	}
+
+	public String generateRandomString(long length) {
+		rng.setSeed(System.currentTimeMillis());
+		Stream<Character> randomCharStream = rng.ints(Character.MIN_CODE_POINT, Character.MAX_CODE_POINT)
+				.mapToObj(i -> (char) i).filter(c -> {
+					return c >= '0' && c <= 'z' && Character.isLetterOrDigit(c);
+				}).limit(length);
+
+		String randomString = randomCharStream.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+				.toString();
+		return randomString;	
+	}
+
+	public void generarLog(Cliente cliente	) {
+		String gsonCliente = new Gson().toJson(cliente);
+		logService.insertLogOperation(LogGeneral.builder().usuarioMicro("jsierra").idRequest(getRequestId())
+				.traza(gsonCliente).tipo(FlowOperationEnum.VALIDATE_CLIENT).build());
+	}
 }
