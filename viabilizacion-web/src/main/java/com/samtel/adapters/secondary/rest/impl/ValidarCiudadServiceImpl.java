@@ -1,14 +1,27 @@
 package com.samtel.adapters.secondary.rest.impl;
 
+import com.samtel.adapters.secondary.rest.RestTemplateService;
+import com.samtel.config.ClientesProperties;
 import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Service
 public class ValidarCiudadServiceImpl implements ValidarCiudadService {
 
+    private final RestTemplateService restTemplateService;
+    private final ClientesProperties clientesProperties;
+
+    public ValidarCiudadServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties) {
+        this.restTemplateService = restTemplateService;
+        this.clientesProperties = properties;
+    }
 
     @Override
-    public Boolean validarCodigoCiudad(String codigoCiudad) {
-        return false;
+    public String validarCodigoCiudad(String codigoCiudad) {
+        return restTemplateService.getWithPathParams(clientesProperties.getUriValidarCiudad(),
+                new ArrayList<>(Arrays.asList(codigoCiudad))).get();
     }
 }

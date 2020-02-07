@@ -3,7 +3,9 @@ package com.samtel.adapters.secondary.rest;
 import com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,8 +30,8 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     @Override
     public Optional<String> getWithPathParams(String uri, List<String> pathParams) {
         pathParams.forEach((x) -> uri.concat("/").concat(x));
-
-        return Optional.empty();
+        HttpEntity<Object> request = new HttpEntity<>(addHeaders());
+        return Optional.of(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
     private HttpHeaders addHeaders() {
