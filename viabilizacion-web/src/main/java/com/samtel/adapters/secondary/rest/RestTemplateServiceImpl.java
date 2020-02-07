@@ -29,7 +29,7 @@ public class RestTemplateServiceImpl implements RestTemplateService {
 
     @Override
     public Optional<String> getWithPathParams(String uri, List<String> pathParams) {
-        pathParams.forEach((x) -> uri.concat("/").concat(x));
+        uri = uri.concat(String.join("/", pathParams));
         HttpEntity<Object> request = new HttpEntity<>(addHeaders());
         return Optional.of(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }

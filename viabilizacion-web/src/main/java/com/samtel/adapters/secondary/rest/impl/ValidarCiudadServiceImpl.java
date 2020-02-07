@@ -3,6 +3,7 @@ package com.samtel.adapters.secondary.rest.impl;
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.config.ClientesProperties;
 import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class ValidarCiudadServiceImpl implements ValidarCiudadService {
     private final RestTemplateService restTemplateService;
     private final ClientesProperties clientesProperties;
 
+    @Autowired
     public ValidarCiudadServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties) {
         this.restTemplateService = restTemplateService;
         this.clientesProperties = properties;

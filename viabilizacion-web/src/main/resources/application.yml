@@ -4,5 +4,5 @@ server:
   port: 5000
 
 servicios:
-  uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad
+  uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
 
