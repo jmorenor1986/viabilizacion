@@ -34,6 +34,12 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         return Optional.of(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
+    @Override
+    public Optional<Object> postWithOutParams(String uri, Object objectRequest) {
+        HttpEntity<Object> request = new HttpEntity<>(addHeaders());
+        return Optional.of(restTemplate.exchange(uri, HttpMethod.POST, request, String.class).getBody());
+    }
+
     private HttpHeaders addHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

@@ -30,8 +30,14 @@ public class RestTemplateServiceImpTest {
     }
 
     @Test(expected = ResourceAccessException.class)
-    public void testgetWithPathParams() {
+    public void testGetWithPathParams() {
         Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)));
+
+    }
+
+    @Test(expected = ResourceAccessException.class)
+    public void testPostWithOutParams() {
+        Optional<Object> result = restTemplateService.postWithOutParams(URI, new Object());
 
     }
 }

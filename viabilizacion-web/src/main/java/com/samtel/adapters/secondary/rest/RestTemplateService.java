@@ -6,4 +6,6 @@ import java.util.Optional;
 public interface RestTemplateService {
 
     public Optional<String> getWithPathParams(String uri, List<String> pathParams);
+
+    public Optional<Object> postWithOutParams(String uri, Object request);
 }

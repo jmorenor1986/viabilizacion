@@ -1,4 +1,4 @@
-package com.samtel.dictum.service.mapper;
+package com.samtel.adapters.secondary.rest.dictum.mapper;
 
 import java.util.Optional;
 
