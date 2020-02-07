@@ -84,5 +84,6 @@
     <modules>
         <module>viabilizacion-web</module>
         <module>validacion-ciudad-web</module>
+        <module>dictum-web</module>
     </modules>
 </project>
