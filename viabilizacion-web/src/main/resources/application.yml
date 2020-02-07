@@ -3,12 +3,6 @@ server:
     context-path: /viabilizacion
   port: 5000
 
-spring:
-  datasource:
-    url: jdbc:h2:mem:testdbCiudadController
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
+servicios:
+  uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
+

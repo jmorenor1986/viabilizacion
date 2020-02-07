@@ -48,12 +48,13 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>com.samtel.Application</exclude>
+                                        <exclude> com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0%</minimum>
+                                            <minimum>80%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
