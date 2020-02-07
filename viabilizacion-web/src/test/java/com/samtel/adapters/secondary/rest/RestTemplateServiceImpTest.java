@@ -18,6 +18,7 @@ public class RestTemplateServiceImpTest {
 
     private RestTemplateService restTemplateService;
 
+
     private RestTemplateBuilder restTemplateBuilder;
 
 
