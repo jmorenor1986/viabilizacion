@@ -31,13 +31,19 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     public Optional<String> getWithPathParams(String uri, List<String> pathParams) {
         uri = uri.concat(String.join("/", pathParams));
         HttpEntity<Object> request = new HttpEntity<>(addHeaders());
-        return Optional.of(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
+        return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
     @Override
     public Optional<Object> postWithOutParams(String uri, Object objectRequest) {
-        HttpEntity<Object> request = new HttpEntity<>(addHeaders());
-        return Optional.of(restTemplate.exchange(uri, HttpMethod.POST, request, String.class).getBody());
+        HttpEntity<Object> request = new HttpEntity<>(objectRequest, addHeaders());
+        return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.POST, request, String.class).getBody());
+    }
+
+    @Override
+    public Optional<Object> getWithOutParams(String uri, Object objectRequest) {
+        HttpEntity<Object> request = new HttpEntity<>(objectRequest, addHeaders());
+        return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, Object.class).getBody());
     }
 
     private HttpHeaders addHeaders() {
