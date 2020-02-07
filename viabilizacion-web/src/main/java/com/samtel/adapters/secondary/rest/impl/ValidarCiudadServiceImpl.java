@@ -1,4 +1,4 @@
-package com.samtel.adapters.secondary.rest;
+package com.samtel.adapters.secondary.rest.impl;
 
 import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
 import org.springframework.stereotype.Service;

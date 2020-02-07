@@ -1,5 +1,6 @@
 package com.samtel.adapters.secondary.rest;
 
+import com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpHeaders;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +20,9 @@ public class RestTemplateServiceImpl implements RestTemplateService {
 
     @Autowired
     public RestTemplateServiceImpl(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
+        this.restTemplate = restTemplateBuilder
+                .additionalInterceptors(Collections.singletonList(new HttpRequestInterceptor()))
+                .build();
     }
 
     @Override

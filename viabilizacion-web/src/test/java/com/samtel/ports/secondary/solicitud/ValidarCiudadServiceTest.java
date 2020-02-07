@@ -1,13 +1,11 @@
 package com.samtel.ports.secondary.solicitud;
 
-import com.samtel.adapters.secondary.rest.ValidarCiudadServiceImpl;
+import com.samtel.adapters.secondary.rest.impl.ValidarCiudadServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
