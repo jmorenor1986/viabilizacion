@@ -12,6 +12,13 @@
     <properties>
         <start-class>com.samtel.Application</start-class>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -48,7 +55,8 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>com.samtel.Application</exclude>
-                                        <exclude> com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor</exclude>
+                                        <exclude>com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor
+                                        </exclude>
                                     </excludes>
                                     <limits>
                                         <limit>

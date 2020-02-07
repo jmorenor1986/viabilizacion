@@ -1,7 +1,7 @@
 package com.samtel.adapters.secondary.rest.dictum.mapper.impl;
 
-import com.samtel.dictum.common.exception.XmlParsingException;
-import com.samtel.dictum.service.mapper.DictumXMLMapper;
+import com.samtel.adapters.secondary.rest.dictum.mapper.DictumXMLMapper;
+import com.samtel.errors.XmlParsingException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
