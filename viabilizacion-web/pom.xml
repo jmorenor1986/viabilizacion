@@ -12,6 +12,20 @@
     <properties>
         <start-class>com.samtel.Application</start-class>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -48,12 +62,16 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>com.samtel.Application</exclude>
+                                        <exclude>com.samtel.adapters.secondary.rest.dictum.dto.RequestBodyDTO</exclude>
+                                        <exclude>com.samtel.domain.solicitud.RequestBody</exclude>
+                                        <exclude>com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor
+                                        </exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0%</minimum>
+                                            <minimum>80%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
