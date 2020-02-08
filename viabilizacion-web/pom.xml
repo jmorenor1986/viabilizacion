@@ -55,6 +55,8 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>com.samtel.Application</exclude>
+                                        <exclude>com.samtel.adapters.secondary.rest.dictum.dto.RequestBodyDTO</exclude>
+                                        <exclude>com.samtel.domain.solicitud.RequestBody</exclude>
                                         <exclude>com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor
                                         </exclude>
                                     </excludes>

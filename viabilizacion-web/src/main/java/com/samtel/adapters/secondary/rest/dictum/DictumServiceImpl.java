@@ -20,23 +20,20 @@ public class DictumServiceImpl implements DictumService {
     public static final String ERROR_RESPONSE_NULL = "ERROR AL OBTENER LA RESPUESTA";
     private final RestTemplateService restTemplateService;
     private final ClientesProperties clientesProperties;
-    private final DictumXMLMapper dictumXMLMapper;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public DictumServiceImpl(RestTemplateService restTemplateService, ClientesProperties clientesProperties, DictumXMLMapper dictumXMLMapper, ModelMapper modelMapper) {
+    public DictumServiceImpl(RestTemplateService restTemplateService, ClientesProperties clientesProperties,ModelMapper modelMapper) {
         this.restTemplateService = restTemplateService;
         this.clientesProperties = clientesProperties;
-        this.dictumXMLMapper = dictumXMLMapper;
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public Optional<String> consultarDictum(RequestDictum request) {
+    public Optional<String> consultarSolicitudDictum(RequestDictum request) {
         RequestDictumDTO requestDictumDTO = modelMapper.map(request, RequestDictumDTO.class);
         ResponseDictumDTO response = (ResponseDictumDTO) restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO).get();
         return consultarDecisionDictum(response);
-
     }
 
     private Optional<String> consultarDecisionDictum(ResponseDictumDTO responseDictumDTO) {
@@ -62,4 +59,5 @@ public class DictumServiceImpl implements DictumService {
             return Optional.of(DecisionDictum.NEGADO);
         return Optional.of(ERROR_RESPONSE_NULL);
     }
+
 }
