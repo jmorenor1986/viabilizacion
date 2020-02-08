@@ -1,5 +1,6 @@
 package com.samtel.adapters.primary.rest.solicitud;
 
+import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.ports.primary.solicitud.SolicitudService;
 import org.modelmapper.ModelMapper;
@@ -25,7 +26,7 @@ public class SolicitudController {
         this.modelMapper = modelMapper;
     }
     @PostMapping(value = "/viabilizacion", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<String> solicitud(@RequestBody ClientePayLoad clientePayLoad) {
+    public Optional<ResponseFlow> solicitud(@RequestBody ClientePayLoad clientePayLoad) {
         return solicitudService.cumplimientoSolicitud(modelMapper.map(clientePayLoad, Cliente.class));
     }
 }

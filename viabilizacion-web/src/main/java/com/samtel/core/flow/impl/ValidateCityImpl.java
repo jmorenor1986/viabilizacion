@@ -26,7 +26,7 @@ public class ValidateCityImpl implements ValidateRequest {
     private Cliente cliente;
     
     @Autowired
-    public ValidateCityImpl(@Qualifier("searchCache")ValidateRequest validateRequest) {
+    public ValidateCityImpl(@Qualifier("proxyLogSearchVigia")ValidateRequest validateRequest) {
         this.validateRequest = validateRequest;
     }
 

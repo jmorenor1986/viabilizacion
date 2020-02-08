@@ -1,6 +1,7 @@
 package com.samtel.ports.primary.solicitud;
 
 import com.samtel.core.flow.ValidateRequest;
+import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.ClienteValidator;
 import com.samtel.errors.MandatoryFieldException;
@@ -60,15 +61,15 @@ public class SolicitudServiceTest {
                 .tipoIdentificacion("tipoIdentificacion")
                 .valorSolicitado("valorsolicitado")
                 .build();
-        Optional<String> result = solicitudService.cumplimientoSolicitud(clienteLocal);
-        Assert.assertEquals("Validation Ok", result.get());
+        Optional<ResponseFlow> result = solicitudService.cumplimientoSolicitud(clienteLocal);
+        Assert.assertNotNull(result);
     }
 
     @Test
     public void testCumplimientoSolicitudError() {
         expectedException.expect(MandatoryFieldException.class);
         expectedException.expectMessage("Request invalido");
-        Optional<String> result = solicitudService.cumplimientoSolicitud(cliente);
+        Optional<ResponseFlow> result = solicitudService.cumplimientoSolicitud(cliente);
         Assert.assertNotNull(result);
 
     }

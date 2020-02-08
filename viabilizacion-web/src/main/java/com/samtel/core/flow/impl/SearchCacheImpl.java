@@ -1,17 +1,19 @@
 package com.samtel.core.flow.impl;
 
-import com.samtel.core.flow.ValidateRequest;
-import com.samtel.core.response.ResponseFlow;
-import com.samtel.domain.solicitud.Cliente;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import com.samtel.core.flow.ValidateRequest;
+import com.samtel.core.response.ResponseFlow;
+import com.samtel.domain.solicitud.Cliente;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Component("searchCache")
 public class SearchCacheImpl implements ValidateRequest {
@@ -23,7 +25,7 @@ public class SearchCacheImpl implements ValidateRequest {
     private Cliente cliente;
 
     @Autowired
-    public SearchCacheImpl(@Qualifier("searchReconocer") ValidateRequest validateRequest) {
+    public SearchCacheImpl(@Qualifier("proxyLogSearchDictum") ValidateRequest validateRequest) {
         this.validateRequest = validateRequest;
     }
 
@@ -31,6 +33,5 @@ public class SearchCacheImpl implements ValidateRequest {
     public Optional<ResponseFlow> process(Cliente cliente, String requestId) {
         setCliente(cliente);
         return validateRequest.process(getCliente(), requestId);
-
     }
 }

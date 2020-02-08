@@ -21,16 +21,18 @@ public class SearchReconocerImplTest {
     private ValidateRequest next;
 
     private Cliente cliente;
+    @Mock
+    private String requestId;
 
     @Before
     public void setUp(){
-        validateRequest = new SearchReconocerImpl();
+        validateRequest = new SearchReconocerImpl(next);
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testSearchReconocerImplSuccess(){
-        ResponseFlow result = validateRequest.process(cliente).orElse(ResponseFlow.DENIED);
+        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
         Assert.assertNotNull(result);
     }
 

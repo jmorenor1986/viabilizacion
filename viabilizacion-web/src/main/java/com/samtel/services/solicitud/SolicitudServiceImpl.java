@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.samtel.core.flow.ValidateRequest;
+import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.log.LogGeneral;
 import com.samtel.domain.repository.entity.FlowOperationEnum;
 import com.samtel.domain.solicitud.Cliente;
@@ -37,20 +38,19 @@ public class SolicitudServiceImpl implements SolicitudService {
 
 	@Autowired
 	public SolicitudServiceImpl(ClienteValidator clienteValidator, LogService logService,
-			@Qualifier("ProxyLogValidateCity") ValidateRequest validateRequest) {
+			@Qualifier("proxyLogValidateCity") ValidateRequest validateRequest) {
 		this.clienteValidator = clienteValidator;
 		this.logService = logService;
 		this.validateRequest = validateRequest;
 	}
 
 	@Override
-	public Optional<String> cumplimientoSolicitud(Cliente cliente) {
+	public Optional<ResponseFlow> cumplimientoSolicitud(Cliente cliente) {
 		log.info("Inicia solicitud de validación");
 		if (clienteValidator.validateObject(cliente)) {
 			setRequestId(generateRandomString(Long.valueOf(12)));
 			generarLog(cliente);
-			validateRequest.process(cliente, getRequestId() );
-			return Optional.of("Validation Ok");
+			return validateRequest.process( cliente, getRequestId() );
 		}
 		throw new MandatoryFieldException("Request invalido", 400);
 	}
@@ -62,9 +62,8 @@ public class SolicitudServiceImpl implements SolicitudService {
 					return c >= '0' && c <= 'z' && Character.isLetterOrDigit(c);
 				}).limit(length);
 
-		String randomString = randomCharStream.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+		return randomCharStream.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
 				.toString();
-		return randomString;	
 	}
 
 	public void generarLog(Cliente cliente	) {
@@ -72,4 +71,5 @@ public class SolicitudServiceImpl implements SolicitudService {
 		logService.insertLogOperation(LogGeneral.builder().usuarioMicro("jsierra").idRequest(getRequestId())
 				.traza(gsonCliente).tipo(FlowOperationEnum.VALIDATE_CLIENT).build());
 	}
+	
 }

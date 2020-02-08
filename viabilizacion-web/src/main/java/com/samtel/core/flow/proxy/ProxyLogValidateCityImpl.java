@@ -17,7 +17,7 @@ import com.samtel.ports.primary.log.LogService;
 import lombok.Getter;
 import lombok.Setter;
 
-@Component("ProxyLogValidateCity")
+@Component("proxyLogValidateCity")
 public class ProxyLogValidateCityImpl implements ValidateRequest {
 
 	private ValidateRequest validateRequest;
@@ -33,8 +33,8 @@ public class ProxyLogValidateCityImpl implements ValidateRequest {
 
 	@Override
 	public Optional<ResponseFlow> process(Cliente cliente,String requestId) {
-		generarLog(cliente);
 		setRequestId(requestId);
+		generarLog(cliente);
 		return validateRequest.process(cliente,requestId);
 	}
 	

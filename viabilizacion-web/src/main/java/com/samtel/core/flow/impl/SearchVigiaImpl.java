@@ -2,6 +2,7 @@ package com.samtel.core.flow.impl;
 
 import java.util.Optional;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,18 @@ public class SearchVigiaImpl implements ValidateRequest {
 
 	private ValidateRequest validateRequest;
 
-	@Getter
-	@Setter
+	@Getter @Setter
 	private Cliente cliente;
 	
 	@Autowired
-	public SearchVigiaImpl(@Qualifier("") ValidateRequest validateRequest) {
-		super();
+	public SearchVigiaImpl(@Qualifier("proxyLogSearchCache") ValidateRequest validateRequest) {
 		this.validateRequest = validateRequest;
-		this.cliente = cliente;
 	}
-
 
 	@Override
 	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
-		// TODO Auto-generated method stub
-		return null;
+		setCliente(cliente);
+		return validateRequest.process(cliente, idRequest);
 	}
 
 }
