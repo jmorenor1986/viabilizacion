@@ -43,6 +43,6 @@ public class RestTemplateServiceImpTest {
 
     @Test(expected = RestClientException.class)
     public void testGetWithOutParams() {
-        Optional<Object> result = restTemplateService.getWithOutParams(URI, new Object());
+        Optional<String> result = restTemplateService.getWithOutParams(URI, new Object());
     }
 }

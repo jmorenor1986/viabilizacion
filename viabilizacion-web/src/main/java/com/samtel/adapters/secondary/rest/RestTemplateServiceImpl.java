@@ -41,9 +41,9 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     }
 
     @Override
-    public Optional<Object> getWithOutParams(String uri, Object objectRequest) {
-        HttpEntity<Object> request = new HttpEntity<>(objectRequest, addHeaders());
-        return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, Object.class).getBody());
+    public Optional<String> getWithOutParams(String uri, Object objectRequest) {
+        HttpEntity<Object> request = new HttpEntity<>(objectRequest, new HttpHeaders());
+        return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
     private HttpHeaders addHeaders() {

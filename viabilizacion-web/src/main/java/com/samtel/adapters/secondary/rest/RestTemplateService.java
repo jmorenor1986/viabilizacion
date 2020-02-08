@@ -9,5 +9,5 @@ public interface RestTemplateService {
 
     public Optional<Object> postWithOutParams(String uri, Object request);
 
-    public Optional<Object> getWithOutParams(String uri, Object request);
+    public Optional<String> getWithOutParams(String uri, Object request);
 }

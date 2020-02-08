@@ -3,18 +3,18 @@ package com.samtel.adapters.secondary.rest.dictum;
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.dictum.common.DecisionDictum;
 import com.samtel.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
-import com.samtel.adapters.secondary.rest.dictum.dto.ResponseDictumDTO;
-import com.samtel.adapters.secondary.rest.dictum.mapper.DictumXMLMapper;
 import com.samtel.config.ClientesProperties;
 import com.samtel.domain.solicitud.RequestDictum;
 import com.samtel.errors.XmlParsingException;
 import com.samtel.ports.secondary.solicitud.DictumService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class DictumServiceImpl implements DictumService {
 
     public static final String ERROR_RESPONSE_NULL = "ERROR AL OBTENER LA RESPUESTA";
@@ -23,7 +23,7 @@ public class DictumServiceImpl implements DictumService {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public DictumServiceImpl(RestTemplateService restTemplateService, ClientesProperties clientesProperties,ModelMapper modelMapper) {
+    public DictumServiceImpl(RestTemplateService restTemplateService, ClientesProperties clientesProperties, ModelMapper modelMapper) {
         this.restTemplateService = restTemplateService;
         this.clientesProperties = clientesProperties;
         this.modelMapper = modelMapper;
@@ -32,16 +32,13 @@ public class DictumServiceImpl implements DictumService {
     @Override
     public Optional<String> consultarSolicitudDictum(RequestDictum request) {
         RequestDictumDTO requestDictumDTO = modelMapper.map(request, RequestDictumDTO.class);
-        ResponseDictumDTO response = (ResponseDictumDTO) restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO).get();
+        String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO).get();
         return consultarDecisionDictum(response);
     }
 
-    private Optional<String> consultarDecisionDictum(ResponseDictumDTO responseDictumDTO) {
+    private Optional<String> consultarDecisionDictum(String responseDictumDTO) {
         if (Objects.nonNull(responseDictumDTO)) {
-            if (Objects.nonNull(responseDictumDTO.getRespuestaServicio())) {
-                return buscarRespuesta(responseDictumDTO.getRespuestaServicio());
-            }
-            throw new XmlParsingException(responseDictumDTO.getMensajeError());
+            return buscarRespuesta(responseDictumDTO);
         }
         throw new XmlParsingException(ERROR_RESPONSE_NULL);
     }
