@@ -6,6 +6,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ public class RestTemplateServiceImpTest {
 
     private RestTemplateService restTemplateService;
 
+
     private RestTemplateBuilder restTemplateBuilder;
 
 
@@ -29,8 +31,18 @@ public class RestTemplateServiceImpTest {
     }
 
     @Test(expected = ResourceAccessException.class)
-    public void testgetWithPathParams() {
+    public void testGetWithPathParams() {
         Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)));
 
+    }
+
+    @Test(expected = RestClientException.class)
+    public void testPostWithOutParams() {
+        Optional<Object> result = restTemplateService.postWithOutParams(URI, new Object());
+    }
+
+    @Test(expected = RestClientException.class)
+    public void testGetWithOutParams() {
+        Optional<String> result = restTemplateService.getWithOutParams(URI, new Object());
     }
 }

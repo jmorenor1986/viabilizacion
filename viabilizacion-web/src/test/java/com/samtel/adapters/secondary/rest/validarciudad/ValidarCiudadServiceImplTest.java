@@ -1,4 +1,4 @@
-package com.samtel.adapters.secondary.rest.impl;
+package com.samtel.adapters.secondary.rest.validarciudad;
 
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.config.ClientesProperties;
