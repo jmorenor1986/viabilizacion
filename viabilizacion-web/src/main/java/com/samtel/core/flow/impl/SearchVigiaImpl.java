@@ -34,7 +34,7 @@ public class SearchVigiaImpl implements ValidateRequest {
 	@Override
 	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
 		setCliente(cliente);
-		return validateRequest.process(cliente, idRequest);
+		return validateRequest.process(getCliente(), idRequest);
 	}
 
 }

@@ -34,6 +34,7 @@ public class ProxyLogSearchBizagi implements ValidateRequest{
 	@Override
 	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
 		setIdRequest(idRequest);
+		generarLog(cliente);
 		return validateRequest.process(cliente, idRequest);
 	}
 	

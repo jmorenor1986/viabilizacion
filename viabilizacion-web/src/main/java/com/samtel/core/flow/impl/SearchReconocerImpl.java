@@ -30,6 +30,6 @@ public class SearchReconocerImpl implements ValidateRequest {
 	@Override
     public Optional<ResponseFlow> process(Cliente cliente, String requestId) {
         setCliente(cliente);
-        return validateRequest.process(cliente, requestId);
+        return validateRequest.process(getCliente(), requestId);
     }
 }
