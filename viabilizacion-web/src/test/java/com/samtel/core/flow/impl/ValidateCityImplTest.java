@@ -13,6 +13,7 @@ import com.samtel.core.flow.ValidateRequest;
 import com.samtel.core.flow.impl.ValidateCityImpl;
 import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
+import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
 import com.samtel.utils.impl.GenerateUniqueIdImpl;
 
 @RunWith(SpringRunner.class)
@@ -20,6 +21,9 @@ import com.samtel.utils.impl.GenerateUniqueIdImpl;
 public class ValidateCityImplTest {
 
     private ValidateRequest validateRequest;
+    
+    @Mock
+    private ValidarCiudadService validarCiudad;
     
     private GenerateUniqueIdImpl generateUniqueId;
     
@@ -32,7 +36,7 @@ public class ValidateCityImplTest {
 
     @Before
     public void setUp(){
-        validateRequest = new ValidateCityImpl(next);
+        validateRequest = new ValidateCityImpl(next, validarCiudad);
         generateUniqueId = new GenerateUniqueIdImpl();
         MockitoAnnotations.initMocks(this);
     }

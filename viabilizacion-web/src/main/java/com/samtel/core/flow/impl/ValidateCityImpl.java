@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.samtel.core.flow.ValidateRequest;
 import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
+import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,18 +23,27 @@ public class ValidateCityImpl implements ValidateRequest {
     
     private ValidateRequest validateRequest;
     
+    private ValidarCiudadService validarCiudadService;
+    
     @Getter @Setter
     private Cliente cliente;
     
     @Autowired
-    public ValidateCityImpl(@Qualifier("proxyLogSearchVigia")ValidateRequest validateRequest) {
+    public ValidateCityImpl(@Qualifier("proxyLogSearchVigia")ValidateRequest validateRequest, ValidarCiudadService validarCiudadService) {
         this.validateRequest = validateRequest;
+        this.validarCiudadService = validarCiudadService;
     }
 
     @Override
     public Optional<ResponseFlow> process(Cliente cliente, String requestId) {
         setCliente(cliente);
-        return validateRequest.process(getCliente(), requestId);
+        String validaCiudad = validarCiudadService.validarCodigoCiudad(getCliente().getCiudad());
+        log.info("Respuesta al validar ciudad {} ", validaCiudad );
+        if("true".equalsIgnoreCase(validaCiudad)) {
+        	return validateRequest.process(getCliente(), requestId);
+        }else {
+        	return Optional.of(ResponseFlow.INVALID_CITY) ;
+        }
     }
     
 }

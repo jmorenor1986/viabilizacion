@@ -25,6 +25,7 @@ public class SolicitudController {
         this.solicitudService = solicitudService;
         this.modelMapper = modelMapper;
     }
+    
     @PostMapping(value = "/viabilizacion", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<ResponseFlow> solicitud(@RequestBody ClientePayLoad clientePayLoad) {
         return solicitudService.cumplimientoSolicitud(modelMapper.map(clientePayLoad, Cliente.class));

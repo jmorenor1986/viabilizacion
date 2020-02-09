@@ -25,6 +25,7 @@ public class Cliente {
     private String ingresos;
     private String plazo;
     private String actividad;
+    private String ciudad;
     
     
 }
