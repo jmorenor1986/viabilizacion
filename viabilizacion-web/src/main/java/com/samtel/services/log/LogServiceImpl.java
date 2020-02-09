@@ -22,8 +22,9 @@ public class LogServiceImpl implements LogService {
 	}
 
 	@Override
-	public void insertLogOperation(LogGeneral log) {
+	public Boolean insertLogOperation(LogGeneral log) {
 		logOperationRepository.save(modelMapper.map(log, LogEntity.class));	
+		return Boolean.TRUE;
 	}
 
 }

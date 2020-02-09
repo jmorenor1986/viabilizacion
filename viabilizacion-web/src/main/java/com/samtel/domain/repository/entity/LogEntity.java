@@ -51,7 +51,7 @@ public class LogEntity {
 	private ServicioEntity servicio;
 	
 	@PrePersist
-    private void prePersistFunction(){
+    public void prePersistFunction(){
         if(fecha == null){
             this.fecha = new Date();
         }
