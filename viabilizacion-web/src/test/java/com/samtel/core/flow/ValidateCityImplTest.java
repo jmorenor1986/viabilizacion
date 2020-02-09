@@ -12,27 +12,33 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.samtel.core.flow.impl.ValidateCityImpl;
 import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
+import com.samtel.utils.impl.GenerateUniqueIdImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ValidateCityImplTest {
 
     private ValidateRequest validateRequest;
+    
+    private GenerateUniqueIdImpl generateUniqueId;
+    
     @Mock
     private ValidateRequest next;
-
-    private Cliente cliente;
     @Mock
+    private Cliente cliente;
+    
     private String requestId;
 
     @Before
     public void setUp(){
         validateRequest = new ValidateCityImpl(next);
+        generateUniqueId = new GenerateUniqueIdImpl();
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testValidateCityImplSuccess() {
+    	requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
         ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
         Assert.assertNotNull( result );
     }

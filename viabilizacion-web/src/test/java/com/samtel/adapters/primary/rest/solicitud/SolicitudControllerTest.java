@@ -42,7 +42,7 @@ public class SolicitudControllerTest {
         Mockito.when(modelMapper.map(clientePayLoad, Cliente.class)).thenReturn(cliente);
         Mockito.when(solicitudService.cumplimientoSolicitud(cliente)).thenReturn(Optional.empty());
         ResponseFlow result = solicitudController.solicitud(clientePayLoad).orElse(ResponseFlow.UNEXPECTED_ERROR);
-        Assert.assertEquals("RESULT", result);
+        Assert.assertEquals(ResponseFlow.UNEXPECTED_ERROR, result);
     }
 
 }
