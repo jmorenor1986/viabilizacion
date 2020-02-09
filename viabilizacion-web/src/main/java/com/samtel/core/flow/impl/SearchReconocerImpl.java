@@ -1,4 +1,4 @@
-package com.samtel.core;
+package com.samtel.core.flow.impl;
 
 import com.samtel.core.flow.ValidateRequest;
 import com.samtel.core.response.ResponseFlow;
@@ -13,24 +13,23 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component("searchCache")
-public class SearchCacheImpl implements ValidateRequest {
+@Component("searchReconocer")
+public class SearchReconocerImpl implements ValidateRequest {
 
-    private static final Logger log= LoggerFactory.getLogger(SearchCacheImpl.class);
-
+    private static final Logger log= LoggerFactory.getLogger(SearchReconocerImpl.class);
     private ValidateRequest validateRequest;
     @Getter @Setter
     private Cliente cliente;
 
     @Autowired
-    public SearchCacheImpl(@Qualifier("searchReconocer") ValidateRequest validateRequest) {
-        this.validateRequest = validateRequest;
-    }
+    public SearchReconocerImpl(@Qualifier("proxyLogSearchUbica")ValidateRequest validateRequest) {
+		super();
+		this.validateRequest = validateRequest;
+	}
 
-    @Override
-    public Optional<ResponseFlow> process(Cliente cliente) {
+	@Override
+    public Optional<ResponseFlow> process(Cliente cliente, String requestId) {
         setCliente(cliente);
-        return validateRequest.process(getCliente());
-
+        return validateRequest.process(getCliente(), requestId);
     }
 }

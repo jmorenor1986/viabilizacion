@@ -1,5 +1,6 @@
 package com.samtel.adapters.primary.rest.solicitud;
 
+import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.ports.primary.solicitud.SolicitudService;
 import org.junit.Assert;
@@ -40,8 +41,8 @@ public class SolicitudControllerTest {
     public void testCumplimientoSolicitudSuccess() {
         Mockito.when(modelMapper.map(clientePayLoad, Cliente.class)).thenReturn(cliente);
         Mockito.when(solicitudService.cumplimientoSolicitud(cliente)).thenReturn(Optional.empty());
-        String result = solicitudController.solicitud(clientePayLoad).orElse("RESULT");
-        Assert.assertEquals("RESULT", result);
+        ResponseFlow result = solicitudController.solicitud(clientePayLoad).orElse(ResponseFlow.UNEXPECTED_ERROR);
+        Assert.assertEquals(ResponseFlow.UNEXPECTED_ERROR, result);
     }
 
 }
