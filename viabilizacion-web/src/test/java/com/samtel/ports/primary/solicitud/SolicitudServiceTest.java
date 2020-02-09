@@ -7,6 +7,8 @@ import com.samtel.domain.solicitud.ClienteValidator;
 import com.samtel.errors.MandatoryFieldException;
 import com.samtel.ports.primary.log.LogService;
 import com.samtel.services.solicitud.SolicitudServiceImpl;
+import com.samtel.utils.IGenerateUniqueId;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -35,13 +37,15 @@ public class SolicitudServiceTest {
 
     @Mock
     private ValidateRequest validateRequest;
+    @Mock
+    private IGenerateUniqueId generateUniqueId;
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp() {
         clienteValidator = new ClienteValidator();
-        solicitudService = new SolicitudServiceImpl(clienteValidator,logService,validateRequest);
+        solicitudService = new SolicitudServiceImpl(clienteValidator,logService,validateRequest, generateUniqueId );
         MockitoAnnotations.initMocks(this);
     }
 
