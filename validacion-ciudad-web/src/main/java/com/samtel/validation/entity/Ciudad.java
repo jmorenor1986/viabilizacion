@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@NamedQuery(name = "Ciudad.buscarPorCodigoONombre", query = "FROM Ciudad where (codigo  = ?1 or nombre = ?1) and estado = 'ACTIVO'")
+@NamedQuery(name = "Ciudad.buscarPorCodigoONombre", query = "FROM Ciudad where ( lower(codigo) = lower(?1) or lower(nombre) = lower(?1) ) and estado = 'ACTIVO'")
 public class Ciudad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
