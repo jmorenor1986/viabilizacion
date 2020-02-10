@@ -1,13 +1,12 @@
 package com.samtel.domain.log;
 
-import java.util.Date;
-
+import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.google.code.beanmatchers.BeanMatchers;
+import java.util.Date;
 
 @SpringBootTest
 public class LogGeneralTest {

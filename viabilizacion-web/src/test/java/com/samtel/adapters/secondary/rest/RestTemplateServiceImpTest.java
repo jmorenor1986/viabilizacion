@@ -30,19 +30,18 @@ public class RestTemplateServiceImpTest {
         restTemplateService = new RestTemplateServiceImpl(restTemplateBuilder);
     }
 
-//    @Test(expected = ResourceAccessException.class)
-//    public void testGetWithPathParams() {
-//        Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)));
-//
-//    }
-//
-//    @Test(expected = RestClientException.class)
-//    public void testPostWithOutParams() {
-//        Optional<Object> result = restTemplateService.postWithOutParams(URI, new Object());
-//    }
-//
-//    @Test(expected = RestClientException.class)
-//    public void testGetWithOutParams() {
-//        Optional<String> result = restTemplateService.getWithOutParams(URI, new Object());
-//    }
+    @Test(expected = ResourceAccessException.class)
+    public void testGetWithPathParams() {
+        Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)));
+    }
+
+    @Test(expected = RestClientException.class)
+    public void testPostWithOutParams() {
+        Optional<Object> result = restTemplateService.postWithOutParams(URI, new Object());
+    }
+
+    @Test(expected = RestClientException.class)
+    public void testGetWithOutParams() {
+        Optional<String> result = restTemplateService.getWithOutParams(URI, new Object());
+    }
 }

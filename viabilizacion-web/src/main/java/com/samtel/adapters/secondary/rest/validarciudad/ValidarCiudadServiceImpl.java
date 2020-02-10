@@ -25,13 +25,7 @@ public class ValidarCiudadServiceImpl implements ValidarCiudadService {
 
     @Override
     public String validarCodigoCiudad(String codigoCiudad) {
-    	ResponseEntity<String> response = restTemplateService.getWithPathParams(clientesProperties.getUriValidarCiudad(),
-                new ArrayList<>(Arrays.asList(codigoCiudad)));
-    	if( HttpStatus.OK.equals( response.getStatusCode() )   ) {
-    		return response.getBody();
-    	}else if( HttpStatus.NO_CONTENT.equals( response.getStatusCode() ) ) {
-    		return "false";
-    	}
-    	return "error";
+        return restTemplateService.getWithPathParams(clientesProperties.getUriValidarCiudad(),
+                new ArrayList<>(Arrays.asList(codigoCiudad))).get();
     }
 }

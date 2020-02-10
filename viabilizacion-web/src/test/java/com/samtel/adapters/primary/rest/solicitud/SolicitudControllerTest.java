@@ -6,17 +6,15 @@ import com.samtel.ports.primary.solicitud.SolicitudService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class SolicitudControllerTest {
     public static final String EXPECTED_RESULT = "RESULT";
@@ -32,9 +30,9 @@ public class SolicitudControllerTest {
     private Cliente cliente;
 
     @Before
-    public void setup() {
-        solicitudController = new SolicitudController(solicitudService, modelMapper);
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
+        solicitudController = new SolicitudController(solicitudService, modelMapper);
     }
 
     @Test

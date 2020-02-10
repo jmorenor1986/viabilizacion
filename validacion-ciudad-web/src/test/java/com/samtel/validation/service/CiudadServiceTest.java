@@ -1,6 +1,6 @@
 package com.samtel.validation.service;
 
-import com.samtel.validation.common.exception.BadRequestException;
+import com.samtel.validation.common.exception.NonContenException;
 import com.samtel.validation.entity.Ciudad;
 import com.samtel.validation.service.impl.CiudadServiceImpl;
 import org.junit.Assert;
@@ -31,7 +31,7 @@ public class CiudadServiceTest {
 
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test(expected = NonContenException.class)
     public void testBuscaCodigoONombreErrorNull() {
         Mockito.when(ciudadRepository.buscarPorCodigoONombre(NOMBRE_CIUDAD)).thenReturn(null);
         Boolean respuesta = ciudadService.validarCiudad(NOMBRE_CIUDAD);

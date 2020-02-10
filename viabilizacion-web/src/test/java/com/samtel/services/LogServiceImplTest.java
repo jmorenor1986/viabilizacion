@@ -1,7 +1,10 @@
 package com.samtel.services;
 
-import java.util.Date;
-
+import com.samtel.core.repository.ILogOperationRepository;
+import com.samtel.domain.log.LogGeneral;
+import com.samtel.domain.repository.entity.FlowOperationEnum;
+import com.samtel.ports.primary.log.LogService;
+import com.samtel.services.log.LogServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +13,7 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.samtel.core.repository.ILogOperationRepository;
-import com.samtel.domain.log.LogGeneral;
-import com.samtel.domain.repository.entity.FlowOperationEnum;
-import com.samtel.ports.primary.log.LogService;
-import com.samtel.services.log.LogServiceImpl;
+import java.util.Date;
 
 @SpringBootTest
 public class LogServiceImplTest {
@@ -29,6 +28,7 @@ public class LogServiceImplTest {
 	
 	@Before
 	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 		map = new ModelMapper();
 		logService = new LogServiceImpl(logOperationRepo, map);
 		logGeneral = LogGeneral.builder()
@@ -38,7 +38,6 @@ public class LogServiceImplTest {
 			.traza("Esto es una prueba")
 			.usuarioMicro("jsierra")
 			.build();
-		MockitoAnnotations.initMocks(this);
 	}
 	@Test
 	public void testServiceLog() {

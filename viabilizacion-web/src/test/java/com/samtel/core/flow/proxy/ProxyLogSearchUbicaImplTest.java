@@ -1,21 +1,18 @@
 package com.samtel.core.flow.proxy;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.samtel.core.flow.ValidateRequest;
 import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.ports.primary.log.LogService;
 import com.samtel.utils.impl.GenerateUniqueIdImpl;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class ProxyLogSearchUbicaImplTest {
 
@@ -34,6 +31,7 @@ public class ProxyLogSearchUbicaImplTest {
 
     @Before
     public void setUp(){
+        MockitoAnnotations.initMocks(this);
         validateRequest = new ProxyLogSearchUbicaImpl(next,logService);
         generateUniqueId = new GenerateUniqueIdImpl();
         cliente= Cliente.builder().actividad("Actividad")
@@ -50,7 +48,7 @@ public class ProxyLogSearchUbicaImplTest {
                 .tipoIdentificacion("tipoIdentificacion")
                 .valorSolicitado("valorsolicitado")
                 .build();
-        MockitoAnnotations.initMocks(this);
+
     }
 
     @Test

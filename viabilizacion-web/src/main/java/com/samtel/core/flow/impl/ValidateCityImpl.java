@@ -1,20 +1,18 @@
 package com.samtel.core.flow.impl;
 
-import java.util.Optional;
-
+import com.samtel.core.flow.ValidateRequest;
+import com.samtel.core.response.ResponseFlow;
+import com.samtel.domain.solicitud.Cliente;
+import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.samtel.core.flow.ValidateRequest;
-import com.samtel.core.response.ResponseFlow;
-import com.samtel.domain.solicitud.Cliente;
-import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
-
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Optional;
 
 @Component("validateCity")
 public class ValidateCityImpl implements ValidateRequest {

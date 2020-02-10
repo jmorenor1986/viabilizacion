@@ -6,9 +6,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,10 +28,10 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     }
 
     @Override
-    public ResponseEntity<String> getWithPathParams(String uri, List<String> pathParams) {
+    public Optional<String> getWithPathParams(String uri, List<String> pathParams) {
         uri = uri.concat(String.join("/", pathParams));
-        HttpEntity<Object> request = new HttpEntity<>(addHeaders());        
-        return restTemplate.exchange(uri, HttpMethod.GET, request, String.class);
+        HttpEntity<Object> request = new HttpEntity<>(addHeaders());
+        return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
     @Override

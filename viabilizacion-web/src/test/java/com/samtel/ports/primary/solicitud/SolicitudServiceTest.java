@@ -8,21 +8,18 @@ import com.samtel.errors.MandatoryFieldException;
 import com.samtel.ports.primary.log.LogService;
 import com.samtel.services.solicitud.SolicitudServiceImpl;
 import com.samtel.utils.IGenerateUniqueId;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class SolicitudServiceTest {
 
@@ -44,9 +41,9 @@ public class SolicitudServiceTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         clienteValidator = new ClienteValidator();
         solicitudService = new SolicitudServiceImpl(clienteValidator,logService,validateRequest, generateUniqueId );
-        MockitoAnnotations.initMocks(this);
     }
 
     @Test

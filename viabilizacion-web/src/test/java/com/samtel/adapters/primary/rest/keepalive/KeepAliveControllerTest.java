@@ -4,13 +4,12 @@ import com.samtel.ports.primary.KeepAliveService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class KeepAliveControllerTest {
 
@@ -21,6 +20,7 @@ public class KeepAliveControllerTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         keepAliveController = new KeepAliveController(keepAliveService);
     }
 

@@ -1,13 +1,12 @@
 package com.samtel.services.log;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.samtel.core.repository.ILogOperationRepository;
 import com.samtel.domain.log.LogGeneral;
 import com.samtel.domain.repository.entity.LogEntity;
 import com.samtel.ports.primary.log.LogService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class LogServiceImpl implements LogService {

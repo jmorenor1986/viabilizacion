@@ -1,11 +1,10 @@
 package com.samtel.utils.impl;
 
-import java.security.SecureRandom;
-import java.util.stream.Stream;
-
+import com.samtel.utils.IGenerateUniqueId;
 import org.springframework.stereotype.Component;
 
-import com.samtel.utils.IGenerateUniqueId;
+import java.security.SecureRandom;
+import java.util.stream.Stream;
 
 @Component("generateUniqueId")
 public class GenerateUniqueIdImpl implements IGenerateUniqueId {

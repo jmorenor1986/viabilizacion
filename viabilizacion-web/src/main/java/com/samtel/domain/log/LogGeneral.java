@@ -1,14 +1,9 @@
 package com.samtel.domain.log;
 
-import java.util.Date;
-
 import com.samtel.domain.repository.entity.FlowOperationEnum;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Date;
 
 @Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class LogGeneral {

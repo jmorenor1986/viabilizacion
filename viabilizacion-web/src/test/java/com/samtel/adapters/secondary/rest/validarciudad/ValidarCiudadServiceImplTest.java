@@ -33,18 +33,18 @@ public class ValidarCiudadServiceImplTest {
         validarCiudadService = new ValidarCiudadServiceImpl(restTemplateService, properties);
     }
 
-//    @Test
-//    public void testValidarCiudadReturnTrue() {
-//        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)))).thenReturn(Optional.of("true"));
-//        String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD);
-//        Assert.assertEquals("true", result);
-//    }
-//
-//    @Test
-//    public void testValidarCiudadReturnFalse() {
-//        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)))).thenReturn(Optional.of("false"));
-//        String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD);
-//        Assert.assertEquals("false", result);
-//    }
+    @Test
+    public void testValidarCiudadReturnTrue() {
+        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)))).thenReturn(Optional.of("true"));
+        String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD);
+        Assert.assertEquals("true", result);
+    }
+
+    @Test
+    public void testValidarCiudadReturnFalse() {
+        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)))).thenReturn(Optional.of("false"));
+        String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD);
+        Assert.assertEquals("false", result);
+    }
 
 }
