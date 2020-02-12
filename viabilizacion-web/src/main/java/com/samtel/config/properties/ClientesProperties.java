@@ -1,4 +1,4 @@
-package com.samtel.config;
+package com.samtel.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Component;
 public class ClientesProperties {
     private String uriValidarCiudad;
     private String uriDictum;
-    private String uriReconocer;
+    private ReconocerProperties reconocerProperties;
 }
