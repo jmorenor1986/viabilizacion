@@ -9,11 +9,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class RestTemplateServiceImpl implements RestTemplateService {
@@ -46,10 +44,22 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
+    @Override
+    public Optional<String> getWithParams(String uri, Map<String, Object> params) {
+        HttpEntity<Object> request = new HttpEntity<>(addHeaders());
+        return Optional.ofNullable(restTemplate.exchange(setParamsUrl(uri, params), HttpMethod.GET, request, String.class).getBody());
+    }
+
     private HttpHeaders addHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         return headers;
+    }
+
+    private String setParamsUrl(String uri, Map<String, Object> params) {
+        return UriComponentsBuilder.fromHttpUrl(uri)
+                .uriVariables(params)
+                .toUriString();
     }
 }

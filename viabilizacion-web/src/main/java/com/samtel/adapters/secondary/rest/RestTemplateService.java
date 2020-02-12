@@ -1,6 +1,7 @@
 package com.samtel.adapters.secondary.rest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface RestTemplateService {
@@ -10,4 +11,6 @@ public interface RestTemplateService {
     public Optional<Object> postWithOutParams(String uri, Object request);
 
     public Optional<String> getWithOutParams(String uri, Object request);
+
+    public Optional<String> getWithParams(String uri, Map<String, Object> params);
 }
