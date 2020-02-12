@@ -7,9 +7,11 @@ import com.samtel.config.properties.ReconocerProperties;
 import com.samtel.domain.solicitud.reconocer.RequestReconocer;
 import com.samtel.domain.solicitud.reconocer.ResponseReconocer;
 import com.samtel.ports.secondary.solicitud.ReconocerService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ReconocerServiceImpl implements ReconocerService {
@@ -29,6 +31,8 @@ public class ReconocerServiceImpl implements ReconocerService {
 
     @Override
     public ResponseReconocer consultarDatosUsuario(RequestReconocer requestReconocer) {
+        setList(restTemplateService.getWithParams(reconocerProperties.getUri(),
+                setMapParameters(requestReconocer)).get());
         return gson.fromJson(restTemplateService.getWithParams(reconocerProperties.getUri(),
                 setMapParameters(requestReconocer)).get(),
                 ResponseReconocer.class);
@@ -45,5 +49,12 @@ public class ReconocerServiceImpl implements ReconocerService {
         map.put("validarNombre", reconocerProperties.getValidarNombre());
         return map;
 
+    }
+
+    private List<String> setList(String json) {
+        JSONObject jsonObject = new JSONObject(json);
+        JSONObject reporte = jsonObject.getJSONObject("reporte");
+        System.out.println(reporte.getJSONObject("celulares"));
+        return null;
     }
 }
