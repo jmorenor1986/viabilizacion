@@ -9,8 +9,5 @@ public class ReconocerServiceImpl implements ReconocerService {
     public ReconocerServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties) {
     }
 
-    @Override
-    public Object consultarDatosUsuario(Object o) {
-        return null;
-    }
+
 }

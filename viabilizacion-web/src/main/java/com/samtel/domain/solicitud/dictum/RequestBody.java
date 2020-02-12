@@ -1,4 +1,4 @@
-package com.samtel.domain.solicitud;
+package com.samtel.domain.solicitud.dictum;
 
 import lombok.Data;
 

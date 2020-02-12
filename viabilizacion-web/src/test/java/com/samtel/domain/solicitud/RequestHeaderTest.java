@@ -1,6 +1,7 @@
 package com.samtel.domain.solicitud;
 
 import com.google.code.beanmatchers.BeanMatchers;
+import com.samtel.domain.solicitud.dictum.RequestHeader;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;

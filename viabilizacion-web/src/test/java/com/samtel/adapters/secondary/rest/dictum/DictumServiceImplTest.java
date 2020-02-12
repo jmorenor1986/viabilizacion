@@ -4,7 +4,7 @@ import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
 import com.samtel.adapters.secondary.rest.dictum.dto.ResponseDictumDTO;
 import com.samtel.config.ClientesProperties;
-import com.samtel.domain.solicitud.RequestDictum;
+import com.samtel.domain.solicitud.dictum.RequestDictum;
 import com.samtel.ports.secondary.solicitud.DictumService;
 import org.junit.Assert;
 import org.junit.Before;
