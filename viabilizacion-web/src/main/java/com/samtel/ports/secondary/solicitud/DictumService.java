@@ -1,6 +1,6 @@
 package com.samtel.ports.secondary.solicitud;
 
-import com.samtel.domain.solicitud.RequestDictum;
+import com.samtel.domain.solicitud.dictum.RequestDictum;
 
 import java.util.Optional;
 

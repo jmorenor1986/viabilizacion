@@ -1,11 +1,9 @@
 package com.samtel.adapters.secondary.rest.validarciudad;
 
 import com.samtel.adapters.secondary.rest.RestTemplateService;
-import com.samtel.config.ClientesProperties;
+import com.samtel.config.properties.ClientesProperties;
 import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
