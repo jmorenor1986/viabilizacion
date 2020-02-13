@@ -1,4 +1,4 @@
-package com.samtel.config.properties;
+package com.samtel.adapters.secondary.rest.common.properties;
 
 import lombok.Builder;
 import lombok.Data;

@@ -13,4 +13,5 @@ public interface RestTemplateService {
     public Optional<String> getWithOutParams(String uri, Object request);
 
     public Optional<String> getWithParams(String uri, Map<String, Object> params);
+
 }

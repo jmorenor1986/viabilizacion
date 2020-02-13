@@ -2,8 +2,8 @@ package com.samtel.adapters.secondary.rest.reconocer;
 
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.JsonUtilities;
-import com.samtel.config.properties.ClientesProperties;
-import com.samtel.config.properties.ReconocerProperties;
+import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
+import com.samtel.adapters.secondary.rest.common.properties.ReconocerProperties;
 import com.samtel.domain.solicitud.reconocer.RequestReconocer;
 import com.samtel.domain.solicitud.reconocer.ResponseReconocer;
 import com.samtel.ports.secondary.solicitud.ReconocerService;

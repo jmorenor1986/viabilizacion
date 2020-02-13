@@ -2,7 +2,7 @@
 package com.samtel.adapters.secondary.rest.validarciudad;
 
 import com.samtel.adapters.secondary.rest.RestTemplateService;
-import com.samtel.config.properties.ClientesProperties;
+import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.ports.secondary.solicitud.ValidarCiudadService;
 import org.junit.Assert;
 import org.junit.Before;
