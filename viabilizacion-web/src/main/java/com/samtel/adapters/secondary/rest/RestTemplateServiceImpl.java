@@ -1,6 +1,6 @@
 package com.samtel.adapters.secondary.rest;
 
-import com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor;
+import com.samtel.adapters.secondary.rest.common.HttpRequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -47,7 +47,8 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     @Override
     public Optional<String> getWithParams(String uri, Map<String, Object> params) {
         HttpEntity<Object> request = new HttpEntity<>(addHeaders());
-        return Optional.ofNullable(restTemplate.exchange(setParamsUrl(uri, params), HttpMethod.GET, request, String.class).getBody());
+        String url = setParamsUrl(uri, params);
+        return Optional.ofNullable(restTemplate.exchange(url, HttpMethod.GET, request, String.class).getBody());
     }
 
     private HttpHeaders addHeaders() {
@@ -58,8 +59,16 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     }
 
     private String setParamsUrl(String uri, Map<String, Object> params) {
+        String result = uri;
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            result = setParamUrl(result, entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
+    private String setParamUrl(String uri, String name, Object value) {
         return UriComponentsBuilder.fromHttpUrl(uri)
-                .uriVariables(params)
+                .queryParam(name, value)
                 .toUriString();
     }
 }

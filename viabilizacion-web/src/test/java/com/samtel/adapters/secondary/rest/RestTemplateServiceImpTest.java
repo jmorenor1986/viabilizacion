@@ -10,6 +10,7 @@ import org.springframework.web.client.RestClientException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Optional;
 
 @SpringBootTest
@@ -44,4 +45,13 @@ public class RestTemplateServiceImpTest {
     public void testGetWithOutParams() {
         Optional<String> result = restTemplateService.getWithOutParams(URI, new Object());
     }
+
+    @Test(expected = RestClientException.class)
+    public void testGetWithParams() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("numeroId", "1");
+        map.put("primerApellidoBuscar", "2");
+        Optional<String> result = restTemplateService.getWithParams(URI, map);
+    }
+
 }

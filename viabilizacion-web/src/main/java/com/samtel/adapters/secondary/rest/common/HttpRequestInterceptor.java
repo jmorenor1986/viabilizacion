@@ -1,4 +1,4 @@
-package com.samtel.adapters.secondary.rest.interceptor;
+package com.samtel.adapters.secondary.rest.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,10 +1,11 @@
 package com.samtel.adapters.secondary.rest.reconocer;
 
-import com.google.gson.Gson;
 import com.samtel.adapters.secondary.rest.RestTemplateService;
+import com.samtel.adapters.secondary.rest.common.JsonUtilities;
 import com.samtel.config.properties.ClientesProperties;
 import com.samtel.config.properties.ReconocerProperties;
 import com.samtel.domain.solicitud.reconocer.RequestReconocer;
+import com.samtel.domain.solicitud.reconocer.ResponseReconocer;
 import com.samtel.ports.secondary.solicitud.ReconocerService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -27,12 +29,12 @@ public class ReconocerServiceImplTest {
     @Mock
     private RestTemplateService restTemplateService;
 
-    private Gson gson;
+    @Mock
+    private JsonUtilities jsonUtilities;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        gson = new Gson();
         properties = new ClientesProperties();
         ReconocerProperties reconocerProperties = ReconocerProperties.builder()
                 .nit("12345678")
@@ -42,7 +44,7 @@ public class ReconocerServiceImplTest {
                 .uri("http://www.mocky.io/v2/5e43f8bd31000013413b0393")
                 .build();
         properties.setReconocerProperties(reconocerProperties);
-        reconocerService = new ReconocerServiceImpl(restTemplateService, properties, gson);
+        reconocerService = new ReconocerServiceImpl(restTemplateService, properties, jsonUtilities);
     }
 
     @Test
@@ -51,6 +53,11 @@ public class ReconocerServiceImplTest {
                 .numeroDocumento("101020220")
                 .primerApellido("PEREZ")
                 .tipoDocumento("1")
+                .build();
+        ResponseReconocer responseReconocer = ResponseReconocer.builder()
+                .direcciones(new ArrayList<>())
+                .numeroCelular("")
+                .numerosTelefono("")
                 .build();
         HashMap<String, Object> map = new HashMap<>();
         map.put("numeroId", requestReconocer.getNumeroDocumento());
@@ -61,8 +68,9 @@ public class ReconocerServiceImplTest {
         map.put("numeroIdBuscar", properties.getReconocerProperties().getNumeroIdBuscar());
         map.put("validarNombre", properties.getReconocerProperties().getValidarNombre());
         Mockito.when(restTemplateService.getWithParams(properties.getReconocerProperties().getUri(), map)).thenReturn(Optional.of(MockReconocerService.response));
-        Object result = reconocerService.consultarDatosUsuario(requestReconocer);
+        ResponseReconocer result = reconocerService.consultarDatosUsuario(requestReconocer);
         Assert.assertNotNull(result);
+        Assert.assertNotNull(responseReconocer);
     }
 
 

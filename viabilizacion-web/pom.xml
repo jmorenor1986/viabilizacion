@@ -63,8 +63,9 @@
                                         <exclude>com.samtel.Application</exclude>
                                         <exclude>com.samtel.adapters.secondary.rest.dictum.dto.RequestBodyDTO</exclude>
                                         <exclude>com.samtel.domain.solicitud.dictum.RequestBody</exclude>
+                                        <exclude>com.samtel.domain.solicitud.reconocer.ResponseReconocer</exclude>
                                         <exclude>com.samtel.config.*</exclude>
-                                        <exclude>com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor
+                                        <exclude>com.samtel.adapters.secondary.rest.common.HttpRequestInterceptor
                                         </exclude>
                                     </excludes>
                                     <limits>
