@@ -1,11 +1,11 @@
 package com.samtel.adapters.secondary.rest.common.properties;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@Getter
 @Builder
 public class ReconocerProperties {
     private String uri;

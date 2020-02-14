@@ -41,7 +41,6 @@ public class VigiaServiceImpl implements VigiaService {
                 .build();
         String result = restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), dto).get();
         return ListaCliente.builder()
-                .estado(jsonUtilities.getPropertyObjectWithKey("Data.", "Estado", result))
                 .resultado(jsonUtilities.getPropertyObjectWithKey("Data.", "Listas", result))
                 .build();
 

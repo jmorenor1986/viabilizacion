@@ -5,22 +5,25 @@
     <parent>
         <artifactId>viabilizacion</artifactId>
         <groupId>com.samtel</groupId>
-        <version>1.0.3</version>
+        <version>1.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>validacion-ciudad-web</artifactId>
+    <artifactId>viabilizacion-web</artifactId>
     <properties>
-        <start-class>com.samtel.ValidationApplication</start-class>
+        <start-class>com.samtel.Application</start-class>
     </properties>
-
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
         </dependency>
-        
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -57,8 +60,13 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>com.samtel.ValidationApplication</exclude>
-                                        <exclude>com.samtel.validation.common.config.*</exclude>
+                                        <exclude>com.samtel.Application</exclude>
+                                        <exclude>com.samtel.adapters.secondary.rest.dictum.dto.RequestBodyDTO</exclude>
+                                        <exclude>com.samtel.domain.solicitud.dictum.RequestBody</exclude>
+                                        <exclude>com.samtel.domain.solicitud.reconocer.ResponseReconocer</exclude>
+                                        <exclude>com.samtel.config.*</exclude>
+                                        <exclude>com.samtel.adapters.secondary.rest.common.HttpRequestInterceptor
+                                        </exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
@@ -75,6 +83,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
