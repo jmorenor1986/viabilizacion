@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.samtel.adapters.secondary.rest.dictum.mapper.DictumClienteMapper;
 import com.samtel.domain.solicitud.Cliente;
-import com.samtel.domain.solicitud.RequestDictum;
+import com.samtel.domain.solicitud.dictum.RequestDictum;
 
 @Component
 public class DictumClienteMapperImpl implements DictumClienteMapper{

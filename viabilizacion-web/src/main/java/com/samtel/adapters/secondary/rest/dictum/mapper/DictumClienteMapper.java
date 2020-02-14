@@ -1,7 +1,7 @@
 package com.samtel.adapters.secondary.rest.dictum.mapper;
 
 import com.samtel.domain.solicitud.Cliente;
-import com.samtel.domain.solicitud.RequestDictum;
+import com.samtel.domain.solicitud.dictum.RequestDictum;
 
 public interface DictumClienteMapper {
 
