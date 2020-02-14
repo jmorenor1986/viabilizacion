@@ -1,6 +1,6 @@
 package com.samtel.adapters.secondary.rest;
 
-import com.samtel.adapters.secondary.rest.interceptor.HttpRequestInterceptor;
+import com.samtel.adapters.secondary.rest.common.HttpRequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -9,11 +9,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class RestTemplateServiceImpl implements RestTemplateService {
@@ -46,10 +44,31 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
+    @Override
+    public Optional<String> getWithParams(String uri, Map<String, Object> params) {
+        HttpEntity<Object> request = new HttpEntity<>(addHeaders());
+        String url = setParamsUrl(uri, params);
+        return Optional.ofNullable(restTemplate.exchange(url, HttpMethod.GET, request, String.class).getBody());
+    }
+
     private HttpHeaders addHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         return headers;
+    }
+
+    private String setParamsUrl(String uri, Map<String, Object> params) {
+        String result = uri;
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            result = setParamUrl(result, entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
+    private String setParamUrl(String uri, String name, Object value) {
+        return UriComponentsBuilder.fromHttpUrl(uri)
+                .queryParam(name, value)
+                .toUriString();
     }
 }

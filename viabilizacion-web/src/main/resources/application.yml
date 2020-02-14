@@ -20,3 +20,17 @@ servicios:
   uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
   uriDictum: http://www.mocky.io/v2/5e3b08212f000063e356c899
 
+  vigiaProperties:
+    uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa
+    codigoEjecucion: null
+    origen: PRODUCCIÓN
+    porcentaje: 76
+
+  reconocerProperties:
+    uri: http://www.mocky.io/v2/5e4473f731000098df3b06ff
+    nit: 900468987
+    tipoIdBuscar: 1
+    numeroIdBuscar: 1010101010
+    validarNombre : true
+
+

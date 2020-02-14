@@ -1,14 +1,13 @@
 package com.samtel.validation.service.impl;
 
-import java.util.Objects;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.samtel.validation.common.exception.NonContenException;
 import com.samtel.validation.entity.Ciudad;
 import com.samtel.validation.service.CiudadRepository;
 import com.samtel.validation.service.CiudadService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class CiudadServiceImpl implements CiudadService {
