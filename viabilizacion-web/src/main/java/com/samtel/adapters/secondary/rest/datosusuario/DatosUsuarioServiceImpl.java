@@ -1,18 +1,18 @@
-package com.samtel.adapters.secondary.rest.reconocer;
+package com.samtel.adapters.secondary.rest.datosusuario;
 
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.JsonUtilities;
 import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.adapters.secondary.rest.common.properties.ReconocerProperties;
-import com.samtel.domain.solicitud.reconocer.RequestReconocer;
-import com.samtel.domain.solicitud.reconocer.ResponseReconocer;
-import com.samtel.ports.secondary.solicitud.ReconocerService;
+import com.samtel.domain.solicitud.datosusuario.RequestDatosUsuario;
+import com.samtel.domain.solicitud.datosusuario.ResponseDatosUsuario;
+import com.samtel.ports.secondary.solicitud.DatosUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReconocerServiceImpl implements ReconocerService {
+public class DatosUsuarioServiceImpl implements DatosUsuarioService {
     private final ReconocerProperties reconocerProperties;
     private final ClientesProperties clientesProperties;
     private final RestTemplateService restTemplateService;
@@ -20,7 +20,7 @@ public class ReconocerServiceImpl implements ReconocerService {
 
 
     @Autowired
-    public ReconocerServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities) {
+    public DatosUsuarioServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities) {
         this.clientesProperties = properties;
         this.restTemplateService = restTemplateService;
         this.reconocerProperties = clientesProperties.getReconocerProperties();
@@ -29,10 +29,10 @@ public class ReconocerServiceImpl implements ReconocerService {
 
 
     @Override
-    public ResponseReconocer consultarDatosUsuario(RequestReconocer requestReconocer) {
+    public ResponseDatosUsuario consultarDatosUsuario(RequestDatosUsuario requestDatosUsuario) {
         String responseService = restTemplateService.getWithParams(reconocerProperties.getUri(),
-                setMapParameters(requestReconocer)).get();
-        return ResponseReconocer.builder()
+                setMapParameters(requestDatosUsuario)).get();
+        return ResponseDatosUsuario.builder()
                 .numeroCelular(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService))
                 .numerosTelefono(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService))
                 .direcciones(jsonUtilities.getValuesForGivenKey("reporte", "direcciones", "dato", responseService))
@@ -41,11 +41,11 @@ public class ReconocerServiceImpl implements ReconocerService {
 
     }
 
-    private Map<String, Object> setMapParameters(RequestReconocer requestReconocer) {
+    private Map<String, Object> setMapParameters(RequestDatosUsuario requestDatosUsuario) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("numeroId", requestReconocer.getNumeroDocumento());
-        map.put("primerApellidoBuscar", requestReconocer.getPrimerApellido());
-        map.put("tipoId", requestReconocer.getTipoDocumento());
+        map.put("numeroId", requestDatosUsuario.getNumeroDocumento());
+        map.put("primerApellidoBuscar", requestDatosUsuario.getPrimerApellido());
+        map.put("tipoId", requestDatosUsuario.getTipoDocumento());
         map.put("nit", reconocerProperties.getNit());
         map.put("tipoIdBuscar", reconocerProperties.getNumeroIdBuscar());
         map.put("numeroIdBuscar", reconocerProperties.getNumeroIdBuscar());

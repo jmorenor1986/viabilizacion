@@ -19,6 +19,7 @@ spring:
 servicios:
   uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
   uriDictum: http://www.mocky.io/v2/5e3b08212f000063e356c899
+  uriUbica: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
 
   vigiaProperties:
     uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa

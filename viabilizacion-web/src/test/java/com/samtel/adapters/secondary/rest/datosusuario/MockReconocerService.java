@@ -1,4 +1,4 @@
-package com.samtel.adapters.secondary.rest.reconocer;
+package com.samtel.adapters.secondary.rest.datosusuario;
 
 public class MockReconocerService {
     public static String response = "{ \n" +

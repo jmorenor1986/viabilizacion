@@ -1,12 +1,13 @@
-package com.samtel.adapters.secondary.rest.reconocer;
+package com.samtel.adapters.secondary.rest.datosusuario;
 
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.JsonUtilities;
 import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.adapters.secondary.rest.common.properties.ReconocerProperties;
-import com.samtel.domain.solicitud.reconocer.RequestReconocer;
-import com.samtel.domain.solicitud.reconocer.ResponseReconocer;
-import com.samtel.ports.secondary.solicitud.ReconocerService;
+import com.samtel.domain.solicitud.datosusuario.DatosUsuarioComplemento;
+import com.samtel.domain.solicitud.datosusuario.RequestDatosUsuario;
+import com.samtel.domain.solicitud.datosusuario.ResponseDatosUsuario;
+import com.samtel.ports.secondary.solicitud.DatosUsuarioService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,10 +21,10 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @SpringBootTest
-public class ReconocerServiceImplTest {
+public class DatosUsuarioServiceImplTest {
 
     public static final String URI_RECONOCER = "URI_RECONOCER";
-    private ReconocerService reconocerService;
+    private DatosUsuarioService datosUsuarioService;
     private ClientesProperties properties;
 
     @Mock
@@ -44,33 +45,40 @@ public class ReconocerServiceImplTest {
                 .uri("http://www.mocky.io/v2/5e43f8bd31000013413b0393")
                 .build();
         properties.setReconocerProperties(reconocerProperties);
-        reconocerService = new ReconocerServiceImpl(restTemplateService, properties, jsonUtilities);
+        datosUsuarioService = new DatosUsuarioServiceImpl(restTemplateService, properties, jsonUtilities);
     }
 
     @Test
-    public void testReturnTelefonosOrDirecciones() {
-        RequestReconocer requestReconocer = RequestReconocer.builder()
+    public void testReturnTelefonosOrDireccionesReconocer() {
+        RequestDatosUsuario requestDatosUsuario = RequestDatosUsuario.builder()
                 .numeroDocumento("101020220")
                 .primerApellido("PEREZ")
                 .tipoDocumento("1")
                 .build();
-        ResponseReconocer responseReconocer = ResponseReconocer.builder()
+        ResponseDatosUsuario responseDatosUsuario = ResponseDatosUsuario.builder()
                 .direcciones(new ArrayList<>())
-                .numeroCelular("")
-                .numerosTelefono("")
+                .numeroCelular(new ArrayList<>())
+                .numerosTelefono(new ArrayList<>())
                 .build();
         HashMap<String, Object> map = new HashMap<>();
-        map.put("numeroId", requestReconocer.getNumeroDocumento());
-        map.put("primerApellidoBuscar", requestReconocer.getPrimerApellido());
-        map.put("tipoId", requestReconocer.getTipoDocumento());
+        map.put("numeroId", requestDatosUsuario.getNumeroDocumento());
+        map.put("primerApellidoBuscar", requestDatosUsuario.getPrimerApellido());
+        map.put("tipoId", requestDatosUsuario.getTipoDocumento());
         map.put("nit", properties.getReconocerProperties().getNit());
         map.put("tipoIdBuscar", properties.getReconocerProperties().getNumeroIdBuscar());
         map.put("numeroIdBuscar", properties.getReconocerProperties().getNumeroIdBuscar());
         map.put("validarNombre", properties.getReconocerProperties().getValidarNombre());
         Mockito.when(restTemplateService.getWithParams(properties.getReconocerProperties().getUri(), map)).thenReturn(Optional.of(MockReconocerService.response));
-        ResponseReconocer result = reconocerService.consultarDatosUsuario(requestReconocer);
+        ResponseDatosUsuario result = datosUsuarioService.consultarDatosUsuario(requestDatosUsuario);
         Assert.assertNotNull(result);
-        Assert.assertNotNull(responseReconocer);
+        Assert.assertNotNull(responseDatosUsuario);
+    }
+
+    @Test
+    public void testConsultarTelefonosDireccionesUbica() {
+        DatosUsuarioComplemento datosUsuarioComplemento = DatosUsuarioComplemento
+                .builder().build();
+
     }
 
 
