@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
-public class ReconocerProperties {
+@NoArgsConstructor
+@AllArgsConstructor
+public class UbicaProperties {
     private String uri;
-    private String nit;
-    private String tipoIdBuscar;
-    private String numeroIdBuscar;
-    private String validarNombre;
+    private String codigoInformacion;
+    private String motivoConsulta;
 }

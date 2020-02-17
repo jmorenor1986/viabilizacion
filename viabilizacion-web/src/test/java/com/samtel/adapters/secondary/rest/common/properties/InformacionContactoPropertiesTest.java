@@ -8,11 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.google.code.beanmatchers.BeanMatchers;
 
 @SpringBootTest
-public class ReconocerPropertiesTest {
+public class InformacionContactoPropertiesTest {
 
 	@Test
 	public void testReconocerProperties() {
-		Assert.assertThat(ReconocerProperties.class,
+		Assert.assertThat(InformacionContactoProperties.class,
 				CoreMatchers.allOf(BeanMatchers.hasValidGettersAndSetters(), BeanMatchers.hasValidBeanConstructor(),
 						BeanMatchers.hasValidBeanEquals(), BeanMatchers.hasValidBeanHashCode(), 
 						BeanMatchers.hasValidBeanToString()));

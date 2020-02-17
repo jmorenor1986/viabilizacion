@@ -1,7 +1,9 @@
 package com.samtel.adapters.secondary.rest;
 
+import com.samtel.core.repository.ILogOperationRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -20,7 +22,8 @@ public class RestTemplateServiceImpTest {
 
     private RestTemplateService restTemplateService;
 
-
+    @Mock
+    private ILogOperationRepository iLogOperationRepository;
     private RestTemplateBuilder restTemplateBuilder;
 
 
@@ -28,7 +31,7 @@ public class RestTemplateServiceImpTest {
     public void init() {
         restTemplateBuilder = new RestTemplateBuilder();
         MockitoAnnotations.initMocks(this);
-        restTemplateService = new RestTemplateServiceImpl(restTemplateBuilder);
+        restTemplateService = new RestTemplateServiceImpl(restTemplateBuilder,iLogOperationRepository);
     }
 
     @Test(expected = ResourceAccessException.class)
