@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class ResponseDatosUsuario {
+public class ResponseInformacionContacto {
     private List<String> numerosTelefono;
     private List<String> numeroCelular;
     private List<String> direcciones;

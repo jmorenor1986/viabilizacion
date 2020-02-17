@@ -1,6 +1,6 @@
 package com.samtel.adapters.secondary.rest.common;
 
-import com.samtel.adapters.secondary.rest.datosusuario.MockReconocerService;
+import com.samtel.adapters.secondary.rest.informacioncontacto.MockReconocerService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

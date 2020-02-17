@@ -2,24 +2,36 @@ server:
   servlet:
     context-path: /viabilizacion
   port: 5000
-    
+
 spring:
-   datasource:
-      driver-class-name: org.postgresql.Driver
-      jdbcUrl: jdbc:postgresql://localhost:5432/samtel
-      username: postgres
-      password: 12345678
-   jpa:
-      properties:
-         hibernate:
-            dialect: org.hibernate.dialect.PostgreSQLDialect
-      show-sql: true
-      generate-ddl: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:5432/samtel
+    username: postgres
+    password: 12345678
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    generate-ddl: true
 
 servicios:
   uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
   uriDictum: http://www.mocky.io/v2/5e3b08212f000063e356c899
-  uriUbica: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
+  informacionContactoPorperties:
+
+    reconocerProperties:
+      uri: http://www.mocky.io/v2/5e4473f731000098df3b06ff
+      nit: 900468987
+      tipoIdBuscar: 1
+      numeroIdBuscar: 1010101010
+      validarNombre: true
+
+    ubicaProperties:
+      uri: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
+      codigoInformacion: 5632
+      motivoConsulta: 1
 
   vigiaProperties:
     uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa
@@ -27,11 +39,6 @@ servicios:
     origen: PRODUCCIÓN
     porcentaje: 76
 
-  reconocerProperties:
-    uri: http://www.mocky.io/v2/5e4473f731000098df3b06ff
-    nit: 900468987
-    tipoIdBuscar: 1
-    numeroIdBuscar: 1010101010
-    validarNombre : true
+
 
 

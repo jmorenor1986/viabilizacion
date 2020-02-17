@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReconocerProperties {
+public class UbicaProperties {
     private String uri;
-    private String nit;
-    private String tipoIdBuscar;
-    private String numeroIdBuscar;
-    private String validarNombre;
+    private String codigoInformacion;
+    private String motivoConsulta;
 }

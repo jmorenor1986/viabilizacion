@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class RequestDatosUsuario {
+public class RequestInformacionContacto {
     private String primerApellido;
     private String tipoDocumento;
     private String numeroDocumento;
