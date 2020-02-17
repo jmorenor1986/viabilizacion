@@ -1,5 +1,8 @@
 package com.samtel.adapters.secondary.rest.vigia;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.JsonUtilities;
 import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
@@ -9,8 +12,8 @@ import com.samtel.adapters.secondary.rest.vigia.dto.VigiaDTO;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.ListaCliente;
 import com.samtel.ports.secondary.solicitud.VigiaService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+@Service
 public class VigiaServiceImpl implements VigiaService {
 
     private final RestTemplateService restTemplateService;
@@ -42,6 +45,8 @@ public class VigiaServiceImpl implements VigiaService {
         String result = restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), dto).get();
         return ListaCliente.builder()
                 .resultado(jsonUtilities.getPropertyObjectWithKey("Data.", "Listas", result))
+                .encontradoId(jsonUtilities.getPropertyObjectWithKey("Data.", "EncontradoID", result))
+                .encontradoNombre(jsonUtilities.getPropertyObjectWithKey("Data.", "EncontradoNombre", result))
                 .build();
 
     }

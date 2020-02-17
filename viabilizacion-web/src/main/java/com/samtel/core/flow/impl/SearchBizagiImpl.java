@@ -1,19 +1,19 @@
 package com.samtel.core.flow.impl;
 
+import java.util.Optional;
+
+import org.springframework.stereotype.Component;
+
 import com.samtel.core.flow.ValidateRequest;
 import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
-import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import lombok.Setter;
 
 @Component("searchBizagi")
 public class SearchBizagiImpl implements ValidateRequest {
 	
-	private static final Logger log= LoggerFactory.getLogger(SearchBizagiImpl.class);
+	//private static final Logger log= LoggerFactory.getLogger(SearchBizagiImpl.class);
 
     @Setter
     private Cliente cliente;
@@ -22,6 +22,9 @@ public class SearchBizagiImpl implements ValidateRequest {
 	@Override
 	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
 		setCliente(cliente);
+		if(Boolean.TRUE.equals(cliente.getVigia())) {
+			return Optional.of(ResponseFlow.PREAPROBADO_CON_DOCUMENTOS);
+		}
 		return Optional.of(ResponseFlow.FAST_TRACK);
 	}
 
