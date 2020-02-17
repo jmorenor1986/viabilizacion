@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 public class ClientesProperties {
     private String uriValidarCiudad;
     private String uriDictum;
-    private ReconocerProperties reconocerProperties;
+    private InformacionContactoProperties informacionContactoProperties;
     private VigiaProperties vigiaProperties;
 }

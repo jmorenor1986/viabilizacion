@@ -1,4 +1,4 @@
-package com.samtel.domain.solicitud.reconocer;
+package com.samtel.domain.solicitud.informacioncontacto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class RequestReconocer {
+@AllArgsConstructor
+public class RequestInformacionContacto {
     private String primerApellido;
     private String tipoDocumento;
     private String numeroDocumento;
