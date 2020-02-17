@@ -33,4 +33,6 @@ servicios:
     numeroIdBuscar: 1010101010
     validarNombre : true
 
+  dictumProperties:
+    codAliado: abcd
 
