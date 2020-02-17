@@ -4,8 +4,9 @@ import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.JsonUtilities;
 import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.adapters.secondary.rest.common.properties.InformacionContactoProperties;
-import com.samtel.domain.solicitud.datosusuario.RequestInformacionContacto;
-import com.samtel.domain.solicitud.datosusuario.ResponseInformacionContacto;
+import com.samtel.adapters.secondary.rest.informacioncontacto.dto.RequestUbicaDTO;
+import com.samtel.domain.solicitud.informacioncontacto.RequestInformacionContacto;
+import com.samtel.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import com.samtel.ports.secondary.solicitud.InformacionContactoService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,7 +45,16 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
 
     @Override
     public ResponseInformacionContacto consultarInformacionContacto(RequestInformacionContacto requestInformacionContacto) {
-        return null;
+        RequestUbicaDTO requestUbicaDTO = RequestUbicaDTO.builder()
+                .codigoInformacion(informacionContactoProperties.getUbicaProperties().getCodigoInformacion())
+                .motivoConsulta(informacionContactoProperties.getUbicaProperties().getMotivoConsulta())
+                .numeroIdentificacion(requestInformacionContacto.getNumeroDocumento())
+                .primerApellido(requestInformacionContacto.getPrimerApellido())
+                .tipoIdentificacion(requestInformacionContacto.getTipoDocumento())
+                .build();
+        return setResponseInformacionContacotUbica(restTemplateService.getWithOutParams(informacionContactoProperties
+                .getUbicaProperties()
+                .getUri(), requestUbicaDTO).get());
     }
 
     private Map<String, Object> setMapParameters(RequestInformacionContacto requestInformacionContacto) {
@@ -57,6 +67,13 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
         map.put("numeroIdBuscar", informacionContactoProperties.getReconocerProperties().getNumeroIdBuscar());
         map.put("validarNombre", informacionContactoProperties.getReconocerProperties().getValidarNombre());
         return map;
+    }
 
+    private ResponseInformacionContacto setResponseInformacionContacotUbica(String json) {
+        return ResponseInformacionContacto.builder()
+                .direcciones(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Mails.Mail", "Correo", json))))
+                .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Celulares.Celular", "Celular", json))))
+                .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Telefonos.Telefono", "Telefono", json))))
+                .build();
     }
 }

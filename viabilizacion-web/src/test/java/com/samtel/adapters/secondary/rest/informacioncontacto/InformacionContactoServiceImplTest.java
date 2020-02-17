@@ -2,10 +2,14 @@ package com.samtel.adapters.secondary.rest.informacioncontacto;
 
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.JsonUtilities;
+import com.samtel.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.adapters.secondary.rest.common.properties.InformacionContactoProperties;
-import com.samtel.domain.solicitud.datosusuario.RequestInformacionContacto;
-import com.samtel.domain.solicitud.datosusuario.ResponseInformacionContacto;
+import com.samtel.adapters.secondary.rest.common.properties.ReconocerProperties;
+import com.samtel.adapters.secondary.rest.common.properties.UbicaProperties;
+import com.samtel.adapters.secondary.rest.informacioncontacto.dto.RequestUbicaDTO;
+import com.samtel.domain.solicitud.informacioncontacto.RequestInformacionContacto;
+import com.samtel.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import com.samtel.ports.secondary.solicitud.InformacionContactoService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,15 +33,18 @@ public class InformacionContactoServiceImplTest {
     @Mock
     private RestTemplateService restTemplateService;
 
-    @Mock
+
     private JsonUtilities jsonUtilities;
 
     private RequestInformacionContacto requestInformacionContacto;
     private ResponseInformacionContacto responseInformacionContacto;
+    private InformacionContactoProperties informacionContactoProperties;
+
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        jsonUtilities = new JsonUtilitiesImpl();
         properties = new ClientesProperties();
         requestInformacionContacto = RequestInformacionContacto.builder()
                 .numeroDocumento("101020220")
@@ -49,12 +56,21 @@ public class InformacionContactoServiceImplTest {
                 .numeroCelular(new ArrayList<>())
                 .numerosTelefono(new ArrayList<>())
                 .build();
-        InformacionContactoProperties informacionContactoProperties = InformacionContactoProperties.builder()
-                .nit("12345678")
-                .numeroIdBuscar("1234444")
+        ReconocerProperties reconocerProperties = ReconocerProperties.builder()
+                .numeroIdBuscar("1010101010")
                 .tipoIdBuscar("1")
+                .nit("900468987")
+                .uri("http://www.mocky.io/v2/5e4473f731000098df3b06ff")
                 .validarNombre("true")
-                .uri("http://www.mocky.io/v2/5e43f8bd31000013413b0393")
+                .build();
+        UbicaProperties ubicaProperties = UbicaProperties.builder()
+                .codigoInformacion("5632")
+                .motivoConsulta("1")
+                .uri("http://www.mocky.io/v2/5e492eae3000004a008c2cf7")
+                .build();
+        informacionContactoProperties = InformacionContactoProperties.builder()
+                .reconocerProperties(reconocerProperties)
+                .ubicaProperties(ubicaProperties)
                 .build();
         properties.setInformacionContactoProperties(informacionContactoProperties);
         informacionContactoService = new InformacionContactoServiceImpl(restTemplateService, properties, jsonUtilities);
@@ -78,9 +94,17 @@ public class InformacionContactoServiceImplTest {
 
     @Test
     public void testConsultarTelefonosDireccionesUbica() {
+        RequestUbicaDTO requestUbicaDTO = RequestUbicaDTO.builder()
+                .codigoInformacion(properties.getInformacionContactoProperties().getUbicaProperties().getCodigoInformacion())
+                .motivoConsulta(properties.getInformacionContactoProperties().getUbicaProperties().getMotivoConsulta())
+                .numeroIdentificacion(requestInformacionContacto.getNumeroDocumento())
+                .primerApellido(requestInformacionContacto.getPrimerApellido())
+                .tipoIdentificacion(requestInformacionContacto.getTipoDocumento())
+                .build();
 
-        Mockito.when(restTemplateService.getWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(),))
+        Mockito.when(restTemplateService.getWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO)).thenReturn(Optional.of(MockUbicaService.response));
         ResponseInformacionContacto informacionContacto = informacionContactoService.consultarInformacionContacto(requestInformacionContacto);
+        Assert.assertNotNull(informacionContacto);
 
     }
 }

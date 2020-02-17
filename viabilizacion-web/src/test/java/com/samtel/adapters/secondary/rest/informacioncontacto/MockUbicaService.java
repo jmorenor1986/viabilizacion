@@ -1,4 +1,4 @@
-package com.samtel.adapters.secondary.rest.ubica;
+package com.samtel.adapters.secondary.rest.informacioncontacto;
 
 public class MockUbicaService {
     public static String response="{\n" +

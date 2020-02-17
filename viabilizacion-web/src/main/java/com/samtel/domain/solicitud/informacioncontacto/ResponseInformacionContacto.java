@@ -1,4 +1,4 @@
-package com.samtel.domain.solicitud.datosusuario;
+package com.samtel.domain.solicitud.informacioncontacto;
 
 import lombok.Builder;
 import lombok.Data;
