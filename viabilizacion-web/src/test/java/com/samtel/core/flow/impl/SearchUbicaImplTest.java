@@ -28,7 +28,7 @@ public class SearchUbicaImplTest {
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        validateRequest = new SearchUbicaImpl();
+        validateRequest = new SearchUbicaImpl(next);
         generateUniqueId = new GenerateUniqueIdImpl();
     }
 
