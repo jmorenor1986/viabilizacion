@@ -39,8 +39,5 @@ servicios:
     origen: PRODUCCIÓN
     porcentaje: 76
 
-
-
   dictumProperties:
     codAliado: abcd
-

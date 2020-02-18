@@ -11,9 +11,8 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix="servicios")
 public class RequestHeader {
-
+    @Value("${servicios.dictumProperties.codAliado}")
     private String codAliado;
     private String usuarioAliado;
     private String sessionId;
