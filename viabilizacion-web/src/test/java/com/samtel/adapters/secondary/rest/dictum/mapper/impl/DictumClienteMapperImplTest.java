@@ -1,7 +1,9 @@
 package com.samtel.adapters.secondary.rest.dictum.mapper.impl;
 
+import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.dictum.RequestBody;
 import com.samtel.domain.solicitud.dictum.RequestHeader;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -17,6 +19,8 @@ public class DictumClienteMapperImplTest {
 
 	@Mock
 	private RequestHeader requestHeader;
+	@Mock
+	private Cliente cliente;
 
 	@Before
 	public void setUp() {
@@ -26,6 +30,6 @@ public class DictumClienteMapperImplTest {
 	
 	@Test
 	public void testClientToRequestDictum() {
-		
+		Assert.assertNotNull(dictumClienteMapper.toRequestDictum(cliente));
 	}
 }
