@@ -28,7 +28,7 @@ servicios:
       numeroIdBuscar: 1010101010
       validarNombre: true
 
-    ubicaProperties:
+  ubicaProperties:
       uri: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
       codigoInformacion: 5632
       motivoConsulta: 1
@@ -39,8 +39,11 @@ servicios:
     origen: PRODUCCIÓN
     porcentaje: 76
 
-
-
   dictumProperties:
     codAliado: abcd
-
+    usuarioAliado: alberto
+    sessionId: 1234
+    ipOrigen: 192.168.0.1
+    numeroSolicitudCredito: 12345678
+    tipoIdentificacion: CC
+    identificacion: 1040

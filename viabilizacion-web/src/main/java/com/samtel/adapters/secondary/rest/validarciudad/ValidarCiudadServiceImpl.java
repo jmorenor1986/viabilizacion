@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class ValidarCiudadServiceImpl implements ValidarCiudadService {
@@ -22,8 +23,8 @@ public class ValidarCiudadServiceImpl implements ValidarCiudadService {
     }
 
     @Override
-    public String validarCodigoCiudad(String codigoCiudad) {
+    public String validarCodigoCiudad(String codigoCiudad, String idRequest) {
         return restTemplateService.getWithPathParams(clientesProperties.getUriValidarCiudad(),
-                new ArrayList<>(Arrays.asList(codigoCiudad))).get();
+                new ArrayList<>(Arrays.asList(codigoCiudad)), Optional.of(idRequest)).get();
     }
 }

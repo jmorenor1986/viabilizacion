@@ -35,7 +35,7 @@ public class ValidateCityImpl implements ValidateRequest {
     @Override
     public Optional<ResponseFlow> process(Cliente cliente, String requestId) {
         setCliente(cliente);
-        String validaCiudad = validarCiudadService.validarCodigoCiudad(getCliente().getCiudad());
+        String validaCiudad = validarCiudadService.validarCodigoCiudad(getCliente().getCiudad(), requestId);
         log.info("Respuesta al validar ciudad {} ", validaCiudad );
         if("true".equalsIgnoreCase(validaCiudad)) {
         	return validateRequest.process(getCliente(), requestId);

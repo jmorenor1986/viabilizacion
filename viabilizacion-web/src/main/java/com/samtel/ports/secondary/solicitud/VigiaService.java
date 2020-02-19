@@ -4,5 +4,5 @@ import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.ListaCliente;
 
 public interface VigiaService {
-    ListaCliente consultarListasCliente(Cliente datosBasicosCliente);
+    ListaCliente consultarListasCliente(Cliente datosBasicosCliente, String idRequest);
 }

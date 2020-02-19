@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RequestDictumTest {
     @Test
     public void testObject() {
+        Assert.assertNotNull(RequestDictum.builder().build());
         Assert.assertThat(RequestDictum.class, CoreMatchers.allOf(BeanMatchers.hasValidBeanConstructor(),
                 BeanMatchers.hasValidBeanEquals(),
                 BeanMatchers.hasValidGettersAndSetters(),

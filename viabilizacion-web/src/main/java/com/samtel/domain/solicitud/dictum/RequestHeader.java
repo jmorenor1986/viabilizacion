@@ -11,14 +11,19 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix="servicios")
 public class RequestHeader {
-
+    @Value("${servicios.dictumProperties.codAliado}")
     private String codAliado;
+    @Value("${servicios.dictumProperties.usuarioAliado}")
     private String usuarioAliado;
+    @Value("${servicios.dictumProperties.sessionId}")
     private String sessionId;
+    @Value("${servicios.dictumProperties.ipOrigen}")
     private String ipOrigen;
+    @Value("${servicios.dictumProperties.numeroSolicitudCredito}")
     private String numeroSolicitudCredito;
+    @Value("${servicios.dictumProperties.tipoIdentificacion}")
     private String tipoIdentificacion;
+    @Value("${servicios.dictumProperties.identificacion}")
     private String identificacion;
 }

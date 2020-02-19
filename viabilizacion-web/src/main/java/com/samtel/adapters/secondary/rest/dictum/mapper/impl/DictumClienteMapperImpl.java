@@ -2,6 +2,7 @@ package com.samtel.adapters.secondary.rest.dictum.mapper.impl;
 
 import com.samtel.domain.solicitud.dictum.RequestBody;
 import com.samtel.domain.solicitud.dictum.RequestHeader;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +23,19 @@ public class DictumClienteMapperImpl implements DictumClienteMapper {
     @Override
     public RequestDictum toRequestDictum(Cliente cliente) {
         return RequestDictum.builder()
-                .requestBody(RequestBody.builder().build())
+                .requestBody(toRequestBodyFromClient(cliente))
                 .requestHeader(requestHeader)
+                .build();
+    }
+
+    public RequestBody toRequestBodyFromClient(Cliente cliente){
+        /* TODO Se debe validar la obtencion de estos parametos*/
+        return RequestBody.builder()
+                .clave("123")
+                .identificacion(cliente.getNumeroIdentificacion())
+                .primerApellido(cliente.getApellidos())
+                .tipoIdentificacion(cliente.getTipoIdentificacion())
+                .producto("DICTUM")
                 .build();
     }
 }
