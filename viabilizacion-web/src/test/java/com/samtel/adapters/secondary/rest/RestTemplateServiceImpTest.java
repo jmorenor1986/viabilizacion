@@ -7,6 +7,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 
@@ -25,13 +28,14 @@ public class RestTemplateServiceImpTest {
     @Mock
     private ILogOperationRepository iLogOperationRepository;
     private RestTemplateBuilder restTemplateBuilder;
-
+    private ClientHttpRequestFactory factory;
 
     @Before
     public void init() {
         restTemplateBuilder = new RestTemplateBuilder();
+        factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
         MockitoAnnotations.initMocks(this);
-        restTemplateService = new RestTemplateServiceImpl(restTemplateBuilder,iLogOperationRepository);
+        restTemplateService = new RestTemplateServiceImpl(factory, iLogOperationRepository);
     }
 
     @Test(expected = ResourceAccessException.class)
