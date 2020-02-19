@@ -13,6 +13,8 @@ import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.ListaCliente;
 import com.samtel.ports.secondary.solicitud.VigiaService;
 
+import java.util.Optional;
+
 @Service
 public class VigiaServiceImpl implements VigiaService {
 
@@ -31,7 +33,7 @@ public class VigiaServiceImpl implements VigiaService {
     }
 
     @Override
-    public ListaCliente consultarListasCliente(Cliente datosBasicosCliente) {
+    public ListaCliente consultarListasCliente(Cliente datosBasicosCliente, String idRequest) {
         MensajeDTO mensajeDTO = MensajeDTO.builder()
                 .nombre(datosBasicosCliente.getApellidos().concat(" ").concat(datosBasicosCliente.getNombres()))
                 .numeroIdentificacion(datosBasicosCliente.getNumeroIdentificacion())
@@ -42,7 +44,7 @@ public class VigiaServiceImpl implements VigiaService {
                 .codigoEjecucion(vigiaProperties.getCodigoEjecucion())
                 .mensaje(mensajeDTO)
                 .build();
-        String result = restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), dto).get();
+        String result = restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), dto, Optional.of(idRequest) ).get();
         return ListaCliente.builder()
                 .resultado(jsonUtilities.getPropertyObjectWithKey("Data.", "Listas", result))
                 .encontradoId(jsonUtilities.getPropertyObjectWithKey("Data.", "EncontradoID", result))

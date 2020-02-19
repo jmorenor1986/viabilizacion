@@ -36,17 +36,17 @@ public class RestTemplateServiceImpTest {
 
     @Test(expected = ResourceAccessException.class)
     public void testGetWithPathParams() {
-        Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)));
+        Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of("123"));
     }
 
     @Test(expected = RestClientException.class)
     public void testPostWithOutParams() {
-        Optional<Object> result = restTemplateService.postWithOutParams(URI, new Object());
+        Optional<Object> result = restTemplateService.postWithOutParams(URI, new Object(), Optional.of("123"));
     }
 
     @Test(expected = RestClientException.class)
     public void testGetWithOutParams() {
-        Optional<String> result = restTemplateService.getWithOutParams(URI, new Object());
+        Optional<String> result = restTemplateService.getWithOutParams(URI, new Object(), Optional.of("123"));
     }
 
     @Test(expected = RestClientException.class)
@@ -54,7 +54,7 @@ public class RestTemplateServiceImpTest {
         HashMap<String, Object> map = new HashMap<>();
         map.put("numeroId", "1");
         map.put("primerApellidoBuscar", "2");
-        Optional<String> result = restTemplateService.getWithParams(URI, map);
+        Optional<String> result = restTemplateService.getWithParams(URI, map, Optional.of("123"));
     }
 
 }

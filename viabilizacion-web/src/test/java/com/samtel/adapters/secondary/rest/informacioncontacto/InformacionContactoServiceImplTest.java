@@ -86,8 +86,8 @@ public class InformacionContactoServiceImplTest {
         map.put("tipoIdBuscar", properties.getInformacionContactoProperties().getReconocerProperties().getNumeroIdBuscar());
         map.put("numeroIdBuscar", properties.getInformacionContactoProperties().getReconocerProperties().getNumeroIdBuscar());
         map.put("validarNombre", properties.getInformacionContactoProperties().getReconocerProperties().getValidarNombre());
-        Mockito.when(restTemplateService.getWithParams(properties.getInformacionContactoProperties().getReconocerProperties().getUri(), map)).thenReturn(Optional.of(MockReconocerService.response));
-        ResponseInformacionContacto result = informacionContactoService.consultarDatosUsuario(requestInformacionContacto);
+        Mockito.when(restTemplateService.getWithParams(properties.getInformacionContactoProperties().getReconocerProperties().getUri(), map, Optional.of("123"))).thenReturn(Optional.of(MockReconocerService.response));
+        ResponseInformacionContacto result = informacionContactoService.consultarDatosUsuario(requestInformacionContacto, "123");
         Assert.assertNotNull(result);
         Assert.assertNotNull(responseInformacionContacto);
     }
@@ -102,8 +102,8 @@ public class InformacionContactoServiceImplTest {
                 .tipoIdentificacion(requestInformacionContacto.getTipoDocumento())
                 .build();
 
-        Mockito.when(restTemplateService.getWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO)).thenReturn(Optional.of(MockUbicaService.response));
-        ResponseInformacionContacto informacionContacto = informacionContactoService.consultarInformacionContacto(requestInformacionContacto);
+        Mockito.when(restTemplateService.getWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO, Optional.of("123"))).thenReturn(Optional.of(MockUbicaService.response));
+        ResponseInformacionContacto informacionContacto = informacionContactoService.consultarInformacionContacto(requestInformacionContacto, "123");
         Assert.assertNotNull(informacionContacto);
 
     }

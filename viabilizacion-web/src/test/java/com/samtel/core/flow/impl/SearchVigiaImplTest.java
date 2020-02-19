@@ -48,7 +48,7 @@ public class SearchVigiaImplTest {
 	public void testSearchVigiaEncontradoParcial() {
 		String requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
 		Cliente cliente = Mockito.mock(Cliente.class);
-		Mockito.when(vigiaService.consultarListasCliente(cliente)).thenReturn(
+		Mockito.when(vigiaService.consultarListasCliente(cliente,"123")).thenReturn(
 				ListaCliente.builder().encontradoId("S").encontradoNombre("N").resultado(RESPUESTA_LISTAS).build());
 		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
 		Assert.assertNotNull(result);
@@ -58,7 +58,7 @@ public class SearchVigiaImplTest {
 	public void testSearchVigiaEncontradoTotal() {
 		String requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
 		Cliente cliente = Mockito.mock(Cliente.class);
-		Mockito.when(vigiaService.consultarListasCliente(cliente)).thenReturn(
+		Mockito.when(vigiaService.consultarListasCliente(cliente, "123")).thenReturn(
 				ListaCliente.builder().encontradoId("S").encontradoNombre("S").resultado(RESPUESTA_LISTAS).build());
 		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
 		Assert.assertNotNull(result);
@@ -68,7 +68,7 @@ public class SearchVigiaImplTest {
 	public void testSearchVigiaNoEncontrado() {
 		String requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
 		Cliente cliente = Mockito.mock(Cliente.class);
-		Mockito.when(vigiaService.consultarListasCliente(cliente)).thenReturn(
+		Mockito.when(vigiaService.consultarListasCliente(cliente, "123")).thenReturn(
 				ListaCliente.builder().encontradoId("N").encontradoNombre("N").resultado(RESPUESTA_LISTAS).build());
 		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
 		Assert.assertNotNull(result);

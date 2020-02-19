@@ -24,6 +24,9 @@ public class SearchDictumImpl implements ValidateRequest {
     @Getter
     @Setter
     private Cliente cliente;
+    @Getter
+    @Setter
+    private String idRequest;
 
     private DictumService dictumService;
     private DictumClienteMapper dictumClienteMapper;
@@ -45,7 +48,7 @@ public class SearchDictumImpl implements ValidateRequest {
     }
 
     public void llamarSevicio() {
-        Optional<String> respuesta = dictumService.consultarSolicitudDictum(dictumClienteMapper.toRequestDictum(getCliente()));
+        Optional<String> respuesta = dictumService.consultarSolicitudDictum(dictumClienteMapper.toRequestDictum(getCliente()), getIdRequest());
         if (respuesta.isPresent())
             log.info("Esta es la respuesta del servicio: {}", respuesta.get());
     }

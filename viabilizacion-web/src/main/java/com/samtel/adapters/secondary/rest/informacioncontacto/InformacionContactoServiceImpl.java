@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class InformacionContactoServiceImpl implements InformacionContactoService {
     private final InformacionContactoProperties informacionContactoProperties;
@@ -31,9 +32,9 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
 
 
     @Override
-    public ResponseInformacionContacto consultarDatosUsuario(RequestInformacionContacto requestInformacionContacto) {
+    public ResponseInformacionContacto consultarDatosUsuario(RequestInformacionContacto requestInformacionContacto, String idRequest) {
         String responseService = restTemplateService.getWithParams(informacionContactoProperties.getReconocerProperties().getUri(),
-                setMapParameters(requestInformacionContacto)).get();
+                setMapParameters(requestInformacionContacto), Optional.of(idRequest)).get();
         return ResponseInformacionContacto.builder()
                 .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService))))
                 .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService))))
@@ -44,7 +45,7 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
     }
 
     @Override
-    public ResponseInformacionContacto consultarInformacionContacto(RequestInformacionContacto requestInformacionContacto) {
+    public ResponseInformacionContacto consultarInformacionContacto(RequestInformacionContacto requestInformacionContacto, String idRequest) {
         RequestUbicaDTO requestUbicaDTO = RequestUbicaDTO.builder()
                 .codigoInformacion(informacionContactoProperties.getUbicaProperties().getCodigoInformacion())
                 .motivoConsulta(informacionContactoProperties.getUbicaProperties().getMotivoConsulta())
@@ -54,7 +55,7 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
                 .build();
         return setResponseInformacionContacotUbica(restTemplateService.getWithOutParams(informacionContactoProperties
                 .getUbicaProperties()
-                .getUri(), requestUbicaDTO).get());
+                .getUri(), requestUbicaDTO, Optional.of(idRequest)).get());
     }
 
     private Map<String, Object> setMapParameters(RequestInformacionContacto requestInformacionContacto) {

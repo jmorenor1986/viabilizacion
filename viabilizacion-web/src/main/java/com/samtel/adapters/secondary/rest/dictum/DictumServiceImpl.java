@@ -30,9 +30,9 @@ public class DictumServiceImpl implements DictumService {
     }
 
     @Override
-    public Optional<String> consultarSolicitudDictum(RequestDictum request) {
+    public Optional<String> consultarSolicitudDictum(RequestDictum request, String idRequest) {
         RequestDictumDTO requestDictumDTO = modelMapper.map(request, RequestDictumDTO.class);
-        String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO).get();
+        String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, Optional.of(idRequest)).get();
         return consultarDecisionDictum(response);
     }
 
