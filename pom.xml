@@ -96,5 +96,6 @@
     <modules>
         <module>viabilizacion-web</module>
         <module>validacion-ciudad-web</module>
+        <module>bizagi-web</module>
     </modules>
 </project>
