@@ -1,7 +1,7 @@
 package com.samtel.adapters.secondary.rest;
 
 import com.samtel.adapters.secondary.rest.common.HttpRequestInterceptor;
-import com.samtel.core.repository.ILogOperationRepository;
+import com.samtel.ports.primary.log.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,15 +18,15 @@ import java.util.*;
 public class RestTemplateServiceImpl implements RestTemplateService {
 
     private final RestTemplate restTemplate;
-    private final ILogOperationRepository logOperationRepository;
+    private final LogService logService;
     private final ClientHttpRequestFactory factory;
 
     @Autowired
-    public RestTemplateServiceImpl(ClientHttpRequestFactory factory, ILogOperationRepository logOperationRepository) {
-        this.logOperationRepository = logOperationRepository;
+    public RestTemplateServiceImpl(ClientHttpRequestFactory factory, LogService logService) {
+        this.logService = logService;
         this.factory = factory;
         this.restTemplate = new RestTemplate(factory);
-        restTemplate.setInterceptors(Collections.singletonList(new HttpRequestInterceptor(logOperationRepository)));
+        restTemplate.setInterceptors(Collections.singletonList(new HttpRequestInterceptor(logService)));
     }
 
     @Override

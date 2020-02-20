@@ -41,6 +41,9 @@ public class LogEntity {
 	@Column(name = "httpStatus" )
 	@Enumerated(value = EnumType.STRING)
 	private HttpStatus httpStatus;
+
+	@Column(name = "url")
+	private String url;
 	
 	@PrePersist
     public void prePersistFunction(){
@@ -52,6 +55,9 @@ public class LogEntity {
         }
         if(httpStatus == null){
         	this.setHttpStatus(HttpStatus.CONTINUE);
+		}
+        if(url == null){
+        	this.setUrl("NO_APLICA");
 		}
     }
 

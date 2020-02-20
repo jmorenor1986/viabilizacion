@@ -1,11 +1,10 @@
 package com.samtel.domain.solicitud;
 
+import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.google.code.beanmatchers.BeanMatchers;
 
 @SpringBootTest
 public class ListaClienteTest {

@@ -1,14 +1,12 @@
 package com.samtel.core.flow.impl;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-
 import com.samtel.core.flow.ValidateRequest;
 import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
-
 import lombok.Setter;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component("searchBizagi")
 public class SearchBizagiImpl implements ValidateRequest {

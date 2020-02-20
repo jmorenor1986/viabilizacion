@@ -1,9 +1,9 @@
 package com.samtel.adapters.secondary.rest.dictum;
 
 import com.samtel.adapters.secondary.rest.RestTemplateService;
+import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.adapters.secondary.rest.dictum.common.DecisionDictum;
 import com.samtel.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
-import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.domain.solicitud.dictum.RequestDictum;
 import com.samtel.errors.XmlParsingException;
 import com.samtel.ports.secondary.solicitud.DictumService;
