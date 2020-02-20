@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /bizagi
+  port: 5002
+
+servicios:
+  uriCrearCaso: www.google.com

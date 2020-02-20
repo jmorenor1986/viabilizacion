@@ -8,23 +8,11 @@
         <version>1.0.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>viabilizacion-web</artifactId>
-    <properties>
-        <start-class>com.samtel.Application</start-class>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20190722</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
 
-    </dependencies>
+    <artifactId>bizagi-web</artifactId>
+    <properties>
+        <start-class>com.samtel.BizagiApplication</start-class>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -60,13 +48,8 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>com.samtel.Application</exclude>
-                                        <exclude>com.samtel.adapters.secondary.rest.dictum.dto.RequestBodyDTO</exclude>
-                                        <exclude>com.samtel.domain.solicitud.dictum.RequestBody</exclude>
-                                        <exclude>com.samtel.domain.solicitud.informacioncontacto.ResponseInformacionContacto</exclude>
-                                        <exclude>com.samtel.config.*</exclude>
-                                        <exclude>com.samtel.adapters.secondary.rest.common.HttpRequestInterceptor
-                                        </exclude>
+                                        <exclude>com.samtel.BizagiApplication</exclude>
+                                        <exclude>com.samtel.bizagi.common.config.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
@@ -83,5 +66,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
