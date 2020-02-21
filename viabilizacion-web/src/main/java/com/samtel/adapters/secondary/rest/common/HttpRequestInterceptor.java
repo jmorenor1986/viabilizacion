@@ -48,7 +48,7 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
                 .build()
                 .toLogRequest(request, new String(body, "UTF-8"), getIdRequest());
         operation = logEntity.getTipo();
-        logService.insertLogOperation(logEntity);
+        logService.insertaLogRest(logEntity);
         setUrl(logEntity.getUrl());
     }
 
@@ -57,6 +57,6 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
                 .builder()
                 .build()
                 .toLogResponse(response, operation, getIdRequest(), StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()), getUrl());
-        logService.insertLogOperation(logEntity);
+        logService.insertaLogRest(logEntity);
     }
 }

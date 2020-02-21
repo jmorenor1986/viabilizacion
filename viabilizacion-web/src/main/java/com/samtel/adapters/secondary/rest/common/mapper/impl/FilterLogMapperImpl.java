@@ -50,7 +50,7 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     }
 
     private FlowOperationEnum validateTipoResponse(FlowOperationEnum tipoOperation ){
-        if(FlowOperationEnum.VALIDATE_CITY.equals(tipoOperation)){
+        if(FlowOperationEnum.VALIDATE_CITY_REQUEST.equals(tipoOperation)){
             return FlowOperationEnum.VALIDATE_CITY_RESPONSE;
         }
         return FlowOperationEnum.NO_APLICA;
