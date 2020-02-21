@@ -5,6 +5,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootTest
 public class LogEntityTest {
@@ -17,7 +18,9 @@ public class LogEntityTest {
 		Assert.assertNotNull(log.equals(new LogEntity()));
 		Assert.assertNotNull(log.equals(log));
 		Assert.assertNotNull(log);
+		Assert.assertNotNull(LogEntity.builder().build());
 		Assert.assertThat(LogEntity.class, CoreMatchers.allOf(
+				BeanMatchers.hasValidBeanConstructor(),
                 BeanMatchers.hasValidGettersAndSetters()));
 		
 	}

@@ -42,15 +42,15 @@ public class LogServiceImpl implements LogService {
     @Override
     public Boolean insertaLogRest(LogGeneral log) {
         Optional<LogEntity> logEntity = generaLogEntity(log);
-        if(!logEntity.isPresent()){
+        if(logEntity.isPresent()){
             logOperationRepository.save(logEntity.get());
+            return Boolean.TRUE;
         }
-        return Boolean.TRUE;
+        return Boolean.FALSE;
     }
 
     public Optional<LogEntity> generaLogEntity(LogGeneral log){
         LogEntity logEntity = modelMapper.map(log, LogEntity.class);
-        logEntity.setServicio(new ServicioEntity());
         Optional<ServicioEntity> servicioEntity = servicioRepository.findByServicio(validaServicio(log.getTipo()));
         if(!servicioEntity.isPresent()){
             this.logger.info("Error al guardrar log de servicio rest {}", new Gson().toJson(log));
@@ -64,7 +64,7 @@ public class LogServiceImpl implements LogService {
         if (FlowOperationEnum.VALIDATE_CITY.equals(operationEnum) || FlowOperationEnum.VALIDATE_CITY_REQUEST.equals(operationEnum) || FlowOperationEnum.VALIDATE_CITY_RESPONSE.equals(operationEnum)) {
 			return ServicioEnum.VALIDATE_CITY;
         }
-        return null;
+        return ServicioEnum.NO_APLICA;
     }
 
 }

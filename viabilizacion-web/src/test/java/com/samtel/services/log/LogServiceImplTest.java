@@ -64,7 +64,8 @@ public class LogServiceImplTest {
                 .traza("true")
                 .usuarioMicro("jsierra")
                 .build();
-
-        Assert.assertEquals(Boolean.FALSE, logService.insertaLogRest(logGeneral));
+        Mockito.when(servicioRepository.findByServicio(logService.validaServicio(FlowOperationEnum.VALIDATE_CITY_RESPONSE))).thenReturn(Optional.of(new ServicioEntity()));
+        Boolean respuesta = logService.insertaLogRest(logGeneral);
+        Assert.assertEquals(Boolean.TRUE, respuesta );
     }
 }
