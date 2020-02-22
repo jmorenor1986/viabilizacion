@@ -1,13 +1,15 @@
 package com.samtel.domain.repository.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.http.HttpStatus;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "log")
+@Builder
+@NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
 public class LogEntity {
 	@Id
@@ -18,12 +20,12 @@ public class LogEntity {
 	
 	@Column(name = "usuario_micro", nullable = false)
 	private String usuarioMicro;
-	
+
 	@Column(name = "tipo" )
 	@Enumerated(value = EnumType.STRING)
 	private FlowOperationEnum tipo;
-	
-	@Column(name= "traza", columnDefinition = "TEXT")	
+
+	@Column(name= "traza", columnDefinition = "TEXT")
 	private String traza;
 	
 	@Column(name = "id_request")
@@ -35,6 +37,13 @@ public class LogEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ServicioEntity servicio;
+
+	@Column(name = "httpStatus" )
+	@Enumerated(value = EnumType.STRING)
+	private HttpStatus httpStatus;
+
+	@Column(name = "url")
+	private String url;
 	
 	@PrePersist
     public void prePersistFunction(){
@@ -44,6 +53,12 @@ public class LogEntity {
         if(tipo == null) {
         	this.setTipo(FlowOperationEnum.NO_APLICA);
         }
+        if(httpStatus == null){
+        	this.setHttpStatus(HttpStatus.CONTINUE);
+		}
+        if(url == null){
+        	this.setUrl("NO_APLICA");
+		}
     }
 
 	@Override

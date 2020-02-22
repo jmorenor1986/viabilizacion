@@ -18,7 +18,7 @@ public class ServicioEntity {
 	@SequenceGenerator(name = "servicio_generator", sequenceName = "servicio_seq", allocationSize = 1)
 	private Long id;
 	
-	@Column(name = "nombre" )
+	@Column(name = "nombre" , unique = true)
 	@Enumerated(value = EnumType.STRING)
 	private ServicioEnum servicio;
 	

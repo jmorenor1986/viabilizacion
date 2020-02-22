@@ -1,5 +1,7 @@
 package com.samtel.validation.service;
 
+import com.samtel.validation.entity.Ciudad;
+import com.samtel.validation.service.impl.CiudadServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,9 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.samtel.validation.entity.Ciudad;
-import com.samtel.validation.service.impl.CiudadServiceImpl;
 
 
 @SpringBootTest

@@ -12,9 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
 
 @SpringBootTest
 public class ValidarCiudadServiceImplTest {
@@ -35,14 +33,16 @@ public class ValidarCiudadServiceImplTest {
 
     @Test
     public void testValidarCiudadReturnTrue() {
-        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of("123"))).thenReturn(Optional.of("true"));
+        Map<String,String> headers = Mockito.mock(Map.class);
+        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("true"));
         String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD, "123");
         Assert.assertEquals("true", result);
     }
 
     @Test
     public void testValidarCiudadReturnFalse() {
-        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of("123"))).thenReturn(Optional.of("false"));
+        Map<String,String> headers = Mockito.mock(Map.class);
+        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("false"));
         String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD, "123");
         Assert.assertEquals("false", result);
     }

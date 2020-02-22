@@ -1,9 +1,12 @@
 package com.samtel.adapters.secondary.rest.informacioncontacto;
 
+import com.google.gson.Gson;
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.JsonUtilities;
 import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.adapters.secondary.rest.common.properties.InformacionContactoProperties;
+import com.samtel.adapters.secondary.rest.dictum.dto.PrincipalRequestDictumDTO;
+import com.samtel.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
 import com.samtel.adapters.secondary.rest.informacioncontacto.dto.RequestUbicaDTO;
 import com.samtel.domain.solicitud.informacioncontacto.RequestInformacionContacto;
 import com.samtel.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
@@ -34,7 +37,7 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
     @Override
     public ResponseInformacionContacto consultarDatosUsuario(RequestInformacionContacto requestInformacionContacto, String idRequest) {
         String responseService = restTemplateService.getWithParams(informacionContactoProperties.getReconocerProperties().getUri(),
-                setMapParameters(requestInformacionContacto), Optional.of(idRequest)).get();
+                setMapParameters(requestInformacionContacto), generateHeaders(idRequest)).get();
         return ResponseInformacionContacto.builder()
                 .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService))))
                 .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService))))
@@ -55,7 +58,7 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
                 .build();
         return setResponseInformacionContacotUbica(restTemplateService.getWithOutParams(informacionContactoProperties
                 .getUbicaProperties()
-                .getUri(), requestUbicaDTO, Optional.of(idRequest)).get());
+                .getUri(), requestUbicaDTO, generateHeaders(idRequest)).get());
     }
 
     private Map<String, Object> setMapParameters(RequestInformacionContacto requestInformacionContacto) {
@@ -76,5 +79,11 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
                 .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Celulares.Celular", "Celular", json))))
                 .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Telefonos.Telefono", "Telefono", json))))
                 .build();
+    }
+
+    public Optional<Map<String, String>> generateHeaders(String idRequest) {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("idRequest", idRequest);
+        return Optional.of(headers);
     }
 }

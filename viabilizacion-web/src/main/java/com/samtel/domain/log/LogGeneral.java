@@ -2,6 +2,7 @@ package com.samtel.domain.log;
 
 import com.samtel.domain.repository.entity.FlowOperationEnum;
 import lombok.*;
+import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
@@ -19,5 +20,9 @@ public class LogGeneral {
 	private String idRequest;
 	
 	private Date fecha;
+
+	private HttpStatus httpStatus;
+
+	private String url;
 	
 }
