@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Map;
 import java.util.Optional;
 
 @SpringBootTest
@@ -47,8 +48,9 @@ public class DictumServiceImplTest {
         RequestDictumDTO requestDictumDTO = Mockito.mock(RequestDictumDTO.class);
         ResponseDictumDTO response = new ResponseDictumDTO();
         response.setRespuestaServicio(MockResponseDictumTest.APROBADO);
+        Map<String,String> headers = Mockito.mock(Map.class);
         Mockito.when(modelMapper.map(request, RequestDictumDTO.class)).thenReturn(requestDictumDTO);
-        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO, Optional.of("123"))).thenReturn(Optional.of(MockResponseDictumTest.APROBADO));
+        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO, Optional.of(headers))).thenReturn(Optional.of(MockResponseDictumTest.APROBADO));
         Optional<String> result = dictumService.consultarSolicitudDictum(request,"123");
         Assert.assertEquals(result.get(), RESPUESTA_APROBADO);
     }
@@ -59,8 +61,9 @@ public class DictumServiceImplTest {
         RequestDictumDTO requestDictumDTO = Mockito.mock(RequestDictumDTO.class);
         ResponseDictumDTO response = new ResponseDictumDTO();
         response.setRespuestaServicio(MockResponseDictumTest.NEGADO);
+        Map<String,String> headers = Mockito.mock(Map.class);
         Mockito.when(modelMapper.map(request, RequestDictumDTO.class)).thenReturn(requestDictumDTO);
-        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO,Optional.of("123"))).thenReturn(Optional.of(MockResponseDictumTest.NEGADO));
+        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO,Optional.of(headers))).thenReturn(Optional.of(MockResponseDictumTest.NEGADO));
         Optional<String> result = dictumService.consultarSolicitudDictum(request, "123");
         Assert.assertEquals(result.get(), RESPUESTA_NEGADO);
     }
@@ -72,7 +75,8 @@ public class DictumServiceImplTest {
         ResponseDictumDTO response = new ResponseDictumDTO();
         response.setRespuestaServicio(MockResponseDictumTest.PREAPROBADO_SIN_DOCUMENTOS);
         Mockito.when(modelMapper.map(request, RequestDictumDTO.class)).thenReturn(requestDictumDTO);
-        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO, Optional.of("123"))).thenReturn(Optional.of(MockResponseDictumTest.PREAPROBADO_SIN_DOCUMENTOS));
+        Map<String,String> headers = Mockito.mock(Map.class);
+        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO, Optional.of(headers))).thenReturn(Optional.of(MockResponseDictumTest.PREAPROBADO_SIN_DOCUMENTOS));
         Optional<String> result = dictumService.consultarSolicitudDictum(request, "123");
         Assert.assertEquals(result.get(), RESPUESTA_PREAPROBADO_SIN_DOCUMENTOS);
     }
@@ -84,7 +88,8 @@ public class DictumServiceImplTest {
         ResponseDictumDTO response = new ResponseDictumDTO();
         response.setRespuestaServicio(MockResponseDictumTest.PREAPROBADO_CON_DOCUMENTOS);
         Mockito.when(modelMapper.map(request, RequestDictumDTO.class)).thenReturn(requestDictumDTO);
-        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO, Optional.of("123"))).thenReturn(Optional.of(MockResponseDictumTest.PREAPROBADO_CON_DOCUMENTOS));
+        Map<String,String> headers = Mockito.mock(Map.class);
+        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO, Optional.of(headers))).thenReturn(Optional.of(MockResponseDictumTest.PREAPROBADO_CON_DOCUMENTOS));
         Optional<String> result = dictumService.consultarSolicitudDictum(request, "123");
         Assert.assertEquals(result.get(), RESPUESTA_PREAPROBADO_CON_DOCUMENTOS);
     }
@@ -96,7 +101,8 @@ public class DictumServiceImplTest {
         ResponseDictumDTO response = new ResponseDictumDTO();
         response.setRespuestaServicio(MockResponseDictumTest.ERROR_EN_PROCESO);
         Mockito.when(modelMapper.map(request, RequestDictumDTO.class)).thenReturn(requestDictumDTO);
-        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO , Optional.of("123"))).thenReturn(Optional.of(MockResponseDictumTest.ERROR_EN_PROCESO));
+        Map<String,String> headers = Mockito.mock(Map.class);
+        Mockito.when(restTemplateService.getWithOutParams(properties.getUriDictum(), requestDictumDTO , Optional.of(headers))).thenReturn(Optional.of(MockResponseDictumTest.ERROR_EN_PROCESO));
         Optional<String> result = dictumService.consultarSolicitudDictum(request, "123");
         Assert.assertEquals(result.get(), RESPUESTA_ERROR_EN_PROCESO);
     }

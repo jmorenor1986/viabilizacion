@@ -1,9 +1,13 @@
 package com.samtel.adapters.secondary.rest.dictum;
 
+import com.google.gson.Gson;
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.adapters.secondary.rest.dictum.common.DecisionDictum;
+import com.samtel.adapters.secondary.rest.dictum.dto.PrincipalRequestDictumDTO;
 import com.samtel.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
+import com.samtel.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
+import com.samtel.adapters.secondary.rest.vigia.dto.VigiaDTO;
 import com.samtel.domain.solicitud.dictum.RequestDictum;
 import com.samtel.errors.XmlParsingException;
 import com.samtel.ports.secondary.solicitud.DictumService;
@@ -11,6 +15,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -32,7 +38,7 @@ public class DictumServiceImpl implements DictumService {
     @Override
     public Optional<String> consultarSolicitudDictum(RequestDictum request, String idRequest) {
         RequestDictumDTO requestDictumDTO = modelMapper.map(request, RequestDictumDTO.class);
-        String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, Optional.of(idRequest)).get();
+        String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, generateHeaders(idRequest, requestDictumDTO)).get();
         return consultarDecisionDictum(response);
     }
 
@@ -55,6 +61,18 @@ public class DictumServiceImpl implements DictumService {
         if (xml.contains(DecisionDictum.NEGADO))
             return Optional.of(DecisionDictum.NEGADO);
         return Optional.of(ERROR_RESPONSE_NULL);
+    }
+
+    public Optional<Map<String, String>> generateHeaders(String idRequest, RequestDictumDTO request) {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("idRequest", idRequest);
+        headers.put("idCache", new Gson().toJson(PrincipalRequestDictumDTO
+                .builder()
+                .identificacion(request.getRequestBody().getIdentificacion())
+                .primerApellido(request.getRequestBody().getPrimerApellido())
+                .tipoIdentificacion(request.getRequestBody().getTipoIdentificacion())
+                .build()));
+        return Optional.of(headers);
     }
 
 }

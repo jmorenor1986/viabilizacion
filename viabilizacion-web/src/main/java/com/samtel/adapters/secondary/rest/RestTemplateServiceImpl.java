@@ -30,27 +30,27 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     }
 
     @Override
-    public Optional<String> getWithPathParams(String uri, List<String> pathParams, Optional<String> idRequest) {
+    public Optional<String> getWithPathParams(String uri, List<String> pathParams, Optional<Map<String, String>> headers) {
         uri = uri.concat(String.join("/", pathParams));
-        HttpEntity<Object> request = new HttpEntity<>((idRequest.isPresent()) ? addAdditionalHeader(addGenericHeaders(), "idRequest", idRequest.get()) : addGenericHeaders());
+        HttpEntity<Object> request = new HttpEntity<>((headers.isPresent()) ? addAdditionalHeader(addGenericHeaders(), headers.get()) : addGenericHeaders());
         return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
     @Override
-    public Optional<Object> postWithOutParams(String uri, Object objectRequest, Optional<String> idRequest) {
-        HttpEntity<Object> request = new HttpEntity<>(objectRequest, (idRequest.isPresent()) ? addAdditionalHeader(addGenericHeaders(), "idRequest", idRequest.get()) : addGenericHeaders());
+    public Optional<Object> postWithOutParams(String uri, Object objectRequest, Optional<Map<String, String>> headers) {
+        HttpEntity<Object> request = new HttpEntity<>(objectRequest, (headers.isPresent()) ? addAdditionalHeader(addGenericHeaders(), headers.get()) : addGenericHeaders());
         return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.POST, request, String.class).getBody());
     }
 
     @Override
-    public Optional<String> getWithOutParams(String uri, Object objectRequest, Optional<String> idRequest) {
-        HttpEntity<Object> request = new HttpEntity<>(objectRequest, (idRequest.isPresent()) ? addAdditionalHeader(new HttpHeaders(), "idRequest", idRequest.get()) : new HttpHeaders());
+    public Optional<String> getWithOutParams(String uri, Object objectRequest, Optional<Map<String, String>> headers) {
+        HttpEntity<Object> request = new HttpEntity<>(objectRequest, (headers.isPresent()) ? addAdditionalHeader(new HttpHeaders(), headers.get()) : new HttpHeaders());
         return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
     }
 
     @Override
-    public Optional<String> getWithParams(String uri, Map<String, Object> params, Optional<String> idRequest) {
-        HttpEntity<Object> request = new HttpEntity<>((idRequest.isPresent()) ? addAdditionalHeader(addGenericHeaders(), "idRequest", idRequest.get()) : addGenericHeaders());
+    public Optional<String> getWithParams(String uri, Map<String, Object> params, Optional<Map<String, String>> headers) {
+        HttpEntity<Object> request = new HttpEntity<>((headers.isPresent()) ? addAdditionalHeader(addGenericHeaders(), headers.get()) : addGenericHeaders());
         String url = setParamsUrl(uri, params);
         return Optional.ofNullable(restTemplate.exchange(url, HttpMethod.GET, request, String.class).getBody());
     }
@@ -62,8 +62,10 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         return headers;
     }
 
-    private HttpHeaders addAdditionalHeader(HttpHeaders headers, String key, String value) {
-        headers.set(key, value);
+    private HttpHeaders addAdditionalHeader(HttpHeaders headers, Map<String, String> cabeceras) {
+        cabeceras.forEach((key, value) -> {
+            headers.set(key, value);
+        });
         return headers;
     }
 
