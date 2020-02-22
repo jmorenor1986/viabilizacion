@@ -63,6 +63,8 @@ public class LogServiceImpl implements LogService {
     public ServicioEnum validaServicio(FlowOperationEnum operationEnum) {
         if (FlowOperationEnum.VALIDATE_CITY.equals(operationEnum) || FlowOperationEnum.VALIDATE_CITY_REQUEST.equals(operationEnum) || FlowOperationEnum.VALIDATE_CITY_RESPONSE.equals(operationEnum)) {
 			return ServicioEnum.VALIDATE_CITY;
+        } else if(FlowOperationEnum.INVOKE_VIGIA.equals(operationEnum) || FlowOperationEnum.INVOKE_VIGIA_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_VIGIA_RESPONSE.equals(operationEnum)){
+            return ServicioEnum.VIGIA;
         }
         return ServicioEnum.NO_APLICA;
     }
