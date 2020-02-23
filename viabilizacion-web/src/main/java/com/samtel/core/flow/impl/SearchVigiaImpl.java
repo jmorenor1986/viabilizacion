@@ -1,20 +1,18 @@
 package com.samtel.core.flow.impl;
 
-import java.util.Objects;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import com.samtel.core.flow.ValidateRequest;
 import com.samtel.core.response.ResponseFlow;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.ListaCliente;
 import com.samtel.ports.secondary.solicitud.VigiaService;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import java.util.Objects;
+import java.util.Optional;
 
 @Component("searchVigia")
 public class SearchVigiaImpl implements ValidateRequest {

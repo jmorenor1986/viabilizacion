@@ -1,14 +1,12 @@
 package com.samtel.adapters.secondary.rest.dictum.mapper.impl;
 
-import com.samtel.domain.solicitud.dictum.RequestBody;
-import com.samtel.domain.solicitud.dictum.RequestHeader;
-import com.sun.xml.bind.v2.TODO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.samtel.adapters.secondary.rest.dictum.mapper.DictumClienteMapper;
 import com.samtel.domain.solicitud.Cliente;
+import com.samtel.domain.solicitud.dictum.RequestBody;
 import com.samtel.domain.solicitud.dictum.RequestDictum;
+import com.samtel.domain.solicitud.dictum.RequestHeader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DictumClienteMapperImpl implements DictumClienteMapper {

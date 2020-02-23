@@ -21,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @SpringBootTest
@@ -86,7 +87,8 @@ public class InformacionContactoServiceImplTest {
         map.put("tipoIdBuscar", properties.getInformacionContactoProperties().getReconocerProperties().getNumeroIdBuscar());
         map.put("numeroIdBuscar", properties.getInformacionContactoProperties().getReconocerProperties().getNumeroIdBuscar());
         map.put("validarNombre", properties.getInformacionContactoProperties().getReconocerProperties().getValidarNombre());
-        Mockito.when(restTemplateService.getWithParams(properties.getInformacionContactoProperties().getReconocerProperties().getUri(), map, Optional.of("123"))).thenReturn(Optional.of(MockReconocerService.response));
+        Map<String,String> headers = Mockito.mock(Map.class);
+        Mockito.when(restTemplateService.getWithParams(properties.getInformacionContactoProperties().getReconocerProperties().getUri(), map, Optional.of(headers))).thenReturn(Optional.of(MockReconocerService.response));
         ResponseInformacionContacto result = informacionContactoService.consultarDatosUsuario(requestInformacionContacto, "123");
         Assert.assertNotNull(result);
         Assert.assertNotNull(responseInformacionContacto);
@@ -101,8 +103,8 @@ public class InformacionContactoServiceImplTest {
                 .primerApellido(requestInformacionContacto.getPrimerApellido())
                 .tipoIdentificacion(requestInformacionContacto.getTipoDocumento())
                 .build();
-
-        Mockito.when(restTemplateService.getWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO, Optional.of("123"))).thenReturn(Optional.of(MockUbicaService.response));
+        Map<String,String> headers = Mockito.mock(Map.class);
+        Mockito.when(restTemplateService.getWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO, Optional.of(headers))).thenReturn(Optional.of(MockUbicaService.response));
         ResponseInformacionContacto informacionContacto = informacionContactoService.consultarInformacionContacto(requestInformacionContacto, "123");
         Assert.assertNotNull(informacionContacto);
 
