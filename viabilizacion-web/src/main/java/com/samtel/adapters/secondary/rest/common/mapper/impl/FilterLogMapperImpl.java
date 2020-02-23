@@ -45,9 +45,12 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     private FlowOperationEnum validateTipoRequest(String uri ){
         if(uri.contains("/v1/ciudad")){
             return FlowOperationEnum.VALIDATE_CITY_REQUEST;
-            //TODO SE DEE CAMBIAR POR LA URL REAL NO POR EL MOCK
+            //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
         }else if(uri.contains("v2/5e45638a3000002848614baa")){
             return FlowOperationEnum.INVOKE_VIGIA_REQUEST;
+            //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
+        }else if(uri.contains("v2/5e3b08212f000063e356c899")){
+            return FlowOperationEnum.INVOKE_DICTUM_REQUEST;
         }
         return FlowOperationEnum.NO_APLICA;
     }
@@ -57,6 +60,8 @@ public class FilterLogMapperImpl implements FilterLogMapper {
             return FlowOperationEnum.VALIDATE_CITY_RESPONSE;
         }else if(FlowOperationEnum.INVOKE_VIGIA_REQUEST.equals(tipoOperation)){
             return FlowOperationEnum.INVOKE_VIGIA_RESPONSE;
+        }else if(FlowOperationEnum.INVOKE_DICTUM_REQUEST.equals(tipoOperation)){
+            return FlowOperationEnum.INVOKE_DICTUM_RESPONSE;
         }
         return FlowOperationEnum.NO_APLICA;
     }

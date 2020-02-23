@@ -49,8 +49,13 @@ public class LogServiceImpl implements LogService {
         if (logEntity.isPresent()) {
             logEntity = Optional.of(logOperationRepository.save(logEntity.get()));
             if (logEntity.isPresent() &&
-                    (FlowOperationEnum.INVOKE_VIGIA_REQUEST.equals(logEntity.get().getTipo()) ||
-                            FlowOperationEnum.INVOKE_VIGIA_RESPONSE.equals(logEntity.get().getTipo()))) {
+                    (
+                            FlowOperationEnum.INVOKE_VIGIA_REQUEST.equals(logEntity.get().getTipo()) ||
+                            FlowOperationEnum.INVOKE_VIGIA_RESPONSE.equals(logEntity.get().getTipo()) ||
+                            FlowOperationEnum.INVOKE_DICTUM_RESPONSE.equals(logEntity.get().getTipo()) ||
+                            FlowOperationEnum.INVOKE_DICTUM_REQUEST.equals(logEntity.get().getTipo())
+                    )
+            ) {
                 cacheUsrService.insertLogCacheUsr(logEntity.get(), idCache);
             }
             return Boolean.TRUE;
@@ -74,6 +79,8 @@ public class LogServiceImpl implements LogService {
             return ServicioEnum.VALIDATE_CITY;
         } else if (FlowOperationEnum.INVOKE_VIGIA.equals(operationEnum) || FlowOperationEnum.INVOKE_VIGIA_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_VIGIA_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.VIGIA;
+        } else if (FlowOperationEnum.INVOKE_DICTUM.equals(operationEnum) || FlowOperationEnum.INVOKE_DICTUM_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_DICTUM_RESPONSE.equals(operationEnum)) {
+            return ServicioEnum.DICTUM;
         }
         return ServicioEnum.NO_APLICA;
     }
