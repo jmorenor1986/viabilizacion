@@ -50,7 +50,7 @@ public class LogServiceImplTest {
                 .usuarioMicro("jsierra")
                 .build();
 
-        Assert.assertEquals(Boolean.FALSE, logService.insertaLogRest(logGeneral));
+        Assert.assertEquals(Boolean.FALSE, logService.insertaLogRest(logGeneral, "aaa"));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class LogServiceImplTest {
                 .usuarioMicro("jsierra")
                 .build();
         Mockito.when(servicioRepository.findByServicio(logService.validaServicio(FlowOperationEnum.VALIDATE_CITY_RESPONSE))).thenReturn(Optional.of(new ServicioEntity()));
-        Boolean respuesta = logService.insertaLogRest(logGeneral);
+        Boolean respuesta = logService.insertaLogRest(logGeneral,"123");
         Assert.assertEquals(Boolean.TRUE, respuesta );
     }
 }

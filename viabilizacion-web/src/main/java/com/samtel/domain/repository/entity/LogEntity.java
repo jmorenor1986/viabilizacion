@@ -42,6 +42,9 @@ public class LogEntity {
 	@Enumerated(value = EnumType.STRING)
 	private HttpStatus httpStatus;
 
+	@ManyToOne(fetch =  FetchType.LAZY)
+	private CacheUsrEntity cacheUsr;
+
 	@Column(name = "url")
 	private String url;
 	

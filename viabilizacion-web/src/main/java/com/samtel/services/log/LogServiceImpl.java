@@ -40,7 +40,7 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Boolean insertaLogRest(LogGeneral log) {
+    public Boolean insertaLogRest(LogGeneral log, String idCache) {
         Optional<LogEntity> logEntity = generaLogEntity(log);
         if(logEntity.isPresent()){
             logOperationRepository.save(logEntity.get());

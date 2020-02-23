@@ -24,6 +24,9 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
     private String idRequest;
     @Getter
     @Setter
+    private String idCache;
+    @Getter
+    @Setter
     private String url;
     private FlowOperationEnum operation;
 
@@ -35,11 +38,20 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        setIdRequest(request.getHeaders().get("idRequest").stream().reduce((a, b) -> a + "" + b).orElse(""));
+        findHeadersLog(request);
         logRequest(request, body);
         ClientHttpResponse response = execution.execute(request, body);
         logResponse(response);
         return response;
+    }
+
+    private void findHeadersLog(HttpRequest request){
+        if(request.getHeaders().get("idRequest") != null){
+            setIdRequest(request.getHeaders().get("idRequest").stream().reduce((a, b) -> a + "" + b).orElse(""));
+        }
+        if(request.getHeaders().get("idCache") != null){
+            setIdCache(request.getHeaders().get("idCache").stream().reduce((a, b) -> a + "" + b).orElse(""));
+        }
     }
 
     private void logRequest(HttpRequest request, byte[] body) throws IOException {
@@ -48,7 +60,7 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
                 .build()
                 .toLogRequest(request, new String(body, "UTF-8"), getIdRequest());
         operation = logEntity.getTipo();
-        logService.insertaLogRest(logEntity);
+        logService.insertaLogRest(logEntity, getIdCache());
         setUrl(logEntity.getUrl());
     }
 
@@ -57,6 +69,6 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
                 .builder()
                 .build()
                 .toLogResponse(response, operation, getIdRequest(), StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()), getUrl());
-        logService.insertaLogRest(logEntity);
+        logService.insertaLogRest(logEntity, getIdCache());
     }
 }
