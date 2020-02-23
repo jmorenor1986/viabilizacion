@@ -1,11 +1,19 @@
 package com.samtel.domain.repository.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "cache_usr")
+@NamedQueries({
+        @NamedQuery(name = "CacheUsrEntity.inactiveCacheUsr", query = "update CacheUsrEntity set estado = 'INACTIVO' where estado = 'ACTIVO' and  paramBusq = :paramBusq and tipo = :tipo ")
+})
+@Builder
+@Data
 public class CacheUsrEntity {
     @Id
     @Column(name = "id")
@@ -14,13 +22,23 @@ public class CacheUsrEntity {
     private Long id;
     @Column(name = "parametros_busq")
     private String paramBusq;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "log_id", unique = true)
+    private LogEntity logs;
+    @Column(name = "estado")
+    @Enumerated(value = EnumType.STRING)
+    private EstadoEnum estado;
+    @Column(name = "tipo")
+    private String tipo;
 
-    @OneToMany(
-            mappedBy = "cacheUsr",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
-    )
-    private List<LogEntity> log = new ArrayList<>();
-
+    public void setLogs(LogEntity logs){
+        if(logs == null){
+            if(this.logs != null){
+                this.logs.setCacheUsr(null);
+            }
+        }else{
+            logs.setCacheUsr(this);
+        }
+        this.logs = logs;
+    }
 }

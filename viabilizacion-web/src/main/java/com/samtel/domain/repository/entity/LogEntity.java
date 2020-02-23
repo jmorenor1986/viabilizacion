@@ -42,7 +42,7 @@ public class LogEntity {
 	@Enumerated(value = EnumType.STRING)
 	private HttpStatus httpStatus;
 
-	@ManyToOne(fetch =  FetchType.LAZY)
+	@OneToOne(mappedBy = "logs",cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private CacheUsrEntity cacheUsr;
 
 	@Column(name = "url")

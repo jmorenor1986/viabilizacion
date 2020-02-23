@@ -1,5 +1,6 @@
 package com.samtel.services.log;
 
+import com.samtel.core.repository.ICacheUsrRepository;
 import com.samtel.core.repository.ILogOperationRepository;
 import com.samtel.core.repository.IServicioRepository;
 import com.samtel.domain.log.LogGeneral;
@@ -7,6 +8,7 @@ import com.samtel.domain.repository.entity.FlowOperationEnum;
 import com.samtel.domain.repository.entity.LogEntity;
 import com.samtel.domain.repository.entity.ServicioEntity;
 import com.samtel.domain.repository.entity.ServicioEnum;
+import com.samtel.ports.primary.log.CacheUsrService;
 import com.samtel.ports.primary.log.LogService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,11 +33,13 @@ public class LogServiceImplTest {
     IServicioRepository servicioRepository;
     @Mock
     LogServiceImpl logEntity;
+    @Mock
+    CacheUsrService cacheUsrService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        logService = new LogServiceImpl(logOperationRepository, new ModelMapper(), servicioRepository);
+        logService = new LogServiceImpl(logOperationRepository, new ModelMapper(), servicioRepository, cacheUsrService);
     }
 
     @Test

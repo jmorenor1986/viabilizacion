@@ -42,7 +42,14 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
         logRequest(request, body);
         ClientHttpResponse response = execution.execute(request, body);
         logResponse(response);
+        cleanObjects();
         return response;
+    }
+
+    private void cleanObjects(){
+        this.setIdCache("");
+        this.setUrl("");
+        this.setIdRequest("");
     }
 
     private void findHeadersLog(HttpRequest request){
