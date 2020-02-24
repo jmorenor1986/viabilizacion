@@ -50,6 +50,7 @@
                                     <excludes>
                                         <exclude>com.samtel.BizagiApplication</exclude>
                                         <exclude>com.samtel.bizagi.common.config.*</exclude>
+                                        <exclude>org.tempuri.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
