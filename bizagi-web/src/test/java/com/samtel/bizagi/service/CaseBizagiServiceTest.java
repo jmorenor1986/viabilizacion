@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.net.MalformedURLException;
+
 @SpringBootTest
 public class CaseBizagiServiceTest {
 
@@ -29,7 +31,7 @@ public class CaseBizagiServiceTest {
     }
 
     @Test
-    public void testCreateCaseSuccess() {
+    public void testCreateCaseSuccess() throws MalformedURLException {
         Mockito.when(caseBizagiClient.createCase(requestCreateCaseDTO)).thenReturn(new ResponseCreateCaseDTO());
         ResponseCreateCaseDTO result = caseBizagiService.createCase(requestCreateCaseDTO);
         Assert.assertNotNull(result);

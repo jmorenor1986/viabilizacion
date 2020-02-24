@@ -6,6 +6,8 @@ import com.samtel.bizagi.dto.ResponseCreateCaseDTO;
 import com.samtel.bizagi.service.CaseBizagiService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.net.MalformedURLException;
+
 public class CaseBizagiServiceImpl implements CaseBizagiService {
     private final CaseBizagiClient caseBizagiClient;
 
@@ -15,7 +17,7 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
     }
 
     @Override
-    public ResponseCreateCaseDTO createCase(RequestCreateCaseDTO requestCreateCaseDTO) {
+    public ResponseCreateCaseDTO createCase(RequestCreateCaseDTO requestCreateCaseDTO) throws MalformedURLException {
         return (ResponseCreateCaseDTO) caseBizagiClient.createCase(requestCreateCaseDTO);
     }
 }

@@ -8,11 +8,15 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.tempuri.WorkflowEngineSOASoap;
+
+import java.net.MalformedURLException;
 
 public class CaseBizagiControllerTest {
     private CaseBizagiController caseBizagiController;
     @Mock
     private CaseBizagiService caseBizagiService;
+
 
     @Before
     public void setUp() {
@@ -21,7 +25,7 @@ public class CaseBizagiControllerTest {
     }
 
     @Test
-    public void testCreateCaseSuccess() {
+    public void testCreateCaseSuccess() throws MalformedURLException {
         Mockito.when(caseBizagiService.createCase(Mockito.any())).thenReturn(new ResponseCreateCaseDTO());
         ResponseCreateCaseDTO result = caseBizagiController.createCase(Mockito.any());
         Assert.assertNotNull(result);
