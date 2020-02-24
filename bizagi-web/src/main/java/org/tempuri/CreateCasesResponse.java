@@ -133,6 +133,9 @@ public class CreateCasesResponse {
             return this.content;
         }
 
+        public void setContent(List<Object> content) {
+            this.content = content;
+        }
     }
 
 }

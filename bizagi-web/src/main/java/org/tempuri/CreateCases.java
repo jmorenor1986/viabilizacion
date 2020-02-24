@@ -132,6 +132,10 @@ public class CreateCases {
             }
             return this.content;
         }
+
+        public void setContent(List<Object> content) {
+            this.content = content;
+        }
     }
 
 }
