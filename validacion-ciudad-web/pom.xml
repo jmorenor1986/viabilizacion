@@ -11,7 +11,7 @@
 
     <artifactId>validacion-ciudad-web</artifactId>
     <properties>
-        <start-class>com.samtel.ValidationApplication</start-class>
+        <start-class>co.com.santander.ValidationApplication</start-class>
     </properties>
 
     <dependencies>
@@ -66,7 +66,7 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>com.samtel.ValidationApplication</exclude>
+                                        <exclude>co.com.santander.ValidationApplication</exclude>
                                         <exclude>com.samtel.validation.common.config.*</exclude>
                                     </excludes>
                                     <limits>

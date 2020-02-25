@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>viabilizacion-web</artifactId>
     <properties>
-        <start-class>com.samtel.Application</start-class>
+        <start-class>co.com.santander.Application</start-class>
     </properties>
     <dependencies>
         <dependency>
@@ -69,14 +69,14 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>com.samtel.Application</exclude>
-                                        <exclude>com.samtel.adapters.secondary.rest.dictum.dto.RequestBodyDTO</exclude>
-                                        <exclude>com.samtel.domain.solicitud.dictum.RequestBody</exclude>
+                                        <exclude>co.com.santander.Application</exclude>
+                                        <exclude>co.com.santander.adapters.secondary.rest.dictum.dto.RequestBodyDTO</exclude>
+                                        <exclude>co.com.santander.domain.solicitud.dictum.RequestBody</exclude>
                                         <exclude>
-                                            com.samtel.domain.solicitud.informacioncontacto.ResponseInformacionContacto
+                                            co.com.santander.domain.solicitud.informacioncontacto.ResponseInformacionContacto
                                         </exclude>
                                         <exclude>com.samtel.config.*</exclude>
-                                        <exclude>com.samtel.adapters.secondary.rest.common.HttpRequestInterceptor
+                                        <exclude>co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor
                                         </exclude>
                                     </excludes>
                                     <limits>
