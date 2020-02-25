@@ -1,11 +1,13 @@
 package com.samtel.adapters.secondary.rest.vigia;
 
+import com.google.gson.Gson;
 import com.samtel.adapters.secondary.rest.RestTemplateService;
 import com.samtel.adapters.secondary.rest.common.JsonUtilities;
 import com.samtel.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import com.samtel.adapters.secondary.rest.common.properties.ClientesProperties;
 import com.samtel.adapters.secondary.rest.common.properties.VigiaProperties;
 import com.samtel.adapters.secondary.rest.vigia.dto.MensajeDTO;
+import com.samtel.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import com.samtel.adapters.secondary.rest.vigia.dto.VigiaDTO;
 import com.samtel.domain.solicitud.Cliente;
 import com.samtel.domain.solicitud.ListaCliente;
@@ -18,6 +20,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @SpringBootTest
@@ -29,6 +33,7 @@ public class VigiaServiceImplTest {
     private RestTemplateService restTemplateService;
     private JsonUtilities jsonUtilities;
     private VigiaProperties vigiaProperties;
+    private Map<String, String> headers;
 
     @Before
     public void setUp() {
@@ -43,6 +48,9 @@ public class VigiaServiceImplTest {
         properties = new ClientesProperties();
         properties.setVigiaProperties(vigiaProperties);
         vigiaService = new VigiaServiceImpl(restTemplateService, properties, jsonUtilities);
+        headers = new HashMap<>();
+        headers.put("idRequest", "123");
+        headers.put("idCache", "{}");
     }
 
     @Test
@@ -65,7 +73,14 @@ public class VigiaServiceImplTest {
                 .codigoEjecucion(vigiaProperties.getCodigoEjecucion())
                 .mensaje(mensajeDTO)
                 .build();
-        Mockito.when(restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), vigiaDTO, Mockito.any())).thenReturn(Optional.of(MockResponseServiceVigia.response));
+        headers = new HashMap<>();
+        headers.put("idRequest", "123");
+        headers.put("idCache", new Gson().toJson(PrincipalVigiaDTO
+                .builder()
+                .nombre(vigiaDTO.getMensaje().getNombre())
+                .numeroIdentificacion(vigiaDTO.getMensaje().getNumeroIdentificacion())
+                .build()));
+        Mockito.when(restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), vigiaDTO, Optional.of(headers) )).thenReturn(Optional.of(MockResponseServiceVigia.response));
         ListaCliente result = vigiaService.consultarListasCliente(datosBasicosCliente, "123");
         Assert.assertNotNull(result);
     }

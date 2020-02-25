@@ -35,12 +35,12 @@ public class RestTemplateServiceImpTest {
         MockitoAnnotations.initMocks(this);
         restTemplateService = new RestTemplateServiceImpl(factory, logService);
         map = new HashMap<>();
-        map.put("", "");
+        map.put("idHeader", "123456789");
     }
 
     @Test(expected = NullPointerException.class)
     public void testGetWithPathParams() {
-        Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(map));
+        Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), null);
     }
 
     @Test(expected = RestClientException.class)
@@ -55,10 +55,10 @@ public class RestTemplateServiceImpTest {
 
     @Test(expected = NullPointerException.class)
     public void testGetWithParams() {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("numeroId", "1");
-        map.put("primerApellidoBuscar", "2");
-        Optional<String> result = restTemplateService.getWithParams(URI, map, Optional.of(this.map));
+        HashMap<String, Object> mapParam = new HashMap<>();
+        mapParam.put("numeroId", "1");
+        mapParam.put("primerApellidoBuscar", "2");
+        Optional<String> result = restTemplateService.getWithParams(URI, mapParam, null);
     }
 
 }

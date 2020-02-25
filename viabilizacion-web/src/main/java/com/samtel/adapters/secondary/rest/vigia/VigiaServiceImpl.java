@@ -47,7 +47,8 @@ public class VigiaServiceImpl implements VigiaService {
                 .codigoEjecucion(vigiaProperties.getCodigoEjecucion())
                 .mensaje(mensajeDTO)
                 .build();
-        String result = restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), dto, generateHeaders(idRequest, dto)).get();
+        Optional<Map<String, String>> headersMap = generateHeaders(idRequest, dto);
+        String result = restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), dto, headersMap).get();
         return ListaCliente.builder()
                 .resultado(jsonUtilities.getPropertyObjectWithKey("Data.", "Listas", result))
                 .encontradoId(jsonUtilities.getPropertyObjectWithKey("Data.", "EncontradoID", result))

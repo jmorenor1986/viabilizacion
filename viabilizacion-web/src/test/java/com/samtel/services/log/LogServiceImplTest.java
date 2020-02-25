@@ -36,10 +36,13 @@ public class LogServiceImplTest {
     @Mock
     CacheUsrService cacheUsrService;
 
+    ModelMapper map;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        logService = new LogServiceImpl(logOperationRepository, new ModelMapper(), servicioRepository, cacheUsrService);
+        map = new ModelMapper();
+        logService = new LogServiceImpl(logOperationRepository, map, servicioRepository, cacheUsrService);
     }
 
     @Test
@@ -68,6 +71,9 @@ public class LogServiceImplTest {
                 .traza("true")
                 .usuarioMicro("jsierra")
                 .build();
+        LogEntity logEntity = map.map(logGeneral, LogEntity.class);
+        logEntity.setId(Long.valueOf(1));
+        Mockito.when(logOperationRepository.save(new LogEntity())).thenReturn(logEntity);
         Mockito.when(servicioRepository.findByServicio(logService.validaServicio(FlowOperationEnum.VALIDATE_CITY_RESPONSE))).thenReturn(Optional.of(new ServicioEntity()));
         Boolean respuesta = logService.insertaLogRest(logGeneral,"123");
         Assert.assertEquals(Boolean.TRUE, respuesta );
