@@ -23,7 +23,16 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
+        <!-- Acceso a datos -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -63,7 +72,9 @@
                                         <exclude>com.samtel.Application</exclude>
                                         <exclude>com.samtel.adapters.secondary.rest.dictum.dto.RequestBodyDTO</exclude>
                                         <exclude>com.samtel.domain.solicitud.dictum.RequestBody</exclude>
-                                        <exclude>com.samtel.domain.solicitud.informacioncontacto.ResponseInformacionContacto</exclude>
+                                        <exclude>
+                                            com.samtel.domain.solicitud.informacioncontacto.ResponseInformacionContacto
+                                        </exclude>
                                         <exclude>com.samtel.config.*</exclude>
                                         <exclude>com.samtel.adapters.secondary.rest.common.HttpRequestInterceptor
                                         </exclude>
