@@ -43,6 +43,7 @@ public class SearchDictumImpl implements ValidateRequest {
     @Override
     public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
         setCliente(cliente);
+        setIdRequest(idRequest);
         llamarSevicio();
         return validateRequest.process(getCliente(), idRequest);
     }
