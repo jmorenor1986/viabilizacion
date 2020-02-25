@@ -56,9 +56,11 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
                 .primerApellido(requestInformacionContacto.getPrimerApellido())
                 .tipoIdentificacion(requestInformacionContacto.getTipoDocumento())
                 .build();
-        return setResponseInformacionContacotUbica(restTemplateService.getWithOutParams(informacionContactoProperties
+        Optional<Map<String, String>> mapHeaders = generateHeaders(idRequest);
+        Optional<String> respuesta = restTemplateService.getWithOutParams(informacionContactoProperties
                 .getUbicaProperties()
-                .getUri(), requestUbicaDTO, generateHeaders(idRequest)).get());
+                .getUri(), requestUbicaDTO, mapHeaders);
+        return setResponseInformacionContacotUbica( ( respuesta.isPresent() )? respuesta.get() : "Error");
     }
 
     private Map<String, Object> setMapParameters(RequestInformacionContacto requestInformacionContacto) {
