@@ -2,6 +2,8 @@ package co.com.santander.services.log;
 
 import co.com.santander.core.repository.IServicioRepository;
 import co.com.santander.domain.log.LogGeneral;
+import co.com.santander.domain.repository.entity.ServicioEntity;
+import co.com.santander.domain.repository.entity.ServicioEnum;
 import co.com.santander.ports.primary.log.CacheUsrService;
 import co.com.santander.core.repository.ILogOperationRepository;
 import co.com.santander.domain.repository.entity.FlowOperationEnum;
@@ -17,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
+import java.util.Optional;
 
 @SpringBootTest
 public class LogServiceImplTest {
@@ -68,7 +71,14 @@ public class LogServiceImplTest {
                 .build();
         LogEntity logEntity = map.map(logGeneral, LogEntity.class);
         logEntity.setId(Long.valueOf(1));
+        ServicioEntity servicioEntity =  ServicioEntity.builder()
+                .servicio(ServicioEnum.VALIDATE_CITY)
+                .descripcion("Servicio Validar Ciudad")
+                .id(Long.valueOf(1))
+                .build();
+        Mockito.when(servicioRepository.findByServicio(ServicioEnum.VALIDATE_CITY)).thenReturn(Optional.of(servicioEntity));
         Mockito.when(logOperationRepository.save(new LogEntity())).thenReturn(logEntity);
+        Mockito.when(logOperationRepository.save(logEntity)).thenReturn(logEntity);
         Boolean respuesta = logService.insertaLogRest(logGeneral,"123");
         Assert.assertEquals(Boolean.TRUE, respuesta );
     }

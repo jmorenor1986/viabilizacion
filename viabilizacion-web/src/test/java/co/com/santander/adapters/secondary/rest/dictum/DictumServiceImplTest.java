@@ -1,15 +1,14 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
+import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.dictum.dto.RequestBodyDTO;
 import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
 import co.com.santander.adapters.secondary.rest.dictum.dto.RequestHeaderDTO;
 import co.com.santander.adapters.secondary.rest.dictum.dto.ResponseDictumDTO;
 import co.com.santander.domain.solicitud.dictum.RequestBody;
-import co.com.santander.domain.solicitud.dictum.RequestHeader;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
-import com.samtel.adapters.secondary.rest.dictum.dto.*;
 import co.com.santander.domain.solicitud.dictum.RequestDictum;
+import co.com.santander.domain.solicitud.dictum.RequestHeader;
 import co.com.santander.ports.secondary.solicitud.DictumService;
 import org.junit.Assert;
 import org.junit.Before;
