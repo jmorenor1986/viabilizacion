@@ -1,7 +1,9 @@
 package co.com.santander.domain.repository.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -12,6 +14,8 @@ import javax.persistence.*;
 })
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CacheUsrEntity {
     @Id
     @Column(name = "id")

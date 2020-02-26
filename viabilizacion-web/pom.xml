@@ -75,7 +75,7 @@
                                         <exclude>
                                             co.com.santander.domain.solicitud.informacioncontacto.ResponseInformacionContacto
                                         </exclude>
-                                        <exclude>com.samtel.config.*</exclude>
+                                        <exclude>co.com.santander.config.*</exclude>
                                         <exclude>co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor
                                         </exclude>
                                     </excludes>

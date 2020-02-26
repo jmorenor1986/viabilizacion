@@ -25,7 +25,7 @@ public class FilterLogMapperImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.filterLogMapper = new FilterLogMapperImpl();
+        this.filterLogMapper = FilterLogMapperImpl.builder().build();
     }
 
     @Test
