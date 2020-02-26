@@ -12,7 +12,21 @@
     <artifactId>bizagi-web</artifactId>
     <properties>
         <start-class>com.samtel.BizagiApplication</start-class>
+        <velocity-tools-version>2.0</velocity-tools-version>
+        <velocity-version>1.7</velocity-version>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-tools</artifactId>
+            <version>${velocity-tools-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>${velocity-version}</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -50,6 +64,7 @@
                                     <excludes>
                                         <exclude>com.samtel.BizagiApplication</exclude>
                                         <exclude>com.samtel.bizagi.common.config.*</exclude>
+                                        <exclude>org.tempuri.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
@@ -64,28 +79,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.cxf</groupId>-->
-            <!--                <artifactId>cxf-codegen-plugin</artifactId>-->
-            <!--                <version>2.4.2</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>generate-sources</id>-->
-            <!--                        <phase>generate-sources</phase>-->
-            <!--                        <configuration>-->
-            <!--                            <sourceRoot>${basedir}/src/main/java/com/samtel/bizagi/case/artifacts</sourceRoot>-->
-            <!--                            <wsdlOptions>-->
-            <!--                                <wsdlOption>-->
-            <!--                                    <wsdl>${basedir}/src/main/resources/wsdl/DHServicePlus.wsdl</wsdl>-->
-            <!--                                </wsdlOption>-->
-            <!--                            </wsdlOptions>-->
-            <!--                        </configuration>-->
-            <!--                        <goals>-->
-            <!--                            <goal>wsdl2java</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
 </project>

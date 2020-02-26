@@ -1,6 +1,5 @@
 package com.samtel.bizagi.controller;
 
-import com.samtel.bizagi.dto.ResponseCreateCaseDTO;
 import com.samtel.bizagi.service.CaseBizagiService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,10 +8,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.net.MalformedURLException;
+
 public class CaseBizagiControllerTest {
     private CaseBizagiController caseBizagiController;
     @Mock
     private CaseBizagiService caseBizagiService;
+
 
     @Before
     public void setUp() {
@@ -21,9 +23,9 @@ public class CaseBizagiControllerTest {
     }
 
     @Test
-    public void testCreateCaseSuccess() {
-        Mockito.when(caseBizagiService.createCase(Mockito.any())).thenReturn(new ResponseCreateCaseDTO());
-        ResponseCreateCaseDTO result = caseBizagiController.createCase(Mockito.any());
+    public void testCreateCaseSuccess() throws MalformedURLException {
+        Mockito.when(caseBizagiService.createCaseString(Mockito.any())).thenReturn(new String());
+        String result = caseBizagiController.createCase(Mockito.any());
         Assert.assertNotNull(result);
     }
 
