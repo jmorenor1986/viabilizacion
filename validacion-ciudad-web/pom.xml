@@ -67,7 +67,7 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.ValidationApplication</exclude>
-                                        <exclude>com.samtel.validation.common.config.*</exclude>
+                                        <exclude>co.com.santander.validation.common.config.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
