@@ -1,7 +1,6 @@
 package com.samtel.bizagi.controller;
 
 import com.samtel.bizagi.dto.RequestCreateCaseDTO;
-import com.samtel.bizagi.dto.ResponseCreateCaseDTO;
 import com.samtel.bizagi.service.CaseBizagiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,7 +23,7 @@ public class CaseBizagiController {
 
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseCreateCaseDTO createCase(@RequestBody RequestCreateCaseDTO request) throws MalformedURLException {
-        return this.caseBizagiService.createCase(request);
+    public String createCase(@RequestBody RequestCreateCaseDTO request) throws MalformedURLException {
+        return this.caseBizagiService.createCaseString(request);
     }
 }

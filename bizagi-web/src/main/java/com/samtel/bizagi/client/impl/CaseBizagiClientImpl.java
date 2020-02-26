@@ -4,8 +4,6 @@ import com.samtel.bizagi.client.CaseBizagiClient;
 import com.samtel.bizagi.common.properties.ServiciosProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tempuri.CreateCases;
-import org.tempuri.CreateCasesResponse;
 import org.tempuri.WorkflowEngineSOA;
 import org.tempuri.WorkflowEngineSOASoap;
 
@@ -25,7 +23,7 @@ public class CaseBizagiClientImpl implements CaseBizagiClient {
     }
 
     @Override
-    public CreateCasesResponse.CreateCasesResult createCase(CreateCases.CasesInfo request) throws MalformedURLException {
-        return workflowEngineSOASoap.createCases(request);
+    public String createCaseString(String request) throws MalformedURLException {
+        return workflowEngineSOASoap.createCasesAsString(request);
     }
 }

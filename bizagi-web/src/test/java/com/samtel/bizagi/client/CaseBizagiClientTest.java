@@ -2,6 +2,7 @@ package com.samtel.bizagi.client;
 
 import com.samtel.bizagi.client.impl.CaseBizagiClientImpl;
 import com.samtel.bizagi.common.properties.ServiciosProperties;
+import com.samtel.bizagi.service.MockRequestCreateCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,8 +41,8 @@ public class CaseBizagiClientTest {
 
     @Test
     public void testCreateCaseBizagi() throws MalformedURLException {
-        Mockito.when(workflowEngineSOASoap.createCases(Mockito.any())).thenReturn(createCasesResult);
-        CreateCasesResponse.CreateCasesResult result = caseBizagiClient.createCase(request);
+        Mockito.when(workflowEngineSOASoap.createCasesAsString(Mockito.any())).thenReturn("sasas");
+        String result = caseBizagiClient.createCaseString(MockRequestCreateCase.request);
         Assert.assertNotNull(result);
         Assert.assertNotNull(serviciosProperties.getUriCrearCaso());
     }

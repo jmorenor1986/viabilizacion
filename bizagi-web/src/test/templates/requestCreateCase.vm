@@ -1,0 +1,20 @@
+<![CDATA[<BizAgiWSParam>
+         <domain>$domain</domain>
+         <userName>$username</userName>
+         <Cases>
+                 <Case>
+                 <Process>$process</Process>
+                 <Entities>
+                         <idRequest>
+                                 <Applicants>
+                                         <Applicant>
+                                                 <DocumentNumber>$documentnumber</DocumentNumber>
+                                                 <idDocumentType businesskey="Name='$typedocument'" />
+                                                 <BuroScore>$buroscore</BuroScore>
+                                         </Applicant>
+                                 </Applicants>
+                         </idRequest>
+                 </Entities>
+                 </Case>
+         </Cases>
+ </BizAgiWSParam>]]>

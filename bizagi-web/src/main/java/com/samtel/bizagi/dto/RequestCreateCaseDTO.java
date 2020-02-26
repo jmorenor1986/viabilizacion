@@ -1,18 +1,13 @@
 package com.samtel.bizagi.dto;
 
-import java.util.List;
+import lombok.Data;
 
+@Data
 public class RequestCreateCaseDTO {
-
-    public static class CasesInfo {
-        protected List<Object> content;
-
-        public List<Object> getContent() {
-            return content;
-        }
-
-        public void setContent(List<Object> content) {
-            this.content = content;
-        }
-    }
+    private String domain;
+    private String userName;
+    private String process;
+    private String documentNumber;
+    private String typeDocument;
+    private String buroScore;
 }
