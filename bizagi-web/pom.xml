@@ -12,7 +12,21 @@
     <artifactId>bizagi-web</artifactId>
     <properties>
         <start-class>com.samtel.BizagiApplication</start-class>
+        <velocity-tools-version></velocity-tools-version>
+        <velocity-version></velocity-version>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-tools</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
