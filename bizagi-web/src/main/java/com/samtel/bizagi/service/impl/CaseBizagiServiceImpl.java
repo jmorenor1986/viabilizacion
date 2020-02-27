@@ -3,33 +3,41 @@ package com.samtel.bizagi.service.impl;
 import com.samtel.bizagi.client.CaseBizagiClient;
 import com.samtel.bizagi.dto.RequestCreateCaseDTO;
 import com.samtel.bizagi.service.CaseBizagiService;
+import com.samtel.bizagi.util.StringUtilities;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 
+@Service
 public class CaseBizagiServiceImpl implements CaseBizagiService {
     public static final String TEMPLATES_REQUEST_CREATE_CASE = "templates/requestCreateCase.vm";
     private final CaseBizagiClient caseBizagiClient;
     private final VelocityEngine velocityEngine;
     private final VelocityContext context;
     private final StringWriter stringWriter;
+    private final StringUtilities stringUtilities;
 
     @Autowired
-    public CaseBizagiServiceImpl(CaseBizagiClient caseBizagiClient, VelocityEngine velocityEngine, VelocityContext context, StringWriter stringWriter) {
+    public CaseBizagiServiceImpl(CaseBizagiClient caseBizagiClient, VelocityEngine velocityEngine, VelocityContext context, StringWriter stringWriter, StringUtilities stringUtilities) {
         this.caseBizagiClient = caseBizagiClient;
         this.velocityEngine = velocityEngine;
         this.context = context;
         this.stringWriter = stringWriter;
+        this.stringUtilities = stringUtilities;
     }
 
     @Override
-    public String createCaseString(RequestCreateCaseDTO request) throws MalformedURLException {
+    public String createCaseString(RequestCreateCaseDTO request) throws MalformedURLException, JSONException {
         String requestString = putParametersVelocity(request).replaceAll("\r", "");
-        return caseBizagiClient.createCaseString(requestString);
+        return stringUtilities.xmlToJson(
+                stringUtilities.cdataToJson(
+                        caseBizagiClient.createCaseString(requestString)));
     }
 
     private String putParametersVelocity(RequestCreateCaseDTO request) {

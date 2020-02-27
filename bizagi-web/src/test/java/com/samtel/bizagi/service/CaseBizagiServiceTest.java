@@ -4,10 +4,12 @@ import com.samtel.bizagi.client.CaseBizagiClient;
 import com.samtel.bizagi.client.MockResponseCreateCase;
 import com.samtel.bizagi.dto.RequestCreateCaseDTO;
 import com.samtel.bizagi.service.impl.CaseBizagiServiceImpl;
+import com.samtel.bizagi.util.StringUtilities;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,10 +33,12 @@ public class CaseBizagiServiceTest {
     private VelocityEngine velocityEngine;
     private VelocityContext context;
     private StringWriter stringWriter;
+    private StringUtilities stringUtilities;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        stringUtilities = new StringUtilities();
         velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER,
                 "classpath");
@@ -43,11 +47,11 @@ public class CaseBizagiServiceTest {
         velocityEngine.init();
         context = new VelocityContext();
         stringWriter = new StringWriter();
-        caseBizagiService = new CaseBizagiServiceImpl(caseBizagiClient, velocityEngine, context, stringWriter);
+        caseBizagiService = new CaseBizagiServiceImpl(caseBizagiClient, velocityEngine, context, stringWriter, stringUtilities);
     }
 
     @Test
-    public void testCreateCaseSuccess() throws MalformedURLException {
+    public void testCreateCaseSuccess() throws MalformedURLException, JSONException {
         RequestCreateCaseDTO requestCreateCaseDTOTest = new RequestCreateCaseDTO();
         requestCreateCaseDTOTest.setBuroScore("5");
         requestCreateCaseDTOTest.setDocumentNumber("785621");
