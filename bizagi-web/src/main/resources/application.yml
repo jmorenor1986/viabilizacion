@@ -4,4 +4,4 @@ server:
   port: 5002
 
 servicios:
-  uriCrearCaso: www.google.com
+  uriCrearCaso: https://172.60.1.2/Originacion2019/WebServices/WorkflowEngineSOA?wsdl
