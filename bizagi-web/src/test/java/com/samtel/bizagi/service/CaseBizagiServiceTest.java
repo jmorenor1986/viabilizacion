@@ -1,6 +1,7 @@
 package com.samtel.bizagi.service;
 
 import com.samtel.bizagi.client.CaseBizagiClient;
+import com.samtel.bizagi.client.MockResponseCreateCase;
 import com.samtel.bizagi.dto.RequestCreateCaseDTO;
 import com.samtel.bizagi.service.impl.CaseBizagiServiceImpl;
 import org.apache.velocity.VelocityContext;
@@ -55,8 +56,8 @@ public class CaseBizagiServiceTest {
         requestCreateCaseDTOTest.setTypeDocument("CC");
         requestCreateCaseDTOTest.setUserName("admon");
 
-        Mockito.when(caseBizagiClient.createCaseString(MockRequestCreateCase.request)).thenReturn("Result");
+        Mockito.when(caseBizagiClient.createCaseString(MockRequestCreateCase.request)).thenReturn(MockResponseCreateCase.response);
         String result = caseBizagiService.createCaseString(requestCreateCaseDTOTest);
-        Assert.assertNull(result);
+        Assert.assertNotNull(result);
     }
 }

@@ -12,6 +12,7 @@ import java.io.StringWriter;
 import java.net.MalformedURLException;
 
 public class CaseBizagiServiceImpl implements CaseBizagiService {
+    public static final String TEMPLATES_REQUEST_CREATE_CASE = "templates/requestCreateCase.vm";
     private final CaseBizagiClient caseBizagiClient;
     private final VelocityEngine velocityEngine;
     private final VelocityContext context;
@@ -27,13 +28,14 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
 
     @Override
     public String createCaseString(RequestCreateCaseDTO request) throws MalformedURLException {
-        return caseBizagiClient.createCaseString(putParametersVelocity(request));
+        String requestString = putParametersVelocity(request).replaceAll("\r", "");
+        return caseBizagiClient.createCaseString(requestString);
     }
 
     private String putParametersVelocity(RequestCreateCaseDTO request) {
-        Template template = velocityEngine.getTemplate("templates/requestCreateCase.vm");
+        Template template = velocityEngine.getTemplate(TEMPLATES_REQUEST_CREATE_CASE, "UTF-8");
         context.put("domain", request.getDomain());
-        context.put("username", request.getProcess());
+        context.put("username", request.getUserName());
         context.put("process", request.getProcess());
         context.put("documentnumber", request.getDocumentNumber());
         context.put("typedocument", request.getTypeDocument());
