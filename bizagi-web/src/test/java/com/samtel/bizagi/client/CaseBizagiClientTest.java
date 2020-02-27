@@ -1,6 +1,7 @@
 package com.samtel.bizagi.client;
 
 import com.samtel.bizagi.client.impl.CaseBizagiClientImpl;
+import com.samtel.bizagi.common.config.SystemProperties;
 import com.samtel.bizagi.common.properties.ServiciosProperties;
 import com.samtel.bizagi.service.MockRequestCreateCase;
 import org.junit.Assert;
@@ -35,6 +36,16 @@ public class CaseBizagiClientTest {
         MockitoAnnotations.initMocks(this);
         serviciosProperties = new ServiciosProperties();
         serviciosProperties.setUriCrearCaso("https://www.google.com");
+        serviciosProperties.setKeyStore("https://www.google.com");
+        serviciosProperties.setTrustStore("https://www.google.com");
+        serviciosProperties.setKeyStorePassword("https://www.google.com");
+        serviciosProperties.setTrustStorePassword("https://www.google.com");
+        System.setProperty(SystemProperties.JAVAX_NET_DEBUG, SystemProperties.VALUE_JAVAX_NET_DEBUG);
+        System.setProperty(SystemProperties.JAVAX_NET_SSL_TRUST_STORE, serviciosProperties.getTrustStore());
+        System.setProperty(SystemProperties.JAVAX_NET_SSL_TRUST_STORE_PASSWORD, serviciosProperties.getTrustStorePassword());
+        System.setProperty(SystemProperties.JAVAX_NET_SSL_KEY_STORE, serviciosProperties.getKeyStore());
+        System.setProperty(SystemProperties.JAVAX_NET_SSL_KEY_STORE_PASSWORD, serviciosProperties.getKeyStorePassword());
+        System.setProperty(SystemProperties.ORG_APACHE_CXF_STAX_ALLOW_INSECURE_PARSER, SystemProperties.VALUE_ALLOW_INSECURE_PARSER);
         Mockito.when(workflowEngineSOA.getWorkflowEngineSOASoap()).thenReturn(workflowEngineSOASoap);
         caseBizagiClient = new CaseBizagiClientImpl(serviciosProperties, workflowEngineSOA);
     }

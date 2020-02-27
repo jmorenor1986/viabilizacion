@@ -1,10 +1,6 @@
 package com.samtel.bizagi.common.config;
 
 import com.samtel.bizagi.common.properties.ServiciosProperties;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.runtime.RuntimeConstants;
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +20,16 @@ public class GeneralConfig {
 
     @Bean
     public WorkflowEngineSOA workflowEngineSOA() throws MalformedURLException {
+        setSystemProperty();
         return new WorkflowEngineSOA(new URL(serviciosProperties.getUriCrearCaso()));
+    }
+
+    private void setSystemProperty() {
+        System.setProperty(SystemProperties.JAVAX_NET_DEBUG, SystemProperties.VALUE_JAVAX_NET_DEBUG);
+        System.setProperty(SystemProperties.JAVAX_NET_SSL_TRUST_STORE, serviciosProperties.getTrustStore());
+        System.setProperty(SystemProperties.JAVAX_NET_SSL_TRUST_STORE_PASSWORD, serviciosProperties.getTrustStorePassword());
+        System.setProperty(SystemProperties.JAVAX_NET_SSL_KEY_STORE, serviciosProperties.getKeyStore());
+        System.setProperty(SystemProperties.JAVAX_NET_SSL_KEY_STORE_PASSWORD, serviciosProperties.getKeyStorePassword());
+        System.setProperty(SystemProperties.ORG_APACHE_CXF_STAX_ALLOW_INSECURE_PARSER, SystemProperties.VALUE_ALLOW_INSECURE_PARSER);
     }
 }

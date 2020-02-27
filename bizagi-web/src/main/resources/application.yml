@@ -5,3 +5,7 @@ server:
 
 servicios:
   uriCrearCaso: https://172.60.1.2/Originacion2019/WebServices/WorkflowEngineSOA?wsdl
+  trustStore: C:/clientes/samtel.jks
+  trustStorePassword: samtel
+  keyStore: C:/clientes/samtel.jks
+  keyStorePassword: samtel
