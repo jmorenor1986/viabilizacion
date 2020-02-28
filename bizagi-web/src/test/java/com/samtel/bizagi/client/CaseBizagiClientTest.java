@@ -1,7 +1,7 @@
 package com.samtel.bizagi.client;
 
 import com.samtel.bizagi.client.impl.CaseBizagiClientImpl;
-import com.samtel.bizagi.common.config.SystemProperties;
+import com.samtel.bizagi.common.properties.SystemProperties;
 import com.samtel.bizagi.common.properties.ServiciosProperties;
 import com.samtel.bizagi.service.MockRequestCreateCase;
 import org.junit.Assert;
