@@ -1,4 +1,4 @@
-package com.samtel.bizagi.common.config;
+package com.samtel.bizagi.common.properties;
 
 public class SystemProperties {
     public static final String JAVAX_NET_DEBUG = "javax.net.debug";

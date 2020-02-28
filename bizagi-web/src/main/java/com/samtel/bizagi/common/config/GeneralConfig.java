@@ -1,6 +1,7 @@
 package com.samtel.bizagi.common.config;
 
 import com.samtel.bizagi.common.properties.ServiciosProperties;
+import com.samtel.bizagi.common.properties.SystemProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
