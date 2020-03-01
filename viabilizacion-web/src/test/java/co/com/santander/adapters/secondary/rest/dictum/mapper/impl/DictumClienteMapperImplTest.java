@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.dictum.mapper.impl;
 
-import co.com.santander.domain.solicitud.Cliente;
-import co.com.santander.domain.solicitud.dictum.RequestHeader;
+import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.dictum.RequestHeader;
 import co.com.santander.adapters.secondary.rest.dictum.mapper.DictumClienteMapper;
 import org.junit.Assert;
 import org.junit.Before;

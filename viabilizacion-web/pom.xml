@@ -72,9 +72,9 @@
                                         <exclude>co.com.santander.Application</exclude>
                                         <exclude>co.com.santander.adapters.secondary.rest.dictum.dto.RequestBodyDTO
                                         </exclude>
-                                        <exclude>co.com.santander.domain.solicitud.dictum.RequestBody</exclude>
+                                        <exclude>co.com.santander.core.domain.solicitud.dictum.RequestBody</exclude>
                                         <exclude>
-                                            co.com.santander.domain.solicitud.informacioncontacto.ResponseInformacionContacto
+                                            co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto
                                         </exclude>
                                         <exclude>co.com.santander.config.*</exclude>
                                         <exclude>co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor

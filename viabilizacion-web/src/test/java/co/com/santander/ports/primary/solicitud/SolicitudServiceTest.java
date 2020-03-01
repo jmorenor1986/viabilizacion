@@ -2,11 +2,11 @@ package co.com.santander.ports.primary.solicitud;
 
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.domain.solicitud.Cliente;
-import co.com.santander.domain.solicitud.ClienteValidator;
-import co.com.santander.errors.MandatoryFieldException;
+import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.ClienteValidator;
+import co.com.santander.core.errors.MandatoryFieldException;
 import co.com.santander.ports.primary.log.LogService;
-import co.com.santander.services.solicitud.SolicitudServiceImpl;
+import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
 import co.com.santander.utils.IGenerateUniqueId;
 import org.junit.Assert;
 import org.junit.Before;

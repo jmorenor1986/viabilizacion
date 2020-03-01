@@ -1,6 +1,6 @@
 package co.com.santander.ports.secondary.solicitud;
 
-import co.com.santander.domain.solicitud.dictum.RequestDictum;
+import co.com.santander.core.domain.solicitud.dictum.RequestDictum;
 
 import java.util.Optional;
 

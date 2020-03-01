@@ -1,8 +1,8 @@
 package co.com.santander.adapters.secondary.rest.common;
 
-import co.com.santander.domain.log.LogGeneral;
+import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.adapters.secondary.rest.common.mapper.impl.FilterLogMapperImpl;
-import co.com.santander.domain.repository.entity.FlowOperationEnum;
+import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
 import co.com.santander.ports.primary.log.LogService;
 import lombok.Getter;
 import lombok.Setter;

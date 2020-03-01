@@ -1,6 +1,6 @@
 package co.com.santander.utils;
 
-import co.com.santander.errors.MandatoryFieldException;
+import co.com.santander.core.errors.MandatoryFieldException;
 
 public abstract class GenericValidator<T> {
 

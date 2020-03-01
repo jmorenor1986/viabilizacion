@@ -1,6 +1,6 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
-import co.com.santander.domain.repository.entity.FlowOperationEnum;
+import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -3,7 +3,7 @@ package co.com.santander.core.flow.impl;
 import co.com.santander.adapters.secondary.rest.dictum.mapper.DictumClienteMapper;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.ports.secondary.solicitud.DictumService;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.dictum.mapper.impl;
 
 import co.com.santander.adapters.secondary.rest.dictum.mapper.DictumXMLMapper;
-import co.com.santander.errors.XmlParsingException;
+import co.com.santander.core.errors.XmlParsingException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

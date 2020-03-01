@@ -6,8 +6,8 @@ import co.com.santander.adapters.secondary.rest.common.properties.VigiaPropertie
 import co.com.santander.adapters.secondary.rest.vigia.dto.MensajeDTO;
 import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import co.com.santander.adapters.secondary.rest.vigia.dto.VigiaDTO;
-import co.com.santander.domain.solicitud.Cliente;
-import co.com.santander.domain.solicitud.ListaCliente;
+import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.ListaCliente;
 import co.com.santander.ports.secondary.solicitud.VigiaService;
 import com.google.gson.Gson;
 import co.com.santander.adapters.secondary.rest.RestTemplateService;

@@ -6,8 +6,8 @@ import co.com.santander.adapters.secondary.rest.common.properties.ClientesProper
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import co.com.santander.adapters.secondary.rest.common.properties.InformacionContactoProperties;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.RequestUbicaDTO;
-import co.com.santander.domain.solicitud.informacioncontacto.RequestInformacionContacto;
-import co.com.santander.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
+import co.com.santander.core.domain.solicitud.informacioncontacto.RequestInformacionContacto;
+import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;

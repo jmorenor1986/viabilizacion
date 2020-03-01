@@ -1,6 +1,6 @@
 package co.com.santander.ports.primary.log;
 
-import co.com.santander.domain.log.LogGeneral;
+import co.com.santander.core.domain.log.LogGeneral;
 
 public interface LogService {
 	

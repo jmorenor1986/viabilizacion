@@ -2,8 +2,8 @@ package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
 import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
-import co.com.santander.domain.log.LogGeneral;
-import co.com.santander.domain.repository.entity.FlowOperationEnum;
+import co.com.santander.core.domain.log.LogGeneral;
+import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
 import lombok.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,8 +1,8 @@
 package co.com.santander.core.flow.impl;
 
 import co.com.santander.core.flow.ValidateRequest;
-import co.com.santander.domain.solicitud.Cliente;
-import co.com.santander.domain.solicitud.ListaCliente;
+import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.ListaCliente;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.secondary.solicitud.VigiaService;
 import co.com.santander.utils.impl.GenerateUniqueIdImpl;

@@ -1,6 +1,6 @@
 package co.com.santander.adapters.primary.rest.solicitud;
 
-import co.com.santander.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
 import org.junit.Assert;

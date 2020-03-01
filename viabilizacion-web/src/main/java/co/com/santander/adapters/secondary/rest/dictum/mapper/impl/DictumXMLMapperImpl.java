@@ -1,6 +1,6 @@
 package co.com.santander.adapters.secondary.rest.dictum.mapper.impl;
 
-import co.com.santander.errors.XmlParsingException;
+import co.com.santander.core.errors.XmlParsingException;
 import co.com.santander.adapters.secondary.rest.dictum.mapper.DictumXMLMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
