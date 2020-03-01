@@ -25,9 +25,11 @@ public class StringUtilities {
 
 
     public String cdataToJson(String xmlResponse) {
+        System.out.println(xmlResponse);
         String response= xmlResponse.replaceAll("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "")
                 .replaceAll("<!\\[CDATA\\[", "")
                 .replaceAll("]]>", "");
+        System.out.println(response);
         return response;
 
     }

@@ -1,8 +1,8 @@
 package co.com.santander.bizagi.client;
 
 import co.com.santander.bizagi.client.impl.CaseBizagiClientImpl;
-import co.com.santander.bizagi.common.properties.SystemProperties;
 import co.com.santander.bizagi.common.properties.ServiciosProperties;
+import co.com.santander.bizagi.common.properties.SystemProperties;
 import co.com.santander.bizagi.service.MockRequestCreateCase;
 import org.junit.Assert;
 import org.junit.Before;

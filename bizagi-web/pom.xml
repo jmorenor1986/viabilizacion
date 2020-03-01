@@ -71,7 +71,6 @@
                                         <exclude>co.com.santander.BizagiApplication</exclude>
                                         <exclude>co.com.santander.bizagi.common.config.*</exclude>
                                         <exclude>org.tempuri.*</exclude>
-                                        <exclude>co.com.santander.bizagi.common.properties.SystemProperties</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
