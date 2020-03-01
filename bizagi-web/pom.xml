@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>viabilizacion</artifactId>
-        <groupId>com.samtel</groupId>
+        <groupId>co.com.santander</groupId>
         <version>1.0.6</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>bizagi-web</artifactId>
     <properties>
-        <start-class>com.samtel.BizagiApplication</start-class>
+        <start-class>co.com.santander.BizagiApplication</start-class>
         <velocity-tools-version>2.0</velocity-tools-version>
         <velocity-version>1.7</velocity-version>
     </properties>
@@ -68,9 +68,10 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>com.samtel.BizagiApplication</exclude>
-                                        <exclude>com.samtel.bizagi.common.config.*</exclude>
+                                        <exclude>co.com.santander.BizagiApplication</exclude>
+                                        <exclude>co.com.santander.bizagi.common.config.*</exclude>
                                         <exclude>org.tempuri.*</exclude>
+                                        <exclude>co.com.santander.bizagi.common.properties.SystemProperties</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
