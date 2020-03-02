@@ -1,14 +1,14 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
-import co.com.santander.adapters.secondary.rest.dictum.common.DecisionDictum;
-import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
-import com.google.gson.Gson;
+import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
+import co.com.santander.adapters.secondary.rest.dictum.common.DecisionDictum;
 import co.com.santander.adapters.secondary.rest.dictum.dto.PrincipalRequestDictumDTO;
+import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
 import co.com.santander.core.domain.solicitud.dictum.RequestDictum;
-import co.com.santander.core.errors.XmlParsingException;
 import co.com.santander.ports.secondary.solicitud.DictumService;
+import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class DictumServiceImpl implements DictumService {
 
     @Override
     public Optional<String> consultarSolicitudDictum(RequestDictum request, String idRequest) {
-        RequestDictumDTO requestDictumDTO = modelMapper.map(request, RequestDictumDTO.class);
+        GeneralPayload<RequestDictumDTO> requestDictumDTO = mapper(request);
         Optional<Map<String, String>> headersMap = generateHeaders(idRequest, requestDictumDTO);
         String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, headersMap).get();
         return consultarDecisionDictum(response);
@@ -45,7 +45,7 @@ public class DictumServiceImpl implements DictumService {
         if (Objects.nonNull(responseDictumDTO)) {
             return buscarRespuesta(responseDictumDTO);
         }
-        throw new XmlParsingException(ERROR_RESPONSE_NULL);
+        return Optional.of(ERROR_RESPONSE_NULL);
     }
 
     private Optional<String> buscarRespuesta(String xml) {
@@ -62,16 +62,29 @@ public class DictumServiceImpl implements DictumService {
         return Optional.of(ERROR_RESPONSE_NULL);
     }
 
-    public Optional<Map<String, String>> generateHeaders(String idRequest, RequestDictumDTO request) {
+    public Optional<Map<String, String>> generateHeaders(String idRequest, GeneralPayload<RequestDictumDTO> request) {
         Map<String, String> headers = new HashMap<>();
         headers.put("idRequest", idRequest);
         headers.put("idCache", new Gson().toJson(PrincipalRequestDictumDTO
                 .builder()
-                .identificacion(request.getRequestBody().getIdentificacion())
+                .identificacion(request.getRequestHeader().getIdentificacion())
                 .primerApellido(request.getRequestBody().getPrimerApellido())
-                .tipoIdentificacion(request.getRequestBody().getTipoIdentificacion())
+                .tipoIdentificacion(request.getRequestHeader().getTipoIdentificacion())
                 .build()));
         return Optional.of(headers);
+    }
+
+    private GeneralPayload<RequestDictumDTO> mapper(RequestDictum request) {
+        RequestDictumDTO result = new RequestDictumDTO();
+        result.setClave(request.getRequestBody().getClave());
+        result.setParametros(request.getRequestBody().getParametros());
+        result.setPrimerApellido(request.getRequestBody().getPrimerApellido());
+        result.setProducto(request.getRequestBody().getProducto());
+        result.setUsuario(request.getRequestBody().getUsuario());
+        GeneralPayload<RequestDictumDTO> response = new GeneralPayload<>();
+        response.setRequestBody(result);
+        response.setRequestHeader(request.getRequestHeader());
+        return response;
     }
 
 }
