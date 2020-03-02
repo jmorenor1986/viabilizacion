@@ -1,7 +1,9 @@
 package co.com.santander.adapters.primary.rest.solicitud;
 
+import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.ports.primary.solicitud.MapperCliente;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,16 +25,18 @@ public class SolicitudControllerTest {
     @Mock
     private SolicitudService solicitudService;
     @Mock
-    private ClientePayLoad clientePayLoad;
+    private GeneralPayload<ClientePayLoad> clientePayLoad;
     @Mock
     private ModelMapper modelMapper;
     @Mock
     private Cliente cliente;
+    @Mock
+    private MapperCliente mapperCliente;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        solicitudController = new SolicitudController(solicitudService, modelMapper);
+        solicitudController = new SolicitudController(solicitudService, modelMapper, mapperCliente);
     }
 
     @Test

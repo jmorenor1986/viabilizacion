@@ -19,7 +19,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = {"com.samtel.domain.repository"})
+//co.com.santander.adapters.secondary.database.santander.entity
+@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = {"co.com.santander.ports.secondary.database.santander"})
 public class DataBaseConfig {
 	
 	@Primary
@@ -33,7 +34,7 @@ public class DataBaseConfig {
 	@Bean(name = "entityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
 			@Qualifier("dataSource") DataSource dataSource) {
-		return builder.dataSource(dataSource).packages("com.samtel.domain.repository").persistenceUnit("SAMTEL_DB").build();
+		return builder.dataSource(dataSource).packages("co.com.santander.adapters.secondary.database.santander.entity").persistenceUnit("SAMTEL_DB").build();
 	}
 
 	@Primary

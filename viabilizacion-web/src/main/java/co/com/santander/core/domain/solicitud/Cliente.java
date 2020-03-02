@@ -24,5 +24,6 @@ public class Cliente {
     private String ciudad;
     //Dato Vigia en el caso de que sea TRUE, quiere decir que fue encontrado en Vigia
     private Boolean vigia;
+    private RequestHeader requestHeader;
     
 }

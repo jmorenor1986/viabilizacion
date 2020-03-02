@@ -2,6 +2,7 @@ package co.com.santander.adapters.primary.rest.solicitud;
 
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.ports.primary.solicitud.MapperCliente;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
 import co.com.santander.core.response.ResponseFlow;
 import org.modelmapper.ModelMapper;
@@ -20,15 +21,17 @@ public class SolicitudController {
 
     private final SolicitudService solicitudService;
     private final ModelMapper modelMapper;
+    private MapperCliente mapperCliente;
     
     @Autowired
-    public SolicitudController(SolicitudService solicitudService, ModelMapper modelMapper) {
+    public SolicitudController(SolicitudService solicitudService, ModelMapper modelMapper, MapperCliente mapperCliente) {
         this.solicitudService = solicitudService;
         this.modelMapper = modelMapper;
+        this.mapperCliente = mapperCliente;
     }
     
     @PostMapping(value = "/viabilizacion", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<ResponseFlow> solicitud(@RequestBody GeneralPayload<ClientePayLoad> clientePayLoad) {
-        return solicitudService.cumplimientoSolicitud(modelMapper.map(clientePayLoad, Cliente.class));
+        return solicitudService.cumplimientoSolicitud(mapperCliente.fromGeneralPayLoad(clientePayLoad));
     }
 }

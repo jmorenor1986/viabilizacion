@@ -24,8 +24,11 @@ public class LogServiceImpl implements LogService {
     private static final Logger logger = LoggerFactory.getLogger(LogServiceImpl.class);
 
     ILogOperationRepository logOperationRepository;
+
     IServicioRepository servicioRepository;
+
     ModelMapper modelMapper;
+
     CacheUsrService cacheUsrService;
 
     @Autowired

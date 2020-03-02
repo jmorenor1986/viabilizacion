@@ -1,4 +1,4 @@
-package co.com.santander.adapters.dto;
+package co.com.santander.core.domain.solicitud;
 
 import lombok.Data;
 
