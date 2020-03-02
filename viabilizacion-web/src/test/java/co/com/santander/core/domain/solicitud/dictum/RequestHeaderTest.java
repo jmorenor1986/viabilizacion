@@ -1,4 +1,5 @@
-package co.com.santander.core.domain.solicitud;
+package co.com.santander.core.domain.solicitud.dictum;
+
 
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
