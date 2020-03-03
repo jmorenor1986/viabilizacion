@@ -107,7 +107,7 @@ public class InformacionContactoServiceImplTest {
                 .primerApellido(informacionContacto.getPrimerApellido())
                 .tipoIdentificacion(informacionContacto.getTipoDocumento())
                 .build();
-        Mockito.when(restTemplateService.getWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO, Optional.of(headers))).thenReturn(Optional.of(MockUbicaService.response));
+        Mockito.when(restTemplateService.postWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO, Optional.of(headers))).thenReturn(Optional.of(MockUbicaService.response));
         ResponseInformacionContacto informacionContacto = informacionContactoService.consultarInformacionContacto(this.informacionContacto, "123");
         Assert.assertNotNull(informacionContacto);
 
