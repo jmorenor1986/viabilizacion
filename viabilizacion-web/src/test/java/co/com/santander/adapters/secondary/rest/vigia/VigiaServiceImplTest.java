@@ -49,7 +49,7 @@ public class VigiaServiceImplTest {
         properties.setVigiaProperties(vigiaProperties);
         vigiaService = new VigiaServiceImpl(restTemplateService, properties, jsonUtilities);
         headers = new HashMap<>();
-        headers.put("idRequest", "123");
+        headers.put("idRequest", "1");
         headers.put("idCache", "{}");
     }
 
@@ -74,7 +74,7 @@ public class VigiaServiceImplTest {
                 .mensaje(mensajeDTO)
                 .build();
         headers = new HashMap<>();
-        headers.put("idRequest", "123");
+        headers.put("idRequest", "1");
         headers.put("idCache", new Gson().toJson(PrincipalVigiaDTO
                 .builder()
                 .nombre(vigiaDTO.getMensaje().getNombre())

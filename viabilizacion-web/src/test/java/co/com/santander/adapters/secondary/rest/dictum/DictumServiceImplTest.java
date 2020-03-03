@@ -25,6 +25,7 @@ import java.util.Optional;
 
 @SpringBootTest
 public class DictumServiceImplTest {
+
     public static final String RESPUESTA_APROBADO = "APROBADO";
     public static final String RESPUESTA_NEGADO = "NEGADO";
     public static final String RESPUESTA_PREAPROBADO_SIN_DOCUMENTOS = "PREAPROBADO_SIN_DOCUMENTOS";
@@ -60,7 +61,7 @@ public class DictumServiceImplTest {
         properties.setUriDictum(URI);
         dictumService = new DictumServiceImpl(restTemplateService, properties, modelMapper);
         headers = new HashMap<>();
-        headers.put("idRequest", "123");
+        headers.put("idRequest", "1");
         headers.put("idCache", "{}");
     }
 
@@ -84,7 +85,6 @@ public class DictumServiceImplTest {
         Mockito.when(modelMapper.map(requestDictum, RequestDictumDTO.class)).thenReturn(requestDictumDTO);
         Mockito.when(restTemplateService.getWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of("PREAPROBADO_CON_DOCUMENTOS"));
         Optional<String> result = dictumService.consultarSolicitudDictum(requestDictum, Long.valueOf("1"));
-
     }
 
     @Test

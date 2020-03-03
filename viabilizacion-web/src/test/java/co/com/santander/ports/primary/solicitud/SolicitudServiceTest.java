@@ -1,5 +1,7 @@
 package co.com.santander.ports.primary.solicitud;
 
+import co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest;
+import co.com.santander.core.domain.solicitud.RequestHeader;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.domain.solicitud.Cliente;
@@ -9,12 +11,14 @@ import co.com.santander.core.services.log.PrincipalRequestService;
 import co.com.santander.ports.primary.log.LogService;
 import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
 import co.com.santander.utils.IGenerateUniqueId;
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -50,6 +54,7 @@ public class SolicitudServiceTest {
 
     @Test
     public void testCumplimientoSolicitudSuccess() {
+        RequestHeader requestHeader = new RequestHeader();
         Cliente clienteLocal = Cliente.builder().actividad("Actividad")
                 .anoNacimiento("anoNacimiento")
                 .apellidos("apellidos")
@@ -63,7 +68,17 @@ public class SolicitudServiceTest {
                 .telefono("telefono")
                 .tipoIdentificacion("tipoIdentificacion")
                 .valorSolicitado("valorsolicitado")
+                .requestHeader(requestHeader)
                 .build();
+
+        PrincipalRequest principalRequest = PrincipalRequest.builder()
+                .id(Long.valueOf("1"))
+                .codigoAliado(clienteLocal.getRequestHeader().getCodAliado())
+                .usuarioAliado(clienteLocal.getRequestHeader().getUsuarioAliado())
+                .ipOrigen(clienteLocal.getRequestHeader().getIpOrigen())
+                .json(new Gson().toJson(clienteLocal.getRequestHeader()))
+                .build();
+        Mockito.when(principalRequestService.insertaPrincipalRequest(principalRequest)).thenReturn(principalRequest);
         Optional<ResponseFlow> result = solicitudService.cumplimientoSolicitud(clienteLocal);
         Assert.assertNotNull(result);
     }
@@ -74,7 +89,6 @@ public class SolicitudServiceTest {
         expectedException.expectMessage("Request invalido");
         Optional<ResponseFlow> result = solicitudService.cumplimientoSolicitud(cliente);
         Assert.assertNotNull(result);
-
     }
 }
 
