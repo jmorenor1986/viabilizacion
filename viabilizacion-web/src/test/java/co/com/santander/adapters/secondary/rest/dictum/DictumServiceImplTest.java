@@ -79,21 +79,21 @@ public class DictumServiceImplTest {
 
     @Test
     public void testDictumSuccessPREAPROBADO_CON_DOCUMENTOS() {
-        Mockito.when(restTemplateService.getWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of("PREAPROBADO_CON_DOCUMENTOS"));
+        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of("PREAPROBADO_CON_DOCUMENTOS"));
         Optional<String> result = dictumService.consultarSolicitudDictum(request, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_PREAPROBADO_CON_DOCUMENTOS);
     }
 
     @Test
     public void testDictumSuccessAPROBADO() {
-        Mockito.when(restTemplateService.getWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.APROBADO));
+        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.APROBADO));
         Optional<String> result = dictumService.consultarSolicitudDictum(request, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_APROBADO);
     }
 
     @Test
     public void testDictumSuccessNEGADO() {
-        Mockito.when(restTemplateService.getWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.NEGADO));
+        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.NEGADO));
         Optional<String> result = dictumService.consultarSolicitudDictum(request, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_NEGADO);
     }
