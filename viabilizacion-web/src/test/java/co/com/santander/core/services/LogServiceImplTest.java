@@ -6,7 +6,7 @@ import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
 import co.com.santander.ports.primary.log.CacheUsrService;
 import co.com.santander.ports.primary.log.LogService;
-import co.com.santander.core.services.log.LogServiceImpl;
+import co.com.santander.core.services.log.impl.LogServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -39,6 +39,9 @@ public class LogEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ServicioEntity servicio;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	private PrincipalRequest principalRequest;
+
 	@Column(name = "httpStatus" )
 	@Enumerated(value = EnumType.STRING)
 	private HttpStatus httpStatus;

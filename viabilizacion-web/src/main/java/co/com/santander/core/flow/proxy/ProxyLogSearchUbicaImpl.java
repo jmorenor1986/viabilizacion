@@ -21,7 +21,7 @@ public class ProxyLogSearchUbicaImpl implements ValidateRequest {
 	private final ValidateRequest validateRequest;
 	private final LogService logService;
 	@Getter @Setter
-	private String idRequest;
+	private Long idRequest;
 	
 	@Autowired
 	public ProxyLogSearchUbicaImpl(@Qualifier("searchUbica") ValidateRequest validateRequest, LogService logService) {
@@ -30,7 +30,7 @@ public class ProxyLogSearchUbicaImpl implements ValidateRequest {
 	}
 	
 	@Override
-	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
+	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setIdRequest(idRequest);
 		generarLog(cliente);
 		return validateRequest.process(cliente, idRequest);

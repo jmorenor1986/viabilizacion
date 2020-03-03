@@ -1,4 +1,4 @@
-package co.com.santander.core.services.log;
+package co.com.santander.core.services.log.impl;
 
 import co.com.santander.ports.secondary.database.santander.IServicioRepository;
 import co.com.santander.core.domain.log.LogGeneral;

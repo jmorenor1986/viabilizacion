@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface ValidateRequest {
 
-    Optional<ResponseFlow> process(Cliente cliente, String idRequest);
+    Optional<ResponseFlow> process(Cliente cliente, Long idRequest);
 }

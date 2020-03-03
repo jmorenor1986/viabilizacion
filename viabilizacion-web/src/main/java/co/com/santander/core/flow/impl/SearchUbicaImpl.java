@@ -27,7 +27,7 @@ public class SearchUbicaImpl implements ValidateRequest {
 	}
 
 	@Override
-	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
+	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setCliente(cliente);
 		return validateRequest.process(getCliente(), idRequest);
 	}

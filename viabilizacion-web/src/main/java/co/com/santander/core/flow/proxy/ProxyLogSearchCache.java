@@ -21,7 +21,7 @@ public class ProxyLogSearchCache implements ValidateRequest {
 	private final ValidateRequest validateRequest;
 	private final LogService logService;
 	@Getter @Setter
-	private String idRequest;
+	private Long idRequest;
 	
 	@Autowired
 	public ProxyLogSearchCache(@Qualifier("searchCache") ValidateRequest validateRequest, LogService logService) {
@@ -30,7 +30,7 @@ public class ProxyLogSearchCache implements ValidateRequest {
 	}
 
 	@Override
-	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
+	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setIdRequest(idRequest);
 		generarLog(cliente);
 		return validateRequest.process(cliente, idRequest);

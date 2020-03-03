@@ -17,7 +17,7 @@ public class LogGeneral {
 	
 	private String traza;
 	
-	private String idRequest;
+	private Long idRequest;
 	
 	private Date fecha;
 

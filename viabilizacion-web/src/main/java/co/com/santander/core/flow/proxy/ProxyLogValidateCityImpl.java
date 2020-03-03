@@ -21,7 +21,7 @@ public class ProxyLogValidateCityImpl implements ValidateRequest {
 	private ValidateRequest validateRequest;
 	private final LogService logService;
 	@Getter @Setter
-	private String requestId;
+	private Long requestId;
 	
 	@Autowired
 	public ProxyLogValidateCityImpl(@Qualifier("validateCity") ValidateRequest validateRequest,LogService logService) {
@@ -30,7 +30,7 @@ public class ProxyLogValidateCityImpl implements ValidateRequest {
 	}
 
 	@Override
-	public Optional<ResponseFlow> process(Cliente cliente, String requestId) {
+	public Optional<ResponseFlow> process(Cliente cliente, Long requestId) {
 		setRequestId(requestId);
 		generarLog(cliente);
 		return validateRequest.process(cliente,requestId);

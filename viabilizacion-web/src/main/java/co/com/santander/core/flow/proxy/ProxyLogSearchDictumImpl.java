@@ -21,7 +21,7 @@ public class ProxyLogSearchDictumImpl implements ValidateRequest {
 	private final ValidateRequest validateRequest;
 	private final LogService logService;
 	@Getter @Setter
-	private String idRequest;
+	private Long idRequest;
 	
 	@Autowired
 	public ProxyLogSearchDictumImpl(@Qualifier("searchDictum") ValidateRequest validateRequest, LogService logService) {
@@ -31,7 +31,7 @@ public class ProxyLogSearchDictumImpl implements ValidateRequest {
 	}
 
 	@Override
-	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
+	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setIdRequest(idRequest);
 		generarLog(cliente);
 		return validateRequest.process(cliente, idRequest);

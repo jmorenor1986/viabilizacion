@@ -1,4 +1,4 @@
-package co.com.santander.core.services.log;
+package co.com.santander.core.services.log.impl;
 
 import co.com.santander.ports.secondary.database.santander.ICacheUsrRepository;
 import co.com.santander.adapters.secondary.database.santander.entity.CacheUsrEntity;

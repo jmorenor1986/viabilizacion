@@ -5,6 +5,7 @@ import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ClienteValidator;
 import co.com.santander.core.errors.MandatoryFieldException;
+import co.com.santander.core.services.log.PrincipalRequestService;
 import co.com.santander.ports.primary.log.LogService;
 import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
 import co.com.santander.utils.IGenerateUniqueId;
@@ -31,7 +32,8 @@ public class SolicitudServiceTest {
     private ClienteValidator clienteValidator;
     @Mock
     private LogService logService;
-
+    @Mock
+    private PrincipalRequestService principalRequestService;
     @Mock
     private ValidateRequest validateRequest;
     @Mock
@@ -43,7 +45,7 @@ public class SolicitudServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         clienteValidator = new ClienteValidator();
-        solicitudService = new SolicitudServiceImpl(clienteValidator,logService,validateRequest, generateUniqueId );
+        solicitudService = new SolicitudServiceImpl(clienteValidator,logService,validateRequest, generateUniqueId, principalRequestService );
     }
 
     @Test

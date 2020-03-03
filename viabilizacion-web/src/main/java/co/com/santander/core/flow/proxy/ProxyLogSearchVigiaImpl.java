@@ -21,7 +21,7 @@ public class ProxyLogSearchVigiaImpl implements ValidateRequest {
 	private ValidateRequest validateRequest;
 	private final LogService logService;
 	@Getter @Setter
-	private String requestId;
+	private Long requestId;
 	
 	
 	@Autowired
@@ -33,7 +33,7 @@ public class ProxyLogSearchVigiaImpl implements ValidateRequest {
 
 
 	@Override
-	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
+	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setRequestId(idRequest);
 		generarLog(cliente);
 		return validateRequest.process(cliente, idRequest);

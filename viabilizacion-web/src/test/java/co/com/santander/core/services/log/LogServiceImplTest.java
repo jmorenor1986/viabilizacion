@@ -1,5 +1,6 @@
 package co.com.santander.core.services.log;
 
+import co.com.santander.core.services.log.impl.LogServiceImpl;
 import co.com.santander.ports.secondary.database.santander.IServicioRepository;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;

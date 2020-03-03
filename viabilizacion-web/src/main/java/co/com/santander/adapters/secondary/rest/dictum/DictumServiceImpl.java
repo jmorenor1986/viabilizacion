@@ -34,7 +34,7 @@ public class DictumServiceImpl implements DictumService {
     }
 
     @Override
-    public Optional<String> consultarSolicitudDictum(RequestDictum request, String idRequest) {
+    public Optional<String> consultarSolicitudDictum(RequestDictum request, Long idRequest) {
         RequestDictumDTO requestDictumDTO = modelMapper.map(request, RequestDictumDTO.class);
         Optional<Map<String, String>> headersMap = generateHeaders(idRequest, requestDictumDTO);
         String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, headersMap).get();
@@ -62,9 +62,9 @@ public class DictumServiceImpl implements DictumService {
         return Optional.of(ERROR_RESPONSE_NULL);
     }
 
-    public Optional<Map<String, String>> generateHeaders(String idRequest, RequestDictumDTO request) {
+    public Optional<Map<String, String>> generateHeaders(Long idRequest, RequestDictumDTO request) {
         Map<String, String> headers = new HashMap<>();
-        headers.put("idRequest", idRequest);
+        headers.put("idRequest", idRequest.toString());
         headers.put("idCache", new Gson().toJson(PrincipalRequestDictumDTO
                 .builder()
                 .identificacion(request.getRequestBody().getIdentificacion())
