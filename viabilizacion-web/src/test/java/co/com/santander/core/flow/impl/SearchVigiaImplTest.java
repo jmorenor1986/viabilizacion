@@ -37,7 +37,7 @@ public class SearchVigiaImplTest {
 
 	@Test
 	public void testSearchVigia() {
-		String requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
+		Long requestId = Long.valueOf("1");
 		Cliente cliente = Cliente.builder().tipoIdentificacion("CC").numeroIdentificacion("1015").nombres("Pepito")
 				.apellidos("Perez").direccion("cra 34 calle 26 - 75 sur").telefono("2365417").build();
 		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
@@ -46,9 +46,9 @@ public class SearchVigiaImplTest {
 
 	@Test
 	public void testSearchVigiaEncontradoParcial() {
-		String requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
+		Long requestId = Long.valueOf("1");
 		Cliente cliente = Mockito.mock(Cliente.class);
-		Mockito.when(vigiaService.consultarListasCliente(cliente,"123")).thenReturn(
+		Mockito.when(vigiaService.consultarListasCliente(cliente,Long.valueOf("1"))).thenReturn(
 				ListaCliente.builder().encontradoId("S").encontradoNombre("N").resultado(RESPUESTA_LISTAS).build());
 		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
 		Assert.assertNotNull(result);
@@ -56,9 +56,9 @@ public class SearchVigiaImplTest {
 	
 	@Test
 	public void testSearchVigiaEncontradoTotal() {
-		String requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
+		Long requestId = Long.valueOf("1");
 		Cliente cliente = Mockito.mock(Cliente.class);
-		Mockito.when(vigiaService.consultarListasCliente(cliente, "123")).thenReturn(
+		Mockito.when(vigiaService.consultarListasCliente(cliente, Long.valueOf("1"))).thenReturn(
 				ListaCliente.builder().encontradoId("S").encontradoNombre("S").resultado(RESPUESTA_LISTAS).build());
 		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
 		Assert.assertNotNull(result);
@@ -66,9 +66,9 @@ public class SearchVigiaImplTest {
 	
 	@Test
 	public void testSearchVigiaNoEncontrado() {
-		String requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
+		Long requestId = Long.valueOf("1");
 		Cliente cliente = Mockito.mock(Cliente.class);
-		Mockito.when(vigiaService.consultarListasCliente(cliente, "123")).thenReturn(
+		Mockito.when(vigiaService.consultarListasCliente(cliente, Long.valueOf("1"))).thenReturn(
 				ListaCliente.builder().encontradoId("N").encontradoNombre("N").resultado(RESPUESTA_LISTAS).build());
 		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
 		Assert.assertNotNull(result);

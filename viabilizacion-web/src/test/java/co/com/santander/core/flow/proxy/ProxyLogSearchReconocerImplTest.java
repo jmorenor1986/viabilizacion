@@ -27,7 +27,7 @@ public class ProxyLogSearchReconocerImplTest {
 
     private Cliente cliente;
 
-    private String requestId;
+    private Long requestId;
 
     @Before
     public void setUp() {
@@ -52,7 +52,7 @@ public class ProxyLogSearchReconocerImplTest {
 
     @Test
     public void testSearchReconocerImplSuccess() {
-        requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
+        requestId = Long.valueOf("1");
         String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
         Assert.assertNotNull(result);
     }

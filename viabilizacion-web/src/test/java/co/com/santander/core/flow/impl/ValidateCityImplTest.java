@@ -39,7 +39,7 @@ public class ValidateCityImplTest {
 
     @Test
     public void testValidateCityImplSuccess() {
-    	requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
+        Long requestId = Long.valueOf("1");
         ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
         Assert.assertNotNull( result );
     }

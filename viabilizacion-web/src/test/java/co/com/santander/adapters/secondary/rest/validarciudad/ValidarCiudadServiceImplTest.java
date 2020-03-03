@@ -36,7 +36,7 @@ public class ValidarCiudadServiceImplTest {
         Map<String, String> headers = new HashMap<>();
         headers.put("idRequest", "123");
         Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("true"));
-        String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD, "123");
+        String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD, Long.valueOf("123"));
         Assert.assertEquals("true", result);
     }
 
@@ -45,7 +45,7 @@ public class ValidarCiudadServiceImplTest {
         Map<String, String> headers = new HashMap<>();
         headers.put("idRequest", "123");
         Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("false"));
-        String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD, "123");
+        String result = validarCiudadService.validarCodigoCiudad(NOMBRE_CIUDAD, Long.valueOf("123"));
         Assert.assertEquals("false", result);
     }
 

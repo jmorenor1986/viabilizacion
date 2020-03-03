@@ -81,7 +81,7 @@ public class VigiaServiceImplTest {
                 .numeroIdentificacion(vigiaDTO.getMensaje().getNumeroIdentificacion())
                 .build()));
         Mockito.when(restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), vigiaDTO, Optional.of(headers) )).thenReturn(Optional.of(MockResponseServiceVigia.response));
-        ListaCliente result = vigiaService.consultarListasCliente(datosBasicosCliente, "123");
+        ListaCliente result = vigiaService.consultarListasCliente(datosBasicosCliente, Long.valueOf("1"));
         Assert.assertNotNull(result);
     }
 }

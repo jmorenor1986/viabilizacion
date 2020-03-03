@@ -27,7 +27,7 @@ public class ProxyLogValidateCityImplTest {
     
     private Cliente cliente;
     
-    private String requestId;
+    private Long requestId;
 
     @Before
     public void setUp(){
@@ -52,7 +52,7 @@ public class ProxyLogValidateCityImplTest {
 
     @Test
     public void testValidateCityImplSuccess() {
-    	requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
+        requestId = Long.valueOf("1");
         ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
         Assert.assertNotNull( result );
     }

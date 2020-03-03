@@ -17,7 +17,7 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     private static final Logger log = LoggerFactory.getLogger(HttpRequestInterceptor.class);
 
     @Override
-    public LogGeneral toLogRequest(HttpRequest request, String body, String idRequest) {
+    public LogGeneral toLogRequest(HttpRequest request, String body, Long idRequest) {
         return LogGeneral.builder()
                 .tipo(validateTipoRequest(extractURLRequest(request)))
                 .httpStatus(HttpStatus.OK)
@@ -30,7 +30,7 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     }
 
     @Override
-    public LogGeneral toLogResponse(ClientHttpResponse response, FlowOperationEnum tipoOperation, String idRequest, String body, String url) {
+    public LogGeneral toLogResponse(ClientHttpResponse response, FlowOperationEnum tipoOperation, Long idRequest, String body, String url) {
         return LogGeneral.builder()
                 .tipo(validateTipoResponse(tipoOperation))
                 .httpStatus(HttpStatus.OK)
