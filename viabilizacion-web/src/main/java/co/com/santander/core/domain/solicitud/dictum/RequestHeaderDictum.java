@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-public class RequestHeader {
+public class RequestHeaderDictum {
     @Value("${servicios.dictumProperties.codAliado}")
     private String codAliado;
     @Value("${servicios.dictumProperties.usuarioAliado}")

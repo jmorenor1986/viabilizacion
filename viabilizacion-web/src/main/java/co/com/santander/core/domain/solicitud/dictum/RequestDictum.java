@@ -1,5 +1,6 @@
 package co.com.santander.core.domain.solicitud.dictum;
 
+import co.com.santander.adapters.dto.RequestHeader;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -11,10 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 public class RequestBodyDTO {
     private String clave;
-    private String identificacion;
     private String primerApellido;
     private String producto;
-    private String tipoIdentificacion;
+    private String usuario;
     private List<ParametrosDTO> parametros;
 
 }

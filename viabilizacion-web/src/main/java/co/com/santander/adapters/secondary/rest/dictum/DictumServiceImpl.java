@@ -1,5 +1,6 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
+import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.dictum.common.DecisionDictum;
 import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
 import com.google.gson.Gson;
@@ -35,7 +36,7 @@ public class DictumServiceImpl implements DictumService {
 
     @Override
     public Optional<String> consultarSolicitudDictum(RequestDictum request, Long idRequest) {
-        RequestDictumDTO requestDictumDTO = modelMapper.map(request, RequestDictumDTO.class);
+        GeneralPayload<RequestDictumDTO> requestDictumDTO = mapper(request);
         Optional<Map<String, String>> headersMap = generateHeaders(idRequest, requestDictumDTO);
         String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, headersMap).get();
         return consultarDecisionDictum(response);
@@ -62,16 +63,29 @@ public class DictumServiceImpl implements DictumService {
         return Optional.of(ERROR_RESPONSE_NULL);
     }
 
-    public Optional<Map<String, String>> generateHeaders(Long idRequest, RequestDictumDTO request) {
+    public Optional<Map<String, String>> generateHeaders(Long idRequest, GeneralPayload<RequestDictumDTO> request) {
         Map<String, String> headers = new HashMap<>();
         headers.put("idRequest", idRequest.toString());
         headers.put("idCache", new Gson().toJson(PrincipalRequestDictumDTO
                 .builder()
-                .identificacion(request.getRequestBody().getIdentificacion())
+                .identificacion(request.getRequestHeader().getIdentificacion())
                 .primerApellido(request.getRequestBody().getPrimerApellido())
-                .tipoIdentificacion(request.getRequestBody().getTipoIdentificacion())
+                .tipoIdentificacion(request.getRequestHeader().getTipoIdentificacion())
                 .build()));
         return Optional.of(headers);
+    }
+
+    private GeneralPayload<RequestDictumDTO> mapper(RequestDictum request) {
+        RequestDictumDTO result = new RequestDictumDTO();
+        result.setClave(request.getRequestBody().getClave());
+        result.setParametros(request.getRequestBody().getParametros());
+        result.setPrimerApellido(request.getRequestBody().getPrimerApellido());
+        result.setProducto(request.getRequestBody().getProducto());
+        result.setUsuario(request.getRequestBody().getUsuario());
+        GeneralPayload<RequestDictumDTO> response = new GeneralPayload<>();
+        response.setRequestBody(result);
+        response.setRequestHeader(request.getRequestHeader());
+        return response;
     }
 
 }

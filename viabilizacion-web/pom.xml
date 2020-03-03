@@ -70,13 +70,18 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.Application</exclude>
-                                        <exclude>co.com.santander.adapters.secondary.rest.dictum.dto.RequestBodyDTO
-                                        </exclude>
                                         <exclude>co.com.santander.core.domain.solicitud.dictum.RequestBody</exclude>
+                                        <exclude>co.com.santander.core.domain.solicitud.RequestHeader</exclude>
+                                        <exclude>co.com.santander.core.services.solicitud.MapperClienteImpl</exclude>
+                                        <exclude>co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO</exclude>
                                         <exclude>
                                             co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto
                                         </exclude>
                                         <exclude>co.com.santander.config.*</exclude>
+                                        <exclude>co.com.santander.utils.impl.GenerateUniqueIdImpl</exclude>
+                                        <exclude>co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest</exclude>
+                                        <exclude>co.com.santander.core.domain.solicitud.dictum.RequestHeaderDictum</exclude>
+                                        <exclude>co.com.santander.core.services.log.impl.PrincipalRequestImpl</exclude>
                                         <exclude>co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor
                                         </exclude>
                                     </excludes>
