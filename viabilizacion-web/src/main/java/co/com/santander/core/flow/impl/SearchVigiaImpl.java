@@ -27,7 +27,7 @@ public class SearchVigiaImpl implements ValidateRequest {
     private Cliente cliente;
     @Getter
     @Setter
-    private String idRequest;
+    private Long idRequest;
     @Getter
     @Setter
     private ListaCliente listaCliente;
@@ -40,7 +40,7 @@ public class SearchVigiaImpl implements ValidateRequest {
     }
 
     @Override
-    public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
+    public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
         setCliente(cliente);
         setIdRequest(idRequest);
         getCliente().setVigia(buscarVigia(getCliente()));

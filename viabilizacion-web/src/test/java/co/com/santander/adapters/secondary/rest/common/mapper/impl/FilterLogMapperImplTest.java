@@ -31,22 +31,22 @@ public class FilterLogMapperImplTest {
     @Test
     public void testToLogRequestCiudadSuccess() {
         Mockito.when(request.getURI()).thenReturn(URI.create("http://localhost:5000/viabilizacion/v1/ciudad/bogota"));
-        Assert.assertNotNull(filterLogMapper.toLogRequest(request, "true", "1234"));
+        Assert.assertNotNull(filterLogMapper.toLogRequest(request, "true", Long.valueOf("1")));
     }
 
     @Test
     public void testToLogRequestFailed() {
         Mockito.when(request.getURI()).thenReturn(URI.create("http://localhost:5000/viabilizacion/ciudad/bogota"));
-        Assert.assertNotNull(filterLogMapper.toLogRequest(request, "true", "1234"));
+        Assert.assertNotNull(filterLogMapper.toLogRequest(request, "true", Long.valueOf("1")));
     }
 
     @Test
     public void testToLogResponse(){
-        Assert.assertNotNull(filterLogMapper.toLogResponse(response, FlowOperationEnum.VALIDATE_CITY, "1234", "TRUE", "http://localhost:5000/viabilizacion/v1/ciudad/bogota"));
+        Assert.assertNotNull(filterLogMapper.toLogResponse(response, FlowOperationEnum.VALIDATE_CITY, Long.valueOf("1"), "TRUE", "http://localhost:5000/viabilizacion/v1/ciudad/bogota"));
     }
 
     @Test
     public void testToLogResponseFailed(){
-        Assert.assertNotNull(filterLogMapper.toLogResponse(response, FlowOperationEnum.NO_APLICA, "1234", "TRUE", "http://localhost:5000/viabilizacion/v1/ciudad/bogota"));
+        Assert.assertNotNull(filterLogMapper.toLogResponse(response, FlowOperationEnum.NO_APLICA, Long.valueOf("1"), "TRUE", "http://localhost:5000/viabilizacion/v1/ciudad/bogota"));
     }
 }

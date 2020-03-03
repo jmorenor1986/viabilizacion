@@ -49,7 +49,7 @@ public class VigiaServiceImplTest {
         properties.setVigiaProperties(vigiaProperties);
         vigiaService = new VigiaServiceImpl(restTemplateService, properties, jsonUtilities);
         headers = new HashMap<>();
-        headers.put("idRequest", "123");
+        headers.put("idRequest", "1");
         headers.put("idCache", "{}");
     }
 
@@ -74,14 +74,14 @@ public class VigiaServiceImplTest {
                 .mensaje(mensajeDTO)
                 .build();
         headers = new HashMap<>();
-        headers.put("idRequest", "123");
+        headers.put("idRequest", "1");
         headers.put("idCache", new Gson().toJson(PrincipalVigiaDTO
                 .builder()
                 .nombre(vigiaDTO.getMensaje().getNombre())
                 .numeroIdentificacion(vigiaDTO.getMensaje().getNumeroIdentificacion())
                 .build()));
         Mockito.when(restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), vigiaDTO, Optional.of(headers) )).thenReturn(Optional.of(MockResponseServiceVigia.response));
-        ListaCliente result = vigiaService.consultarListasCliente(datosBasicosCliente, "123");
+        ListaCliente result = vigiaService.consultarListasCliente(datosBasicosCliente, Long.valueOf("1"));
         Assert.assertNotNull(result);
     }
 }

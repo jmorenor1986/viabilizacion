@@ -18,7 +18,7 @@ public class SearchBizagiImpl implements ValidateRequest {
 
 
 	@Override
-	public Optional<ResponseFlow> process(Cliente cliente, String idRequest) {
+	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setCliente(cliente);
 		if(Boolean.TRUE.equals(cliente.getVigia())) {
 			return Optional.of(ResponseFlow.PREAPROBADO_CON_DOCUMENTOS);

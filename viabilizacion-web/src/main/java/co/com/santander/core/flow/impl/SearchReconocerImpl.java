@@ -28,7 +28,7 @@ public class SearchReconocerImpl implements ValidateRequest {
 	}
 
 	@Override
-    public Optional<ResponseFlow> process(Cliente cliente, String requestId) {
+    public Optional<ResponseFlow> process(Cliente cliente, Long requestId) {
         setCliente(cliente);
         return validateRequest.process(getCliente(), requestId);
     }

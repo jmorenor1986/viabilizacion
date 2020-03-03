@@ -36,7 +36,7 @@ public class VigiaServiceImpl implements VigiaService {
     }
 
     @Override
-    public ListaCliente consultarListasCliente(Cliente datosBasicosCliente, String idRequest) {
+    public ListaCliente consultarListasCliente(Cliente datosBasicosCliente, Long idRequest) {
         MensajeDTO mensajeDTO = MensajeDTO.builder()
                 .nombre(datosBasicosCliente.getApellidos().concat(" ").concat(datosBasicosCliente.getNombres()))
                 .numeroIdentificacion(datosBasicosCliente.getNumeroIdentificacion())
@@ -57,9 +57,9 @@ public class VigiaServiceImpl implements VigiaService {
 
     }
 
-    public Optional<Map<String, String>> generateHeaders(String idRequest, VigiaDTO vigia) {
+    public Optional<Map<String, String>> generateHeaders(Long idRequest, VigiaDTO vigia) {
         Map<String, String> headers = new HashMap<>();
-        headers.put("idRequest", idRequest);
+        headers.put("idRequest", idRequest.toString());
         headers.put("idCache", new Gson().toJson(PrincipalVigiaDTO
                 .builder()
                 .nombre(vigia.getMensaje().getNombre())

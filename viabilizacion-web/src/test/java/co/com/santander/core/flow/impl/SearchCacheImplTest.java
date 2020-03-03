@@ -34,7 +34,7 @@ public class SearchCacheImplTest {
 
     @Test
     public void testSearchCacheImplSuccess(){
-    	requestId = generateUniqueId.generateUniqueIdStr(Long.valueOf(12));
+        Long requestId = Long.valueOf("1");
         ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
         Assert.assertNotNull(result);
     }

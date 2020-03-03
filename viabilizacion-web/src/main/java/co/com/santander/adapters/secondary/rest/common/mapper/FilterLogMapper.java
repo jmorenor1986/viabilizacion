@@ -7,7 +7,7 @@ import org.springframework.http.client.ClientHttpResponse;
 
 public interface FilterLogMapper {
 
-    LogGeneral toLogRequest(HttpRequest request , String body, String idRequest);
+    LogGeneral toLogRequest(HttpRequest request , String body, Long idRequest);
 
-    LogGeneral toLogResponse(ClientHttpResponse response, FlowOperationEnum tipoOperation, String idRequest, String body, String url);
+    LogGeneral toLogResponse(ClientHttpResponse response, FlowOperationEnum tipoOperation, Long idRequest, String body, String url);
 }

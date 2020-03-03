@@ -1,5 +1,6 @@
 package co.com.santander.core.services.log;
 
+import co.com.santander.core.services.log.impl.LogServiceImpl;
 import co.com.santander.ports.secondary.database.santander.IServicioRepository;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
@@ -49,7 +50,7 @@ public class LogServiceImplTest {
                 .url("http://localhost:5001/validacion/v1/ciudad/")
                 .fecha(new Date())
                 .httpStatus(HttpStatus.CONTINUE)
-                .idRequest("1233")
+                .idRequest(Long.valueOf("1"))
                 .tipo(FlowOperationEnum.VALIDATE_CITY_RESPONSE)
                 .traza("true")
                 .usuarioMicro("jsierra")
@@ -64,7 +65,7 @@ public class LogServiceImplTest {
                 .url("http://localhost:5001/validacion/v1/ciudad/")
                 .fecha(new Date())
                 .httpStatus(HttpStatus.CONTINUE)
-                .idRequest("1233")
+                .idRequest(Long.valueOf("1"))
                 .tipo(FlowOperationEnum.VALIDATE_CITY_RESPONSE)
                 .traza("true")
                 .usuarioMicro("jsierra")

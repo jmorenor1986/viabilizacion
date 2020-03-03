@@ -21,7 +21,7 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
     private final LogService logService;
     @Getter
     @Setter
-    private String idRequest;
+    private Long idRequest;
     @Getter
     @Setter
     private String idCache;
@@ -49,12 +49,12 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
     private void cleanObjects(){
         this.setIdCache("");
         this.setUrl("");
-        this.setIdRequest("");
+        this.setIdRequest(Long.valueOf("0"));
     }
 
     private void findHeadersLog(HttpRequest request){
         if(request.getHeaders().get("idRequest") != null){
-            setIdRequest(request.getHeaders().get("idRequest").stream().reduce((a, b) -> a + "" + b).orElse(""));
+            setIdRequest(Long.valueOf(request.getHeaders().get("idRequest").stream().reduce((a, b) -> a + "" + b).orElse("")));
         }
         if(request.getHeaders().get("idCache") != null){
             setIdCache(request.getHeaders().get("idCache").stream().reduce((a, b) -> a + "" + b).orElse(""));

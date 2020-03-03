@@ -39,10 +39,6 @@ public class DictumServiceImplTest {
     private ModelMapper modelMapper;
     private RequestHeader requestHeader;
     private RequestBody requestBody;
-    @Mock
-    private RequestHeaderDTO requestHeaderDTO;
-    @Mock
-    private RequestBodyDTO requestBodyDTO;
 
     private Map<String, String> headers;
 
@@ -77,34 +73,34 @@ public class DictumServiceImplTest {
         properties.setUriDictum(URI);
         dictumService = new DictumServiceImpl(restTemplateService, properties, modelMapper);
         headers = new HashMap<>();
-        headers.put("idRequest", "123");
+        headers.put("idRequest", "1");
         headers.put("idCache", "{}");
     }
 
     @Test
     public void testDictumSuccessPREAPROBADO_CON_DOCUMENTOS() {
         Mockito.when(restTemplateService.getWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of("PREAPROBADO_CON_DOCUMENTOS"));
-        Optional<String> result = dictumService.consultarSolicitudDictum(request, "1");
+        Optional<String> result = dictumService.consultarSolicitudDictum(request, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_PREAPROBADO_CON_DOCUMENTOS);
     }
 
     @Test
     public void testDictumSuccessAPROBADO() {
         Mockito.when(restTemplateService.getWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.APROBADO));
-        Optional<String> result = dictumService.consultarSolicitudDictum(request, "1");
+        Optional<String> result = dictumService.consultarSolicitudDictum(request, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_APROBADO);
     }
 
     @Test
     public void testDictumSuccessNEGADO() {
         Mockito.when(restTemplateService.getWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.NEGADO));
-        Optional<String> result = dictumService.consultarSolicitudDictum(request, "1");
+        Optional<String> result = dictumService.consultarSolicitudDictum(request, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_NEGADO);
     }
 
-    private Optional<Map<String, String>> setHeaders(RequestDictum request, String idRequest) {
+    private Optional<Map<String, String>> setHeaders(RequestDictum request, Long idRequest) {
         Map<String, String> headers = new HashMap<>();
-        headers.put("idRequest", idRequest);
+        headers.put("idRequest", idRequest.toString());
         headers.put("idCache", new Gson().toJson(PrincipalRequestDictumDTO
                 .builder()
                 .identificacion(request.getRequestHeader().getIdentificacion())

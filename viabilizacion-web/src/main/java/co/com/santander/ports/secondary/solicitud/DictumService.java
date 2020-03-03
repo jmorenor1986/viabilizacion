@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface DictumService {
 
-    Optional<String> consultarSolicitudDictum(RequestDictum request, String idRequest);
+    Optional<String> consultarSolicitudDictum(RequestDictum request,Long idRequest);
 }

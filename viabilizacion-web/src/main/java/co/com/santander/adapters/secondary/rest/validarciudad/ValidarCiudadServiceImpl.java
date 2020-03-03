@@ -21,14 +21,14 @@ public class ValidarCiudadServiceImpl implements ValidarCiudadService {
     }
 
     @Override
-    public String validarCodigoCiudad(String codigoCiudad, String idRequest) {
+    public String validarCodigoCiudad(String codigoCiudad, Long idRequest) {
         return restTemplateService.getWithPathParams(clientesProperties.getUriValidarCiudad(),
                 new ArrayList<>(Arrays.asList(codigoCiudad)), generateHeaders(idRequest)).get();
     }
 
-    public Optional<Map<String, String>> generateHeaders(String idRequest){
+    public Optional<Map<String, String>> generateHeaders(Long idRequest){
         Map<String, String> headers = new HashMap<>();
-        headers.put("idRequest", idRequest);
+        headers.put("idRequest", idRequest.toString());
         return Optional.of(headers);
     }
 }
