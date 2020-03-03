@@ -1,15 +1,16 @@
 package co.com.santander.core.services.solicitud;
 
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
+import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ClienteValidator;
-import co.com.santander.core.flow.ValidateRequest;
-import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.primary.log.LogService;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
 import co.com.santander.utils.IGenerateUniqueId;
 import com.google.gson.Gson;
+import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
+import co.com.santander.core.errors.MandatoryFieldException;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -30,13 +31,12 @@ public class SolicitudServiceImpl implements SolicitudService {
 
     private Logger log = LoggerFactory.getLogger(SolicitudServiceImpl.class);
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private String requestId;
 
     @Autowired
     public SolicitudServiceImpl(ClienteValidator clienteValidator, LogService logService,
-                                @Qualifier("proxyLogValidateCity") ValidateRequest validateRequest, IGenerateUniqueId generateUniqueId) {
+                                @Qualifier("proxyLogValidateCity") ValidateRequest validateRequest,IGenerateUniqueId generateUniqueId ) {
         this.clienteValidator = clienteValidator;
         this.logService = logService;
         this.validateRequest = validateRequest;
@@ -49,13 +49,13 @@ public class SolicitudServiceImpl implements SolicitudService {
         if (clienteValidator.validateObject(cliente)) {
             setRequestId(generateUniqueId.generateUniqueIdStr(Long.valueOf(12)));
             generarLog(cliente);
-            return validateRequest.process(cliente, getRequestId());
+            return validateRequest.process( cliente, getRequestId() );
         }
-        return null;
+        throw new MandatoryFieldException("Request invalido", 400);
     }
 
 
-    public void generarLog(Cliente cliente) {
+    public void generarLog(Cliente cliente	) {
         String gsonCliente = new Gson().toJson(cliente);
         logService.insertLogOperation(LogGeneral.builder().usuarioMicro("jsierra").idRequest(getRequestId())
                 .traza(gsonCliente).tipo(FlowOperationEnum.VALIDATE_CLIENT).build());

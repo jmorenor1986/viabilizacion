@@ -70,9 +70,10 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.Application</exclude>
-                                        <exclude>co.com.santander.adapters.secondary.rest.dictum.dto.RequestBodyDTO
-                                        </exclude>
                                         <exclude>co.com.santander.core.domain.solicitud.dictum.RequestBody</exclude>
+                                        <exclude>co.com.santander.core.domain.solicitud.RequestHeader</exclude>
+                                        <exclude>co.com.santander.core.services.solicitud.MapperClienteImpl</exclude>
+                                        <exclude>co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO</exclude>
                                         <exclude>
                                             co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto
                                         </exclude>
