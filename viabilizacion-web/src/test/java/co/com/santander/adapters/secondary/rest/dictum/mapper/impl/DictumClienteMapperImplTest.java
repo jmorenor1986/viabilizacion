@@ -23,7 +23,7 @@ public class DictumClienteMapperImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        dictumClienteMapper = new DictumClienteMapperImpl(requestHeader);
+        dictumClienteMapper = new DictumClienteMapperImpl();
     }
 
     @Test
