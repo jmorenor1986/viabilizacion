@@ -38,7 +38,7 @@ public class DictumServiceImpl implements DictumService {
     public Optional<String> consultarSolicitudDictum(RequestDictum request, Long idRequest) {
         GeneralPayload<RequestDictumDTO> requestDictumDTO = mapper(request);
         Optional<Map<String, String>> headersMap = generateHeaders(idRequest, requestDictumDTO);
-        String response = restTemplateService.getWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, headersMap).get();
+        String response = restTemplateService.postWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, headersMap).get();
         return consultarDecisionDictum(response);
     }
 

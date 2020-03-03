@@ -5,14 +5,14 @@ server:
 
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    jdbcUrl: jdbc:postgresql://localhost:5432/samtel
-    username: postgres
-    password: 12345678
+    url: jdbc:h2:mem:samtel
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
     generate-ddl: true
 
@@ -29,9 +29,9 @@ servicios:
       validarNombre: true
 
   ubicaProperties:
-      uri: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
-      codigoInformacion: 5632
-      motivoConsulta: 1
+    uri: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
+    codigoInformacion: 5632
+    motivoConsulta: 1
 
   vigiaProperties:
     uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa
