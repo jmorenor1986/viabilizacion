@@ -2,11 +2,13 @@ package co.com.santander.core.domain.solicitud.informacioncontacto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RequestInformacionContacto {
     private String motivoConsulta;
     private String primerApellido;
