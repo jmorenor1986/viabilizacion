@@ -9,7 +9,7 @@ import co.com.santander.adapters.secondary.rest.common.properties.UbicaPropertie
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import co.com.santander.adapters.secondary.rest.common.properties.InformacionContactoProperties;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.RequestUbicaDTO;
-import co.com.santander.core.domain.solicitud.informacioncontacto.RequestInformacionContacto;
+import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class InformacionContactoServiceImplTest {
 
     private JsonUtilities jsonUtilities;
 
-    private RequestInformacionContacto requestInformacionContacto;
+    private InformacionContacto informacionContacto;
     private ResponseInformacionContacto responseInformacionContacto;
     private InformacionContactoProperties informacionContactoProperties;
 
@@ -49,7 +49,7 @@ public class InformacionContactoServiceImplTest {
         MockitoAnnotations.initMocks(this);
         jsonUtilities = new JsonUtilitiesImpl();
         properties = new ClientesProperties();
-        requestInformacionContacto = RequestInformacionContacto.builder()
+        informacionContacto = InformacionContacto.builder()
                 .numeroDocumento("101020220")
                 .primerApellido("PEREZ")
                 .tipoDocumento("1")
@@ -84,16 +84,16 @@ public class InformacionContactoServiceImplTest {
     @Test
     public void testReturnTelefonosOrDireccionesReconocer() {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("numeroId", requestInformacionContacto.getNumeroDocumento());
-        map.put("primerApellidoBuscar", requestInformacionContacto.getPrimerApellido());
-        map.put("tipoId", requestInformacionContacto.getTipoDocumento());
+        map.put("numeroId", informacionContacto.getNumeroDocumento());
+        map.put("primerApellidoBuscar", informacionContacto.getPrimerApellido());
+        map.put("tipoId", informacionContacto.getTipoDocumento());
         map.put("nit", properties.getInformacionContactoProperties().getReconocerProperties().getNit());
         map.put("tipoIdBuscar", properties.getInformacionContactoProperties().getReconocerProperties().getNumeroIdBuscar());
         map.put("numeroIdBuscar", properties.getInformacionContactoProperties().getReconocerProperties().getNumeroIdBuscar());
         map.put("validarNombre", properties.getInformacionContactoProperties().getReconocerProperties().getValidarNombre());
 
         Mockito.when(restTemplateService.getWithParams(properties.getInformacionContactoProperties().getReconocerProperties().getUri(), map, Optional.of(headers))).thenReturn(Optional.of(MockReconocerService.response));
-        ResponseInformacionContacto result = informacionContactoService.consultarDatosUsuario(requestInformacionContacto, "123");
+        ResponseInformacionContacto result = informacionContactoService.consultarDatosUsuario(informacionContacto, "123");
         Assert.assertNotNull(result);
         Assert.assertNotNull(responseInformacionContacto);
     }
@@ -103,12 +103,12 @@ public class InformacionContactoServiceImplTest {
         RequestUbicaDTO requestUbicaDTO = RequestUbicaDTO.builder()
                 .codigoInformacion(properties.getInformacionContactoProperties().getUbicaProperties().getCodigoInformacion())
                 .motivoConsulta(properties.getInformacionContactoProperties().getUbicaProperties().getMotivoConsulta())
-                .numeroIdentificacion(requestInformacionContacto.getNumeroDocumento())
-                .primerApellido(requestInformacionContacto.getPrimerApellido())
-                .tipoIdentificacion(requestInformacionContacto.getTipoDocumento())
+                .numeroIdentificacion(informacionContacto.getNumeroDocumento())
+                .primerApellido(informacionContacto.getPrimerApellido())
+                .tipoIdentificacion(informacionContacto.getTipoDocumento())
                 .build();
-        Mockito.when(restTemplateService.getWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO, Optional.of(headers))).thenReturn(Optional.of(MockUbicaService.response));
-        ResponseInformacionContacto informacionContacto = informacionContactoService.consultarInformacionContacto(requestInformacionContacto, "123");
+        Mockito.when(restTemplateService.postWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO, Optional.of(headers))).thenReturn(Optional.of(MockUbicaService.response));
+        ResponseInformacionContacto informacionContacto = informacionContactoService.consultarInformacionContacto(this.informacionContacto, "123");
         Assert.assertNotNull(informacionContacto);
 
     }
