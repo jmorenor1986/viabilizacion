@@ -35,8 +35,6 @@ servicios:
 
   vigiaProperties:
     uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa
-    codigoEjecucion: null
-    origen: PRODUCCIÓN
     porcentaje: 76
 
   dictumProperties:

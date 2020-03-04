@@ -55,7 +55,7 @@ public class SearchVigiaImpl implements ValidateRequest {
      */
     public Boolean buscarVigia(Cliente cliente) {
         // Consumo el servicio vigia
-        setListaCliente(vigiaService.consultarListasCliente(cliente, getIdRequest()));
+        setListaCliente(vigiaService.consultarListasCliente(cliente, getIdRequest(),"76"));
         if (Objects.isNull(getListaCliente()))
             return Boolean.FALSE;
         else if ("S".equalsIgnoreCase(getListaCliente().getEncontradoId())

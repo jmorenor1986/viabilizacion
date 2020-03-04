@@ -1,16 +1,17 @@
 package co.com.santander.adapters.secondary.rest.vigia;
 
+import co.com.santander.adapters.dto.GeneralPayload;
+import co.com.santander.adapters.dto.RequestHeader;
+import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.common.properties.VigiaProperties;
-import co.com.santander.adapters.secondary.rest.vigia.dto.MensajeDTO;
 import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import co.com.santander.adapters.secondary.rest.vigia.dto.VigiaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
 import co.com.santander.ports.secondary.solicitud.VigiaService;
 import com.google.gson.Gson;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,18 +38,9 @@ public class VigiaServiceImpl implements VigiaService {
 
     @Override
     public ListaCliente consultarListasCliente(Cliente datosBasicosCliente, Long idRequest) {
-        MensajeDTO mensajeDTO = MensajeDTO.builder()
-                .nombre(datosBasicosCliente.getApellidos().concat(" ").concat(datosBasicosCliente.getNombres()))
-                .numeroIdentificacion(datosBasicosCliente.getNumeroIdentificacion())
-                .origen(vigiaProperties.getOrigen())
-                .porcentaje(vigiaProperties.getPorcentaje())
-                .build();
-        VigiaDTO dto = VigiaDTO.builder()
-                .codigoEjecucion(vigiaProperties.getCodigoEjecucion())
-                .mensaje(mensajeDTO)
-                .build();
-        Optional<Map<String, String>> headersMap = generateHeaders(idRequest, dto);
-        String result = restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), dto, headersMap).get();
+        GeneralPayload<VigiaDTO> request = mapper(datosBasicosCliente);
+        Optional<Map<String, String>> headersMap = generateHeaders(idRequest, request);
+        String result = restTemplateService.postWithOutParams(vigiaProperties.getUriVigia(), request, headersMap).get();
         return ListaCliente.builder()
                 .resultado(jsonUtilities.getPropertyObjectWithKey("Data.", "Listas", result))
                 .encontradoId(jsonUtilities.getPropertyObjectWithKey("Data.", "EncontradoID", result))
@@ -57,13 +49,33 @@ public class VigiaServiceImpl implements VigiaService {
 
     }
 
-    public Optional<Map<String, String>> generateHeaders(Long idRequest, VigiaDTO vigia) {
+    private GeneralPayload<VigiaDTO> mapper(Cliente datosBasicosCliente) {
+        VigiaDTO dto = VigiaDTO.builder().porcentaje(vigiaProperties.getPorcentaje()).nombre(datosBasicosCliente.getApellidos()
+                .concat(" ")
+                .concat(datosBasicosCliente.getNombres()))
+                .build();
+        GeneralPayload<VigiaDTO> result = new GeneralPayload<>();
+        result.setRequestHeader(RequestHeader.builder()
+                .codAliado(datosBasicosCliente.getRequestHeader().getCodAliado())
+                .usuarioAliado(datosBasicosCliente.getRequestHeader().getUsuarioAliado())
+                .sesionId(datosBasicosCliente.getRequestHeader().getSesionId())
+                .ipOrigen(datosBasicosCliente.getRequestHeader().getIpOrigen())
+                .numeroSolicitudCredito(datosBasicosCliente.getRequestHeader().getNumeroSolicitudCredito())
+                .tipoIdentificacion(datosBasicosCliente.getRequestHeader().getTipoIdentificacion())
+                .identificacion(datosBasicosCliente.getRequestHeader().getTipoIdentificacion())
+                .build());
+        result.setRequestBody(dto);
+        return result;
+
+    }
+
+    public Optional<Map<String, String>> generateHeaders(Long idRequest, GeneralPayload<VigiaDTO> request) {
         Map<String, String> headers = new HashMap<>();
         headers.put("idRequest", idRequest.toString());
         headers.put("idCache", new Gson().toJson(PrincipalVigiaDTO
                 .builder()
-                .nombre(vigia.getMensaje().getNombre())
-                .numeroIdentificacion(vigia.getMensaje().getNumeroIdentificacion())
+                .nombre(request.getRequestBody().getNombre())
+                .numeroIdentificacion(request.getRequestHeader().getIdentificacion())
                 .build()));
         return Optional.of(headers);
     }

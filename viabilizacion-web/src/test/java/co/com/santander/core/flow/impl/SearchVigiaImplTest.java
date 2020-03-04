@@ -1,5 +1,6 @@
 package co.com.santander.core.flow.impl;
 
+import co.com.santander.adapters.dto.RequestHeader;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
@@ -27,12 +28,14 @@ public class SearchVigiaImplTest {
 	private ValidateRequest next;
 	@Mock
 	private VigiaService vigiaService;
+	private Cliente cliente;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		validateRequest = new SearchVigiaImpl(next, vigiaService);
 		generateUniqueId = new GenerateUniqueIdImpl();
+		cliente.setRequestHeader(RequestHeader.builder().build());
 	}
 
 	@Test
