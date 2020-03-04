@@ -53,7 +53,6 @@ public class SolicitudServiceImpl implements SolicitudService {
         log.info("Inicia solicitud de validación");
         if (clienteValidator.validateObject(cliente)) {
 			generatePrincipalRequest(cliente);
-            //setRequestId(generateUniqueId.generateUniqueIdStr(Long.valueOf(12)));
             generarLog(cliente);
             return validateRequest.process(cliente, getPrincipalRequestId());
         }
