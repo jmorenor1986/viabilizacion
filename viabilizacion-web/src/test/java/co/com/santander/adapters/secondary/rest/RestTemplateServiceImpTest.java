@@ -50,7 +50,7 @@ public class RestTemplateServiceImpTest {
 
     @Test(expected = RestClientException.class)
     public void testPostWithOutParams() {
-        Optional<Object> result = restTemplateService.postWithOutParams(URI, new Object(), Optional.of(map));
+        Optional<String> result = restTemplateService.postWithOutParams(URI, new Object(), Optional.of(map));
     }
 
     @Test(expected = RestClientException.class)

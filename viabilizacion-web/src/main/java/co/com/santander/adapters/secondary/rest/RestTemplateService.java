@@ -8,7 +8,7 @@ public interface RestTemplateService {
 
     public Optional<String> getWithPathParams(String uri, List<String> pathParams, Optional<Map<String, String>> headers);
 
-    public Optional<Object> postWithOutParams(String uri, Object request, Optional<Map<String, String>> headers);
+    public Optional<String> postWithOutParams(String uri, Object request, Optional<Map<String, String>> headers);
 
     public Optional<String> getWithOutParams(String uri, Object request, Optional<Map<String, String>> headers);
 
