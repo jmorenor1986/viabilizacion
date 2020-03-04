@@ -13,10 +13,10 @@ public class DictumClienteMapperImpl implements DictumClienteMapper {
 
     private RequestHeader requestHeader;
 
-    @Autowired
-    public DictumClienteMapperImpl(RequestHeader requestHeader) {
-        this.requestHeader = requestHeader;
-    }
+    //@Autowired
+    //public DictumClienteMapperImpl(RequestHeader requestHeader) {
+    //    this.requestHeader = requestHeader;
+    //}
 
     @Override
     public RequestDictum toRequestDictum(Cliente cliente) {

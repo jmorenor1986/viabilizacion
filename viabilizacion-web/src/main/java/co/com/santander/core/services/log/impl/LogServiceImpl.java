@@ -1,5 +1,6 @@
 package co.com.santander.core.services.log.impl;
 
+import co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest;
 import co.com.santander.ports.secondary.database.santander.IServicioRepository;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.ports.primary.log.CacheUsrService;
@@ -41,7 +42,11 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public Boolean insertLogOperation(LogGeneral log) {
-        logOperationRepository.save(modelMapper.map(log, LogEntity.class));
+        LogEntity logEntity = modelMapper.map(log, LogEntity.class);
+        PrincipalRequest principalRequest = new PrincipalRequest();
+        principalRequest.setId(log.getIdRequest());
+        logEntity.setPrincipalRequest(principalRequest);
+        logOperationRepository.save(logEntity);
         return Boolean.TRUE;
     }
 
