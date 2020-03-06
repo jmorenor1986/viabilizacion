@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class VigiaDTO {
-    private String codigoEjecucion;
-    private MensajeDTO mensaje;
+    private String nombre;
+    private String porcentaje;
 }

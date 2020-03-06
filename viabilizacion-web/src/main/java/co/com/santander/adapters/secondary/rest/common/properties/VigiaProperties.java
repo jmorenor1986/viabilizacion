@@ -11,7 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VigiaProperties {
     private String uriVigia;
-    private String codigoEjecucion;
-    private String origen;
     private String porcentaje;
 }

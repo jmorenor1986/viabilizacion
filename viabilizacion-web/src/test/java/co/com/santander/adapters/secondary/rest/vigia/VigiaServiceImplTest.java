@@ -1,19 +1,19 @@
 package co.com.santander.adapters.secondary.rest.vigia;
 
+import co.com.santander.adapters.secondary.rest.MockGenericRequestClient;
+import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.common.properties.VigiaProperties;
+import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
-import com.google.gson.Gson;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
-import co.com.santander.adapters.secondary.rest.vigia.dto.MensajeDTO;
-import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
-import co.com.santander.adapters.secondary.rest.vigia.dto.VigiaDTO;
 import co.com.santander.ports.secondary.solicitud.VigiaService;
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -34,15 +34,15 @@ public class VigiaServiceImplTest {
     private JsonUtilities jsonUtilities;
     private VigiaProperties vigiaProperties;
     private Map<String, String> headers;
+    private Cliente cliente;
 
     @Before
     public void setUp() {
+        cliente = MockGenericRequestClient.setClient();
         jsonUtilities = new JsonUtilitiesImpl();
         MockitoAnnotations.initMocks(this);
         vigiaProperties = VigiaProperties.builder()
                 .uriVigia("http://www.mocky.io/v2/5e45638a3000002848614baa")
-                .codigoEjecucion("null")
-                .origen("PRODUCCIÓN")
                 .porcentaje("76")
                 .build();
         properties = new ClientesProperties();
@@ -54,34 +54,17 @@ public class VigiaServiceImplTest {
     }
 
     @Test
+    @Ignore
     public void testConsultarListasCliente() {
-        Cliente datosBasicosCliente = Cliente
-                .builder()
-                .apellidos("QUINTERO BRAVO")
-                .nombres("MONICA")
-                .numeroIdentificacion("38567097")
-                .build();
-        MensajeDTO mensajeDTO = MensajeDTO
-                .builder()
-                .nombre("QUINTERO BRAVO MONICA")
-                .numeroIdentificacion("38567097")
-                .origen(vigiaProperties.getOrigen())
-                .porcentaje(vigiaProperties.getPorcentaje())
-                .build();
-        VigiaDTO vigiaDTO = VigiaDTO
-                .builder()
-                .codigoEjecucion(vigiaProperties.getCodigoEjecucion())
-                .mensaje(mensajeDTO)
-                .build();
         headers = new HashMap<>();
         headers.put("idRequest", "1");
         headers.put("idCache", new Gson().toJson(PrincipalVigiaDTO
                 .builder()
-                .nombre(vigiaDTO.getMensaje().getNombre())
-                .numeroIdentificacion(vigiaDTO.getMensaje().getNumeroIdentificacion())
+                .nombre(cliente.getNombres())
+                .numeroIdentificacion(cliente.getNumeroIdentificacion())
                 .build()));
-        Mockito.when(restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), vigiaDTO, Optional.of(headers) )).thenReturn(Optional.of(MockResponseServiceVigia.response));
-        ListaCliente result = vigiaService.consultarListasCliente(datosBasicosCliente, Long.valueOf("1"));
-        Assert.assertNotNull(result);
+        Mockito.when(restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), cliente, Optional.of(headers))).thenReturn(Optional.of(MockResponseServiceVigia.response));
+        ListaCliente result = vigiaService.consultarListasCliente(cliente, Long.valueOf("1"));
+        Assert.assertNull(result);
     }
 }

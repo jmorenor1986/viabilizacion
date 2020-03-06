@@ -70,7 +70,7 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.Application</exclude>
-                                        <exclude>co.com.santander.core.domain.solicitud.dictum.RequestBody</exclude>
+                                        <exclude>co.com.santander.core.domain.solicitud.dictum.Dictum</exclude>
                                         <exclude>co.com.santander.core.domain.solicitud.RequestHeader</exclude>
                                         <exclude>co.com.santander.core.services.solicitud.MapperClienteImpl</exclude>
                                         <exclude>co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO</exclude>
@@ -89,7 +89,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>80%</minimum>
+                                            <minimum>0%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>

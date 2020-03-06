@@ -1,9 +1,9 @@
 package co.com.santander.core.flow.impl;
 
-import co.com.santander.core.flow.ValidateRequest;
-import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
+import co.com.santander.core.flow.ValidateRequest;
+import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.secondary.solicitud.VigiaService;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,7 +55,7 @@ public class SearchVigiaImpl implements ValidateRequest {
      */
     public Boolean buscarVigia(Cliente cliente) {
         // Consumo el servicio vigia
-        setListaCliente(vigiaService.consultarListasCliente(cliente, getIdRequest()));
+        setListaCliente(vigiaService.consultarListasCliente(cliente, 76L));
         if (Objects.isNull(getListaCliente()))
             return Boolean.FALSE;
         else if ("S".equalsIgnoreCase(getListaCliente().getEncontradoId())

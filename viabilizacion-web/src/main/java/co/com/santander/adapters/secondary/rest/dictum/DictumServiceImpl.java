@@ -1,16 +1,17 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
 import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.dictum.common.DecisionDictum;
-import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
-import com.google.gson.Gson;
 import co.com.santander.adapters.secondary.rest.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.common.mapper.impl.DictumMapperImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
+import co.com.santander.adapters.secondary.rest.dictum.common.DecisionDictum;
 import co.com.santander.adapters.secondary.rest.dictum.dto.PrincipalRequestDictumDTO;
-import co.com.santander.core.domain.solicitud.dictum.RequestDictum;
+import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
+import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.dictum.Dictum;
 import co.com.santander.core.errors.XmlParsingException;
 import co.com.santander.ports.secondary.solicitud.DictumService;
-import org.modelmapper.ModelMapper;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +26,18 @@ public class DictumServiceImpl implements DictumService {
     public static final String ERROR_RESPONSE_NULL = "ERROR AL OBTENER LA RESPUESTA";
     private final RestTemplateService restTemplateService;
     private final ClientesProperties clientesProperties;
-    private final ModelMapper modelMapper;
+    private final DictumMapperImpl dictumMapper;
 
     @Autowired
-    public DictumServiceImpl(RestTemplateService restTemplateService, ClientesProperties clientesProperties, ModelMapper modelMapper) {
+    public DictumServiceImpl(RestTemplateService restTemplateService, ClientesProperties clientesProperties, DictumMapperImpl dictumMapper) {
         this.restTemplateService = restTemplateService;
         this.clientesProperties = clientesProperties;
-        this.modelMapper = modelMapper;
+        this.dictumMapper = dictumMapper;
     }
 
     @Override
-    public Optional<String> consultarSolicitudDictum(RequestDictum request, Long idRequest) {
-        GeneralPayload<RequestDictumDTO> requestDictumDTO = mapper(request);
+    public Optional<String> consultarSolicitudDictum(Cliente cliente, Dictum dictum, Long idRequest) {
+        GeneralPayload<RequestDictumDTO> requestDictumDTO = dictumMapper.dtoToRequest(dictum, cliente);
         Optional<Map<String, String>> headersMap = generateHeaders(idRequest, requestDictumDTO);
         String response = restTemplateService.postWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, headersMap).get();
         return consultarDecisionDictum(response);
@@ -74,18 +75,4 @@ public class DictumServiceImpl implements DictumService {
                 .build()));
         return Optional.of(headers);
     }
-
-    private GeneralPayload<RequestDictumDTO> mapper(RequestDictum request) {
-        RequestDictumDTO result = new RequestDictumDTO();
-        result.setClave(request.getRequestBody().getClave());
-        result.setParametros(request.getRequestBody().getParametros());
-        result.setPrimerApellido(request.getRequestBody().getPrimerApellido());
-        result.setProducto(request.getRequestBody().getProducto());
-        result.setUsuario(request.getRequestBody().getUsuario());
-        GeneralPayload<RequestDictumDTO> response = new GeneralPayload<>();
-        response.setRequestBody(result);
-        response.setRequestHeader(request.getRequestHeader());
-        return response;
-    }
-
 }

@@ -1,8 +1,8 @@
 package co.com.santander.core.flow.impl;
 
+import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,17 +17,18 @@ import java.util.Optional;
 @Component("validateCity")
 public class ValidateCityImpl implements ValidateRequest {
 
-    private static final Logger log= LoggerFactory.getLogger(ValidateCityImpl.class);
-    
+    private static final Logger log = LoggerFactory.getLogger(ValidateCityImpl.class);
+
     private ValidateRequest validateRequest;
-    
+
     private ValidarCiudadService validarCiudadService;
-    
-    @Getter @Setter
+
+    @Getter
+    @Setter
     private Cliente cliente;
-    
+
     @Autowired
-    public ValidateCityImpl(@Qualifier("proxyLogSearchVigia")ValidateRequest validateRequest, ValidarCiudadService validarCiudadService) {
+    public ValidateCityImpl(@Qualifier("proxyLogSearchVigia") ValidateRequest validateRequest, ValidarCiudadService validarCiudadService) {
         this.validateRequest = validateRequest;
         this.validarCiudadService = validarCiudadService;
     }
@@ -36,12 +37,12 @@ public class ValidateCityImpl implements ValidateRequest {
     public Optional<ResponseFlow> process(Cliente cliente, Long requestId) {
         setCliente(cliente);
         String validaCiudad = validarCiudadService.validarCodigoCiudad(getCliente().getCiudad(), requestId);
-        log.info("Respuesta al validar ciudad {} ", validaCiudad );
-        if("true".equalsIgnoreCase(validaCiudad)) {
-        	return validateRequest.process(getCliente(), requestId);
-        }else {
-        	return Optional.of(ResponseFlow.INVALID_CITY) ;
+        log.info("Respuesta al validar ciudad {} ", validaCiudad);
+        if ("true".equalsIgnoreCase(validaCiudad)) {
+            return validateRequest.process(getCliente(), requestId);
+        } else {
+            return Optional.of(ResponseFlow.INVALID_CITY);
         }
     }
-    
+
 }
