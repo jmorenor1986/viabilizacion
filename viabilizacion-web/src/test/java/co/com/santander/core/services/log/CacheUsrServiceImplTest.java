@@ -38,7 +38,6 @@ public class CacheUsrServiceImplTest {
                 .id(Long.valueOf("1"))
                 .fecha(new Date())
                 .httpStatus(HttpStatus.OK)
-                .idRequest("123")
                 .tipo(FlowOperationEnum.VALIDATE_CITY_REQUEST)
                 .servicio(new ServicioEntity())
                 .build();

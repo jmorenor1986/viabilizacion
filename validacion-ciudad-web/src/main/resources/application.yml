@@ -6,7 +6,7 @@ server:
 spring:
    datasource:
       driver-class-name: org.postgresql.Driver
-      jdbcUrl: jdbc:postgresql://localhost:5432/samtel
+      url: jdbc:postgresql://localhost:5432/samtel
       username: postgres
       password: 12345678
    jpa:

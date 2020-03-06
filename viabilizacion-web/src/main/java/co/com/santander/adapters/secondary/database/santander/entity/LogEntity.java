@@ -29,9 +29,6 @@ public class LogEntity {
 	@Column(name= "traza", columnDefinition = "TEXT")
 	private String traza;
 	
-	@Column(name = "id_request")
-	private String idRequest;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fecha")
 	private Date fecha;

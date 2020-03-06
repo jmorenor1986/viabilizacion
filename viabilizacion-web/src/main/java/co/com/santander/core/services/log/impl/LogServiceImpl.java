@@ -43,9 +43,11 @@ public class LogServiceImpl implements LogService {
     @Override
     public Boolean insertLogOperation(LogGeneral log) {
         LogEntity logEntity = modelMapper.map(log, LogEntity.class);
-        PrincipalRequest principalRequest = new PrincipalRequest();
-        principalRequest.setId(log.getIdRequest());
-        logEntity.setPrincipalRequest(principalRequest);
+
+        logEntity.setPrincipalRequest(PrincipalRequest.builder()
+                .id(log.getIdRequest())
+                .build());
+
         logOperationRepository.save(logEntity);
         return Boolean.TRUE;
     }
@@ -72,6 +74,11 @@ public class LogServiceImpl implements LogService {
 
     private Optional<LogEntity> generaLogEntity(LogGeneral log) {
         LogEntity logEntity = modelMapper.map(log, LogEntity.class);
+        //Generamos el principal request
+        logEntity.setPrincipalRequest(PrincipalRequest.builder()
+                .id(log.getIdRequest())
+                .build());
+
         Optional<ServicioEntity> servicioEntity = servicioRepository.findByServicio(validaServicio(log.getTipo()));
         if (!servicioEntity.isPresent()) {
             this.logger.info("Error al guardrar log de servicio rest {}", new Gson().toJson(log));

@@ -79,11 +79,10 @@
                                         </exclude>
                                         <exclude>co.com.santander.config.*</exclude>
                                         <exclude>co.com.santander.utils.impl.GenerateUniqueIdImpl</exclude>
-                                        <exclude>co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest</exclude>
+                                        <!--exclude>co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest</exclude>
                                         <exclude>co.com.santander.core.domain.solicitud.dictum.RequestHeaderDictum</exclude>
-                                        <exclude>co.com.santander.core.services.log.impl.PrincipalRequestImpl</exclude>
-                                        <exclude>co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor
-                                        </exclude>
+                                        <exclude>co.com.santander.core.services.log.impl.PrincipalRequestImpl</exclude-->
+                                        <exclude>co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
