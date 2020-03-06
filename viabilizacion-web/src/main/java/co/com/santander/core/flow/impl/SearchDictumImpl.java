@@ -1,7 +1,7 @@
 package co.com.santander.core.flow.impl;
 
-import co.com.santander.adapters.secondary.rest.dictum.mapper.DictumClienteMapper;
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.dictum.Dictum;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.secondary.solicitud.DictumService;
@@ -29,14 +29,12 @@ public class SearchDictumImpl implements ValidateRequest {
     private Long idRequest;
 
     private DictumService dictumService;
-    private DictumClienteMapper dictumClienteMapper;
 
     @Autowired
-    public SearchDictumImpl(@Qualifier("proxyLogSearchReconocer") ValidateRequest validateRequest, DictumService dictumService, DictumClienteMapper dictumClienteMapper) {
+    public SearchDictumImpl(@Qualifier("proxyLogSearchReconocer") ValidateRequest validateRequest, DictumService dictumService) {
         super();
         this.validateRequest = validateRequest;
         this.dictumService = dictumService;
-        this.dictumClienteMapper = dictumClienteMapper;
     }
 
 
@@ -49,7 +47,7 @@ public class SearchDictumImpl implements ValidateRequest {
     }
 
     public void llamarSevicio() {
-        Optional<String> respuesta = dictumService.consultarSolicitudDictum(dictumClienteMapper.toRequestDictum(getCliente()), getIdRequest());
+        Optional<String> respuesta = dictumService.consultarSolicitudDictum(getCliente(), new Dictum(), getIdRequest());
         if (respuesta.isPresent())
             log.info("Esta es la respuesta del servicio: {}", respuesta.get());
     }

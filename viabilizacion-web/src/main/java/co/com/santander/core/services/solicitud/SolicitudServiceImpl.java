@@ -1,19 +1,18 @@
 package co.com.santander.core.services.solicitud;
 
+import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
 import co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest;
-import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ClienteValidator;
+import co.com.santander.core.errors.MandatoryFieldException;
+import co.com.santander.core.flow.ValidateRequest;
+import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.services.log.PrincipalRequestService;
 import co.com.santander.ports.primary.log.LogService;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
-import co.com.santander.ports.secondary.database.santander.IPrincipalRequestRepository;
 import co.com.santander.utils.IGenerateUniqueId;
 import com.google.gson.Gson;
-import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import co.com.santander.core.errors.MandatoryFieldException;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -52,7 +51,7 @@ public class SolicitudServiceImpl implements SolicitudService {
     public Optional<ResponseFlow> cumplimientoSolicitud(Cliente cliente) {
         log.info("Inicia solicitud de validación");
         if (clienteValidator.validateObject(cliente)) {
-			generatePrincipalRequest(cliente);
+            generatePrincipalRequest(cliente);
             generarLog(cliente);
             return validateRequest.process(cliente, getPrincipalRequestId());
         }

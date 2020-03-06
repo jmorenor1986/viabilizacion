@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RequestBodyTest {
     @Test
     public void testObject(){
-        Assert.assertNotNull(RequestBody.builder().build());
-        Assert.assertThat(RequestBody.class, CoreMatchers.allOf(BeanMatchers.hasValidBeanConstructor(),
+        Assert.assertNotNull(Dictum.builder().build());
+        Assert.assertThat(Dictum.class, CoreMatchers.allOf(BeanMatchers.hasValidBeanConstructor(),
                 BeanMatchers.hasValidGettersAndSetters(),
                 BeanMatchers.hasValidBeanToString()));
     }
