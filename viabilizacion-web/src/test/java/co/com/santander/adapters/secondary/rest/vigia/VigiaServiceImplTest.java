@@ -7,6 +7,7 @@ import co.com.santander.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.common.properties.VigiaProperties;
 import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
+import co.com.santander.adapters.secondary.rest.vigia.mapper.VigiaMapperImpl;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
 import co.com.santander.ports.secondary.solicitud.VigiaService;
@@ -35,10 +36,12 @@ public class VigiaServiceImplTest {
     private VigiaProperties vigiaProperties;
     private Map<String, String> headers;
     private Cliente cliente;
+    private VigiaMapperImpl vigiaMapper;
 
     @Before
     public void setUp() {
         cliente = MockGenericRequestClient.setClient();
+        vigiaMapper = new VigiaMapperImpl();
         jsonUtilities = new JsonUtilitiesImpl();
         MockitoAnnotations.initMocks(this);
         vigiaProperties = VigiaProperties.builder()
@@ -47,7 +50,7 @@ public class VigiaServiceImplTest {
                 .build();
         properties = new ClientesProperties();
         properties.setVigiaProperties(vigiaProperties);
-        vigiaService = new VigiaServiceImpl(restTemplateService, properties, jsonUtilities);
+        vigiaService = new VigiaServiceImpl(restTemplateService, properties, jsonUtilities, vigiaMapper);
         headers = new HashMap<>();
         headers.put("idRequest", "1");
         headers.put("idCache", "{}");
