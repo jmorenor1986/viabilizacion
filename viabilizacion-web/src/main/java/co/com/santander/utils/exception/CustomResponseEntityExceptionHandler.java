@@ -26,7 +26,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         return new ResponseEntity<>(GeneralPayload.<ResponsePayLoad>builder()
                 .requestBody(ResponsePayLoad.builder()
                         .codRespuesta(Long.valueOf("3"))
-                        .mensajeError(ex.getMessage())
+                        .mensajeError(ex.getMessage() + " " + ex.toString() )
                         .build())
                 .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
