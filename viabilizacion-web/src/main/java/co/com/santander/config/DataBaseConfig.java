@@ -19,7 +19,6 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-//co.com.santander.adapters.secondary.database.santander.entity
 @EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = {"co.com.santander.ports.secondary.database.santander"})
 public class DataBaseConfig {
 	

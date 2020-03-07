@@ -1,4 +1,4 @@
-package co.com.santander.adapters.primary.rest.solicitud;
+package co.com.santander.adapters.primary.rest.solicitud.dto;
 
 import lombok.Data;
 

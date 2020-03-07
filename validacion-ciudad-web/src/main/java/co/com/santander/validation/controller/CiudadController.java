@@ -1,10 +1,15 @@
 package co.com.santander.validation.controller;
 
+import co.com.santander.validation.dto.GeneralPayload;
+import co.com.santander.validation.dto.ResponsePayLoad;
+import co.com.santander.validation.dto.ValidarCiudad;
 import co.com.santander.validation.service.CiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +24,18 @@ public class CiudadController {
         this.ciudadService = ciudadService;
     }
 
-    @GetMapping(value = "/{ciudad}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean validarCiudad(@PathVariable("ciudad") String ciudad) {
-        return ciudadService.validarCiudad(ciudad);
+    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GeneralPayload<ResponsePayLoad>> validarCiudad(@RequestBody GeneralPayload<ValidarCiudad> ciudadPayload){
+        String respuestaServicio = ciudadService.validarCiudad(ciudadPayload.getRequestBody().getCiudad()).toString();
+        return new ResponseEntity<>(GeneralPayload.<ResponsePayLoad>builder()
+                .requestHeader(ciudadPayload.getRequestHeader())
+                .requestBody(ResponsePayLoad.builder()
+                        .codRespuesta(Long.valueOf("1"))
+                        .mensajeError("OK")
+                        .respuestaServicio(respuestaServicio)
+                        .build())
+                .build()
+                ,HttpStatus.OK);
     }
+
 }
