@@ -1,13 +1,12 @@
 package co.com.santander.adapters.secondary.rest.informacioncontacto;
 
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.dto.RequestHeader;
 import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.common.properties.InformacionContactoProperties;
+import co.com.santander.adapters.secondary.rest.informacioncontacto.mapper.InformacionContactoMapperImpl;
+import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
-import co.com.santander.core.domain.solicitud.informacioncontacto.RequestInformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +21,23 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
     private final ClientesProperties clientesProperties;
     private final RestTemplateService restTemplateService;
     private final JsonUtilities jsonUtilities;
+    private final InformacionContactoMapperImpl mapper;
 
 
     @Autowired
-    public InformacionContactoServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities) {
+    public InformacionContactoServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, InformacionContactoMapperImpl mapper) {
         this.clientesProperties = properties;
         this.restTemplateService = restTemplateService;
         this.informacionContactoProperties = clientesProperties.getInformacionContactoProperties();
         this.jsonUtilities = jsonUtilities;
+        this.mapper = mapper;
     }
 
 
     @Override
-    public ResponseInformacionContacto consultarDatosUsuario(InformacionContacto informacionContacto, String idRequest) {
-        String responseService = restTemplateService.getWithParams(informacionContactoProperties.getReconocerProperties().getUri(),
-                setMapParameters(informacionContacto), generateHeaders(idRequest)).get();
+    public ResponseInformacionContacto consultarDatosUsuario(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
+        String responseService = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUri(),
+                mapper.dtoToRequest(informacionContacto, cliente), generateHeaders(idRequest)).get();
         return ResponseInformacionContacto.builder()
                 .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService))))
                 .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService))))
@@ -47,45 +48,12 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
     }
 
     @Override
-    public ResponseInformacionContacto consultarInformacionContacto(InformacionContacto informacionContacto, String idRequest) {
-        GeneralPayload<RequestInformacionContacto> payload = mapper(informacionContacto, informacionContactoProperties);
+    public ResponseInformacionContacto consultarInformacionContacto(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
         Optional<Map<String, String>> mapHeaders = generateHeaders(idRequest);
         Optional<String> respuesta = restTemplateService.postWithOutParams(informacionContactoProperties
                 .getUbicaProperties()
-                .getUri(), payload, mapHeaders);
+                .getUri(), mapper.dtoToRequest(informacionContacto, cliente), mapHeaders);
         return setResponseInformacionContacotUbica((respuesta.isPresent()) ? respuesta.get() : "Error");
-    }
-
-    private GeneralPayload<RequestInformacionContacto> mapper(InformacionContacto informacionContacto, InformacionContactoProperties informacionContactoProperties) {
-        RequestHeader requestHeader = RequestHeader.builder()
-                .codAliado(informacionContacto.getCodigoAliado())
-                .usuarioAliado(informacionContacto.getUsuarioAliado())
-                .sesionId(informacionContacto.getSessionId())
-                .ipOrigen(informacionContacto.getIpOrigen())
-                .numeroSolicitudCredito(informacionContacto.getNumeroSolicitudCredito())
-                .tipoIdentificacion(informacionContacto.getTipoDocumento())
-                .identificacion(informacionContacto.getNumeroDocumento())
-                .build();
-        RequestInformacionContacto requestInformacionContacto = RequestInformacionContacto.builder()
-                .primerApellido(informacionContacto.getPrimerApellido())
-                .motivoConsulta(informacionContacto.getMotivoConsulta())
-                .build();
-        GeneralPayload<RequestInformacionContacto> result = new GeneralPayload<>();
-        result.setRequestHeader(requestHeader);
-        result.setRequestBody(requestInformacionContacto);
-        return result;
-    }
-
-    private Map<String, Object> setMapParameters(InformacionContacto informacionContacto) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("numeroId", informacionContacto.getNumeroDocumento());
-        map.put("primerApellidoBuscar", informacionContacto.getPrimerApellido());
-        map.put("tipoId", informacionContacto.getTipoDocumento());
-        map.put("nit", informacionContactoProperties.getReconocerProperties().getNit());
-        map.put("tipoIdBuscar", informacionContactoProperties.getReconocerProperties().getNumeroIdBuscar());
-        map.put("numeroIdBuscar", informacionContactoProperties.getReconocerProperties().getNumeroIdBuscar());
-        map.put("validarNombre", informacionContactoProperties.getReconocerProperties().getValidarNombre());
-        return map;
     }
 
     private ResponseInformacionContacto setResponseInformacionContacotUbica(String json) {
@@ -96,9 +64,9 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
                 .build();
     }
 
-    public Optional<Map<String, String>> generateHeaders(String idRequest) {
+    public Optional<Map<String, String>> generateHeaders(Long idRequest) {
         Map<String, String> headers = new HashMap<>();
-        headers.put("idRequest", idRequest);
+        headers.put("idRequest", idRequest.toString());
         return Optional.of(headers);
     }
 }
