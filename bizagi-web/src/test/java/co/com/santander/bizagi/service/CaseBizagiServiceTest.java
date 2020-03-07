@@ -2,9 +2,10 @@ package co.com.santander.bizagi.service;
 
 import co.com.santander.bizagi.client.CaseBizagiClient;
 import co.com.santander.bizagi.client.MockResponseCreateCase;
-import co.com.santander.bizagi.util.StringUtilities;
+import co.com.santander.bizagi.common.properties.ServiciosProperties;
 import co.com.santander.bizagi.dto.RequestCreateCaseDTO;
 import co.com.santander.bizagi.service.impl.CaseBizagiServiceImpl;
+import co.com.santander.bizagi.util.StringUtilities;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
@@ -34,10 +35,21 @@ public class CaseBizagiServiceTest {
     private VelocityContext context;
     private StringWriter stringWriter;
     private StringUtilities stringUtilities;
+    private ServiciosProperties serviciosProperties;
 
     @Before
     public void setUp() {
+        serviciosProperties = new ServiciosProperties();
         MockitoAnnotations.initMocks(this);
+        serviciosProperties.setKeyStore("123456");
+        serviciosProperties.setKeyStorePassword("123456");
+        serviciosProperties.setTrustStore("1234567");
+        serviciosProperties.setTrustStorePassword("12345678");
+        serviciosProperties.setUriCrearCaso("12345678");
+        serviciosProperties.setDomain("2345678");
+        serviciosProperties.setProcess("23456789");
+        serviciosProperties.setUserName("1234567");
+        serviciosProperties.setAutorizaConsultaaCentrales("1");
         stringUtilities = new StringUtilities();
         velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER,
@@ -47,7 +59,7 @@ public class CaseBizagiServiceTest {
         velocityEngine.init();
         context = new VelocityContext();
         stringWriter = new StringWriter();
-        caseBizagiService = new CaseBizagiServiceImpl(caseBizagiClient, velocityEngine, context, stringWriter, stringUtilities);
+        caseBizagiService = new CaseBizagiServiceImpl(caseBizagiClient, velocityEngine, context, stringWriter, stringUtilities, serviciosProperties);
     }
 
     @Test
