@@ -1,13 +1,16 @@
 package co.com.santander.adapters.primary.rest.solicitud;
 
 import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.adapters.primary.rest.solicitud.dto.ClientePayLoad;
+import co.com.santander.adapters.primary.rest.solicitud.dto.ResponsePayLoad;
 import co.com.santander.ports.primary.solicitud.MapperCliente;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
 import co.com.santander.core.response.ResponseFlow;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +34,18 @@ public class SolicitudController {
     }
     
     @PostMapping(value = "/viabilizacion", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<ResponseFlow> solicitud(@RequestBody GeneralPayload<ClientePayLoad> clientePayLoad) {
-        return solicitudService.cumplimientoSolicitud(mapperCliente.fromGeneralPayLoad(clientePayLoad));
+    public ResponseEntity<GeneralPayload<ResponsePayLoad>> solicitud(@RequestBody GeneralPayload<ClientePayLoad> clientePayLoad) {
+        Optional<ResponseFlow> result = solicitudService.cumplimientoSolicitud(mapperCliente.fromGeneralPayLoad(clientePayLoad));
+        String respuestaServicio = (result.isPresent() ? result.get().toString() : ResponseFlow.UNEXPECTED_ERROR.toString());
+        return new ResponseEntity<>(
+                GeneralPayload.<ResponsePayLoad>builder()
+                        .requestHeader(clientePayLoad.getRequestHeader())
+                        .requestBody(ResponsePayLoad.builder()
+                                .codRespuesta(Long.valueOf("0"))
+                                .respuestaServicio(respuestaServicio)
+                                .mensajeError("OK")
+                                .build())
+                        .build()
+                ,HttpStatus.OK);
     }
 }

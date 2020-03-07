@@ -1,6 +1,8 @@
 package co.com.santander.adapters.primary.rest.solicitud;
 
 import co.com.santander.adapters.dto.GeneralPayload;
+import co.com.santander.adapters.primary.rest.solicitud.dto.ClientePayLoad;
+import co.com.santander.adapters.primary.rest.solicitud.dto.ResponsePayLoad;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.primary.solicitud.MapperCliente;
@@ -13,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
@@ -41,10 +44,16 @@ public class SolicitudControllerTest {
 
     @Test
     public void testCumplimientoSolicitudSuccess() {
-        Mockito.when(modelMapper.map(clientePayLoad, Cliente.class)).thenReturn(cliente);
-        Mockito.when(solicitudService.cumplimientoSolicitud(cliente)).thenReturn(Optional.empty());
-        ResponseFlow result = solicitudController.solicitud(clientePayLoad).orElse(ResponseFlow.UNEXPECTED_ERROR);
-        Assert.assertEquals(ResponseFlow.UNEXPECTED_ERROR, result);
+        Cliente cliente = Cliente.builder()
+                .nombres("Jesus Nicolas")
+                .build();
+        Mockito.when(mapperCliente.fromGeneralPayLoad(clientePayLoad)).thenReturn(cliente);
+        Mockito.when(solicitudService.cumplimientoSolicitud(cliente)).thenReturn(Optional.of(ResponseFlow.UNEXPECTED_ERROR));
+
+
+        Mockito.when(solicitudService.cumplimientoSolicitud(cliente)).thenReturn(Optional.of(ResponseFlow.UNEXPECTED_ERROR));
+        ResponseEntity<GeneralPayload<ResponsePayLoad>> result = solicitudController.solicitud(clientePayLoad);
+        Assert.assertEquals(ResponseFlow.UNEXPECTED_ERROR.toString(), result.getBody().getRequestBody().getRespuestaServicio());
     }
 
 }

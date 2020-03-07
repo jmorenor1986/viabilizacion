@@ -1,5 +1,6 @@
 package co.com.santander.adapters.primary.rest.solicitud;
 
+import co.com.santander.adapters.primary.rest.solicitud.dto.ClientePayLoad;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
