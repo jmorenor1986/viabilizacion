@@ -1,16 +1,18 @@
 package co.com.santander.adapters.secondary.rest.informacioncontacto;
 
+import co.com.santander.adapters.secondary.rest.MockGenericRequestClient;
 import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
+import co.com.santander.adapters.secondary.rest.common.properties.InformacionContactoProperties;
 import co.com.santander.adapters.secondary.rest.common.properties.ReconocerProperties;
 import co.com.santander.adapters.secondary.rest.common.properties.UbicaProperties;
-import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
-import co.com.santander.adapters.secondary.rest.common.properties.InformacionContactoProperties;
-import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.RequestUbicaDTO;
+import co.com.santander.adapters.secondary.rest.informacioncontacto.mapper.InformacionContactoMapperImpl;
+import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
+import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +36,7 @@ public class InformacionContactoServiceImplTest {
     @Mock
     private RestTemplateService restTemplateService;
 
-    private Map<String,String> headers;
+    private Map<String, String> headers;
 
 
     private JsonUtilities jsonUtilities;
@@ -42,17 +44,20 @@ public class InformacionContactoServiceImplTest {
     private InformacionContacto informacionContacto;
     private ResponseInformacionContacto responseInformacionContacto;
     private InformacionContactoProperties informacionContactoProperties;
+    private Cliente cliente;
+    private InformacionContactoMapperImpl informacionContactoMapper;
 
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        cliente = MockGenericRequestClient.setClient();
+        informacionContactoMapper = new InformacionContactoMapperImpl();
         jsonUtilities = new JsonUtilitiesImpl();
         properties = new ClientesProperties();
         informacionContacto = InformacionContacto.builder()
-                .numeroDocumento("101020220")
                 .primerApellido("PEREZ")
-                .tipoDocumento("1")
+                .motivoConsulta("MOTIVO")
                 .build();
         responseInformacionContacto = ResponseInformacionContacto.builder()
                 .direcciones(new ArrayList<>())
@@ -76,40 +81,23 @@ public class InformacionContactoServiceImplTest {
                 .ubicaProperties(ubicaProperties)
                 .build();
         properties.setInformacionContactoProperties(informacionContactoProperties);
-        informacionContactoService = new InformacionContactoServiceImpl(restTemplateService, properties, jsonUtilities);
+        informacionContactoService = new InformacionContactoServiceImpl(restTemplateService, properties, jsonUtilities, informacionContactoMapper);
         headers = new HashMap<>();
         headers.put("idRequest", "123");
     }
 
     @Test
     public void testReturnTelefonosOrDireccionesReconocer() {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("numeroId", informacionContacto.getNumeroDocumento());
-        map.put("primerApellidoBuscar", informacionContacto.getPrimerApellido());
-        map.put("tipoId", informacionContacto.getTipoDocumento());
-        map.put("nit", properties.getInformacionContactoProperties().getReconocerProperties().getNit());
-        map.put("tipoIdBuscar", properties.getInformacionContactoProperties().getReconocerProperties().getNumeroIdBuscar());
-        map.put("numeroIdBuscar", properties.getInformacionContactoProperties().getReconocerProperties().getNumeroIdBuscar());
-        map.put("validarNombre", properties.getInformacionContactoProperties().getReconocerProperties().getValidarNombre());
-
-        Mockito.when(restTemplateService.getWithParams(properties.getInformacionContactoProperties().getReconocerProperties().getUri(), map, Optional.of(headers))).thenReturn(Optional.of(MockReconocerService.response));
-        ResponseInformacionContacto result = informacionContactoService.consultarDatosUsuario(informacionContacto, "123");
+        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockReconocerService.response));
+        ResponseInformacionContacto result = informacionContactoService.consultarDatosUsuario(cliente, informacionContacto, 1L);
         Assert.assertNotNull(result);
-        Assert.assertNotNull(responseInformacionContacto);
     }
 
     @Test
     public void testConsultarTelefonosDireccionesUbica() {
-        RequestUbicaDTO requestUbicaDTO = RequestUbicaDTO.builder()
-                .codigoInformacion(properties.getInformacionContactoProperties().getUbicaProperties().getCodigoInformacion())
-                .motivoConsulta(properties.getInformacionContactoProperties().getUbicaProperties().getMotivoConsulta())
-                .numeroIdentificacion(informacionContacto.getNumeroDocumento())
-                .primerApellido(informacionContacto.getPrimerApellido())
-                .tipoIdentificacion(informacionContacto.getTipoDocumento())
-                .build();
-        Mockito.when(restTemplateService.postWithOutParams(properties.getInformacionContactoProperties().getUbicaProperties().getUri(), requestUbicaDTO, Optional.of(headers))).thenReturn(Optional.of(MockUbicaService.response));
-        ResponseInformacionContacto informacionContacto = informacionContactoService.consultarInformacionContacto(this.informacionContacto, "123");
-        Assert.assertNotNull(informacionContacto);
+        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockUbicaService.response));
+        ResponseInformacionContacto result = informacionContactoService.consultarInformacionContacto(cliente, informacionContacto, 1L);
+        Assert.assertNotNull(result);
 
     }
 }
