@@ -57,4 +57,12 @@ public class CaseBizagiClientTest {
         Assert.assertNotNull(result);
         Assert.assertNotNull(serviciosProperties.getUriCrearCaso());
     }
+
+    @Test
+    public void testCreateCaseObject() throws MalformedURLException {
+        Mockito.when(workflowEngineSOASoap.createCases(Mockito.any())).thenReturn(new CreateCasesResponse.CreateCasesResult());
+        CreateCasesResponse.CreateCasesResult result = caseBizagiClient.createCase(Mockito.any());
+        Assert.assertNotNull(result);
+
+    }
 }

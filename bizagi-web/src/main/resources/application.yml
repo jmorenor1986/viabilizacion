@@ -9,3 +9,7 @@ servicios:
   trustStorePassword: SAMTEL
   keyStore: C:/clientes/samtel.jks
   keyStorePassword: SAMTEL
+  domain: premiercredit
+  userName: Bizagi_Samtel
+  process: ConsumoPersonaNatural
+  autorizaConsultaaCentrales: 1
