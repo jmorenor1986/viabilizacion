@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
@@ -27,13 +28,16 @@ public class ValidateCityImplTest {
     private ValidateRequest next;
     @Mock
     private Cliente cliente;
+
+    private ModelMapper mapper;
     
     private String requestId;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        validateRequest = new ValidateCityImpl(next, validarCiudad);
+        mapper = new ModelMapper();
+        validateRequest = new ValidateCityImpl(next, validarCiudad, mapper);
         generateUniqueId = new GenerateUniqueIdImpl();
     }
 

@@ -43,8 +43,9 @@ public class SearchVigiaImpl implements ValidateRequest {
     public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
         setCliente(cliente);
         setIdRequest(idRequest);
+
         getCliente().setVigia(buscarVigia(getCliente()));
-        return validateRequest.process(getCliente(), idRequest);
+        return validateRequest.process(getCliente(), getIdRequest());
     }
 
     /**
@@ -55,7 +56,7 @@ public class SearchVigiaImpl implements ValidateRequest {
      */
     public Boolean buscarVigia(Cliente cliente) {
         // Consumo el servicio vigia
-        setListaCliente(vigiaService.consultarListasCliente(cliente, 76L));
+        setListaCliente(vigiaService.consultarListasCliente(cliente, getIdRequest()));
         if (Objects.isNull(getListaCliente()))
             return Boolean.FALSE;
         else if ("S".equalsIgnoreCase(getListaCliente().getEncontradoId())
