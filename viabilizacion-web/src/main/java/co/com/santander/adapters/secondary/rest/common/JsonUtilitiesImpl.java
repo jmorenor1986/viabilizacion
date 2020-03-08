@@ -3,6 +3,8 @@ package co.com.santander.adapters.secondary.rest.common;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.stream.IntStream;
 
 @Service
 public class JsonUtilitiesImpl implements JsonUtilities {
+
+    private static final Logger log= LoggerFactory.getLogger(JsonUtilitiesImpl.class);
 
     /*
     method that help to get property in any level, example country.direction return
@@ -47,7 +51,6 @@ String property for direction, if not exist return exception
         } catch (JSONException ex) {
             return "";
         }
-
     }
 
     @Override
@@ -62,7 +65,19 @@ String property for direction, if not exist return exception
         } catch (JSONException ex) {
             return new ArrayList<>();
         }
+    }
 
+    @Override
+    public String getValueForGivenKey(String nameObject, String nameKey, String jsonString) {
+        try {
+            String object = getObjectWithKey(nameObject, jsonString);
+            log.info(object);
+            JSONObject jsonObject = getJsonObject(object);
+            Object valor = jsonObject.get(nameKey);
+            return (String) valor;
+        } catch (JSONException ex) {
+            return "";
+        }
     }
 
     private String getObjectToString(String name, String jsonString) throws JSONException {

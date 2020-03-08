@@ -3,6 +3,7 @@ package co.com.santander.adapters.secondary.rest;
 import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
 import co.com.santander.core.errors.ConnectionException;
 import co.com.santander.ports.primary.log.LogService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -37,15 +38,19 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         HttpEntity<Object> request = new HttpEntity<>((headers.isPresent()) ? addAdditionalHeader(addGenericHeaders(), headers.get()) : addGenericHeaders());
         try {
             return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.GET, request, String.class).getBody());
-        }catch (ResourceAccessException re){
-            throw new ConnectionException("CONNECTION_EXCEPTION Error al intentar conectar con el recurso", re, uri, HttpMethod.GET, String.join("," , pathParams) );
+        } catch (ResourceAccessException re) {
+            throw new ConnectionException("CONNECTION_EXCEPTION Error al intentar conectar con el recurso", re, uri, HttpMethod.GET, String.join(",", pathParams));
         }
     }
 
     @Override
     public Optional<String> postWithOutParams(String uri, Object objectRequest, Optional<Map<String, String>> headers) {
         HttpEntity<Object> request = new HttpEntity<>(objectRequest, (headers.isPresent()) ? addAdditionalHeader(addGenericHeaders(), headers.get()) : addGenericHeaders());
-        return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.POST, request, String.class).getBody());
+        try {
+            return Optional.ofNullable(restTemplate.exchange(uri, HttpMethod.POST, request, String.class).getBody());
+        } catch (ResourceAccessException re) {
+            throw new ConnectionException("CONNECTION_EXCEPTION Error al intentar conectar con el recurso", re, uri, HttpMethod.POST, new Gson().toJson(objectRequest));
+        }
     }
 
     @Override
