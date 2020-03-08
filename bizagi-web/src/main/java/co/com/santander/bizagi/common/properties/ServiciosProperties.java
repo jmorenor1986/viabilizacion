@@ -15,4 +15,8 @@ public class ServiciosProperties {
     private String trustStorePassword;
     private String keyStore;
     private String keyStorePassword;
+    private String domain;
+    private String userName;
+    private String process;
+    private String autorizaConsultaaCentrales;
 }

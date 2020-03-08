@@ -2,9 +2,12 @@ package co.com.santander.bizagi.service;
 
 import co.com.santander.bizagi.client.CaseBizagiClient;
 import co.com.santander.bizagi.client.MockResponseCreateCase;
-import co.com.santander.bizagi.util.StringUtilities;
+import co.com.santander.bizagi.common.generic.GenericResponse;
+import co.com.santander.bizagi.common.properties.ServiciosProperties;
+import co.com.santander.bizagi.dto.Cliente;
 import co.com.santander.bizagi.dto.RequestCreateCaseDTO;
 import co.com.santander.bizagi.service.impl.CaseBizagiServiceImpl;
+import co.com.santander.bizagi.util.StringUtilities;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
@@ -17,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.tempuri.CreateCasesResponse;
 
 import java.io.StringWriter;
 import java.net.MalformedURLException;
@@ -34,10 +38,22 @@ public class CaseBizagiServiceTest {
     private VelocityContext context;
     private StringWriter stringWriter;
     private StringUtilities stringUtilities;
+    private ServiciosProperties serviciosProperties;
 
     @Before
     public void setUp() {
+        serviciosProperties = new ServiciosProperties();
         MockitoAnnotations.initMocks(this);
+        serviciosProperties.setKeyStore("123456");
+        serviciosProperties.setKeyStorePassword("123456");
+        serviciosProperties.setTrustStore("1234567");
+        serviciosProperties.setTrustStorePassword("12345678");
+        serviciosProperties.setUriCrearCaso("12345678");
+        serviciosProperties.setDomain("2345678");
+        serviciosProperties.setProcess("23456789");
+        serviciosProperties.setUserName("1234567");
+        serviciosProperties.setAutorizaConsultaaCentrales("1");
+        ;
         stringUtilities = new StringUtilities();
         velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER,
@@ -47,7 +63,7 @@ public class CaseBizagiServiceTest {
         velocityEngine.init();
         context = new VelocityContext();
         stringWriter = new StringWriter();
-        caseBizagiService = new CaseBizagiServiceImpl(caseBizagiClient, velocityEngine, context, stringWriter, stringUtilities);
+        caseBizagiService = new CaseBizagiServiceImpl(caseBizagiClient, velocityEngine, context, stringWriter, stringUtilities, serviciosProperties);
     }
 
     @Test
@@ -62,6 +78,22 @@ public class CaseBizagiServiceTest {
 
         Mockito.when(caseBizagiClient.createCaseString(MockRequestCreateCase.request)).thenReturn(MockResponseCreateCase.response);
         String result = caseBizagiService.createCaseString(requestCreateCaseDTOTest);
+        Assert.assertNotNull(result);
+    }
+
+    @Test
+    public void testCreateCaseObjectSuccess() throws MalformedURLException, JSONException {
+
+        Cliente cliente = Cliente.builder()
+                .Apellido1("12345")
+                .Apellido2("werty")
+                .Nombre1("123456")
+                .Nombre2("1234567")
+                .NumeroIdentificacion("1234567")
+                .Tipodeidentificacion("1")
+                .build();
+        Mockito.when(caseBizagiClient.createCase(Mockito.any())).thenReturn(new CreateCasesResponse.CreateCasesResult());
+        GenericResponse result = caseBizagiService.createCase(cliente);
         Assert.assertNotNull(result);
     }
 }
