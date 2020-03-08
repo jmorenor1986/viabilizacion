@@ -6,7 +6,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    jdbcUrl: jdbc:postgresql://localhost:5432/samtel
+    jdbcUrl: jdbc:postgresql://192.168.0.15:5432/samtel
     username: postgres
     password: 12345678
   jpa:
@@ -18,7 +18,8 @@ spring:
 
 servicios:
   uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
-  uriDictum: https://dictum.free.beeceptor.com/
+  #uriDictum: https://dictum.free.beeceptor.com/
+  uriDictum: http://dictum-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultarHC2
   informacionContactoPorperties:
 
     reconocerProperties:
@@ -34,7 +35,8 @@ servicios:
       motivoConsulta: 1
 
   vigiaProperties:
-    uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa
+    #uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa
+    uriVigia: http://vigia-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaVigia
     porcentaje: 76
 
   dictumProperties:
@@ -45,3 +47,10 @@ servicios:
     numeroSolicitudCredito: 12345678
     tipoIdentificacion: CC
     identificacion: 1040
+
+
+
+dictum:
+  parametros:
+    clave: 06BRZ
+    producto: 64
