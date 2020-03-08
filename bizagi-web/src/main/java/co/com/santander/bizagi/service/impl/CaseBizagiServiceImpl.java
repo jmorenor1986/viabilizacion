@@ -1,6 +1,7 @@
 package co.com.santander.bizagi.service.impl;
 
 import co.com.santander.bizagi.client.CaseBizagiClient;
+import co.com.santander.bizagi.common.generic.GenericResponse;
 import co.com.santander.bizagi.common.properties.ServiciosProperties;
 import co.com.santander.bizagi.dto.*;
 import co.com.santander.bizagi.service.CaseBizagiService;
@@ -48,12 +49,15 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
     }
 
     @Override
-    public CreateCasesResponse.CreateCasesResult createCase(Cliente cliente) throws MalformedURLException, JSONException {
+    public GenericResponse createCase(Cliente cliente) throws MalformedURLException, JSONException {
         BizAgiWSParam request = setParams(cliente, serviciosProperties);
-        return caseBizagiClient.createCase(request);
-
-
+        return GenericResponse.builder()
+                .codRespuesta("1")
+                .respuestaError("null")
+                .respuestaServicio(caseBizagiClient.createCase(request))
+                .build();
     }
+
 
     private BizAgiWSParam setParams(Cliente cliente, ServiciosProperties serviciosProperties) {
         return BizAgiWSParam.builder()
