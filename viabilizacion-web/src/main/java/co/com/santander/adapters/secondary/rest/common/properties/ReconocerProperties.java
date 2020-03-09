@@ -11,4 +11,5 @@ public class ReconocerProperties {
     private String tipoIdBuscar;
     private String numeroIdBuscar;
     private String validarNombre;
+    private String uriToken;
 }
