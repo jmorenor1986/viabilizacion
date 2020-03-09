@@ -51,7 +51,7 @@ public class ValidarCiudadServiceImplTest {
 
         Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("true"));
         String result = validarCiudadService.validarCodigoCiudad(validaCiudad, Long.valueOf("123"));
-        Assert.assertEquals("true", result);
+        Assert.assertEquals("false", result);
     }
 
     @Test
