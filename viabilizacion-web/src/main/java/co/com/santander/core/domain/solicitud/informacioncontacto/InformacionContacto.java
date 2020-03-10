@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InformacionContacto {
-    private String primerApellido;
-    private String motivoConsulta;
+    private String primerApellidoBuscar;
+    private String validarNombre;
 }

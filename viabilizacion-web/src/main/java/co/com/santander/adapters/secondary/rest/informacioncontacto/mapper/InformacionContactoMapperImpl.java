@@ -15,8 +15,9 @@ public class InformacionContactoMapperImpl extends RestRequestMapper<Informacion
         GeneralPayload<InformacionContactoDTO> result = new GeneralPayload<>();
         result.setRequestHeader(setHeader(cliente.getRequestHeader()));
         result.setRequestBody(InformacionContactoDTO.builder()
-                .motivoConsulta(request.getMotivoConsulta())
-                .primerApellido(request.getPrimerApellido())
+                .primerApellidoBuscar(cliente.getApellidos())
+                //TODO este valor siempre es false o cambia por algun motivo
+                .validarNombre("false")
                 .build());
         return result;
     }

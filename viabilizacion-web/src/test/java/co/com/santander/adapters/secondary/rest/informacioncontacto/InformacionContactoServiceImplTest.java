@@ -56,8 +56,8 @@ public class InformacionContactoServiceImplTest {
         jsonUtilities = new JsonUtilitiesImpl();
         properties = new ClientesProperties();
         informacionContacto = InformacionContacto.builder()
-                .primerApellido("PEREZ")
-                .motivoConsulta("MOTIVO")
+                .primerApellidoBuscar("PEREZ")
+                .validarNombre("false")
                 .build();
         responseInformacionContacto = ResponseInformacionContacto.builder()
                 .direcciones(new ArrayList<>())

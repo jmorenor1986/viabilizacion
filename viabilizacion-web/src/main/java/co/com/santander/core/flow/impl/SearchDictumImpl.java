@@ -42,11 +42,12 @@ public class SearchDictumImpl implements ValidateRequest {
     public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
         setCliente(cliente);
         setIdRequest(idRequest);
-        llamarSevicio();
+        //TODO Definir claramente que se debe generar con la respuesta de este servicio
+        callService();
         return validateRequest.process(getCliente(), idRequest);
     }
 
-    public void llamarSevicio() {
+    public void callService() {
         Optional<String> respuesta = dictumService.consultarSolicitudDictum(getCliente(), new Dictum(), getIdRequest());
         if (respuesta.isPresent())
             log.info("Esta es la respuesta del servicio: {}", respuesta.get());

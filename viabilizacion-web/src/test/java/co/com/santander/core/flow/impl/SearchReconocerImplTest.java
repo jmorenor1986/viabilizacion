@@ -3,6 +3,7 @@ package co.com.santander.core.flow.impl;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import co.com.santander.utils.impl.GenerateUniqueIdImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,11 +25,13 @@ public class SearchReconocerImplTest {
     private Cliente cliente;
     
     private Long requestId;
+    @Mock
+    private InformacionContactoService informacionContactoService;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        validateRequest = new SearchReconocerImpl(next);
+        validateRequest = new SearchReconocerImpl(next, informacionContactoService);
         generateUniqueId = new GenerateUniqueIdImpl();
 
     }

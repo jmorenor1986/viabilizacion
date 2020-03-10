@@ -41,6 +41,8 @@ To the run application, just use maven
 ```
 mvn -pl viabilizacion-web spring-boot:run
 ```
+Next step run the script.sql located in resources
+ 
 To validate the service you have two ways:
 
 Open the browser with next url:

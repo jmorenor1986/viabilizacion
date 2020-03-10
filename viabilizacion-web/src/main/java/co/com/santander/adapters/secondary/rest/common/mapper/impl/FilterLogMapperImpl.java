@@ -46,10 +46,10 @@ public class FilterLogMapperImpl implements FilterLogMapper {
         if(uri.contains("/v1/ciudad")){
             return FlowOperationEnum.VALIDATE_CITY_REQUEST;
             //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
-        }else if(uri.contains("v2/5e45638a3000002848614baa")){
+        }else if(uri.contains("vigia-credito")){
             return FlowOperationEnum.INVOKE_VIGIA_REQUEST;
             //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
-        }else if(uri.contains("v2/5e3b08212f000063e356c899")){
+        }else if(uri.contains("dictum-credito")){
             return FlowOperationEnum.INVOKE_DICTUM_REQUEST;
         }
         return FlowOperationEnum.NO_APLICA;
