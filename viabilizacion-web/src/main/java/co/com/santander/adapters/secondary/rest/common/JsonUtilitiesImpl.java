@@ -1,5 +1,8 @@
 package co.com.santander.adapters.secondary.rest.common;
 
+import co.com.santander.adapters.dto.GeneralPayload;
+import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
+import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -93,5 +97,10 @@ String property for direction, if not exist return exception
     private String getProperty(String name, String jsonString) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonString);
         return jsonObject.getString(name);
+    }
+    @Override
+    public ResponseDto getGeneralResponse(String json){
+        ResponseDto respuesta = new Gson().fromJson(json, ResponseDto.class);
+        return respuesta;
     }
 }

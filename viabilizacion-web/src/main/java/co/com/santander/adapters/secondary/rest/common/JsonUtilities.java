@@ -1,5 +1,7 @@
 package co.com.santander.adapters.secondary.rest.common;
 
+import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
+
 import java.util.List;
 
 public interface JsonUtilities {
@@ -10,5 +12,7 @@ public interface JsonUtilities {
     public List<String> getValuesForGivenKey(String nameObject, String nameArray, String nameKey, String jsonString);
 
     public String getValueForGivenKey(String nameObject, String nameKey, String jsonString);
+
+    public ResponseDto getGeneralResponse(String json);
 }
 

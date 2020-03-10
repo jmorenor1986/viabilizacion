@@ -3,9 +3,11 @@ package co.com.santander.adapters.secondary.rest.informacioncontacto;
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.common.properties.InformacionContactoProperties;
 import co.com.santander.adapters.secondary.rest.dictum.DictumServiceImpl;
+import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.InformacionContactoDTO;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.mapper.InformacionContactoMapperImpl;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
@@ -25,11 +27,13 @@ import java.util.Optional;
 
 @Service
 public class InformacionContactoServiceImpl implements InformacionContactoService {
-    private final InformacionContactoProperties informacionContactoProperties;
     private final ClientesProperties clientesProperties;
     private final RestTemplateService restTemplateService;
     private final JsonUtilities jsonUtilities;
     private final InformacionContactoMapperImpl mapper;
+    private final InformacionContactoProperties informacionContactoProperties;
+
+    private String tokenReconocer;
 
     private static final Logger log= LoggerFactory.getLogger(InformacionContactoServiceImpl.class);
 
@@ -38,7 +42,10 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
     public InformacionContactoServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, InformacionContactoMapperImpl mapper) {
         this.clientesProperties = properties;
         this.restTemplateService = restTemplateService;
-        this.informacionContactoProperties = clientesProperties.getInformacionContactoProperties();
+        this.informacionContactoProperties = InformacionContactoProperties.builder()
+                .reconocerProperties(clientesProperties.getReconocerProperties())
+                .ubicaProperties(clientesProperties.getUbicaProperties())
+                .build();
         this.jsonUtilities = jsonUtilities;
         this.mapper = mapper;
     }
@@ -48,8 +55,10 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
     public ResponseInformacionContacto consultarDatosUsuario(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
         String responseService = "";
         if(generateTokenServiceReconocer(cliente, idRequest)){
+            GeneralPayload<InformacionContactoDTO> requestObject = mapper.dtoToRequest(informacionContacto, cliente);
+            requestObject.getRequestBody().setToken(tokenReconocer);
             responseService = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUri(),
-                    mapper.dtoToRequest(informacionContacto, cliente), generateHeaders(idRequest)).get();
+                    requestObject, generateHeaders(idRequest)).get();
         }
         return ResponseInformacionContacto.builder()
                 .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService))))
@@ -69,17 +78,28 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
         Optional<String> response = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUriToken(),
                 requestToken, headersMap);
         if(response.isPresent()){
-            extractToken(response.get());
+            tokenReconocer = extractToken(response.get());
+        }else{
+            return Boolean.FALSE;
         }
         return Boolean.TRUE;
     }
 
     private String extractToken(String response){
-        String respuestaServicio = jsonUtilities.getObjectWithKey("respuestaServicio",response);
-
-        log.info("Esta es el valor de la propiedad: {}", respuestaServicio);
-
-        return "";
+        ResponseDto responseDto = jsonUtilities.getGeneralResponse(response);
+        String respuestaServicio = responseDto.getRespuestaServicio();
+        //Eliminar caracteres extranios
+        Integer inicio = respuestaServicio.indexOf("{");
+        Integer fin = respuestaServicio.indexOf("}");
+        String json = respuestaServicio.substring(inicio,fin);
+        //Extraigo el valor del token
+        inicio= json.indexOf("access_token=");
+        fin = json.indexOf("scope=");
+        String token = json.substring(inicio,fin);
+        //Quitamos La propiedad
+        inicio= token.indexOf("=");
+        token = token.substring(inicio+1,token.length() -2);
+        return token;
     }
 
 

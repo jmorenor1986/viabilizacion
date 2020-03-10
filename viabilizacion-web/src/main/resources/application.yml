@@ -20,19 +20,18 @@ servicios:
   uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
   #uriDictum: https://dictum.free.beeceptor.com/
   uriDictum: http://dictum-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultarHC2
-  informacionContactoPorperties:
-    reconocerProperties:
-      uri: http://www.mocky.io/v2/5e4473f731000098df3b06ff
-      uriToken: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken
-      nit: 900468987
-      tipoIdBuscar: 1
-      numeroIdBuscar: 1010101010
-      validarNombre: true
-    ubicaProperties:
-      uri: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
-      codigoInformacion: 5632
-      motivoConsulta: 1
-
+  uriReconocer: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken
+  reconocerProperties:
+    uri: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaReconocer
+    uriToken: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken
+    nit: 900468987
+    tipoIdBuscar: 1
+    numeroIdBuscar: 1010101010
+    validarNombre: true
+  ubicaProperties:
+    uri: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
+    codigoInformacion: 5632
+    motivoConsulta: 1
   vigiaProperties:
     #uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa
     uriVigia: http://vigia-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaVigia
