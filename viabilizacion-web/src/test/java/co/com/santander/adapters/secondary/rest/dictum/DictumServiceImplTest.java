@@ -2,6 +2,8 @@ package co.com.santander.adapters.secondary.rest.dictum;
 
 import co.com.santander.adapters.secondary.rest.MockGenericRequestClient;
 import co.com.santander.adapters.secondary.rest.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import co.com.santander.adapters.secondary.rest.common.mapper.impl.DictumMapperImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
@@ -34,6 +36,8 @@ public class DictumServiceImplTest {
     @Mock
     private RestTemplateService restTemplateService;
 
+    private JsonUtilities jsonUtilities;
+
 
     private Map<String, String> headers;
 
@@ -43,7 +47,8 @@ public class DictumServiceImplTest {
         properties = new ClientesProperties();
         properties.setUriDictum(URI);
         dictumMapper = new DictumMapperImpl();
-        dictumService = new DictumServiceImpl(restTemplateService, properties, dictumMapper);
+        jsonUtilities = new JsonUtilitiesImpl();
+        dictumService = new DictumServiceImpl(restTemplateService, properties, dictumMapper, jsonUtilities);
         headers = new HashMap<>();
         headers.put("idRequest", "1");
         headers.put("idCache", "{}");
