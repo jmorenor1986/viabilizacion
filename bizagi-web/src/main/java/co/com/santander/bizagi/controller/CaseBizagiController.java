@@ -2,7 +2,6 @@ package co.com.santander.bizagi.controller;
 
 import co.com.santander.bizagi.common.generic.GenericResponse;
 import co.com.santander.bizagi.dto.Cliente;
-import co.com.santander.bizagi.dto.RequestCreateCaseDTO;
 import co.com.santander.bizagi.service.CaseBizagiService;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,8 @@ public class CaseBizagiController {
 
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createCase(@RequestBody RequestCreateCaseDTO request) throws MalformedURLException, JSONException {
-        return this.caseBizagiService.createCaseString(request);
+    public String createCase(@RequestBody Cliente cliente) throws MalformedURLException, JSONException {
+        return this.caseBizagiService.createCaseString(cliente);
     }
 
     @PostMapping(value = "/create-case", produces = MediaType.APPLICATION_JSON_VALUE)

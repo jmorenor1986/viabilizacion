@@ -68,16 +68,17 @@ public class CaseBizagiServiceTest {
 
     @Test
     public void testCreateCaseSuccess() throws MalformedURLException, JSONException {
-        RequestCreateCaseDTO requestCreateCaseDTOTest = new RequestCreateCaseDTO();
-        requestCreateCaseDTOTest.setBuroScore("5");
-        requestCreateCaseDTOTest.setDocumentNumber("785621");
-        requestCreateCaseDTOTest.setDomain("domain");
-        requestCreateCaseDTOTest.setProcess("Credit");
-        requestCreateCaseDTOTest.setTypeDocument("CC");
-        requestCreateCaseDTOTest.setUserName("admon");
+        Cliente cliente = Cliente.builder()
+                .Apellido1("12345")
+                .Apellido2("werty")
+                .Nombre1("123456")
+                .Nombre2("1234567")
+                .NumeroIdentificacion("1234567")
+                .Tipodeidentificacion("1")
+                .build();
 
-        Mockito.when(caseBizagiClient.createCaseString(MockRequestCreateCase.request)).thenReturn(MockResponseCreateCase.response);
-        String result = caseBizagiService.createCaseString(requestCreateCaseDTOTest);
+        Mockito.when(caseBizagiClient.createCaseString(Mockito.any())).thenReturn(MockResponseCreateCase.response);
+        String result = caseBizagiService.createCaseString(cliente);
         Assert.assertNotNull(result);
     }
 

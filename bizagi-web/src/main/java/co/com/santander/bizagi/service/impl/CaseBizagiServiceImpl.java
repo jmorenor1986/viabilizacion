@@ -3,7 +3,10 @@ package co.com.santander.bizagi.service.impl;
 import co.com.santander.bizagi.client.CaseBizagiClient;
 import co.com.santander.bizagi.common.generic.GenericResponse;
 import co.com.santander.bizagi.common.properties.ServiciosProperties;
-import co.com.santander.bizagi.dto.*;
+import co.com.santander.bizagi.dto.BizAgiWSParam;
+import co.com.santander.bizagi.dto.Case;
+import co.com.santander.bizagi.dto.Cliente;
+import co.com.santander.bizagi.dto.SolicitudCredito;
 import co.com.santander.bizagi.service.CaseBizagiService;
 import co.com.santander.bizagi.util.StringUtilities;
 import org.apache.velocity.Template;
@@ -12,7 +15,6 @@ import org.apache.velocity.app.VelocityEngine;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tempuri.CreateCasesResponse;
 
 import java.io.StringWriter;
 import java.net.MalformedURLException;
@@ -41,8 +43,9 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
     }
 
     @Override
-    public String createCaseString(RequestCreateCaseDTO request) throws MalformedURLException, JSONException {
-        String requestString = putParametersVelocity(request).replaceAll("\r", "");
+    public String createCaseString(Cliente cliente) throws MalformedURLException, JSONException {
+        String requestString = putParametersVelocity(cliente).replaceAll("\r", "");
+        System.out.println(requestString);
         return stringUtilities.xmlToJson(
                 stringUtilities.cdataToJson(
                         caseBizagiClient.createCaseString(requestString)));
@@ -85,14 +88,18 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
         return result;
     }
 
-    private String putParametersVelocity(RequestCreateCaseDTO request) {
+    private String putParametersVelocity(Cliente cliente) {
         Template template = velocityEngine.getTemplate(TEMPLATES_REQUEST_CREATE_CASE, "UTF-8");
-        context.put("domain", request.getDomain());
-        context.put("username", request.getUserName());
-        context.put("process", request.getProcess());
-        context.put("documentnumber", request.getDocumentNumber());
-        context.put("typedocument", request.getTypeDocument());
-        context.put("buroscore", request.getBuroScore());
+        context.put("domain", serviciosProperties.getDomain());
+        context.put("username", serviciosProperties.getUserName());
+        context.put("process", serviciosProperties.getProcess());
+        context.put("documentnumber", cliente.getNumeroIdentificacion());
+        context.put("typedocument", cliente.getTipodeidentificacion());
+        context.put("apellido1", cliente.getApellido1());
+        context.put("apellido2", cliente.getApellido2());
+        context.put("nombre1", cliente.getNombre1());
+        context.put("nombre2", cliente.getNombre2());
+        context.put("autorizaCentrales", serviciosProperties.getAutorizaConsultaaCentrales());
         template.merge(context, stringWriter);
         return stringWriter.toString();
     }
