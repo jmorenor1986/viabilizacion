@@ -46,11 +46,17 @@ public class FilterLogMapperImpl implements FilterLogMapper {
         if(uri.contains("/v1/ciudad")){
             return FlowOperationEnum.VALIDATE_CITY_REQUEST;
             //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
-        }else if(uri.contains("vigia-credito")){
+        }else if(uri.contains("vigia")){
             return FlowOperationEnum.INVOKE_VIGIA_REQUEST;
             //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
-        }else if(uri.contains("dictum-credito")){
+        }else if(uri.contains("dictum")){
             return FlowOperationEnum.INVOKE_DICTUM_REQUEST;
+            //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
+        }else if(uri.contains("reconocer")){
+            return FlowOperationEnum.INVOKE_RECONOCER_REQUEST;
+            //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
+        }else if(uri.contains("bizagi")){
+            return FlowOperationEnum.CASO_BIZAGI_REQUEST;
         }
         return FlowOperationEnum.NO_APLICA;
     }
@@ -62,6 +68,10 @@ public class FilterLogMapperImpl implements FilterLogMapper {
             return FlowOperationEnum.INVOKE_VIGIA_RESPONSE;
         }else if(FlowOperationEnum.INVOKE_DICTUM_REQUEST.equals(tipoOperation)){
             return FlowOperationEnum.INVOKE_DICTUM_RESPONSE;
+        }else if(FlowOperationEnum.INVOKE_RECONOCER_REQUEST.equals(tipoOperation)){
+            return FlowOperationEnum.INVOKE_RECONOCER_RESPONSE;
+        }else if(FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(tipoOperation)){
+            return FlowOperationEnum.CASO_BIZAGI_RESPONSE;
         }
         return FlowOperationEnum.NO_APLICA;
     }

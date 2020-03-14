@@ -60,9 +60,11 @@ public class LogServiceImpl implements LogService {
             if (logEntity.isPresent() &&
                     (
                             FlowOperationEnum.INVOKE_VIGIA_REQUEST.equals(logEntity.get().getTipo()) ||
-                            FlowOperationEnum.INVOKE_VIGIA_RESPONSE.equals(logEntity.get().getTipo()) ||
-                            FlowOperationEnum.INVOKE_DICTUM_RESPONSE.equals(logEntity.get().getTipo()) ||
-                            FlowOperationEnum.INVOKE_DICTUM_REQUEST.equals(logEntity.get().getTipo())
+                                    FlowOperationEnum.INVOKE_VIGIA_RESPONSE.equals(logEntity.get().getTipo()) ||
+                                    FlowOperationEnum.INVOKE_DICTUM_RESPONSE.equals(logEntity.get().getTipo()) ||
+                                    FlowOperationEnum.INVOKE_DICTUM_REQUEST.equals(logEntity.get().getTipo()) ||
+                                    FlowOperationEnum.INVOKE_RECONOCER_REQUEST.equals(logEntity.get().getTipo()) ||
+                                    FlowOperationEnum.INVOKE_RECONOCER_RESPONSE.equals(logEntity.get().getTipo())
                     )
             ) {
                 cacheUsrService.insertLogCacheUsr(logEntity.get(), idCache);
@@ -95,6 +97,10 @@ public class LogServiceImpl implements LogService {
             return ServicioEnum.VIGIA;
         } else if (FlowOperationEnum.INVOKE_DICTUM.equals(operationEnum) || FlowOperationEnum.INVOKE_DICTUM_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_DICTUM_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.DICTUM;
+        } else if (FlowOperationEnum.INVOKE_RECONOCER.equals(operationEnum) || FlowOperationEnum.INVOKE_RECONOCER_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_RECONOCER_RESPONSE.equals(operationEnum)) {
+            return ServicioEnum.RECONOCER;
+        } else if (FlowOperationEnum.CASO_BIZAGI.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_RESPONSE.equals(operationEnum)) {
+            return ServicioEnum.BIZAGI;
         }
         return ServicioEnum.NO_APLICA;
     }

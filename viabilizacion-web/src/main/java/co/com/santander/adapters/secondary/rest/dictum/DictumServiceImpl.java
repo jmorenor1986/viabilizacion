@@ -67,7 +67,6 @@ public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
     }
 
     private Optional<String> buscarRespuesta(String xml) {
-        log.info("Esta es la respuesta del servicio: {}",xml );
         if (xml.contains(DecisionDictum.PREAPROBADO_CON_DOCUMENTOS))
             return Optional.of(DecisionDictum.PREAPROBADO_CON_DOCUMENTOS);
         if (xml.contains(DecisionDictum.PREAPROBADO_SIN_DOCUMENTOS))
