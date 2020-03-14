@@ -89,7 +89,7 @@ public class InformacionContactoServiceImplTest {
     @Test
     public void testReturnTelefonosOrDireccionesReconocer() {
         Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockReconocerService.response));
-        ResponseInformacionContacto result = informacionContactoService.consultarDatosUsuario(cliente, informacionContacto, 1L);
+        Optional<ResponseInformacionContacto> result = informacionContactoService.consultarDatosUsuario(cliente, informacionContacto, 1L);
         Assert.assertNotNull(result);
     }
 

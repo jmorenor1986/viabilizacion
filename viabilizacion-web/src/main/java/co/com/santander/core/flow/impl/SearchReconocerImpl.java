@@ -20,7 +20,8 @@ import java.util.Optional;
 public class SearchReconocerImpl implements ValidateRequest {
 
     private static final Logger log = LoggerFactory.getLogger(SearchReconocerImpl.class);
-    private ValidateRequest validateRequest;
+    private ValidateRequest validateRequestUbi;
+    private ValidateRequest validateRequestBiz;
     @Getter
     @Setter
     private Cliente cliente;
@@ -29,9 +30,10 @@ public class SearchReconocerImpl implements ValidateRequest {
     private InformacionContactoService informacionContactoService;
 
     @Autowired
-    public SearchReconocerImpl(@Qualifier("proxyLogSearchUbica") ValidateRequest validateRequest, InformacionContactoService informacionContactoService) {
+    public SearchReconocerImpl(@Qualifier("proxyLogSearchUbica") ValidateRequest validateRequestUbi, @Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequestBiz, InformacionContactoService informacionContactoService) {
         super();
-        this.validateRequest = validateRequest;
+        this.validateRequestUbi = validateRequestUbi;
+        this.validateRequestBiz = validateRequestBiz;
         this.informacionContactoService = informacionContactoService;
     }
 
@@ -39,13 +41,20 @@ public class SearchReconocerImpl implements ValidateRequest {
     public Optional<ResponseFlow> process(Cliente cliente, Long requestId) {
         setCliente(cliente);
         setRequestId(requestId);
-        callService();
-        return validateRequest.process(getCliente(), requestId);
+        Boolean respuesta = callService();
+        if( Boolean.FALSE.equals(respuesta)) {
+            return validateRequestUbi.process(getCliente(), getRequestId());
+        }
+        return validateRequestBiz.process(getCliente(), getRequestId());
     }
 
-    public void callService() {
-        ResponseInformacionContacto respueta = informacionContactoService.consultarDatosUsuario(getCliente(), InformacionContacto.builder().build(), getRequestId());
-        log.info("Esta es la respuesta: {}",respueta);
-
+    public Boolean callService() {
+        Optional<ResponseInformacionContacto> respueta = informacionContactoService.consultarDatosUsuario(getCliente(), InformacionContacto.builder().build(), getRequestId());
+        //TODO REALIZAR LA LOGICA CORRESPONDIENTE A RECONOCER
+        //En el caso de que no responda debe llamar a UBICA
+        if(!respueta.isPresent()){
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
     }
 }

@@ -1,5 +1,6 @@
 package co.com.santander.core.flow.impl;
 
+import co.com.santander.adapters.secondary.rest.bizagi.BizagiServiceImpl;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.response.ResponseFlow;
@@ -21,13 +22,15 @@ public class SearchBizagiImplTest {
 	
 	@Mock
 	private Cliente cliente;
+	@Mock
+	private BizagiServiceImpl bizagiService;
 
 	private Long requestId;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		validateRequest = new SearchBizagiImpl();
+		validateRequest = new SearchBizagiImpl(bizagiService);
 		generateUniqueId = new GenerateUniqueIdImpl();
 
 	}

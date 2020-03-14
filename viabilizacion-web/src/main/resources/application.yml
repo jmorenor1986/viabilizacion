@@ -18,12 +18,14 @@ spring:
 
 servicios:
   uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
-  #uriDictum: https://dictum.free.beeceptor.com/
-  uriDictum: http://dictum-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultarHC2
-  uriReconocer: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken
+  uriDictum: https://dictum.free.beeceptor.com/
+  uriBizagi: http://localhost:5002/bizagi/v1/bizagi/
+  #uriDictum: http://dictum-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultarHC2
   reconocerProperties:
-    uri: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaReconocer
-    uriToken: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken
+    uri: https://reconocer.free.beeceptor.com/
+    #uri: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaReconocer
+    uriToken: https://reconocer.free.beeceptor.com/obtenerToken
+    #uriToken: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken
     nit: 900468987
     tipoIdBuscar: 1
     numeroIdBuscar: 1010101010
@@ -33,8 +35,8 @@ servicios:
     codigoInformacion: 5632
     motivoConsulta: 1
   vigiaProperties:
-    #uriVigia: http://www.mocky.io/v2/5e45638a3000002848614baa
-    uriVigia: http://vigia-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaVigia
+    uriVigia: https://vigia.free.beeceptor.com
+    #uriVigia: http://vigia-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaVigia
     porcentaje: 76
 
   dictumProperties:
