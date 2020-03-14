@@ -19,6 +19,7 @@ spring:
 servicios:
   uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
   uriDictum: https://dictum.free.beeceptor.com/
+  uriBizagi: http://localhost:5002/bizagi/v1/bizagi/
   #uriDictum: http://dictum-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultarHC2
   reconocerProperties:
     uri: https://reconocer.free.beeceptor.com/

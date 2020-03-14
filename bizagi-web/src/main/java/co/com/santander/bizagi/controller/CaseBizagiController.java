@@ -29,15 +29,13 @@ public class CaseBizagiController {
 
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GeneralPayload<ResponsePayLoad>> createCase(@RequestBody(required = true) GeneralPayload<Cliente> clientePayload) throws MalformedURLException, JSONException {
-        ResponseEntity<GeneralPayload<ResponsePayLoad>> respuesta = new ResponseEntity<>(GeneralPayload.<ResponsePayLoad>builder()
-                .requestHeader(clientePayload.getRequestHeader())
-                .requestBody(ResponsePayLoad.builder()
+    public ResponseEntity<ResponsePayLoad> createCase(@RequestBody(required = true) GeneralPayload<Cliente> clientePayload) throws MalformedURLException, JSONException {
+        ResponseEntity<ResponsePayLoad> respuesta = new ResponseEntity<>(ResponsePayLoad.builder()
                         .codRespuesta(Long.valueOf("1"))
                         .respuestaServicio(this.caseBizagiService.createCaseString(clientePayload.getRequestBody()))
                         .mensajeError("OK")
-                        .build())
-                .build(),HttpStatus.OK);
+                        .build()
+                ,HttpStatus.OK);
         return respuesta;
     }
 
