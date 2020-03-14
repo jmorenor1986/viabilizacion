@@ -15,11 +15,14 @@ public class SearchBizagiImpl implements ValidateRequest {
 
     @Setter
     private Cliente cliente;
+	@Setter
+    private Long requestId;
 
 
 	@Override
 	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setCliente(cliente);
+		setRequestId(requestId);
 		if(Boolean.TRUE.equals(cliente.getVigia())) {
 			return Optional.of(ResponseFlow.PREAPROBADO_CON_DOCUMENTOS);
 		}

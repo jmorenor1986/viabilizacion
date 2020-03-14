@@ -2,6 +2,7 @@ package co.com.santander.adapters.secondary.rest.informacioncontacto;
 
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
@@ -26,10 +27,9 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class InformacionContactoServiceImpl implements InformacionContactoService {
+public class InformacionContactoServiceImpl  extends ServiceRestAbs implements InformacionContactoService {
     private final ClientesProperties clientesProperties;
     private final RestTemplateService restTemplateService;
-    private final JsonUtilities jsonUtilities;
     private final InformacionContactoMapperImpl mapper;
     private final InformacionContactoProperties informacionContactoProperties;
 
@@ -52,19 +52,23 @@ public class InformacionContactoServiceImpl implements InformacionContactoServic
 
 
     @Override
-    public ResponseInformacionContacto consultarDatosUsuario(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
-        String responseService = "";
+    public Optional<ResponseInformacionContacto> consultarDatosUsuario(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
+        ResponseDto responseService = new ResponseDto();
         if(generateTokenServiceReconocer(cliente, idRequest)){
             GeneralPayload<InformacionContactoDTO> requestObject = mapper.dtoToRequest(informacionContacto, cliente);
             requestObject.getRequestBody().setToken(tokenReconocer);
-            responseService = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUri(),
+            String responseServiceString = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUri(),
                     requestObject, generateHeaders(idRequest)).get();
+            responseService = extractGenericResponse(responseServiceString);
         }
-        return ResponseInformacionContacto.builder()
-                .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService))))
-                .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService))))
-                .direcciones(jsonUtilities.getValuesForGivenKey("reporte", "direcciones", "dato", responseService))
-                .build();
+        if("1".equalsIgnoreCase(responseService.getCodRespuesta())){
+            return Optional.of(ResponseInformacionContacto.builder()
+                    .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService.getRespuestaServicio()))))
+                    .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService.getRespuestaServicio()))))
+                    .direcciones(jsonUtilities.getValuesForGivenKey("reporte", "direcciones", "dato", responseService.getRespuestaServicio()))
+                    .build());
+        }
+        return Optional.empty();
     }
 
     private Boolean generateTokenServiceReconocer(Cliente cliente, Long idRequest){

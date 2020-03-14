@@ -28,10 +28,13 @@ public class SearchReconocerImplTest {
     @Mock
     private InformacionContactoService informacionContactoService;
 
+    @Mock
+    private ValidateRequest validateRequestBiz;
+
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        validateRequest = new SearchReconocerImpl(next, informacionContactoService);
+        validateRequest = new SearchReconocerImpl(next, validateRequestBiz,informacionContactoService );
         generateUniqueId = new GenerateUniqueIdImpl();
 
     }
