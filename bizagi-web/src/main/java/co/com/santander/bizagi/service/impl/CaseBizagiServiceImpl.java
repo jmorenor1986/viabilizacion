@@ -27,17 +27,15 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
     private final CaseBizagiClient caseBizagiClient;
     private final VelocityEngine velocityEngine;
     private final VelocityContext context;
-    private final StringWriter stringWriter;
     private final StringUtilities stringUtilities;
     private final ServiciosProperties serviciosProperties;
 
     @Autowired
     public CaseBizagiServiceImpl(CaseBizagiClient caseBizagiClient, VelocityEngine velocityEngine, VelocityContext context,
-                                 StringWriter stringWriter, StringUtilities stringUtilities, ServiciosProperties serviciosProperties) {
+                                 StringUtilities stringUtilities, ServiciosProperties serviciosProperties) {
         this.caseBizagiClient = caseBizagiClient;
         this.velocityEngine = velocityEngine;
         this.context = context;
-        this.stringWriter = stringWriter;
         this.stringUtilities = stringUtilities;
         this.serviciosProperties = serviciosProperties;
     }
@@ -100,7 +98,8 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
         context.put("nombre1", cliente.getNombre1());
         context.put("nombre2", cliente.getNombre2());
         context.put("autorizaCentrales", serviciosProperties.getAutorizaConsultaaCentrales());
-        template.merge(context, stringWriter);
-        return stringWriter.toString();
+        StringWriter writer =  new StringWriter();
+        template.merge(context, writer);
+        return writer.toString();
     }
 }

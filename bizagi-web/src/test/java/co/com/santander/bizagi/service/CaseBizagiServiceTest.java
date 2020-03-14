@@ -36,7 +36,6 @@ public class CaseBizagiServiceTest {
     private RequestCreateCaseDTO requestCreateCaseDTO;
     private VelocityEngine velocityEngine;
     private VelocityContext context;
-    private StringWriter stringWriter;
     private StringUtilities stringUtilities;
     private ServiciosProperties serviciosProperties;
 
@@ -62,8 +61,7 @@ public class CaseBizagiServiceTest {
                 ClasspathResourceLoader.class.getName());
         velocityEngine.init();
         context = new VelocityContext();
-        stringWriter = new StringWriter();
-        caseBizagiService = new CaseBizagiServiceImpl(caseBizagiClient, velocityEngine, context, stringWriter, stringUtilities, serviciosProperties);
+        caseBizagiService = new CaseBizagiServiceImpl(caseBizagiClient, velocityEngine, context, stringUtilities, serviciosProperties);
     }
 
     @Test

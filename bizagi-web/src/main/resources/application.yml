@@ -4,7 +4,7 @@ server:
   port: 5002
 
 servicios:
-  uriCrearCaso: https://premiercredit.co/Originacion2019/WebServices/WorkflowEngineSOA?WSDL
+  uriCrearCaso: http://localhost:1234/Originacion2019/WebServices/WorkflowEngineSOA?WSDL
   trustStore: C:/clientes/samtel.jks
   trustStorePassword: SAMTEL
   keyStore: C:/clientes/samtel.jks

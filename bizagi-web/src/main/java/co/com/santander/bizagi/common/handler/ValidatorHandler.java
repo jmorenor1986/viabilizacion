@@ -23,29 +23,22 @@ public class ValidatorHandler implements SOAPHandler<SOAPMessageContext> {
         Boolean isRequest = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 
         //for response message only, true for outbound messages, false for inbound
-        if (!isRequest) {
+        //if (!isRequest) {
 
             try {
                 SOAPMessage soapMsg = context.getMessage();
-                SOAPEnvelope soapEnv = soapMsg.getSOAPPart().getEnvelope();
-                SOAPHeader soapHeader = soapEnv.getHeader();
-
-                //if no header, add one
-                if (soapHeader == null) {
-                    soapHeader = soapEnv.addHeader();
-                    //throw exception
-                    generateSOAPErrMessage(soapMsg, "No SOAP header.");
-                }
                 //tracking
+                System.out.println("***********************************************************************************************");
                 soapMsg.writeTo(System.out);
-
+                System.out.println("");
+                System.out.println("***********************************************************************************************");
             } catch (SOAPException e) {
-                System.err.println(e);
+                System.out.println(e);
             } catch (IOException e) {
-                System.err.println(e);
+                System.out.println(e);
             }
 
-        }
+        //}
 
         //continue other handler chain
         return true;

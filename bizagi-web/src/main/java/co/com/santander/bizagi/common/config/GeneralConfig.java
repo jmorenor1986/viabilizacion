@@ -21,7 +21,7 @@ public class GeneralConfig {
 
     @Bean
     public WorkflowEngineSOA workflowEngineSOA() throws MalformedURLException {
-        setSystemProperty();
+        //setSystemProperty();
         return new WorkflowEngineSOA(new URL(serviciosProperties.getUriCrearCaso()));
     }
 
