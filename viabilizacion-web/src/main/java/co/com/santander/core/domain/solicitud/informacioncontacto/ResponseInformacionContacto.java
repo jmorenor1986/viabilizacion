@@ -11,5 +11,6 @@ public class ResponseInformacionContacto {
     private List<String> numerosTelefono;
     private List<String> numeroCelular;
     private List<String> direcciones;
+    private List<String> correoElectronico;
     private boolean tieneDatos;
 }

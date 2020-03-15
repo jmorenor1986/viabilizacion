@@ -28,13 +28,12 @@ import java.util.Optional;
 
 @Service
 public class InformacionContactoServiceImpl  extends ServiceRestAbs implements InformacionContactoService {
+
     private final ClientesProperties clientesProperties;
     private final RestTemplateService restTemplateService;
     private final InformacionContactoMapperImpl mapper;
     private final InformacionContactoProperties informacionContactoProperties;
-
     private String tokenReconocer;
-
     private static final Logger log= LoggerFactory.getLogger(InformacionContactoServiceImpl.class);
 
 
@@ -57,15 +56,24 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
         if(generateTokenServiceReconocer(cliente, idRequest)){
             GeneralPayload<InformacionContactoDTO> requestObject = mapper.dtoToRequest(informacionContacto, cliente);
             requestObject.getRequestBody().setToken(tokenReconocer);
-            String responseServiceString = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUri(),
-                    requestObject, generateHeaders(idRequest)).get();
+            String responseServiceString = "";
+            try {
+                responseServiceString = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUri(),
+                        requestObject, generateHeaders(idRequest)).get();
+            }catch (Exception e){
+                //Si genera alguna excepcion al llamar al servicio de reconocer retorna empty para luego llamar a ubica
+                return Optional.empty();
+            }
             responseService = extractGenericResponse(responseServiceString);
+        }else{
+            return Optional.empty();
         }
         if("1".equalsIgnoreCase(responseService.getCodRespuesta())){
             return Optional.of(ResponseInformacionContacto.builder()
                     .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService.getRespuestaServicio()))))
                     .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService.getRespuestaServicio()))))
                     .direcciones(jsonUtilities.getValuesForGivenKey("reporte", "direcciones", "dato", responseService.getRespuestaServicio()))
+                    .correoElectronico(jsonUtilities.getValuesForGivenKey("reporte", "emails", "dato", responseService.getRespuestaServicio()))
                     .build());
         }
         return Optional.empty();
@@ -120,7 +128,8 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
         return ResponseInformacionContacto.builder()
                 .direcciones(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Mails.Mail", "Correo", json))))
                 .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Celulares.Celular", "Celular", json))))
-                .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Telefonos.Telefono", "Telefono", json))))
+                .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Telefonos.Telefono", "Telefono", json)) ))
+                .correoElectronico(Arrays.asList())
                 .build();
     }
 
