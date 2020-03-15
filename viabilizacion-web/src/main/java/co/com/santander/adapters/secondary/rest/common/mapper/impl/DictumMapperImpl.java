@@ -43,7 +43,7 @@ public class DictumMapperImpl extends RestRequestMapper<RequestDictumDTO, Dictum
         parametrosList.add(Parametros.builder()
                 .tipo("T")
                 .nombre("nombre")
-                .valor(cliente.getAnoNacimiento())
+                .valor(cliente.getNombres())
                 .build());
         //Genero el valor solicitado
         parametrosList.add(Parametros.builder()
@@ -68,7 +68,7 @@ public class DictumMapperImpl extends RestRequestMapper<RequestDictumDTO, Dictum
         parametrosList.add(Parametros.builder()
                 .tipo("T")
                 .nombre("ACTIVIDAD")
-                .valor("1")
+                .valor(cliente.getActividad())
                 .build());
         return parametrosList;
     }

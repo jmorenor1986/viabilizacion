@@ -49,9 +49,11 @@ public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
         GeneralPayload<RequestDictumDTO> requestDictumDTO = dictumMapper.dtoToRequest(dictum, cliente);
         Optional<Map<String, String>> headersMap = generateGenericsHeaders(idRequest, new Gson().toJson(PrincipalRequestDictumDTO
                 .builder()
-                .identificacion(requestDictumDTO.getRequestHeader().getIdentificacion())
-                .primerApellido(requestDictumDTO.getRequestBody().getPrimerApellido())
-                .tipoIdentificacion(requestDictumDTO.getRequestHeader().getTipoIdentificacion())
+                .tipoIdentificacion(cliente.getTipoIdentificacion())
+                .numeroIdentificacion(cliente.getNumeroIdentificacion())
+                .valorSolicitado(cliente.getValorSolicitado())
+                .ingresos(cliente.getIngresos())
+                .actividadEconomica(cliente.getActividad())
                 .build()));
         ResponseDto result = extractGenericResponse(restTemplateService.postWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, headersMap).get());
         if (result.getCodRespuesta().equalsIgnoreCase("1"))
@@ -77,7 +79,7 @@ public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
             return Optional.of(DecisionDictum.ERROR_EN_PROCESO);
         if (xml.contains(DecisionDictum.NEGADO))
             return Optional.of(DecisionDictum.NEGADO);
-        return Optional.of(ERROR_RESPONSE_NULL);
+        return Optional.of(DecisionDictum.SIN_RESPUESTA);
     }
 
 }

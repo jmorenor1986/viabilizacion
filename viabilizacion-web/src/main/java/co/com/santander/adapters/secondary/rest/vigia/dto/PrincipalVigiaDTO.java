@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PrincipalVigiaDTO {
 
-    private String nombre;
+    private String tipoIdentificacion;
     private String numeroIdentificacion;
 
 }

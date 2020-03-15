@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class PrincipalRequestDictumDTO {
+public class    PrincipalRequestDictumDTO {
 
-    private String identificacion;
-    private String primerApellido;
     private String tipoIdentificacion;
+    private String numeroIdentificacion;
+    private String valorSolicitado;
+    private String ingresos;
+    private String actividadEconomica;
 
 }

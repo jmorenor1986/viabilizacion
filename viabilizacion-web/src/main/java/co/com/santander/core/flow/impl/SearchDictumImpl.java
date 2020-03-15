@@ -1,5 +1,6 @@
 package co.com.santander.core.flow.impl;
 
+import co.com.santander.adapters.secondary.rest.dictum.common.DecisionDictum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
 import co.com.santander.core.flow.ValidateRequest;
@@ -27,6 +28,9 @@ public class SearchDictumImpl implements ValidateRequest {
     @Getter
     @Setter
     private Long idRequest;
+    @Getter
+    @Setter
+    private String respuestaDictum;
 
     private DictumService dictumService;
 
@@ -37,20 +41,31 @@ public class SearchDictumImpl implements ValidateRequest {
         this.dictumService = dictumService;
     }
 
-
     @Override
     public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
         setCliente(cliente);
         setIdRequest(idRequest);
-        //TODO Definir claramente que se debe generar con la respuesta de este servicio
-        callService();
-        return validateRequest.process(getCliente(), idRequest);
+        if (callService()) {
+            getCliente().setDecision(respuestaDictum);
+            return validateRequest.process(getCliente(), idRequest);
+        }
+        return Optional.of(ResponseFlow.DENIED);
     }
 
-    public void callService() {
+    public Boolean callService() {
         Optional<String> respuesta = dictumService.consultarSolicitudDictum(getCliente(), new Dictum(), getIdRequest());
-        if (respuesta.isPresent())
-            log.info("Esta es la respuesta del servicio: {}", respuesta.get());
+        if (respuesta.isPresent()) {
+            setRespuestaDictum(respuesta.get());
+            if (DecisionDictum.SIN_RESPUESTA.equalsIgnoreCase(respuesta.get())
+                    || DecisionDictum.ERROR_EN_PROCESO.equalsIgnoreCase(respuesta.get())
+                    || DecisionDictum.NEGADO.equalsIgnoreCase(respuesta.get())
+            )
+                return Boolean.FALSE;
+            //Si llega aquí quiere que dictum dio viabilidad para el credito
+            return Boolean.TRUE;
+        } else {
+            return Boolean.FALSE;
+        }
     }
 
 }

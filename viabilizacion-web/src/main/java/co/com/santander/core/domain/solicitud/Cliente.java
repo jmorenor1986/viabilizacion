@@ -25,6 +25,9 @@ public class Cliente {
     private String canalOrigen;
     //Dato Vigia en el caso de que sea TRUE, quiere decir que fue encontrado en Vigia
     private Boolean vigia;
+    //Dato relevante de dictum
+    private String decision;
+
     private RequestHeader requestHeader;
     
 }
