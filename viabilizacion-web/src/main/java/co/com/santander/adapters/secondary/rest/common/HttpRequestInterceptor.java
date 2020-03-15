@@ -1,5 +1,6 @@
 package co.com.santander.adapters.secondary.rest.common;
 
+import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.adapters.secondary.rest.common.mapper.impl.FilterLogMapperImpl;
 import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
@@ -28,10 +29,14 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
     @Getter
     @Setter
     private String url;
+
     private FlowOperationEnum operation;
 
-    public HttpRequestInterceptor(LogService logService) {
+    private FilterLogMapper filterLogMapper;
+
+    public HttpRequestInterceptor(LogService logService, FilterLogMapper  filterLogMapper) {
         this.logService = logService;
+        this.filterLogMapper = filterLogMapper;
     }
 
     private static final Logger log = LoggerFactory.getLogger(HttpRequestInterceptor.class);
@@ -62,20 +67,14 @@ public class HttpRequestInterceptor implements ClientHttpRequestInterceptor {
     }
 
     private void logRequest(HttpRequest request, byte[] body) throws IOException {
-        LogGeneral logEntity = FilterLogMapperImpl
-                .builder()
-                .build()
-                .toLogRequest(request, new String(body, "UTF-8"), getIdRequest());
+        LogGeneral logEntity = filterLogMapper.toLogRequest(request, new String(body, "UTF-8"), getIdRequest());
         operation = logEntity.getTipo();
         logService.insertaLogRest(logEntity, getIdCache());
         setUrl(logEntity.getUrl());
     }
 
     private void logResponse(ClientHttpResponse response) throws IOException {
-        LogGeneral logEntity = FilterLogMapperImpl
-                .builder()
-                .build()
-                .toLogResponse(response, operation, getIdRequest(), StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()), getUrl());
+        LogGeneral logEntity = filterLogMapper.toLogResponse(response, operation, getIdRequest(), StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()), getUrl());
         logService.insertaLogRest(logEntity, getIdCache());
     }
 }

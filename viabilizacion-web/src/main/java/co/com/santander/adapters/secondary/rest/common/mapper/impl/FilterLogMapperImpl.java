@@ -2,19 +2,28 @@ package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
 import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
+import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import lombok.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.stereotype.Component;
 
-@Builder
+@Component
 public class FilterLogMapperImpl implements FilterLogMapper {
 
     private static final Logger log = LoggerFactory.getLogger(HttpRequestInterceptor.class);
+
+    private final ClientesProperties clientesProperties;
+
+    @Autowired
+    public FilterLogMapperImpl(ClientesProperties clientesProperties) {
+        this.clientesProperties = clientesProperties;
+    }
 
     @Override
     public LogGeneral toLogRequest(HttpRequest request, String body, Long idRequest) {
@@ -43,19 +52,15 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     }
 
     private FlowOperationEnum validateTipoRequest(String uri ){
-        if(uri.contains("/v1/ciudad")){
+        if(uri.contains(clientesProperties.getUriValidarCiudad())){
             return FlowOperationEnum.VALIDATE_CITY_REQUEST;
-            //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
-        }else if(uri.contains("vigia")){
+        }else if(uri.contains(clientesProperties.getVigiaProperties().getUriVigia())){
             return FlowOperationEnum.INVOKE_VIGIA_REQUEST;
-            //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
-        }else if(uri.contains("dictum")){
+        }else if(uri.contains(clientesProperties.getUriDictum())){
             return FlowOperationEnum.INVOKE_DICTUM_REQUEST;
-            //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
-        }else if(uri.contains("reconocer")){
+        }else if(uri.contains(clientesProperties.getReconocerProperties().getUri())){
             return FlowOperationEnum.INVOKE_RECONOCER_REQUEST;
-            //TODO SE DEBE CAMBIAR POR LA URL REAL NO POR EL MOCK
-        }else if(uri.contains("bizagi")){
+        }else if(uri.contains(clientesProperties.getUriBizagi())){
             return FlowOperationEnum.CASO_BIZAGI_REQUEST;
         }
         return FlowOperationEnum.NO_APLICA;

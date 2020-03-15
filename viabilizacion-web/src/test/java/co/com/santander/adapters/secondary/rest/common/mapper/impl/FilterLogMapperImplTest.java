@@ -1,6 +1,7 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
 import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
+import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,10 +23,12 @@ public class FilterLogMapperImplTest {
     @Mock
     private ClientHttpResponse response;
 
+    private ClientesProperties clientesProperties;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.filterLogMapper = FilterLogMapperImpl.builder().build();
+        this.filterLogMapper = new FilterLogMapperImpl(clientesProperties);
     }
 
     @Test

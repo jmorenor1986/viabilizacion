@@ -21,15 +21,13 @@ import java.util.*;
 public class RestTemplateServiceImpl implements RestTemplateService {
 
     private final RestTemplate restTemplate;
-    private final LogService logService;
     private final ClientHttpRequestFactory factory;
 
     @Autowired
-    public RestTemplateServiceImpl(ClientHttpRequestFactory factory, LogService logService) {
-        this.logService = logService;
+    public RestTemplateServiceImpl(ClientHttpRequestFactory factory,  HttpRequestInterceptor httpRequestInterceptor ) {
         this.factory = factory;
         this.restTemplate = new RestTemplate(factory);
-        restTemplate.setInterceptors(Collections.singletonList(new HttpRequestInterceptor(logService)));
+        restTemplate.setInterceptors(Collections.singletonList(httpRequestInterceptor));
     }
 
     @Override
