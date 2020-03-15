@@ -14,6 +14,7 @@ public class ClientePayLoad {
     private String correoElectronico;
     private String anoNacimiento;
     private String valorSolicitado;
+    private String canalOrigen;
     private String ingresos;
     private String plazo;
     private String actividad;

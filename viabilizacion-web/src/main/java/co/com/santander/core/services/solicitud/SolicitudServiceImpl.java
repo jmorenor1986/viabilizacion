@@ -31,6 +31,7 @@ public class SolicitudServiceImpl implements SolicitudService {
     private final PrincipalRequestService principalRequestService;
     private final ValidateRequest validateRequest;
     private final IGenerateUniqueId generateUniqueId;
+
     private Logger log = LoggerFactory.getLogger(SolicitudServiceImpl.class);
 
     @Getter
@@ -49,7 +50,6 @@ public class SolicitudServiceImpl implements SolicitudService {
 
     @Override
     public Optional<ResponseFlow> cumplimientoSolicitud(Cliente cliente) {
-        log.info("Inicia solicitud de validación");
         if (clienteValidator.validateObject(cliente)) {
             generatePrincipalRequest(cliente);
             generarLog(cliente);

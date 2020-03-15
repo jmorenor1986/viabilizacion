@@ -22,6 +22,7 @@ public class Cliente {
     private String plazo;
     private String actividad;
     private String ciudad;
+    private String canalOrigen;
     //Dato Vigia en el caso de que sea TRUE, quiere decir que fue encontrado en Vigia
     private Boolean vigia;
     private RequestHeader requestHeader;

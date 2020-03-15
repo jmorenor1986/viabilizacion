@@ -1,4 +1,4 @@
-package co.com.santander.utils.exception.dto;
+package co.com.santander.core.errors.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

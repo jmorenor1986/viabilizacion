@@ -25,27 +25,24 @@ public class SolicitudController {
     private final SolicitudService solicitudService;
     private final ModelMapper modelMapper;
     private MapperCliente mapperCliente;
-    
+
     @Autowired
     public SolicitudController(SolicitudService solicitudService, ModelMapper modelMapper, MapperCliente mapperCliente) {
         this.solicitudService = solicitudService;
         this.modelMapper = modelMapper;
         this.mapperCliente = mapperCliente;
     }
-    
+
     @PostMapping(value = "/viabilizacion", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GeneralPayload<ResponsePayLoad>> solicitud(@RequestBody GeneralPayload<ClientePayLoad> clientePayLoad) {
+    public ResponseEntity<ResponsePayLoad> solicitud(@RequestBody GeneralPayload<ClientePayLoad> clientePayLoad) {
         Optional<ResponseFlow> result = solicitudService.cumplimientoSolicitud(mapperCliente.fromGeneralPayLoad(clientePayLoad));
         String respuestaServicio = (result.isPresent() ? result.get().toString() : ResponseFlow.UNEXPECTED_ERROR.toString());
         return new ResponseEntity<>(
-                GeneralPayload.<ResponsePayLoad>builder()
-                        .requestHeader(clientePayLoad.getRequestHeader())
-                        .requestBody(ResponsePayLoad.builder()
-                                .codRespuesta(Long.valueOf("0"))
-                                .respuestaServicio(respuestaServicio)
-                                .mensajeError("OK")
-                                .build())
+                ResponsePayLoad.builder()
+                        .codRespuesta(Long.valueOf("1"))
+                        .respuestaServicio(respuestaServicio)
+                        .mensajeError("OK")
                         .build()
-                ,HttpStatus.OK);
+                , HttpStatus.OK);
     }
 }
