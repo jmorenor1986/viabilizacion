@@ -7,6 +7,7 @@ import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
 import com.google.gson.Gson;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,4 +31,13 @@ public abstract class ServiceRestAbs {
                         .value(objectCache)
                         .build());
     }
+
+
+    public Optional<Map<String, String>> generateBasicHeaders(Long idRequest) {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("idRequest", idRequest.toString());
+        return Optional.of(headers);
+    }
+
+
 }

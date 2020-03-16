@@ -9,6 +9,8 @@ import co.com.santander.adapters.secondary.rest.common.properties.ClientesProper
 import co.com.santander.adapters.secondary.rest.common.properties.InformacionContactoProperties;
 import co.com.santander.adapters.secondary.rest.dictum.DictumServiceImpl;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.InformacionContactoDTO;
+import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalReconocerDTO;
+import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalUbicaDTO;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.mapper.InformacionContactoMapperImpl;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
@@ -16,6 +18,7 @@ import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInform
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +62,10 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
             String responseServiceString = "";
             try {
                 responseServiceString = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUri(),
-                        requestObject, generateHeaders(idRequest)).get();
+                        requestObject, generateGenericsHeaders(idRequest,new Gson().toJson(PrincipalReconocerDTO.builder()
+                                .numeroIdentificacion(cliente.getNumeroIdentificacion())
+                                .tipoIdentificacion(cliente.getTipoIdentificacion())
+                                .build()))).get();
             }catch (Exception e){
                 //Si genera alguna excepcion al llamar al servicio de reconocer retorna empty para luego llamar a ubica
                 return Optional.empty();
@@ -116,26 +122,28 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
 
 
     @Override
-    public ResponseInformacionContacto consultarInformacionContacto(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
-        Optional<Map<String, String>> mapHeaders = generateHeaders(idRequest);
-        Optional<String> respuesta = restTemplateService.postWithOutParams(informacionContactoProperties
-                .getUbicaProperties()
-                .getUri(), mapper.dtoToRequest(informacionContacto, cliente), mapHeaders);
-        return setResponseInformacionContacotUbica((respuesta.isPresent()) ? respuesta.get() : "Error");
+    public Optional<ResponseInformacionContacto> consultarInformacionContacto(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
+        Optional<Map<String, String>> mapHeaders = generateGenericsHeaders(idRequest, new Gson().toJson(PrincipalUbicaDTO
+                .builder()
+                .numeroIdentificacion(cliente.getNumeroIdentificacion())
+                .tipoIdentificacion(cliente.getTipoIdentificacion())
+                .build()));
+        Optional<String> respuesta = restTemplateService.postWithOutParams(informacionContactoProperties.getUbicaProperties().getUri()
+                , mapper.dtoToRequest(informacionContacto, cliente)
+                , mapHeaders);
+        return setResponseInformacionContacotUbica((respuesta.isPresent()) ? respuesta.get() : "");
     }
 
-    private ResponseInformacionContacto setResponseInformacionContacotUbica(String json) {
-        return ResponseInformacionContacto.builder()
+    private Optional<ResponseInformacionContacto> setResponseInformacionContacotUbica(String json) {
+        if(json.isEmpty())
+            return Optional.empty();
+        return Optional.of( ResponseInformacionContacto.builder()
                 .direcciones(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Mails.Mail", "Correo", json))))
                 .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Celulares.Celular", "Celular", json))))
                 .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Telefonos.Telefono", "Telefono", json)) ))
                 .correoElectronico(Arrays.asList())
-                .build();
+                .build() );
     }
 
-    public Optional<Map<String, String>> generateHeaders(Long idRequest) {
-        Map<String, String> headers = new HashMap<>();
-        headers.put("idRequest", idRequest.toString());
-        return Optional.of(headers);
-    }
+
 }

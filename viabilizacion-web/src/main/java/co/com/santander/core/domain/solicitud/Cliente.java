@@ -29,6 +29,7 @@ public class Cliente {
     private String decision;
     //Si encuentra alguno de los datos sera true de lo contrario sera false
     private Boolean validaReconocer;
+    private Boolean validaUbica;
 
     private RequestHeader requestHeader;
     
