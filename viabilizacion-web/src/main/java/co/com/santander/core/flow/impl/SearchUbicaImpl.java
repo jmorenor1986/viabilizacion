@@ -1,8 +1,12 @@
 package co.com.santander.core.flow.impl;
 
+import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
+import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
+import co.com.santander.utils.ValidatorInformacionContacto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +23,31 @@ public class SearchUbicaImpl implements ValidateRequest {
 	private ValidateRequest validateRequest;
 	@Setter @Getter
 	private Cliente cliente;
+	@Getter @Setter
+	private Long idRequest;
+
+	private InformacionContactoService informacionContactoService;
 	
 	@Autowired
-	public SearchUbicaImpl(@Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequest) {
+	public SearchUbicaImpl(@Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequest, InformacionContactoService informacionContactoService) {
 		super();
 		this.validateRequest = validateRequest;
+		this.informacionContactoService = informacionContactoService;
 	}
 
 	@Override
 	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setCliente(cliente);
+		setIdRequest(idRequest);
 		return validateRequest.process(getCliente(), idRequest);
+	}
+
+	public void callService(){
+		Optional<ResponseInformacionContacto> respuesta = informacionContactoService.consultarInformacionContacto(getCliente(), InformacionContacto.builder().build(), getIdRequest());
+		if(respuesta.isPresent()){
+			getCliente().setValidaUbica(ValidatorInformacionContacto.builder().build().evaluaDatosContacto(respuesta.get(),cliente));
+		}
+		getCliente().setValidaUbica(Boolean.FALSE);
 	}
 
 }

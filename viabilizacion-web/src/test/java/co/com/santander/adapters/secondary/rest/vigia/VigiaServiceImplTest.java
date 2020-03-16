@@ -63,7 +63,7 @@ public class VigiaServiceImplTest {
         headers.put("idRequest", "1");
         headers.put("idCache", new Gson().toJson(PrincipalVigiaDTO
                 .builder()
-                .nombre(cliente.getNombres())
+                .tipoIdentificacion(cliente.getTipoIdentificacion())
                 .numeroIdentificacion(cliente.getNumeroIdentificacion())
                 .build()));
         Mockito.when(restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), cliente, Optional.of(headers))).thenReturn(Optional.of(MockResponseServiceVigia.response));

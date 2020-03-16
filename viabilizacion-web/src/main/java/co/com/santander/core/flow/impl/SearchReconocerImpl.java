@@ -6,6 +6,7 @@ import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
+import co.com.santander.utils.ValidatorInformacionContacto;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -28,6 +29,9 @@ public class SearchReconocerImpl implements ValidateRequest {
     @Getter @Setter
     private Long requestId;
     private InformacionContactoService informacionContactoService;
+    @Getter @Setter
+    private ResponseInformacionContacto responseInformacionContacto;
+
 
     @Autowired
     public SearchReconocerImpl(@Qualifier("proxyLogSearchUbica") ValidateRequest validateRequestUbi, @Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequestBiz, InformacionContactoService informacionContactoService) {
@@ -50,11 +54,13 @@ public class SearchReconocerImpl implements ValidateRequest {
 
     public Boolean callService() {
         Optional<ResponseInformacionContacto> respueta = informacionContactoService.consultarDatosUsuario(getCliente(), InformacionContacto.builder().build(), getRequestId());
-        //TODO REALIZAR LA LOGICA CORRESPONDIENTE A RECONOCER
         //En el caso de que no responda debe llamar a UBICA
-        if(!respueta.isPresent()){
-            return Boolean.FALSE;
+        if(respueta.isPresent()){
+            setResponseInformacionContacto(respueta.get());
+            getCliente().setValidaReconocer(ValidatorInformacionContacto.builder().build().evaluaDatosContacto(getResponseInformacionContacto(),cliente));
+            return getCliente().getValidaReconocer();
         }
-        return Boolean.TRUE;
+        return Boolean.FALSE;
     }
+
 }

@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.vigia.dto;
+package co.com.santander.adapters.secondary.rest.informacioncontacto.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PrincipalVigiaDTO {
+public class PrincipalReconocerDTO {
 
     private String tipoIdentificacion;
     private String numeroIdentificacion;
-
 }

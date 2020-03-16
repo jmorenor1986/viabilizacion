@@ -43,7 +43,6 @@ public class SearchVigiaImpl implements ValidateRequest {
     public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
         setCliente(cliente);
         setIdRequest(idRequest);
-
         getCliente().setVigia(buscarVigia(getCliente()));
         return validateRequest.process(getCliente(), getIdRequest());
     }

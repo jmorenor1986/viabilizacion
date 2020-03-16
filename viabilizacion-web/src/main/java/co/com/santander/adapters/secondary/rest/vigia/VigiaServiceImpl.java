@@ -45,8 +45,8 @@ public class VigiaServiceImpl extends ServiceRestAbs implements VigiaService {
         GeneralPayload<VigiaDTO> request = vigiaMapper.dtoToRequest(vigiaProperties, datosBasicosCliente);
         Optional<Map<String, String>> headersMap = generateGenericsHeaders(idRequest, new Gson().toJson(PrincipalVigiaDTO
                 .builder()
-                .nombre(request.getRequestBody().getNombre())
-                .numeroIdentificacion(request.getRequestHeader().getIdentificacion())
+                .tipoIdentificacion(datosBasicosCliente.getTipoIdentificacion())
+                .numeroIdentificacion(datosBasicosCliente.getNumeroIdentificacion())
                 .build()));
         ResponseDto result = extractGenericResponse(restTemplateService.postWithOutParams(vigiaProperties.getUriVigia(), request, headersMap).get());
         if(result.getCodRespuesta().equalsIgnoreCase("1")){
