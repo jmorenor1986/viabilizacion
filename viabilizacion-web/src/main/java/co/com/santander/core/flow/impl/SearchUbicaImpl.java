@@ -39,6 +39,7 @@ public class SearchUbicaImpl implements ValidateRequest {
 	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setCliente(cliente);
 		setIdRequest(idRequest);
+		callService();
 		return validateRequest.process(getCliente(), idRequest);
 	}
 
