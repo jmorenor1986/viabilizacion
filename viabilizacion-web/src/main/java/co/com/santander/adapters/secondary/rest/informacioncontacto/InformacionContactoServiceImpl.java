@@ -24,10 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class InformacionContactoServiceImpl  extends ServiceRestAbs implements InformacionContactoService {
@@ -123,6 +120,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
 
     @Override
     public Optional<ResponseInformacionContacto> consultarInformacionContacto(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
+        ResponseDto responseService = new ResponseDto();
         Optional<Map<String, String>> mapHeaders = generateGenericsHeaders(idRequest, new Gson().toJson(PrincipalUbicaDTO
                 .builder()
                 .numeroIdentificacion(cliente.getNumeroIdentificacion())
@@ -131,17 +129,27 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
         Optional<String> respuesta = restTemplateService.postWithOutParams(informacionContactoProperties.getUbicaProperties().getUri()
                 , mapper.dtoToRequest(informacionContacto, cliente)
                 , mapHeaders);
-        return setResponseInformacionContacotUbica((respuesta.isPresent()) ? respuesta.get() : "");
+        if(respuesta.isPresent()){
+            responseService = extractGenericResponse(respuesta.get());
+            return setResponseInformacionContacotUbica(responseService.getRespuestaServicio());
+        }else{
+            return Optional.empty();
+        }
     }
 
     private Optional<ResponseInformacionContacto> setResponseInformacionContacotUbica(String json) {
         if(json.isEmpty())
             return Optional.empty();
+        String objetoUbicacion = jsonUtilities.getObjectWithKey("CIFIN.Tercero.UbicaPlusCifin", json);
+
+        List<String> correos = jsonUtilities.getValuesForGivenKey("Mails", "Mail","Correo", objetoUbicacion);
+        List<String> celulares = jsonUtilities.getValuesForGivenKey("Celulares", "Celular","Celular", objetoUbicacion);
+        List<String> telefonos = jsonUtilities.getValuesForGivenKey("Telefonos", "Telefono","Telefono", objetoUbicacion);
+
         return Optional.of( ResponseInformacionContacto.builder()
-                .direcciones(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Mails.Mail", "Correo", json))))
-                .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Celulares.Celular", "Celular", json))))
-                .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("respuestaServicio.CIFIN.Tercero.UbicaPlusCifin.Telefonos.Telefono", "Telefono", json)) ))
-                .correoElectronico(Arrays.asList())
+                .correoElectronico(correos)
+                .numeroCelular(celulares)
+                .numerosTelefono(telefonos)
                 .build() );
     }
 

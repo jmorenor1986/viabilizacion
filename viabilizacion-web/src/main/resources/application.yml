@@ -22,16 +22,16 @@ servicios:
   uriDictum: https://dictum.free.beeceptor.com/
   uriBizagi: http://localhost:5002/bizagi/v1/bizagi/
   reconocerProperties:
-    uri: https://reconocer.free.beeceptor.com/
+    uri: http://localhost:8080/reconocer/obtenerToken
     #uri: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaReconocer
-    uriToken: https://reconocer.free.beeceptor.com/obtenerToken
+    uriToken: http://localhost:8080/reconocer/obtenerToken
     #uriToken: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken
     nit: 900468987
     tipoIdBuscar: 1
     numeroIdBuscar: 1010101010
     validarNombre: true
   ubicaProperties:
-    uri: http://www.mocky.io/v2/5e492eae3000004a008c2cf7
+    uri: https://ubica.free.beeceptor.com
     codigoInformacion: 5632
     motivoConsulta: 1
   vigiaProperties:

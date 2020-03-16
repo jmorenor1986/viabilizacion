@@ -3,6 +3,7 @@ package co.com.santander.adapters.secondary.rest.common;
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +30,9 @@ public class JsonUtilitiesImpl implements JsonUtilities {
     public String getObjectWithKey(String nameObject, String jsonString) {
         try {
             String list[] = nameObject.split("\\.");
+            if(list.length == 0){
+                list[0] = nameObject;
+            }
             String result = jsonString;
             for (String item : list) {
                 result = getObjectToString(item, result);
@@ -62,13 +66,22 @@ String property for direction, if not exist return exception
         try {
             String object = getObjectWithKey(nameObject, jsonString);
             JSONObject jsonObject = getJsonObject(object);
-            JSONArray jsonArray = (JSONArray) jsonObject.get(nameArray);
-            return IntStream.range(0, jsonArray.length())
-                    .mapToObj(index -> ((JSONObject) jsonArray.get(index)).optString(nameKey))
-                    .collect(Collectors.toList());
+            JSONArray jsonArray = new JSONArray();
+            try{
+                jsonArray = (JSONArray) jsonObject.get(nameArray);
+            }catch (ClassCastException exc){
+                jsonArray.put(jsonObject.get(nameArray));
+            }
+            return extractListJsonArray(jsonArray, nameKey);
         } catch (JSONException ex) {
             return new ArrayList<>();
         }
+    }
+
+    private List<String> extractListJsonArray(JSONArray jsonArray, String nameKey){
+        return IntStream.range(0, jsonArray.length())
+                .mapToObj(index -> ((JSONObject) jsonArray.get(index)).optString(nameKey))
+                .collect(Collectors.toList());
     }
 
     @Override

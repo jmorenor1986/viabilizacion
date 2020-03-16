@@ -5,6 +5,7 @@ import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInform
 import lombok.Builder;
 
 import java.util.List;
+import java.util.Optional;
 
 @Builder
 public class ValidatorInformacionContacto {
@@ -21,9 +22,10 @@ public class ValidatorInformacionContacto {
                     .stream()
                     .filter(item -> !(item == null))
                     .filter(item -> !(item.isEmpty()))
-                    .filter(tel -> !cliente.getTelefono().equalsIgnoreCase(tel))
+                    .filter(tel -> cliente.getTelefono().equalsIgnoreCase(tel))
                     .findAny()
                     .isPresent();
+
         }
         //En el caso de que la respuesta sea TRUE debe responder que si encontro informacion
         if (telefono) {
@@ -37,7 +39,7 @@ public class ValidatorInformacionContacto {
                     .stream()
                     .filter(item -> !(item == null))
                     .filter(item -> !(item.isEmpty()))
-                    .filter(correoEl -> !cliente.getCorreoElectronico().equalsIgnoreCase(correoEl))
+                    .filter(correoEl -> cliente.getCorreoElectronico().equalsIgnoreCase(correoEl))
                     .findAny()
                     .isPresent();
         }
@@ -54,7 +56,7 @@ public class ValidatorInformacionContacto {
                     .stream()
                     .filter(item -> !(item == null))
                     .filter(item -> !(item.isEmpty()))
-                    .filter(correoEl -> !cliente.getCorreoElectronico().equalsIgnoreCase(correoEl))
+                    .filter(correoEl -> cliente.getCorreoElectronico().equalsIgnoreCase(correoEl))
                     .findAny()
                     .isPresent();
         }

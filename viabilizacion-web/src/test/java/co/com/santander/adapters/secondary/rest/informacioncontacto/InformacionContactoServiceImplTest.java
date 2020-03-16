@@ -98,6 +98,5 @@ public class InformacionContactoServiceImplTest {
         Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockUbicaService.response));
         Optional<ResponseInformacionContacto> result = informacionContactoService.consultarInformacionContacto(cliente, informacionContacto, 1L);
         Assert.assertNotNull(result);
-
     }
 }
