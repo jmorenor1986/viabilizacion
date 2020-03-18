@@ -99,7 +99,9 @@ public class LogServiceImpl implements LogService {
             return ServicioEnum.DICTUM;
         } else if (FlowOperationEnum.INVOKE_RECONOCER.equals(operationEnum) || FlowOperationEnum.INVOKE_RECONOCER_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_RECONOCER_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.RECONOCER;
-        } else if (FlowOperationEnum.CASO_BIZAGI.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_RESPONSE.equals(operationEnum)) {
+        }else if (FlowOperationEnum.INVOKE_UBICA.equals(operationEnum) || FlowOperationEnum.INVOKE_UBICA_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_UBICA_RESPONSE.equals(operationEnum)) {
+            return ServicioEnum.RECONOCER;
+        }else if (FlowOperationEnum.CASO_BIZAGI.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.BIZAGI;
         }
         return ServicioEnum.NO_APLICA;

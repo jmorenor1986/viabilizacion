@@ -60,6 +60,8 @@ public class FilterLogMapperImpl implements FilterLogMapper {
             return FlowOperationEnum.INVOKE_DICTUM_REQUEST;
         }else if(uri.contains(clientesProperties.getReconocerProperties().getUri())){
             return FlowOperationEnum.INVOKE_RECONOCER_REQUEST;
+        }else if(uri.contains(clientesProperties.getUbicaProperties().getUri())){
+            return FlowOperationEnum.INVOKE_UBICA_REQUEST;
         }else if(uri.contains(clientesProperties.getUriBizagi())){
             return FlowOperationEnum.CASO_BIZAGI_REQUEST;
         }
@@ -75,6 +77,8 @@ public class FilterLogMapperImpl implements FilterLogMapper {
             return FlowOperationEnum.INVOKE_DICTUM_RESPONSE;
         }else if(FlowOperationEnum.INVOKE_RECONOCER_REQUEST.equals(tipoOperation)){
             return FlowOperationEnum.INVOKE_RECONOCER_RESPONSE;
+        }else if(FlowOperationEnum.INVOKE_UBICA_REQUEST.equals(tipoOperation)){
+            return FlowOperationEnum.INVOKE_UBICA_RESPONSE;
         }else if(FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(tipoOperation)){
             return FlowOperationEnum.CASO_BIZAGI_RESPONSE;
         }
