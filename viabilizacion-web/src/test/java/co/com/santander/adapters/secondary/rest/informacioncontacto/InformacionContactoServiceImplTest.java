@@ -81,6 +81,8 @@ public class InformacionContactoServiceImplTest {
                 .ubicaProperties(ubicaProperties)
                 .build();
         properties.setInformacionContactoProperties(informacionContactoProperties);
+        properties.setReconocerProperties(reconocerProperties);
+        properties.setUbicaProperties(ubicaProperties);
         informacionContactoService = new InformacionContactoServiceImpl(restTemplateService, properties, jsonUtilities, informacionContactoMapper);
         headers = new HashMap<>();
         headers.put("idRequest", "123");

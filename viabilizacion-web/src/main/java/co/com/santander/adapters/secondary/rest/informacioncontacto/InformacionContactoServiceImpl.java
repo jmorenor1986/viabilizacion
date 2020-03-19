@@ -32,7 +32,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
     private final ClientesProperties clientesProperties;
     private final RestTemplateService restTemplateService;
     private final InformacionContactoMapperImpl mapper;
-    private final InformacionContactoProperties informacionContactoProperties;
+
     private String tokenReconocer;
     private static final Logger log= LoggerFactory.getLogger(InformacionContactoServiceImpl.class);
 
@@ -41,7 +41,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
     public InformacionContactoServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, InformacionContactoMapperImpl mapper) {
         this.clientesProperties = properties;
         this.restTemplateService = restTemplateService;
-        this.informacionContactoProperties = properties.getInformacionContactoProperties();
+
         this.jsonUtilities = jsonUtilities;
         this.mapper = mapper;
     }
@@ -55,7 +55,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
             requestObject.getRequestBody().setToken(tokenReconocer);
             String responseServiceString = "";
             try {
-                responseServiceString = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUri(),
+                responseServiceString = restTemplateService.postWithOutParams(clientesProperties.getReconocerProperties().getUri(),
                         requestObject, generateGenericsHeaders(idRequest,new Gson().toJson(PrincipalReconocerDTO.builder()
                                 .numeroIdentificacion(cliente.getNumeroIdentificacion())
                                 .tipoIdentificacion(cliente.getTipoIdentificacion())
@@ -87,7 +87,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
                 .key("idRequest")
                 .value(idRequest.toString())
                 .build());
-        Optional<String> response = restTemplateService.postWithOutParams(informacionContactoProperties.getReconocerProperties().getUriToken(),
+        Optional<String> response = restTemplateService.postWithOutParams(clientesProperties.getReconocerProperties().getUriToken(),
                 requestToken, headersMap);
         if(response.isPresent()){
             tokenReconocer = extractToken(response.get());
@@ -123,7 +123,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
                 .numeroIdentificacion(cliente.getNumeroIdentificacion())
                 .tipoIdentificacion(cliente.getTipoIdentificacion())
                 .build()));
-        Optional<String> respuesta = restTemplateService.postWithOutParams(informacionContactoProperties.getUbicaProperties().getUri()
+        Optional<String> respuesta = restTemplateService.postWithOutParams(clientesProperties.getUbicaProperties().getUri()
                 , mapper.dtoToRequest(informacionContacto, cliente)
                 , mapHeaders);
         if(respuesta.isPresent()){
