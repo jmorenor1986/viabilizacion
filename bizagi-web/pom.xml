@@ -71,12 +71,15 @@
                                         <exclude>co.com.santander.BizagiApplication</exclude>
                                         <exclude>co.com.santander.bizagi.common.config.*</exclude>
                                         <exclude>org.tempuri.*</exclude>
+                                        <exclude>co.com.santander.bizagi.dto.*</exclude>
+                                        <exclude>co.com.santander.bizagi.common.handler.*</exclude>
+                                        <exclude>co.com.santander.bizagi.controller.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0%</minimum>
+                                            <minimum>80%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>

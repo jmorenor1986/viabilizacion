@@ -1,8 +1,8 @@
 package co.com.santander.bizagi.controller;
 
+import co.com.santander.bizagi.common.generic.GeneralPayload;
 import co.com.santander.bizagi.common.generic.GenericResponse;
 import co.com.santander.bizagi.dto.Cliente;
-import co.com.santander.bizagi.dto.GeneralPayload;
 import co.com.santander.bizagi.dto.ResponsePayLoad;
 import co.com.santander.bizagi.service.CaseBizagiService;
 import org.json.JSONException;

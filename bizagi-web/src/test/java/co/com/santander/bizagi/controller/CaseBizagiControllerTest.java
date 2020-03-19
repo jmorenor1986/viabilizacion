@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
 
 import java.net.MalformedURLException;
 
@@ -23,6 +24,11 @@ public class CaseBizagiControllerTest {
         caseBizagiController = new CaseBizagiController(caseBizagiService);
     }
 
-
+    //@Test
+    //public void testCreateCaseSuccess() throws MalformedURLException, JSONException {
+    //    Mockito.when(caseBizagiService.createCaseString(Mockito.any())).thenReturn(new String());
+    //    ResponseEntity result = caseBizagiController.createCase(Mockito.any());
+    //    Assert.assertNotNull(result);
+    //}
 
 }
