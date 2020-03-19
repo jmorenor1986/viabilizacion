@@ -56,18 +56,19 @@ public class SolicitudServiceTest {
     public void testCumplimientoSolicitudSuccess() {
         RequestHeader requestHeader = new RequestHeader();
         Cliente clienteLocal = Cliente.builder().actividad("Actividad")
-                .anoNacimiento("anoNacimiento")
+                .anoNacimiento("1991")
                 .apellidos("apellidos")
-                .celular("celular")
+                .celular("3229045674")
                 .correoElectronico("correoElectronio")
                 .direccion("direccion")
-                .ingresos("ingresos")
+                .ingresos("1000000")
                 .nombres("nombres")
-                .numeroIdentificacion("numer0")
-                .plazo("plazo")
-                .telefono("telefono")
+                .numeroIdentificacion("10205689")
+                .plazo("60")
+                .telefono("8957631")
                 .tipoIdentificacion("tipoIdentificacion")
-                .valorSolicitado("valorsolicitado")
+                .valorSolicitado("800000")
+                .canalOrigen("1")
                 .requestHeader(requestHeader)
                 .build();
 
@@ -92,7 +93,7 @@ public class SolicitudServiceTest {
     @Test
     public void testCumplimientoSolicitudError() {
         expectedException.expect(MandatoryFieldException.class);
-        expectedException.expectMessage("Request invalido");
+        expectedException.expectMessage("El campo  ACTIVIDAD_ECONOMICA es obligatorio");
         Optional<ResponseFlow> result = solicitudService.cumplimientoSolicitud(cliente);
         Assert.assertNotNull(result);
     }
