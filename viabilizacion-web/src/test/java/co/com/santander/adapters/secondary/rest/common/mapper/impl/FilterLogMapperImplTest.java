@@ -28,19 +28,21 @@ public class FilterLogMapperImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        this.clientesProperties = new ClientesProperties();
+        this.clientesProperties.setUriValidarCiudad("http://localhost:5001/validacion/v1/ciudad/");
         this.filterLogMapper = new FilterLogMapperImpl(clientesProperties);
     }
 
     @Test
     public void testToLogRequestCiudadSuccess() {
-        Mockito.when(request.getURI()).thenReturn(URI.create("http://localhost:5000/viabilizacion/v1/ciudad/bogota"));
-        Assert.assertNotNull(filterLogMapper.toLogRequest(request, "true", Long.valueOf("1")));
+        Mockito.when(request.getURI()).thenReturn(URI.create("http://localhost:5001/validacion/v1/ciudad/"));
+        Assert.assertNotNull(filterLogMapper.toLogRequest(request, "{     \"requestHeader\": {         \"codAliado\": \"001\",         \"usuarioAliado\": \"pepito.perez@sanitas.com.co\",         \"sesionId\": \"fbe2e77\",         \"ipOrigen\": \"127.0.01\",         \"numeroSolicitudCredito\": \"0000012\",         \"tipoIdentificacion\": \"1\",         \"identificacion\": \"91518562\"     },     \"requestBody\": {         \"codRespuesta\": 1,         \"respuestaServicio\": \"true\",         \"mensajeError\": \"OK\"     } }", Long.valueOf("1")));
     }
 
     @Test
     public void testToLogRequestFailed() {
-        Mockito.when(request.getURI()).thenReturn(URI.create("http://localhost:5000/viabilizacion/ciudad/bogota"));
-        Assert.assertNotNull(filterLogMapper.toLogRequest(request, "true", Long.valueOf("1")));
+        Mockito.when(request.getURI()).thenReturn(URI.create("http://localhost:5001/validacion/v1/ciudad/"));
+        Assert.assertNotNull(filterLogMapper.toLogRequest(request, "{     \"requestHeader\": {         \"codAliado\": \"001\",         \"usuarioAliado\": \"pepito.perez@sanitas.com.co\",         \"sesionId\": \"fbe2e77\",         \"ipOrigen\": \"127.0.01\",         \"numeroSolicitudCredito\": \"0000012\",         \"tipoIdentificacion\": \"1\",         \"identificacion\": \"91518562\"     },     \"requestBody\": {         \"codRespuesta\": 1,         \"respuestaServicio\": \"false\",         \"mensajeError\": \"OK\"     } }", Long.valueOf("1")));
     }
 
     @Test
