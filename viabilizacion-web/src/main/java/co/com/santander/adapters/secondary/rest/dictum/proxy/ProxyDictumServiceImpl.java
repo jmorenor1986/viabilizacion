@@ -50,12 +50,12 @@ public class ProxyDictumServiceImpl implements DictumService {
 
     public Boolean consultaCacheServicio(){
         //Obetenemos el objeto con el cual se va ha validar el cache
-
-
+        return Boolean.TRUE;
     }
 
     public Optional<String> obtenerValorCache(){
         //Obtenemos el valor del cache para el usuario
+        return Optional.empty();
     }
 
 }
