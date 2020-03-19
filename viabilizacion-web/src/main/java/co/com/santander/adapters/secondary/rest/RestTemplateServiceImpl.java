@@ -2,7 +2,6 @@ package co.com.santander.adapters.secondary.rest;
 
 import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
 import co.com.santander.core.errors.ConnectionException;
-import co.com.santander.ports.primary.log.LogService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

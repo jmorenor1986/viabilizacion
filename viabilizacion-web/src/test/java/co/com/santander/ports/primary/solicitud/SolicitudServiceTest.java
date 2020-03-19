@@ -9,7 +9,7 @@ import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.services.log.PrincipalRequestService;
 import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
-import co.com.santander.ports.primary.log.LogService;
+import co.com.santander.core.services.log.LogService;
 import co.com.santander.utils.IGenerateUniqueId;
 import com.google.gson.Gson;
 import org.junit.Assert;

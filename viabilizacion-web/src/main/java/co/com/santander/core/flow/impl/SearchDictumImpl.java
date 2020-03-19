@@ -35,7 +35,7 @@ public class SearchDictumImpl implements ValidateRequest {
     private DictumService dictumService;
 
     @Autowired
-    public SearchDictumImpl(@Qualifier("proxyLogSearchReconocer") ValidateRequest validateRequest, DictumService dictumService) {
+    public SearchDictumImpl(@Qualifier("proxyLogSearchReconocer") ValidateRequest validateRequest, @Qualifier("proxyDictumServiceImpl") DictumService dictumService) {
         super();
         this.validateRequest = validateRequest;
         this.dictumService = dictumService;
