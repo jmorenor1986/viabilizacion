@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-@Service
+@Service("dictumServiceImpl")
 public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
 
     public static final String ERROR_RESPONSE_NULL = "ERROR AL OBTENER LA RESPUESTA";

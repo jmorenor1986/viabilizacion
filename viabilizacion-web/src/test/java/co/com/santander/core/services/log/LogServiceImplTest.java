@@ -5,7 +5,6 @@ import co.com.santander.ports.secondary.database.santander.IServicioRepository;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
 import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
-import co.com.santander.ports.primary.log.CacheUsrService;
 import co.com.santander.ports.secondary.database.santander.ILogOperationRepository;
 import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
 import co.com.santander.adapters.secondary.database.santander.entity.LogEntity;

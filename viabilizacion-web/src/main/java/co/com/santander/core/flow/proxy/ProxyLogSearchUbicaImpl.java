@@ -4,7 +4,7 @@ import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.core.domain.solicitud.Cliente;
-import co.com.santander.ports.primary.log.LogService;
+import co.com.santander.core.services.log.LogService;
 import com.google.gson.Gson;
 import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
 import lombok.Getter;
