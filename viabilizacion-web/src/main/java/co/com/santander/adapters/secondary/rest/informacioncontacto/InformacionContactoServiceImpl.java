@@ -41,10 +41,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
     public InformacionContactoServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, InformacionContactoMapperImpl mapper) {
         this.clientesProperties = properties;
         this.restTemplateService = restTemplateService;
-        this.informacionContactoProperties = InformacionContactoProperties.builder()
-                .reconocerProperties(clientesProperties.getReconocerProperties())
-                .ubicaProperties(clientesProperties.getUbicaProperties())
-                .build();
+        this.informacionContactoProperties = properties.getInformacionContactoProperties();
         this.jsonUtilities = jsonUtilities;
         this.mapper = mapper;
     }

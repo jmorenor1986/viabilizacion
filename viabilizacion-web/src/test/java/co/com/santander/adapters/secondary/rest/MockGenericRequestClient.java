@@ -22,6 +22,7 @@ public class MockGenericRequestClient {
                 .plazo("1")
                 .valorSolicitado("1000000")
                 .ciudad("BOGOTA")
+                .canalOrigen("1")
                 .build();
     }
 

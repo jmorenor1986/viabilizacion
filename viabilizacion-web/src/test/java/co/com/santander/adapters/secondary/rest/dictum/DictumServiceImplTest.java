@@ -32,7 +32,7 @@ public class DictumServiceImplTest {
     private ClientesProperties properties;
     private DictumMapperImpl dictumMapper;
     private Dictum dictum;
-    public static final String URI = "http://localhost:5001/validacion/v1/ciudad";
+    public static final String URI = "https://dictum.free.beeceptor.com/";
     @Mock
     private RestTemplateService restTemplateService;
 
@@ -63,21 +63,21 @@ public class DictumServiceImplTest {
 
     @Test
     public void testDictumSuccessPREAPROBADO_CON_DOCUMENTOS() {
-        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of("PREAPROBADO_CON_DOCUMENTOS"));
+        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_PREAPROBADO_CON_DOCUMENTOS));
         Optional<String> result = dictumService.consultarSolicitudDictum(MockGenericRequestClient.setClient(), dictum, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_PREAPROBADO_CON_DOCUMENTOS);
     }
 
     @Test
     public void testDictumSuccessAPROBADO() {
-        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.APROBADO));
+        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_APROBADO));
         Optional<String> result = dictumService.consultarSolicitudDictum(MockGenericRequestClient.setClient(), dictum, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_APROBADO);
     }
 
     @Test
     public void testDictumSuccessNEGADO() {
-        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.NEGADO));
+        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_NEGADO));
         Optional<String> result = dictumService.consultarSolicitudDictum(MockGenericRequestClient.setClient(), dictum, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_NEGADO);
     }
