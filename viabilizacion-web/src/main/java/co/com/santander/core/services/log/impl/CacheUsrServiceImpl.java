@@ -9,6 +9,8 @@ import co.com.santander.core.services.log.CacheUsrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CacheUsrServiceImpl implements CacheUsrService {
 
@@ -30,12 +32,21 @@ public class CacheUsrServiceImpl implements CacheUsrService {
                 .build());
     }
 
-    public String evaluoTipo(FlowOperationEnum operation){
-        if(operation.toString().contains("REQUEST")){
+    @Override
+    public Optional<String> validityLogUser(String cache) {
+        Optional< CacheUsrEntity > cacheEntity = cacheUsrRepository.findByParamBusqAndEstadoAndTipo(cache, EstadoEnum.ACTIVO, "RESPONSE");
+        if(cacheEntity.isPresent()){
+            return Optional.of(cacheEntity.get().getLogs().getTraza());
+        }
+        return Optional.empty();
+    }
+
+    public String evaluoTipo(FlowOperationEnum operation) {
+        if (operation.toString().contains("REQUEST")) {
             return "REQUEST";
-        }else if(operation.toString().contains("RESPONSE")){
+        } else if (operation.toString().contains("RESPONSE")) {
             return "RESPONSE";
-        }else{
+        } else {
             return "NA";
         }
     }
