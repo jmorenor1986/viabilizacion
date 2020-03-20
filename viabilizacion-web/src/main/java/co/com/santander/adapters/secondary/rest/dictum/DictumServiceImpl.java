@@ -30,7 +30,6 @@ import java.util.Optional;
 @Service("dictumServiceImpl")
 public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
 
-    public static final String ERROR_RESPONSE_NULL = "ERROR AL OBTENER LA RESPUESTA";
     private final RestTemplateService restTemplateService;
     private final ClientesProperties clientesProperties;
     private final DictumMapperImpl dictumMapper;
@@ -59,27 +58,6 @@ public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
         if (result.getCodRespuesta().equalsIgnoreCase("1"))
             return consultarDecisionDictum(result.getRespuestaServicio());
         return Optional.empty();
-    }
-
-    private Optional<String> consultarDecisionDictum(String responseDictumDTO) {
-        if (Objects.nonNull(responseDictumDTO)) {
-            return buscarRespuesta(responseDictumDTO);
-        }
-        throw new XmlParsingException(ERROR_RESPONSE_NULL);
-    }
-
-    private Optional<String> buscarRespuesta(String xml) {
-        if (xml.contains(DecisionDictum.PREAPROBADO_CON_DOCUMENTOS))
-            return Optional.of(DecisionDictum.PREAPROBADO_CON_DOCUMENTOS);
-        if (xml.contains(DecisionDictum.PREAPROBADO_SIN_DOCUMENTOS))
-            return Optional.of(DecisionDictum.PREAPROBADO_SIN_DOCUMENTOS);
-        if (xml.contains(DecisionDictum.APROBADO))
-            return Optional.of(DecisionDictum.APROBADO);
-        if (xml.contains(DecisionDictum.ERROR_EN_PROCESO))
-            return Optional.of(DecisionDictum.ERROR_EN_PROCESO);
-        if (xml.contains(DecisionDictum.NEGADO))
-            return Optional.of(DecisionDictum.NEGADO);
-        return Optional.of(DecisionDictum.SIN_RESPUESTA);
     }
 
 }

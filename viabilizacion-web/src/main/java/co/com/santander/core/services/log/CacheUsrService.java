@@ -9,6 +9,6 @@ public interface CacheUsrService {
 
     CacheUsrEntity insertLogCacheUsr(LogEntity log, String cache);
 
-    Optional< String > validityLogUser(String cache);
+    Optional< String > validityLogUser(String cache, Long vig);
 
 }

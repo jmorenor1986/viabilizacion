@@ -2,6 +2,9 @@ package co.com.santander.adapters.secondary.rest.dictum.proxy;
 
 import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
 import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
+import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
+import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.dictum.dto.PrincipalRequestDictumDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
@@ -20,7 +23,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service("proxyDictumServiceImpl")
-public class ProxyDictumServiceImpl implements DictumService {
+public class ProxyDictumServiceImpl extends ServiceRestAbs implements DictumService {
 
     private static final Logger log= LoggerFactory.getLogger(ProxyDictumServiceImpl.class);
 
@@ -36,10 +39,11 @@ public class ProxyDictumServiceImpl implements DictumService {
 
     @Autowired
     public ProxyDictumServiceImpl(@Qualifier("dictumServiceImpl") DictumService dictumService, ServicioService servicioService,
-                                  CacheUsrService cacheUsrService) {
+                                  CacheUsrService cacheUsrService, JsonUtilities jsonUtilities) {
         this.dictumService = dictumService;
         this.servicioService = servicioService;
         this.cacheUsrService = cacheUsrService;
+        this.jsonUtilities = jsonUtilities;
     }
 
     @Override
@@ -49,10 +53,20 @@ public class ProxyDictumServiceImpl implements DictumService {
         if(!consultaCacheServicio()){
             return dictumService.consultarSolicitudDictum(cliente,dictum,idRequest);
         }
-        return obtenerValorCache();
+        return generateResponse();
     }
 
-    public void generateObjectCache(){
+    private Optional<String> generateResponse(){
+        Optional<String> respuesta = obtenerValorCache();
+        if(respuesta.isPresent()){
+            ResponseDto result = extractGenericResponse(respuesta.get());
+            if (result.getCodRespuesta().equalsIgnoreCase("1"))
+                return consultarDecisionDictum(result.getRespuestaServicio());
+        }
+        return Optional.empty();
+    }
+
+    private void generateObjectCache(){
         setKeyCache(new Gson().toJson(PrincipalRequestDictumDTO
                 .builder()
                 .tipoIdentificacion(cliente.getTipoIdentificacion())
@@ -63,7 +77,7 @@ public class ProxyDictumServiceImpl implements DictumService {
                 .build()));
     }
 
-    public Boolean consultaCacheServicio(){
+    private Boolean consultaCacheServicio(){
         //Obetenemos el objeto con el cual se va ha validar el cache
         Optional<ServicioEntity> servicio = servicioService.findServiceByService(ServicioEnum.DICTUM);
         if(servicio.isPresent()){
@@ -76,10 +90,10 @@ public class ProxyDictumServiceImpl implements DictumService {
         return Boolean.FALSE;
     }
 
-    public Optional<String> obtenerValorCache(){
-        Optional<String> traza = cacheUsrService.validityLogUser(getKeyCache());
+    private Optional<String> obtenerValorCache(){
+        Optional<String> traza = cacheUsrService.validityLogUser(getKeyCache(),getVigencia());
         if(traza.isPresent()){
-            log.info("Este es la traza {}", traza.get());
+            return Optional.of(traza.get());
         }
         return Optional.empty();
     }
