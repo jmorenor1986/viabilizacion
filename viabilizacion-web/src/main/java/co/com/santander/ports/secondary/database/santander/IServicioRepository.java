@@ -9,5 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface IServicioRepository extends JpaRepository<ServicioEntity, Long> {
+
     Optional<ServicioEntity> findByServicio(ServicioEnum servicio);
 }
