@@ -28,8 +28,7 @@ public class ProxyDictumServiceImpl extends ServiceRestAbs implements DictumServ
     private static final Logger log= LoggerFactory.getLogger(ProxyDictumServiceImpl.class);
 
     private DictumService dictumService;
-    private ServicioService servicioService;
-    private CacheUsrService cacheUsrService;
+
     @Getter @Setter
     private Cliente cliente;
     @Getter @Setter
@@ -50,10 +49,11 @@ public class ProxyDictumServiceImpl extends ServiceRestAbs implements DictumServ
     public Optional<String> consultarSolicitudDictum(Cliente cliente, Dictum dictum, Long idRequest) {
         setCliente(cliente);
         generateObjectCache();
-        if(!consultaCacheServicio()){
+        if(!consultaCacheServicio(ServicioEnum.DICTUM)){
             return dictumService.consultarSolicitudDictum(cliente,dictum,idRequest);
         }
-        return generateResponse();
+        Optional<String> respuesta = generateResponse();
+        return respuesta.isPresent() ? respuesta : dictumService.consultarSolicitudDictum(cliente,dictum,idRequest);
     }
 
     private Optional<String> generateResponse(){
@@ -77,26 +77,4 @@ public class ProxyDictumServiceImpl extends ServiceRestAbs implements DictumServ
                 .build()));
     }
 
-    private Boolean consultaCacheServicio(){
-        //Obetenemos el objeto con el cual se va ha validar el cache
-        Optional<ServicioEntity> servicio = servicioService.findServiceByService(ServicioEnum.DICTUM);
-        if(servicio.isPresent()){
-            //Valido si el tiempo es superior a 0
-            setVigencia(servicio.get().getVigencia());
-            if(getVigencia().compareTo(Long.valueOf(0)) > 0){
-                return Boolean.TRUE;
-            }
-        }
-        return Boolean.FALSE;
-    }
-
-    private Optional<String> obtenerValorCache(){
-        Optional<String> traza = cacheUsrService.validityLogUser(getKeyCache(),getVigencia());
-        if(traza.isPresent()){
-            return Optional.of(traza.get());
-        }
-        return Optional.empty();
-    }
-
 }
-

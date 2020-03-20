@@ -34,7 +34,7 @@ public class SearchVigiaImpl implements ValidateRequest {
 
     @Autowired
     public SearchVigiaImpl(@Qualifier("proxyLogSearchCache") ValidateRequest validateRequest,
-                           VigiaService vigiaService) {
+                           @Qualifier("proxyVigiaServiceImpl") VigiaService vigiaService) {
         this.validateRequest = validateRequest;
         this.vigiaService = vigiaService;
     }

@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Service
+@Service("vigiaServiceImpl")
 public class VigiaServiceImpl extends ServiceRestAbs implements VigiaService {
 
     private final RestTemplateService restTemplateService;
@@ -50,14 +50,9 @@ public class VigiaServiceImpl extends ServiceRestAbs implements VigiaService {
                 .build()));
         ResponseDto result = extractGenericResponse(restTemplateService.postWithOutParams(vigiaProperties.getUriVigia(), request, headersMap).get());
         if(result.getCodRespuesta().equalsIgnoreCase("1")){
-            return ListaCliente.builder()
-                    .resultado(jsonUtilities.getPropertyObjectWithKey("Data.", "Listas", result.getRespuestaServicio()))
-                    .encontradoId(jsonUtilities.getPropertyObjectWithKey("Data.", "EncontradoID", result.getRespuestaServicio()))
-                    .encontradoNombre(jsonUtilities.getPropertyObjectWithKey("Data.", "EncontradoNombre", result.getRespuestaServicio()))
-                    .build();
+            return buscarRespuesta(result.getRespuestaServicio());
         }
         return ListaCliente.builder().build();
-
     }
 
 }

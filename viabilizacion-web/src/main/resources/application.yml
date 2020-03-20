@@ -22,7 +22,7 @@ servicios:
   uriDictum: https://dictum.free.beeceptor.com/
   uriBizagi: http://localhost:5002/bizagi/v1/bizagi/
   reconocerProperties:
-    uri: http://localhost:8080/reconocer/obtenerToken
+    uri: http://localhost:8080/reconocer/
     #uri: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaReconocer
     uriToken: http://localhost:8080/reconocer/obtenerToken
     #uriToken: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken

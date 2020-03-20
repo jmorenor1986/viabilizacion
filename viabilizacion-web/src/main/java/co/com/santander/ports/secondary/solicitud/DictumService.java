@@ -9,10 +9,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 public interface DictumService {
+    //Metodo principal de la interfaz
+    Optional<String> consultarSolicitudDictum(Cliente cliente, Dictum dictum, Long idRequest);
 
     public static final String ERROR_RESPONSE_NULL = "ERROR AL OBTENER LA RESPUESTA";
-
-    Optional<String> consultarSolicitudDictum(Cliente cliente, Dictum dictum, Long idRequest);
 
     default Optional<String> consultarDecisionDictum(String responseDictumDTO) {
         if (Objects.nonNull(responseDictumDTO)) {
