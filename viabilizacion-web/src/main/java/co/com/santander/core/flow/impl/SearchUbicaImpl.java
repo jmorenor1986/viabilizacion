@@ -29,7 +29,7 @@ public class SearchUbicaImpl implements ValidateRequest {
 	private InformacionContactoService informacionContactoService;
 	
 	@Autowired
-	public SearchUbicaImpl(@Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequest, InformacionContactoService informacionContactoService) {
+	public SearchUbicaImpl(@Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequest, @Qualifier("proxyInformacionContactoServiceImpl") InformacionContactoService informacionContactoService) {
 		super();
 		this.validateRequest = validateRequest;
 		this.informacionContactoService = informacionContactoService;

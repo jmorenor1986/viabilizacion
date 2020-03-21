@@ -34,7 +34,9 @@ public class SearchReconocerImpl implements ValidateRequest {
 
 
     @Autowired
-    public SearchReconocerImpl(@Qualifier("proxyLogSearchUbica") ValidateRequest validateRequestUbi, @Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequestBiz, InformacionContactoService informacionContactoService) {
+    public SearchReconocerImpl(@Qualifier("proxyLogSearchUbica") ValidateRequest validateRequestUbi
+            , @Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequestBiz
+            , @Qualifier("proxyInformacionContactoServiceImpl") InformacionContactoService informacionContactoService) {
         super();
         this.validateRequestUbi = validateRequestUbi;
         this.validateRequestBiz = validateRequestBiz;

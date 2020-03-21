@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service
+@Service("informacionContactoServiceImpl")
 public class InformacionContactoServiceImpl  extends ServiceRestAbs implements InformacionContactoService {
 
     private final ClientesProperties clientesProperties;
@@ -69,12 +69,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
             return Optional.empty();
         }
         if("1".equalsIgnoreCase(responseService.getCodRespuesta())){
-            return Optional.of(ResponseInformacionContacto.builder()
-                    .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService.getRespuestaServicio()))))
-                    .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService.getRespuestaServicio()))))
-                    .direcciones(jsonUtilities.getValuesForGivenKey("reporte", "direcciones", "dato", responseService.getRespuestaServicio()))
-                    .correoElectronico(jsonUtilities.getValuesForGivenKey("reporte", "emails", "dato", responseService.getRespuestaServicio()))
-                    .build());
+            return Optional.of( buscarRespuestaReconocer(responseService.getRespuestaServicio()) );
         }
         return Optional.empty();
     }
