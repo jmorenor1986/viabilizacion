@@ -5,6 +5,7 @@ import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalReconocerDTO;
+import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalUbicaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
@@ -57,8 +58,7 @@ public class ProxyInformacionContactoServiceImpl extends ServiceRestAbs implemen
         if(respuesta.isPresent()){
             ResponseDto result = extractGenericResponse(respuesta.get());
             if (result.getCodRespuesta().equalsIgnoreCase("1"))
-                //return buscarRespuesta(result.getRespuestaServicio());
-                return null;
+                return buscarRespuestaReconocer(result.getRespuestaServicio());
         }
         return null;
     }
@@ -72,7 +72,31 @@ public class ProxyInformacionContactoServiceImpl extends ServiceRestAbs implemen
 
     @Override
     public Optional<ResponseInformacionContacto> consultarInformacionContacto(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
-        return informacionContactoService.consultarInformacionContacto(cliente, informacionContacto, idRequest);
+        setCliente(cliente);
+        generateObjectCacheUbica();
+        if (!consultaCacheServicio(ServicioEnum.UBICA)) {
+            return informacionContactoService.consultarInformacionContacto(cliente, informacionContacto, idRequest);
+        }
+        Optional<ResponseInformacionContacto> respuesta = generateResponseUbica();
+        return respuesta.isPresent() ? respuesta : informacionContactoService.consultarInformacionContacto(cliente, informacionContacto, idRequest);
+    }
+
+    private void generateObjectCacheUbica() {
+        setKeyCache(new Gson().toJson(PrincipalUbicaDTO
+                .builder()
+                .numeroIdentificacion(getCliente().getNumeroIdentificacion())
+                .tipoIdentificacion(getCliente().getTipoIdentificacion())
+                .build()));
+    }
+
+    private Optional<ResponseInformacionContacto> generateResponseUbica(){
+        Optional<String> respuesta = obtenerValorCache();
+        if(respuesta.isPresent()){
+            ResponseDto result = extractGenericResponse(respuesta.get());
+            if (result.getCodRespuesta().equalsIgnoreCase("1"))
+                return buscarRespuestaUbica(result.getRespuestaServicio());
+        }
+        return Optional.empty();
     }
 
 }
