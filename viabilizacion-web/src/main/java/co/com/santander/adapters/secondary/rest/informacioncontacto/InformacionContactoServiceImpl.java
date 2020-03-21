@@ -19,6 +19,8 @@ import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
 import com.google.gson.Gson;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,33 +28,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service
+@Service("informacionContactoServiceImpl")
 public class InformacionContactoServiceImpl  extends ServiceRestAbs implements InformacionContactoService {
 
     private final ClientesProperties clientesProperties;
     private final RestTemplateService restTemplateService;
     private final InformacionContactoMapperImpl mapper;
-
+    @Getter @Setter
     private String tokenReconocer;
-    private static final Logger log= LoggerFactory.getLogger(InformacionContactoServiceImpl.class);
-
 
     @Autowired
     public InformacionContactoServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, InformacionContactoMapperImpl mapper) {
         this.clientesProperties = properties;
         this.restTemplateService = restTemplateService;
-
         this.jsonUtilities = jsonUtilities;
         this.mapper = mapper;
     }
-
 
     @Override
     public Optional<ResponseInformacionContacto> consultarDatosUsuario(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
         ResponseDto responseService = new ResponseDto();
         if(generateTokenServiceReconocer(cliente, idRequest)){
             GeneralPayload<InformacionContactoDTO> requestObject = mapper.dtoToRequest(informacionContacto, cliente);
-            requestObject.getRequestBody().setToken(tokenReconocer);
+            requestObject.getRequestBody().setToken(getTokenReconocer());
             String responseServiceString = "";
             try {
                 responseServiceString = restTemplateService.postWithOutParams(clientesProperties.getReconocerProperties().getUri(),
@@ -69,12 +67,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
             return Optional.empty();
         }
         if("1".equalsIgnoreCase(responseService.getCodRespuesta())){
-            return Optional.of(ResponseInformacionContacto.builder()
-                    .numeroCelular(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.celulares", "celular", responseService.getRespuestaServicio()))))
-                    .numerosTelefono(Arrays.asList(new String(jsonUtilities.getPropertyObjectWithKey("reporte.telefonos", "telefono", responseService.getRespuestaServicio()))))
-                    .direcciones(jsonUtilities.getValuesForGivenKey("reporte", "direcciones", "dato", responseService.getRespuestaServicio()))
-                    .correoElectronico(jsonUtilities.getValuesForGivenKey("reporte", "emails", "dato", responseService.getRespuestaServicio()))
-                    .build());
+            return Optional.of( buscarRespuestaReconocer(responseService.getRespuestaServicio()) );
         }
         return Optional.empty();
     }
@@ -90,30 +83,12 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
         Optional<String> response = restTemplateService.postWithOutParams(clientesProperties.getReconocerProperties().getUriToken(),
                 requestToken, headersMap);
         if(response.isPresent()){
-            tokenReconocer = extractToken(response.get());
+            setTokenReconocer(extractTokenReconocer(response.get()));
         }else{
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
     }
-
-    private String extractToken(String response){
-        ResponseDto responseDto = jsonUtilities.getGeneralResponse(response);
-        String respuestaServicio = responseDto.getRespuestaServicio();
-        //Eliminar caracteres extranios
-        Integer inicio = respuestaServicio.indexOf("{");
-        Integer fin = respuestaServicio.indexOf("}");
-        String json = respuestaServicio.substring(inicio,fin);
-        //Extraigo el valor del token
-        inicio= json.indexOf("access_token=");
-        fin = json.indexOf("scope=");
-        String token = json.substring(inicio,fin);
-        //Quitamos La propiedad
-        inicio= token.indexOf("=");
-        token = token.substring(inicio+1,token.length() -2);
-        return token;
-    }
-
 
     @Override
     public Optional<ResponseInformacionContacto> consultarInformacionContacto(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
@@ -128,27 +103,9 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
                 , mapHeaders);
         if(respuesta.isPresent()){
             responseService = extractGenericResponse(respuesta.get());
-            return setResponseInformacionContacotUbica(responseService.getRespuestaServicio());
+            return buscarRespuestaUbica(responseService.getRespuestaServicio());
         }else{
             return Optional.empty();
         }
     }
-
-    private Optional<ResponseInformacionContacto> setResponseInformacionContacotUbica(String json) {
-        if(json.isEmpty())
-            return Optional.empty();
-        String objetoUbicacion = jsonUtilities.getObjectWithKey("CIFIN.Tercero.UbicaPlusCifin", json);
-
-        List<String> correos = jsonUtilities.getValuesForGivenKey("Mails", "Mail","Correo", objetoUbicacion);
-        List<String> celulares = jsonUtilities.getValuesForGivenKey("Celulares", "Celular","Celular", objetoUbicacion);
-        List<String> telefonos = jsonUtilities.getValuesForGivenKey("Telefonos", "Telefono","Telefono", objetoUbicacion);
-
-        return Optional.of( ResponseInformacionContacto.builder()
-                .correoElectronico(correos)
-                .numeroCelular(celulares)
-                .numerosTelefono(telefonos)
-                .build() );
-    }
-
-
 }
