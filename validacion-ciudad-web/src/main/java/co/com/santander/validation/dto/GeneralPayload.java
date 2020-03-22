@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GeneralPayload<T> {
+public class GeneralPayload<T> implements Serializable {
 
     private RequestHeader requestHeader;
     private T requestBody;

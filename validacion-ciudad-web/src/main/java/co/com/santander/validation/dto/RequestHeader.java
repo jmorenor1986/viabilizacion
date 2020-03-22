@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestHeader {
+public class RequestHeader implements Serializable {
     private String codAliado;
     private String usuarioAliado;
     private String sesionId;

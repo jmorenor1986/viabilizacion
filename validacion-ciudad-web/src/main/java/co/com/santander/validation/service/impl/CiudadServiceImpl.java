@@ -4,6 +4,7 @@ import co.com.santander.validation.entity.Ciudad;
 import co.com.santander.validation.service.CiudadRepository;
 import co.com.santander.validation.service.CiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -20,6 +21,7 @@ public class CiudadServiceImpl implements CiudadService {
     }
 
     @Override
+    @Cacheable(value = "ciudades")
     public Boolean validarCiudad(String nombreCiudad) {
         Ciudad ciudad = ciudadRepository.buscarPorCodigoONombre(nombreCiudad);
         if ( Objects.isNull(ciudad) )
