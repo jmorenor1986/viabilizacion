@@ -4,26 +4,39 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>viabilizacion</artifactId>
-        <groupId>com.samtel</groupId>
-        <version>1.0.2</version>
+        <groupId>co.com.santander</groupId>
+        <version>1.0.6</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>viabilizacion-web</artifactId>
-    <properties>
-        <start-class>Application</start-class>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20190722</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
 
+    <artifactId>acceso-datos-ciudad-web</artifactId>
+    <properties>
+        <start-class>co.com.santander.ValidationApplication</start-class>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -60,13 +73,8 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>Application</exclude>
-                                        <exclude>RequestBodyDTO</exclude>
-                                        <exclude>RequestBody</exclude>
-                                        <exclude>com.samtel.domain.solicitud.reconocer.ResponseDatosUsuario</exclude>
-                                        <exclude>com.samtel.config.*</exclude>
-                                        <exclude>HttpRequestInterceptor
-                                        </exclude>
+                                        <exclude>co.com.santander.ValidationApplication</exclude>
+                                        <exclude>co.com.santander.validation.common.config.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
@@ -83,5 +91,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
