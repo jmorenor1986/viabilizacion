@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>validacion-ciudad-web</artifactId>
+    <artifactId>acceso-datos-ciudad-web</artifactId>
     <properties>
         <start-class>co.com.santander.ValidationApplication</start-class>
     </properties>
@@ -91,6 +91,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
