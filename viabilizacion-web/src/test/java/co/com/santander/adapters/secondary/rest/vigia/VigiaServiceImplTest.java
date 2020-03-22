@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.vigia;
 
 import co.com.santander.adapters.secondary.rest.MockGenericRequestClient;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;

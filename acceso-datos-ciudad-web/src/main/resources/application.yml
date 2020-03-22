@@ -12,6 +12,7 @@ spring:
    flyway:
         schemas: public
         table: validar_ciudad_web_flyway_schema_history
+        baseline-on-migrate: true
    jpa:
       properties:
          hibernate:

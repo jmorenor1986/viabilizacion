@@ -1,5 +1,6 @@
-package co.com.santander.adapters.secondary.rest;
+package co.com.santander.adapters.secondary.rest.access.impl;
 
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
 import co.com.santander.core.errors.ConnectionException;
 import com.google.gson.Gson;
@@ -16,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.*;
 
-@Service
+@Service("restTemplateServiceImpl")
 public class RestTemplateServiceImpl implements RestTemplateService {
 
     private final RestTemplate restTemplate;

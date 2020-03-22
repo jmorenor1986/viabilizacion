@@ -1,5 +1,7 @@
 package co.com.santander.adapters.secondary.rest;
 
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.impl.RestTemplateServiceImpl;
 import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
 import org.junit.Before;
 import org.junit.Test;

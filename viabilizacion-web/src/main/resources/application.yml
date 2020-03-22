@@ -19,6 +19,7 @@ spring:
     schemas: public
     table: viabilizacion_web_flyway_schema_history
     locations: classpath:/db/migration
+    baselineOnMigrate: true
 
 servicios:
   uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/

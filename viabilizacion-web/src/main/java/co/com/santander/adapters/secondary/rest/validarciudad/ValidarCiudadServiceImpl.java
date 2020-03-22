@@ -1,18 +1,17 @@
 package co.com.santander.adapters.secondary.rest.validarciudad;
 
 import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.validarciudad.dto.ValidarCiudad;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 @Service
@@ -23,7 +22,7 @@ public class ValidarCiudadServiceImpl implements ValidarCiudadService {
     private final JsonUtilities jsonUtilities;
 
     @Autowired
-    public ValidarCiudadServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities) {
+    public ValidarCiudadServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities) {
         this.restTemplateService = restTemplateService;
         this.clientesProperties = properties;
         this.jsonUtilities = jsonUtilities;
