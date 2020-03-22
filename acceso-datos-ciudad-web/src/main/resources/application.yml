@@ -3,8 +3,6 @@ server:
     context-path: /validacion
   port: 5001
 
-
-    
 spring:
    datasource:
       driver-class-name: org.postgresql.Driver
