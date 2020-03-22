@@ -2,6 +2,8 @@ server:
   servlet:
     context-path: /validacion
   port: 5001
+
+
     
 spring:
    datasource:
@@ -9,6 +11,9 @@ spring:
       url: jdbc:postgresql://192.168.0.15:5432/samtel
       username: postgres
       password: 12345678
+   flyway:
+        schemas: public
+        table: validar_ciudad_web_flyway_schema_history
    jpa:
       properties:
          hibernate:
