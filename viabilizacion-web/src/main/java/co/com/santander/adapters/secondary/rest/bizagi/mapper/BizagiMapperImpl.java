@@ -6,8 +6,6 @@ import co.com.santander.adapters.secondary.rest.common.mapper.RestRequestMapper;
 import co.com.santander.core.domain.solicitud.Cliente;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
-
 @Service
 public class BizagiMapperImpl extends RestRequestMapper<BizagiDTO, BizagiDTO> {
 

@@ -1,7 +1,6 @@
 package co.com.santander.adapters.secondary.rest.access.impl;
 
 import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
-import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
 import co.com.santander.core.errors.ConnectionException;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,10 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service("restTemplateServiceImpl")
 public class RestTemplateServiceImpl implements RestTemplateService {
@@ -24,10 +26,9 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     private final ClientHttpRequestFactory factory;
 
     @Autowired
-    public RestTemplateServiceImpl(ClientHttpRequestFactory factory,  HttpRequestInterceptor httpRequestInterceptor ) {
+    public RestTemplateServiceImpl(ClientHttpRequestFactory factory) {
         this.factory = factory;
         this.restTemplate = new RestTemplate(factory);
-        restTemplate.setInterceptors(Collections.singletonList(httpRequestInterceptor));
     }
 
     @Override

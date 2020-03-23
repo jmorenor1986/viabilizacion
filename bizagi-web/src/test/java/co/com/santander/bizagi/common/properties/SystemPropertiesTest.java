@@ -1,6 +1,5 @@
 package co.com.santander.bizagi.common.properties;
 
-import co.com.santander.bizagi.common.properties.SystemProperties;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

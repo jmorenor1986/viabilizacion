@@ -1,7 +1,7 @@
 package co.com.santander.core.domain.solicitud.reconocer;
 
-import com.google.code.beanmatchers.BeanMatchers;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
+import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;

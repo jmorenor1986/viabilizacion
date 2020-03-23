@@ -5,7 +5,6 @@ import co.com.santander.validation.dto.ResponsePayLoad;
 import co.com.santander.validation.dto.ValidarCiudad;
 import co.com.santander.validation.service.CiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,16 +25,13 @@ public class CiudadController {
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GeneralPayload<ResponsePayLoad>> validarCiudad(@RequestBody GeneralPayload<ValidarCiudad> ciudadPayload) {
+    public ResponseEntity<ResponsePayLoad> validarCiudad(@RequestBody GeneralPayload<ValidarCiudad> ciudadPayload) {
         String respuestaServicio = ciudadService.validarCiudad(ciudadPayload.getRequestBody().getCiudad()).toString();
-        return new ResponseEntity<>(GeneralPayload.<ResponsePayLoad>builder()
-                .requestHeader(ciudadPayload.getRequestHeader())
-                .requestBody(ResponsePayLoad.builder()
+        return new ResponseEntity<>(ResponsePayLoad.builder()
                         .codRespuesta(Long.valueOf("1"))
                         .mensajeError("OK")
                         .respuestaServicio(respuestaServicio)
-                        .build())
-                .build()
+                        .build()
                 , HttpStatus.OK);
     }
 

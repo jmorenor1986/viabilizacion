@@ -1,12 +1,12 @@
 package co.com.santander.core.services;
 
-import co.com.santander.ports.secondary.database.santander.ILogOperationRepository;
-import co.com.santander.ports.secondary.database.santander.IServicioRepository;
-import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
+import co.com.santander.core.domain.log.LogGeneral;
 import co.com.santander.core.services.log.CacheUsrService;
 import co.com.santander.core.services.log.LogService;
 import co.com.santander.core.services.log.impl.LogServiceImpl;
+import co.com.santander.ports.secondary.database.santander.ILogOperationRepository;
+import co.com.santander.ports.secondary.database.santander.IServicioRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

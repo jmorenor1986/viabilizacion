@@ -1,22 +1,16 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
-import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
+import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.core.domain.log.LogGeneral;
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FilterLogMapperImpl implements FilterLogMapper {
-
-    private static final Logger log = LoggerFactory.getLogger(HttpRequestInterceptor.class);
 
     private final ClientesProperties clientesProperties;
 
@@ -26,20 +20,20 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     }
 
     @Override
-    public LogGeneral toLogRequest(HttpRequest request, String body, Long idRequest) {
+    public LogGeneral toLogRequest(String uri, String body, Long idRequest) {
         return LogGeneral.builder()
-                .tipo(validateTipoRequest(extractURLRequest(request)))
+                .tipo(validateTipoRequest(uri))
                 .httpStatus(HttpStatus.OK)
                 .idRequest(idRequest)
                 //TODO Se debe poner el usuario logeado
                 .usuarioMicro("jsierra")
                 .traza(body)
-                .url(extractURLRequest(request))
+                .url(uri)
                 .build();
     }
 
     @Override
-    public LogGeneral toLogResponse(ClientHttpResponse response, FlowOperationEnum tipoOperation, Long idRequest, String body, String url) {
+    public LogGeneral toLogResponse(FlowOperationEnum tipoOperation, Long idRequest, String body, String url) {
         return LogGeneral.builder()
                 .tipo(validateTipoResponse(tipoOperation))
                 .httpStatus(HttpStatus.OK)

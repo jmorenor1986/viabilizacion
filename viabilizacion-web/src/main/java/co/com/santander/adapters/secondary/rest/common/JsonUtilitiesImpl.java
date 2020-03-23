@@ -1,9 +1,7 @@
 package co.com.santander.adapters.secondary.rest.common;
 
-import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

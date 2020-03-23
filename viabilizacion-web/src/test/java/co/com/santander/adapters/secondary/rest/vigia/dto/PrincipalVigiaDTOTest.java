@@ -1,6 +1,5 @@
 package co.com.santander.adapters.secondary.rest.vigia.dto;
 
-import co.com.santander.adapters.secondary.rest.dictum.dto.ParametrosDTO;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

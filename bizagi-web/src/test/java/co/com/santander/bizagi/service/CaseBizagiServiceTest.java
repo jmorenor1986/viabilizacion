@@ -22,7 +22,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.tempuri.CreateCasesResponse;
 
-import java.io.StringWriter;
 import java.net.MalformedURLException;
 
 @SpringBootTest

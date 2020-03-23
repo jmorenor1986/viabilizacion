@@ -2,7 +2,6 @@ package co.com.santander.adapters.secondary.rest;
 
 import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.access.impl.RestTemplateServiceImpl;
-import co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -23,8 +22,7 @@ public class RestTemplateServiceImpTest {
     public static final String NOMBRE_CIUDAD = "BOGOTA";
 
     private RestTemplateService restTemplateService;
-    @Mock
-    private HttpRequestInterceptor httpRequestInterceptor;
+
     private RestTemplateBuilder restTemplateBuilder;
     @Mock
     private ClientHttpRequestFactory factory;
@@ -37,7 +35,7 @@ public class RestTemplateServiceImpTest {
         restTemplateBuilder = new RestTemplateBuilder();
         factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
         MockitoAnnotations.initMocks(this);
-        restTemplateService = new RestTemplateServiceImpl(factory, httpRequestInterceptor );
+        restTemplateService = new RestTemplateServiceImpl(factory );
         map = new HashMap<>();
         map.put("idHeader", "123456789");
     }

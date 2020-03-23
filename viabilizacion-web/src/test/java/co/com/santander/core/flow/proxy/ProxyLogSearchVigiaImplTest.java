@@ -1,7 +1,7 @@
 package co.com.santander.core.flow.proxy;
 
-import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.services.log.LogService;
 import co.com.santander.utils.impl.GenerateUniqueIdImpl;

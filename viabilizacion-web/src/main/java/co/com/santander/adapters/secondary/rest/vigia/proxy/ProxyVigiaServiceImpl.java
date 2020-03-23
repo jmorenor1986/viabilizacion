@@ -1,11 +1,9 @@
 package co.com.santander.adapters.secondary.rest.vigia.proxy;
 
 import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
-import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
-import co.com.santander.adapters.secondary.rest.dictum.dto.PrincipalRequestDictumDTO;
 import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;

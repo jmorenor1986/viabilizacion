@@ -1,8 +1,8 @@
 package co.com.santander.adapters.secondary.rest.bizagi;
 
 import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.bizagi.dto.BizagiDTO;
 import co.com.santander.adapters.secondary.rest.bizagi.mapper.BizagiMapperImpl;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
