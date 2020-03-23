@@ -1,13 +1,18 @@
-package co.com.santander.core.domain.log;
-
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import lombok.*;
-import org.springframework.http.HttpStatus;
+package co.com.santander.persistencia.service.dto;
 
 import java.util.Date;
 
+import org.springframework.http.HttpStatus;
+
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
-public class LogGeneral {
+public class LogPayload {
 
 	private Long id;
 	

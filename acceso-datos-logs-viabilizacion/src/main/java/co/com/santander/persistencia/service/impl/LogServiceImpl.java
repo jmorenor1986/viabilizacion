@@ -1,23 +1,25 @@
-package co.com.santander.core.services.log.impl;
+package co.com.santander.persistencia.service.impl;
 
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
-import co.com.santander.adapters.secondary.database.santander.entity.LogEntity;
-import co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest;
-import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
-import co.com.santander.core.domain.log.LogGeneral;
-import co.com.santander.core.services.log.CacheUsrService;
-import co.com.santander.core.services.log.LogService;
-import co.com.santander.ports.secondary.database.santander.ILogOperationRepository;
-import co.com.santander.ports.secondary.database.santander.IServicioRepository;
-import com.google.gson.Gson;
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.google.gson.Gson;
+
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.entity.LogEntity;
+import co.com.santander.persistencia.entity.PrincipalRequest;
+import co.com.santander.persistencia.entity.ServicioEntity;
+import co.com.santander.persistencia.repository.ILogOperationRepository;
+import co.com.santander.persistencia.repository.IServicioRepository;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.service.LogService;
+import co.com.santander.persistencia.service.dto.LogPayload;
 
 @Service
 public class LogServiceImpl implements LogService {
@@ -41,7 +43,7 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Boolean insertLogOperation(LogGeneral log) {
+    public Boolean insertLogOperation(LogPayload log) {
         LogEntity logEntity = modelMapper.map(log, LogEntity.class);
 
         logEntity.setPrincipalRequest(PrincipalRequest.builder()
@@ -53,7 +55,7 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Boolean insertaLogRest(LogGeneral log, String idCache) {
+    public Boolean insertaLogRest(LogPayload log, String idCache) {
         Optional<LogEntity> logEntity = generaLogEntity(log);
         if (logEntity.isPresent()) {
             logEntity = Optional.of(logOperationRepository.save(logEntity.get()));
@@ -74,7 +76,7 @@ public class LogServiceImpl implements LogService {
         return Boolean.FALSE;
     }
 
-    private Optional<LogEntity> generaLogEntity(LogGeneral log) {
+    private Optional<LogEntity> generaLogEntity(LogPayload log) {
         LogEntity logEntity = modelMapper.map(log, LogEntity.class);
         //Generamos el principal request
         logEntity.setPrincipalRequest(PrincipalRequest.builder()
@@ -83,7 +85,7 @@ public class LogServiceImpl implements LogService {
 
         Optional<ServicioEntity> servicioEntity = servicioRepository.findByServicio(validaServicio(log.getTipo()));
         if (!servicioEntity.isPresent()) {
-            this.logger.info("Error al guardrar log de servicio rest {}", new Gson().toJson(log));
+            logger.info("Error al guardrar log de servicio rest {}", new Gson().toJson(log));
             return Optional.empty();
         }
         logEntity.setServicio(servicioEntity.get());

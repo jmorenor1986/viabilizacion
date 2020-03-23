@@ -1,13 +1,14 @@
-package co.com.santander.core.services.log.impl;
+package co.com.santander.persistencia.service.impl;
 
-import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
-import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
-import co.com.santander.core.services.log.ServicioService;
-import co.com.santander.ports.secondary.database.santander.IServicioRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.entity.ServicioEntity;
+import co.com.santander.persistencia.repository.IServicioRepository;
+import co.com.santander.persistencia.service.ServicioService;
 
 @Service
 public class ServicioServiceImpl implements ServicioService {

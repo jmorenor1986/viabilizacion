@@ -1,20 +1,22 @@
 package co.com.santander.adapters.secondary.rest.access.proxy;
 
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
-import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
-import co.com.santander.core.domain.log.LogGeneral;
-import co.com.santander.core.services.log.LogService;
-import com.google.gson.Gson;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import com.google.gson.Gson;
+
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.service.LogService;
+import co.com.santander.persistencia.service.dto.LogPayload;
+import lombok.Getter;
+import lombok.Setter;
 
 @Service("proxyRestTemplateServiceImpl")
 public class ProxyRestTemplateServiceImpl implements RestTemplateService {
@@ -88,12 +90,12 @@ public class ProxyRestTemplateServiceImpl implements RestTemplateService {
     }
 
     private void logResponse(String body) {
-        LogGeneral logEntity = filterLogMapper.toLogResponse(getOperation(), getIdRequest(), body, getUri());
+        LogPayload logEntity = filterLogMapper.toLogResponse(getOperation(), getIdRequest(), body, getUri());
         logService.insertaLogRest(logEntity, getIdCache());
     }
 
     private void logRequest(){
-        LogGeneral logEntity = filterLogMapper.toLogRequest(getUri(), getBody() , getIdRequest());
+    	LogPayload logEntity = filterLogMapper.toLogRequest(getUri(), getBody() , getIdRequest());
         setOperation( logEntity.getTipo() );
         logService.insertaLogRest(logEntity, getIdCache());
     }

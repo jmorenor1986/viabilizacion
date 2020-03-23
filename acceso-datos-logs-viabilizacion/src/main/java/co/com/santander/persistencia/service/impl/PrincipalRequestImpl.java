@@ -1,10 +1,11 @@
-package co.com.santander.core.services.log.impl;
+package co.com.santander.persistencia.service.impl;
 
-import co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest;
-import co.com.santander.core.services.log.PrincipalRequestService;
-import co.com.santander.ports.secondary.database.santander.IPrincipalRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import co.com.santander.persistencia.entity.PrincipalRequest;
+import co.com.santander.persistencia.repository.IPrincipalRequestRepository;
+import co.com.santander.persistencia.service.PrincipalRequestService;
 
 @Service
 public class PrincipalRequestImpl implements PrincipalRequestService {

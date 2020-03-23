@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.database.santander.constants;
+package co.com.santander.persistencia.constants;
 
 public enum FlowOperationEnum {
 	

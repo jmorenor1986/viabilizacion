@@ -1,5 +1,14 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
@@ -12,15 +21,6 @@ import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
 import co.com.santander.ports.secondary.solicitud.DictumService;
-import com.google.gson.Gson;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import java.util.Map;
-import java.util.Optional;
 
 @Service("dictumServiceImpl")
 public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
@@ -28,7 +28,6 @@ public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
     private final RestTemplateService restTemplateService;
     private final ClientesProperties clientesProperties;
     private final DictumMapperImpl dictumMapper;
-    private static final Logger log= LoggerFactory.getLogger(DictumServiceImpl.class);
 
     @Autowired
     public DictumServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties clientesProperties, DictumMapperImpl dictumMapper, JsonUtilities jsonUtilities) {
