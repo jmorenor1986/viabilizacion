@@ -4,9 +4,6 @@ import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import lombok.Builder;
 
-import java.util.List;
-import java.util.Optional;
-
 @Builder
 public class ValidatorInformacionContacto {
 

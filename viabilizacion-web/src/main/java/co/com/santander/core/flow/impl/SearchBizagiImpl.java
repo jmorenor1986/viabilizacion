@@ -1,9 +1,9 @@
 package co.com.santander.core.flow.impl;
 
 import co.com.santander.adapters.secondary.rest.bizagi.BizagiServiceImpl;
+import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.core.domain.solicitud.Cliente;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

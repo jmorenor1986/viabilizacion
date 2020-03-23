@@ -1,13 +1,11 @@
 package co.com.santander.adapters.secondary.rest.informacioncontacto;
 
 import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.adapters.secondary.rest.common.properties.InformacionContactoProperties;
-import co.com.santander.adapters.secondary.rest.dictum.DictumServiceImpl;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.InformacionContactoDTO;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalReconocerDTO;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalUbicaDTO;
@@ -21,12 +19,12 @@ import co.com.santander.utils.dto.HeaderDto;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
 
 @Service("informacionContactoServiceImpl")
 public class InformacionContactoServiceImpl  extends ServiceRestAbs implements InformacionContactoService {
@@ -38,7 +36,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
     private String tokenReconocer;
 
     @Autowired
-    public InformacionContactoServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, InformacionContactoMapperImpl mapper) {
+    public InformacionContactoServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, InformacionContactoMapperImpl mapper) {
         this.clientesProperties = properties;
         this.restTemplateService = restTemplateService;
         this.jsonUtilities = jsonUtilities;

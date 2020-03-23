@@ -1,8 +1,8 @@
 package co.com.santander.adapters.secondary.rest.vigia;
 
 import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
@@ -13,13 +13,11 @@ import co.com.santander.adapters.secondary.rest.vigia.mapper.VigiaMapperImpl;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
 import co.com.santander.ports.secondary.solicitud.VigiaService;
-import co.com.santander.utils.CreateHeadersMap;
-import co.com.santander.utils.dto.HeaderDto;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -32,7 +30,7 @@ public class VigiaServiceImpl extends ServiceRestAbs implements VigiaService {
     private final VigiaMapperImpl vigiaMapper;
 
     @Autowired
-    public VigiaServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, VigiaMapperImpl vigiaMapper) {
+    public VigiaServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, VigiaMapperImpl vigiaMapper) {
         this.restTemplateService = restTemplateService;
         this.properties = properties;
         this.vigiaProperties = properties.getVigiaProperties();

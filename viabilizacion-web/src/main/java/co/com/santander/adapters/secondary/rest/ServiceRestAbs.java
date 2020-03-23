@@ -4,12 +4,10 @@ import co.com.santander.adapters.secondary.database.santander.constants.Servicio
 import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
-import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import co.com.santander.core.services.log.CacheUsrService;
 import co.com.santander.core.services.log.ServicioService;
 import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
-import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
 

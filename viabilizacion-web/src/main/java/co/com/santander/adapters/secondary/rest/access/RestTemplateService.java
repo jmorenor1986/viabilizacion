@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest;
+package co.com.santander.adapters.secondary.rest.access;
 
 import java.util.List;
 import java.util.Map;

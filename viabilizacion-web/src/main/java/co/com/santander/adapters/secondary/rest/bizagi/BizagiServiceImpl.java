@@ -1,8 +1,8 @@
 package co.com.santander.adapters.secondary.rest.bizagi;
 
 import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.bizagi.dto.BizagiDTO;
 import co.com.santander.adapters.secondary.rest.bizagi.mapper.BizagiMapperImpl;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
@@ -13,6 +13,7 @@ import co.com.santander.ports.secondary.solicitud.BizagiService;
 import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -25,7 +26,7 @@ public class BizagiServiceImpl extends ServiceRestAbs implements BizagiService {
     private final BizagiMapperImpl bizagiMapper;
 
     @Autowired
-    public BizagiServiceImpl(RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, BizagiMapperImpl bizagiMapper, BizagiMapperImpl bizagiMapper1) {
+    public BizagiServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, BizagiMapperImpl bizagiMapper, BizagiMapperImpl bizagiMapper1) {
         this.restTemplateService = restTemplateService;
         this.properties = properties;
         this.bizagiMapper = bizagiMapper1;

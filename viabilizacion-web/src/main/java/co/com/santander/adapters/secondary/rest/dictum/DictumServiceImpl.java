@@ -1,30 +1,25 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
 import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.common.mapper.impl.DictumMapperImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.adapters.secondary.rest.dictum.common.DecisionDictum;
 import co.com.santander.adapters.secondary.rest.dictum.dto.PrincipalRequestDictumDTO;
 import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
-import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
-import co.com.santander.core.errors.XmlParsingException;
 import co.com.santander.ports.secondary.solicitud.DictumService;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service("dictumServiceImpl")
@@ -36,7 +31,7 @@ public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
     private static final Logger log= LoggerFactory.getLogger(DictumServiceImpl.class);
 
     @Autowired
-    public DictumServiceImpl(RestTemplateService restTemplateService, ClientesProperties clientesProperties, DictumMapperImpl dictumMapper, JsonUtilities jsonUtilities) {
+    public DictumServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties clientesProperties, DictumMapperImpl dictumMapper, JsonUtilities jsonUtilities) {
         this.restTemplateService = restTemplateService;
         this.clientesProperties = clientesProperties;
         this.dictumMapper = dictumMapper;

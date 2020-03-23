@@ -1,7 +1,6 @@
 package co.com.santander.adapters.secondary.rest.dictum.proxy;
 
 import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
-import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;

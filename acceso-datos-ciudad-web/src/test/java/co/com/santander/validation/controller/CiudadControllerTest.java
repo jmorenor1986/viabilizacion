@@ -31,10 +31,10 @@ public class CiudadControllerTest {
     @Test
     public void testValidarCiudadSuccess() {
         Mockito.when(ciudadService.validarCiudad(CIUDAD_TEST)).thenReturn(Boolean.TRUE);
-        ResponseEntity<GeneralPayload<ResponsePayLoad>> result = ciudadController.validarCiudad(GeneralPayload.<ValidarCiudad>builder()
+        ResponseEntity<ResponsePayLoad> result = ciudadController.validarCiudad(GeneralPayload.<ValidarCiudad>builder()
                 .requestBody(ValidarCiudad.builder().ciudad(CIUDAD_TEST).build())
                 .build());
-        Assert.assertEquals("true", result.getBody().getRequestBody().getRespuestaServicio());
+        Assert.assertEquals("true", result.getBody().getRespuestaServicio());
     }
 
 

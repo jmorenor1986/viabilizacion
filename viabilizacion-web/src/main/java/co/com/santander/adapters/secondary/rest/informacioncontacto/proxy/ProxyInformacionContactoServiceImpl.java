@@ -7,7 +7,6 @@ import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalReconocerDTO;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalUbicaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
-import co.com.santander.core.domain.solicitud.ListaCliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import co.com.santander.core.services.log.CacheUsrService;

@@ -2,7 +2,7 @@ package co.com.santander.adapters.secondary.rest.dictum;
 
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.dto.RequestHeader;
-import co.com.santander.adapters.secondary.rest.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
 import co.com.santander.core.domain.solicitud.dictum.Parametros;
