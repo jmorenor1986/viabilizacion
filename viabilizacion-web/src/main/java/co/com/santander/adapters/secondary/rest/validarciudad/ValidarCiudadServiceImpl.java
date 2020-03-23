@@ -1,8 +1,10 @@
 package co.com.santander.adapters.secondary.rest.validarciudad;
 
 import co.com.santander.adapters.dto.GeneralPayload;
+import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.validarciudad.dto.ValidarCiudad;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
@@ -16,11 +18,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class ValidarCiudadServiceImpl implements ValidarCiudadService {
+public class ValidarCiudadServiceImpl extends ServiceRestAbs implements ValidarCiudadService {
 
     private final RestTemplateService restTemplateService;
     private final ClientesProperties clientesProperties;
-    private final JsonUtilities jsonUtilities;
 
     @Autowired
     public ValidarCiudadServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities) {
@@ -46,8 +47,8 @@ public class ValidarCiudadServiceImpl implements ValidarCiudadService {
         if ("".equalsIgnoreCase(json)) {
             return "false";
         }
-        String value = jsonUtilities.getValueForGivenKey("requestBody", "respuestaServicio", json);
-        return value;
+        ResponseDto responseDto = extractGenericResponse(json);
+        return responseDto.getRespuestaServicio();
     }
 
 }
