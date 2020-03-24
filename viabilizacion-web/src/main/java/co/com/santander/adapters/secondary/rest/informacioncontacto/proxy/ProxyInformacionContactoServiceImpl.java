@@ -1,6 +1,13 @@
 package co.com.santander.adapters.secondary.rest.informacioncontacto.proxy;
 
-import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
@@ -9,24 +16,18 @@ import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.Principa
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
-import co.com.santander.core.services.log.CacheUsrService;
-import co.com.santander.core.services.log.ServicioService;
+import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.service.ServicioService;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
-import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service("proxyInformacionContactoServiceImpl")
 public class ProxyInformacionContactoServiceImpl extends ServiceRestAbs implements InformacionContactoService {
 
     private InformacionContactoService informacionContactoService;
-    @Getter
-    @Setter
+    @Getter @Setter
     private Cliente cliente;
 
     @Autowired

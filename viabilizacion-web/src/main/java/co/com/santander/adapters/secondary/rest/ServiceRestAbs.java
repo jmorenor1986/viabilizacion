@@ -1,19 +1,19 @@
 package co.com.santander.adapters.secondary.rest;
 
-import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
-import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
-import co.com.santander.core.services.log.CacheUsrService;
-import co.com.santander.core.services.log.ServicioService;
+import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.entity.ServicioEntity;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.service.ServicioService;
 import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 public abstract class ServiceRestAbs {
     @Getter

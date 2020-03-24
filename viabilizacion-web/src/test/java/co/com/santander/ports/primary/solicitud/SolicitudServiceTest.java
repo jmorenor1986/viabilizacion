@@ -1,17 +1,7 @@
 package co.com.santander.ports.primary.solicitud;
 
-import co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest;
-import co.com.santander.core.domain.solicitud.Cliente;
-import co.com.santander.core.domain.solicitud.ClienteValidator;
-import co.com.santander.core.domain.solicitud.RequestHeader;
-import co.com.santander.core.errors.MandatoryFieldException;
-import co.com.santander.core.flow.ValidateRequest;
-import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.core.services.log.LogService;
-import co.com.santander.core.services.log.PrincipalRequestService;
-import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
-import co.com.santander.utils.IGenerateUniqueId;
-import com.google.gson.Gson;
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -22,7 +12,18 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
+import com.google.gson.Gson;
+
+import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.ClienteValidator;
+import co.com.santander.core.domain.solicitud.RequestHeader;
+import co.com.santander.core.errors.MandatoryFieldException;
+import co.com.santander.core.flow.ValidateRequest;
+import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
+import co.com.santander.persistencia.entity.PrincipalRequest;
+import co.com.santander.persistencia.service.LogService;
+import co.com.santander.persistencia.service.PrincipalRequestService;
 
 
 @SpringBootTest
@@ -40,8 +41,7 @@ public class SolicitudServiceTest {
     private PrincipalRequestService principalRequestService;
     @Mock
     private ValidateRequest validateRequest;
-    @Mock
-    private IGenerateUniqueId generateUniqueId;
+    
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -49,7 +49,7 @@ public class SolicitudServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         clienteValidator = new ClienteValidator();
-        solicitudService = new SolicitudServiceImpl(clienteValidator, logService, validateRequest, generateUniqueId, principalRequestService);
+        solicitudService = new SolicitudServiceImpl(clienteValidator, logService, validateRequest, principalRequestService);
     }
 
     @Test

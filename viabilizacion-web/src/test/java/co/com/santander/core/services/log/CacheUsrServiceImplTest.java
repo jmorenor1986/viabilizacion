@@ -1,12 +1,7 @@
 package co.com.santander.core.services.log;
 
-import co.com.santander.adapters.secondary.database.santander.constants.EstadoEnum;
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import co.com.santander.adapters.secondary.database.santander.entity.CacheUsrEntity;
-import co.com.santander.adapters.secondary.database.santander.entity.LogEntity;
-import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
-import co.com.santander.core.services.log.impl.CacheUsrServiceImpl;
-import co.com.santander.ports.secondary.database.santander.ICacheUsrRepository;
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +11,14 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import java.util.Date;
+import co.com.santander.persistencia.constants.EstadoEnum;
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.entity.CacheUsrEntity;
+import co.com.santander.persistencia.entity.LogEntity;
+import co.com.santander.persistencia.entity.ServicioEntity;
+import co.com.santander.persistencia.repository.ICacheUsrRepository;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.service.impl.CacheUsrServiceImpl;
 
 @SpringBootTest
 public class CacheUsrServiceImplTest {

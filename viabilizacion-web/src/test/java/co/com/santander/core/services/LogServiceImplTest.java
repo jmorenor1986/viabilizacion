@@ -1,12 +1,7 @@
 package co.com.santander.core.services;
 
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import co.com.santander.core.domain.log.LogGeneral;
-import co.com.santander.core.services.log.CacheUsrService;
-import co.com.santander.core.services.log.LogService;
-import co.com.santander.core.services.log.impl.LogServiceImpl;
-import co.com.santander.ports.secondary.database.santander.ILogOperationRepository;
-import co.com.santander.ports.secondary.database.santander.IServicioRepository;
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +10,13 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.repository.ILogOperationRepository;
+import co.com.santander.persistencia.repository.IServicioRepository;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.service.LogService;
+import co.com.santander.persistencia.service.dto.LogPayload;
+import co.com.santander.persistencia.service.impl.LogServiceImpl;
 
 @SpringBootTest
 public class LogServiceImplTest {
@@ -28,7 +29,7 @@ public class LogServiceImplTest {
 	@Mock
 	private IServicioRepository servicioRepository;
 
-	private LogGeneral logGeneral;
+	private LogPayload logPayload;
 
 	@Mock
 	private CacheUsrService cacheUsrService;
@@ -38,7 +39,7 @@ public class LogServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 		map = new ModelMapper();
 		logService = new LogServiceImpl(logOperationRepo, map, servicioRepository, cacheUsrService);
-		logGeneral = LogGeneral.builder()
+		logPayload = LogPayload.builder()
 			.id(Long.valueOf("1"))
 			.fecha(new Date())
 			.tipo(FlowOperationEnum.NO_APLICA)
@@ -48,7 +49,7 @@ public class LogServiceImplTest {
 	}
 	@Test
 	public void testServiceLog() {
-		Assert.assertNotNull(logService.insertLogOperation(logGeneral));
+		Assert.assertNotNull(logService.insertLogOperation(logPayload));
 		Assert.assertNotNull(logService);
 	}
 }

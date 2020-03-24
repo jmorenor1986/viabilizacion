@@ -1,13 +1,14 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
-import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.core.domain.log.LogGeneral;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
+import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
+import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.service.dto.LogPayload;
 
 @Component
 public class FilterLogMapperImpl implements FilterLogMapper {
@@ -20,8 +21,8 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     }
 
     @Override
-    public LogGeneral toLogRequest(String uri, String body, Long idRequest) {
-        return LogGeneral.builder()
+    public LogPayload toLogRequest(String uri, String body, Long idRequest) {
+        return LogPayload.builder()
                 .tipo(validateTipoRequest(uri))
                 .httpStatus(HttpStatus.OK)
                 .idRequest(idRequest)
@@ -33,8 +34,8 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     }
 
     @Override
-    public LogGeneral toLogResponse(FlowOperationEnum tipoOperation, Long idRequest, String body, String url) {
-        return LogGeneral.builder()
+    public LogPayload toLogResponse(FlowOperationEnum tipoOperation, Long idRequest, String body, String url) {
+        return LogPayload.builder()
                 .tipo(validateTipoResponse(tipoOperation))
                 .httpStatus(HttpStatus.OK)
                 .idRequest(idRequest)

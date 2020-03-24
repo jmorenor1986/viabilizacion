@@ -45,12 +45,12 @@ public class RestTemplateServiceImpTest {
         Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), null);
     }
 
-    @Test(expected = RestClientException.class)
+    @Test(expected = NullPointerException.class)
     public void testPostWithOutParams() {
         Optional<String> result = restTemplateService.postWithOutParams(URI, new Object(), Optional.of(map));
     }
 
-    @Test(expected = RestClientException.class)
+    @Test(expected = NullPointerException.class)
     public void testGetWithOutParams() {
         Optional<String> result = restTemplateService.getWithOutParams(URI, new Object(), Optional.of(map));
     }

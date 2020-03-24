@@ -1,27 +1,26 @@
 package co.com.santander.core.services.solicitud;
 
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import co.com.santander.adapters.secondary.database.santander.entity.PrincipalRequest;
-import co.com.santander.core.domain.log.LogGeneral;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ClienteValidator;
 import co.com.santander.core.errors.MandatoryFieldException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.core.services.log.LogService;
-import co.com.santander.core.services.log.PrincipalRequestService;
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.entity.PrincipalRequest;
+import co.com.santander.persistencia.service.LogService;
+import co.com.santander.persistencia.service.PrincipalRequestService;
+import co.com.santander.persistencia.service.dto.LogPayload;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
-import co.com.santander.utils.IGenerateUniqueId;
-import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class SolicitudServiceImpl implements SolicitudService {
@@ -30,9 +29,7 @@ public class SolicitudServiceImpl implements SolicitudService {
     private final LogService logService;
     private final PrincipalRequestService principalRequestService;
     private final ValidateRequest validateRequest;
-    private final IGenerateUniqueId generateUniqueId;
 
-    private Logger log = LoggerFactory.getLogger(SolicitudServiceImpl.class);
 
     @Getter
     @Setter
@@ -40,11 +37,10 @@ public class SolicitudServiceImpl implements SolicitudService {
 
     @Autowired
     public SolicitudServiceImpl(ClienteValidator clienteValidator, LogService logService,
-                                @Qualifier("proxyLogValidateCity") ValidateRequest validateRequest, IGenerateUniqueId generateUniqueId, PrincipalRequestService principalRequestService) {
+                                @Qualifier("proxyLogValidateCity") ValidateRequest validateRequest, PrincipalRequestService principalRequestService) {
         this.clienteValidator = clienteValidator;
         this.logService = logService;
         this.validateRequest = validateRequest;
-        this.generateUniqueId = generateUniqueId;
         this.principalRequestService = principalRequestService;
     }
 
@@ -61,7 +57,7 @@ public class SolicitudServiceImpl implements SolicitudService {
 
     public void generarLog(Cliente cliente) {
         String gsonCliente = new Gson().toJson(cliente);
-        logService.insertLogOperation(LogGeneral.builder().usuarioMicro("jsierra").idRequest(getPrincipalRequestId())
+        logService.insertLogOperation(LogPayload.builder().usuarioMicro("jsierra").idRequest(getPrincipalRequestId())
                 .traza(gsonCliente).tipo(FlowOperationEnum.VALIDATE_CLIENT).build());
     }
 

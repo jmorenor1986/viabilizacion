@@ -1,13 +1,8 @@
 package co.com.santander.core.services.log;
 
-import co.com.santander.adapters.secondary.database.santander.constants.FlowOperationEnum;
-import co.com.santander.adapters.secondary.database.santander.constants.ServicioEnum;
-import co.com.santander.adapters.secondary.database.santander.entity.LogEntity;
-import co.com.santander.adapters.secondary.database.santander.entity.ServicioEntity;
-import co.com.santander.core.domain.log.LogGeneral;
-import co.com.santander.core.services.log.impl.LogServiceImpl;
-import co.com.santander.ports.secondary.database.santander.ILogOperationRepository;
-import co.com.santander.ports.secondary.database.santander.IServicioRepository;
+import java.util.Date;
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,8 +13,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import java.util.Date;
-import java.util.Optional;
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.entity.LogEntity;
+import co.com.santander.persistencia.entity.ServicioEntity;
+import co.com.santander.persistencia.repository.ILogOperationRepository;
+import co.com.santander.persistencia.repository.IServicioRepository;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.service.dto.LogPayload;
+import co.com.santander.persistencia.service.impl.LogServiceImpl;
 
 @SpringBootTest
 public class LogServiceImplTest {
@@ -45,7 +47,7 @@ public class LogServiceImplTest {
 
     @Test
     public void testInsertaLogRestFailed() {
-        LogGeneral logGeneral = LogGeneral.builder()
+        LogPayload logGeneral = LogPayload.builder()
                 .url("http://localhost:5001/validacion/v1/ciudad/")
                 .fecha(new Date())
                 .httpStatus(HttpStatus.CONTINUE)
@@ -60,7 +62,7 @@ public class LogServiceImplTest {
 
     @Test
     public void testInsertaLogRestSuccess() {
-        LogGeneral logGeneral = LogGeneral.builder()
+    	LogPayload logGeneral = LogPayload.builder()
                 .url("http://localhost:5001/validacion/v1/ciudad/")
                 .fecha(new Date())
                 .httpStatus(HttpStatus.CONTINUE)
