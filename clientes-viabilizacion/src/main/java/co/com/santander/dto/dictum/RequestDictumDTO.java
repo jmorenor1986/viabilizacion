@@ -1,6 +1,5 @@
-package co.com.santander.adapters.secondary.rest.dictum.dto;
+package co.com.santander.dto.dictum;
 
-import co.com.santander.core.domain.solicitud.dictum.Parametros;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,5 +12,5 @@ public class RequestDictumDTO {
     private String primerApellido;
     private String producto;
     private String usuario;
-    private List<Parametros> parametros;
+    private List<ParametrosDTO> parametros;
 }

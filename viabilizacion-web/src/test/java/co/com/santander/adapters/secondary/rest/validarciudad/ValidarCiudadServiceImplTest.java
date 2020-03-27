@@ -3,10 +3,10 @@ package co.com.santander.adapters.secondary.rest.validarciudad;
 
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.dto.RequestHeader;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.adapters.secondary.rest.validarciudad.dto.ValidarCiudad;
+import co.com.santander.dto.ciudad.ValidarCiudad;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,7 +26,7 @@ public class ValidarCiudadServiceImplTest {
     private ValidarCiudadService validarCiudadService;
     private ClientesProperties properties;
     @Mock
-    private RestTemplateService restTemplateService;
+    private RestService restService;
     @Mock
     private JsonUtilities jsonUtilities;
 
@@ -35,7 +35,7 @@ public class ValidarCiudadServiceImplTest {
         MockitoAnnotations.initMocks(this);
         properties = new ClientesProperties();
         properties.setUriValidarCiudad(URI);
-        validarCiudadService = new ValidarCiudadServiceImpl(restTemplateService, properties, jsonUtilities);
+        validarCiudadService = new ValidarCiudadServiceImpl(restService, properties, jsonUtilities);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ValidarCiudadServiceImplTest {
                         .build())
                 .build();
 
-        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("true"));
+        Mockito.when(restService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("true"));
         String result = validarCiudadService.validarCodigoCiudad(validaCiudad, Long.valueOf("123"));
         Assert.assertEquals("false", result);
     }
@@ -65,7 +65,7 @@ public class ValidarCiudadServiceImplTest {
                         .build())
                 .build();
 
-        Mockito.when(restTemplateService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("false"));
+        Mockito.when(restService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("false"));
         String result = validarCiudadService.validarCodigoCiudad(validaCiudad, Long.valueOf("123"));
         Assert.assertEquals("false", result);
     }

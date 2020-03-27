@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.vigia.dto;
+package co.com.santander.dto.vigia;
 
 import lombok.Builder;
 import lombok.Data;

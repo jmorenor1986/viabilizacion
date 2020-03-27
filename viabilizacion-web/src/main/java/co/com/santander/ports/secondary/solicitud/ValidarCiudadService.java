@@ -1,7 +1,7 @@
 package co.com.santander.ports.secondary.solicitud;
 
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.validarciudad.dto.ValidarCiudad;
+import co.com.santander.dto.ciudad.ValidarCiudad;
+import co.com.santander.dto.generic.GeneralPayload;
 
 public interface ValidarCiudadService {
 

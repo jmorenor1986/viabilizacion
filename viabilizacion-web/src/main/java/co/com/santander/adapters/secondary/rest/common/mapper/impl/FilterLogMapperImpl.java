@@ -1,14 +1,13 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.persistencia.constants.FlowOperationEnum;
 import co.com.santander.persistencia.service.dto.LogPayload;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 @Component
 public class FilterLogMapperImpl implements FilterLogMapper {

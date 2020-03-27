@@ -1,7 +1,15 @@
 package co.com.santander.ports.primary.solicitud;
 
-import java.util.Optional;
-
+import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.ClienteValidator;
+import co.com.santander.core.errors.MandatoryFieldException;
+import co.com.santander.core.flow.ValidateRequest;
+import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
+import co.com.santander.persistencia.entity.PrincipalRequest;
+import co.com.santander.persistencia.service.LogService;
+import co.com.santander.persistencia.service.PrincipalRequestService;
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -12,18 +20,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.google.gson.Gson;
-
-import co.com.santander.core.domain.solicitud.Cliente;
-import co.com.santander.core.domain.solicitud.ClienteValidator;
-import co.com.santander.core.domain.solicitud.RequestHeader;
-import co.com.santander.core.errors.MandatoryFieldException;
-import co.com.santander.core.flow.ValidateRequest;
-import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
-import co.com.santander.persistencia.entity.PrincipalRequest;
-import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.service.PrincipalRequestService;
+import java.util.Optional;
 
 
 @SpringBootTest

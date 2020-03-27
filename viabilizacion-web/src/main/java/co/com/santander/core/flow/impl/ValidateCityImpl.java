@@ -2,7 +2,7 @@ package co.com.santander.core.flow.impl;
 
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.dto.RequestHeader;
-import co.com.santander.adapters.secondary.rest.validarciudad.dto.ValidarCiudad;
+import co.com.santander.dto.ciudad.ValidarCiudad;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;

@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.vigia;
 
 import co.com.santander.adapters.secondary.rest.MockGenericRequestClient;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
@@ -31,7 +31,7 @@ public class VigiaServiceImplTest {
     private VigiaService vigiaService;
     private ClientesProperties properties;
     @Mock
-    private RestTemplateService restTemplateService;
+    private RestService restService;
     private JsonUtilities jsonUtilities;
     private VigiaProperties vigiaProperties;
     private Map<String, String> headers;
@@ -50,7 +50,7 @@ public class VigiaServiceImplTest {
                 .build();
         properties = new ClientesProperties();
         properties.setVigiaProperties(vigiaProperties);
-        vigiaService = new VigiaServiceImpl(restTemplateService, properties, jsonUtilities, vigiaMapper);
+        vigiaService = new VigiaServiceImpl(restService, properties, jsonUtilities, vigiaMapper);
         headers = new HashMap<>();
         headers.put("idRequest", "1");
         headers.put("idCache", "{}");
@@ -66,7 +66,7 @@ public class VigiaServiceImplTest {
                 .tipoIdentificacion(cliente.getTipoIdentificacion())
                 .numeroIdentificacion(cliente.getNumeroIdentificacion())
                 .build()));
-        Mockito.when(restTemplateService.getWithOutParams(vigiaProperties.getUriVigia(), cliente, Optional.of(headers))).thenReturn(Optional.of(MockResponseServiceVigia.response));
+        Mockito.when(restService.getWithOutParams(vigiaProperties.getUriVigia(), cliente, Optional.of(headers))).thenReturn(Optional.of(MockResponseServiceVigia.response));
         ListaCliente result = vigiaService.consultarListasCliente(cliente, Long.valueOf("1"));
         Assert.assertNull(result);
     }

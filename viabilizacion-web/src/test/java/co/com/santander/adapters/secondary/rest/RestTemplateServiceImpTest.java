@@ -1,7 +1,6 @@
 package co.com.santander.adapters.secondary.rest;
 
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
-import co.com.santander.adapters.secondary.rest.access.impl.RestTemplateServiceImpl;
+import co.com.santander.adapters.secondary.rest.access.RestService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -11,7 +10,6 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
@@ -21,7 +19,7 @@ public class RestTemplateServiceImpTest {
     public static final String URI = "http://localhost:1234/validacion/v1/ciudad/";
     public static final String NOMBRE_CIUDAD = "BOGOTA";
 
-    private RestTemplateService restTemplateService;
+    private RestService restService;
 
     private RestTemplateBuilder restTemplateBuilder;
     @Mock
@@ -35,24 +33,24 @@ public class RestTemplateServiceImpTest {
         restTemplateBuilder = new RestTemplateBuilder();
         factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
         MockitoAnnotations.initMocks(this);
-        restTemplateService = new RestTemplateServiceImpl(factory );
+        restService = new RestTemplateServiceImpl(factory );
         map = new HashMap<>();
         map.put("idHeader", "123456789");
     }
 
     @Test(expected = NullPointerException.class)
     public void testGetWithPathParams() {
-        Optional<String> result = restTemplateService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), null);
+        Optional<String> result = restService.getWithPathParams(URI, new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), null);
     }
 
     @Test(expected = NullPointerException.class)
     public void testPostWithOutParams() {
-        Optional<String> result = restTemplateService.postWithOutParams(URI, new Object(), Optional.of(map));
+        Optional<String> result = restService.postWithOutParams(URI, new Object(), Optional.of(map));
     }
 
     @Test(expected = NullPointerException.class)
     public void testGetWithOutParams() {
-        Optional<String> result = restTemplateService.getWithOutParams(URI, new Object(), Optional.of(map));
+        Optional<String> result = restService.getWithOutParams(URI, new Object(), Optional.of(map));
     }
 
     @Test(expected = NullPointerException.class)
@@ -60,7 +58,7 @@ public class RestTemplateServiceImpTest {
         HashMap<String, Object> mapParam = new HashMap<>();
         mapParam.put("numeroId", "1");
         mapParam.put("primerApellidoBuscar", "2");
-        Optional<String> result = restTemplateService.getWithParams(URI, mapParam, null);
+        Optional<String> result = restService.getWithParams(URI, mapParam, null);
     }
 
     @Test(expected = NullPointerException.class)
@@ -72,7 +70,7 @@ public class RestTemplateServiceImpTest {
         Map<String, String> headers = new HashMap<>();
         mapParam.put("idRequest", "123");
 
-        Optional<String> result = restTemplateService.getWithParams(URI, mapParam, Optional.of(headers));
+        Optional<String> result = restService.getWithParams(URI, mapParam, Optional.of(headers));
     }
 
 }

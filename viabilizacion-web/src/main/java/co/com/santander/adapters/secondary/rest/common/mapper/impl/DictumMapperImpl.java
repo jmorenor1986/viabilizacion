@@ -1,11 +1,12 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
-import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.common.mapper.RestRequestMapper;
-import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
+import co.com.santander.dto.dictum.ParametrosDTO;
+import co.com.santander.dto.dictum.RequestDictumDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
 import co.com.santander.core.domain.solicitud.dictum.Parametros;
+import co.com.santander.dto.generic.GeneralPayload;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -37,35 +38,35 @@ public class DictumMapperImpl extends RestRequestMapper<RequestDictumDTO, Dictum
         return result;
     }
 
-    private List<Parametros> generateParams(Cliente cliente){
-        List<Parametros> parametrosList = new ArrayList<>();
+    private List<ParametrosDTO> generateParams(Cliente cliente){
+        List<ParametrosDTO> parametrosList = new ArrayList<>();
         //Genero el anio de nacimiento
-        parametrosList.add(Parametros.builder()
+        parametrosList.add(ParametrosDTO.builder()
                 .tipo("T")
                 .nombre("nombre")
                 .valor(cliente.getNombres())
                 .build());
         //Genero el valor solicitado
-        parametrosList.add(Parametros.builder()
+        parametrosList.add(ParametrosDTO.builder()
                 .tipo("T")
                 .nombre("VALOR_SOLICITADO")
                 .valor(cliente.getValorSolicitado())
                 .build());
         //Genero ingresos
-        parametrosList.add(Parametros.builder()
+        parametrosList.add(ParametrosDTO.builder()
                 .tipo("T")
                 .nombre("INGRESOS")
                 .valor(cliente.getIngresos())
                 .build());
         //Genero plazo
-        parametrosList.add(Parametros.builder()
+        parametrosList.add(ParametrosDTO.builder()
                 .tipo("T")
                 .nombre("PLAZO")
                 .valor(cliente.getPlazo())
                 .build());
         //TODO ¿De donde saco la actividad? = El valor se encuentra quemado
         //Genero plazo
-        parametrosList.add(Parametros.builder()
+        parametrosList.add(ParametrosDTO.builder()
                 .tipo("T")
                 .nombre("ACTIVIDAD")
                 .valor(cliente.getActividad())

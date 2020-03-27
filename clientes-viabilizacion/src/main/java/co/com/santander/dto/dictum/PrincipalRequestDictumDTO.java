@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.dictum.dto;
+package co.com.santander.dto.dictum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class    PrincipalRequestDictumDTO {
+public class PrincipalRequestDictumDTO {
 
     private String tipoIdentificacion;
     private String numeroIdentificacion;

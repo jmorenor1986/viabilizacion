@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
-import java.net.URI;
-
+import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
+import co.com.santander.persistencia.constants.FlowOperationEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpResponse;
 
-import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import java.net.URI;
 
 @SpringBootTest
 public class FilterLogMapperImplTest {

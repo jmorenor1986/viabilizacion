@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
 import co.com.santander.adapters.secondary.rest.MockGenericRequestClient;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import co.com.santander.adapters.secondary.rest.common.mapper.impl.DictumMapperImpl;
@@ -34,7 +34,7 @@ public class DictumServiceImplTest {
     private Dictum dictum;
     public static final String URI = "https://dictum.free.beeceptor.com/";
     @Mock
-    private RestTemplateService restTemplateService;
+    private RestService restService;
 
     private JsonUtilities jsonUtilities;
 
@@ -48,7 +48,7 @@ public class DictumServiceImplTest {
         properties.setUriDictum(URI);
         dictumMapper = new DictumMapperImpl();
         jsonUtilities = new JsonUtilitiesImpl();
-        dictumService = new DictumServiceImpl(restTemplateService, properties, dictumMapper, jsonUtilities);
+        dictumService = new DictumServiceImpl(restService, properties, dictumMapper, jsonUtilities);
         headers = new HashMap<>();
         headers.put("idRequest", "1");
         headers.put("idCache", "{}");
@@ -63,21 +63,21 @@ public class DictumServiceImplTest {
 
     @Test
     public void testDictumSuccessPREAPROBADO_CON_DOCUMENTOS() {
-        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_PREAPROBADO_CON_DOCUMENTOS));
+        Mockito.when(restService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_PREAPROBADO_CON_DOCUMENTOS));
         Optional<String> result = dictumService.consultarSolicitudDictum(MockGenericRequestClient.setClient(), dictum, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_PREAPROBADO_CON_DOCUMENTOS);
     }
 
     @Test
     public void testDictumSuccessAPROBADO() {
-        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_APROBADO));
+        Mockito.when(restService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_APROBADO));
         Optional<String> result = dictumService.consultarSolicitudDictum(MockGenericRequestClient.setClient(), dictum, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_APROBADO);
     }
 
     @Test
     public void testDictumSuccessNEGADO() {
-        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_NEGADO));
+        Mockito.when(restService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockResponseDictumTest.JSON_NEGADO));
         Optional<String> result = dictumService.consultarSolicitudDictum(MockGenericRequestClient.setClient(), dictum, 1L);
         Assert.assertEquals(result.get(), RESPUESTA_NEGADO);
     }

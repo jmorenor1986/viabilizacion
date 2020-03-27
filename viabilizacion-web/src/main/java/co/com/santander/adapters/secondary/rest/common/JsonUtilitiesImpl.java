@@ -1,6 +1,6 @@
 package co.com.santander.adapters.secondary.rest.common;
 
-import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
+import co.com.santander.dto.generic.ResponseDto;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package co.com.santander.adapters.dto;
+package co.com.santander.dto.generic;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

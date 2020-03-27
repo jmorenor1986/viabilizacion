@@ -1,4 +1,4 @@
-package co.com.santander.adapters.dto;
+package co.com.santander.dto.generic;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestHeader {
+
     private String codAliado;
     private String usuarioAliado;
     private String sesionId;

@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.dictum.dto;
+package co.com.santander.dto.dictum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

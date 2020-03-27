@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.validarciudad.dto;
+package co.com.santander.dto.ciudad;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.bizagi.dto;
+package co.com.santander.dto.bizagi;
 
 import lombok.Builder;
 import lombok.Data;

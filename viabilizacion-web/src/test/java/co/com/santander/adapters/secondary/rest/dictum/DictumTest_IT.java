@@ -2,9 +2,8 @@ package co.com.santander.adapters.secondary.rest.dictum;
 
 import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.dto.RequestHeader;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
 import co.com.santander.core.domain.solicitud.dictum.Parametros;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,7 +23,7 @@ import java.util.Optional;
 @ActiveProfiles("test")
 public class DictumTest_IT {
     @Autowired
-    private RestTemplateService restTemplateService;
+    private RestService restService;
     @Autowired
     private ClientesProperties properties;
 
@@ -55,7 +54,7 @@ public class DictumTest_IT {
         GeneralPayload<RequestDictumDTO> request = new GeneralPayload<>();
         request.setRequestBody(requestBody);
         request.setRequestHeader(requestHeader);
-        Optional<String> result = restTemplateService.postWithOutParams(properties.getUriDictum(), request, Optional.of(new HashMap<>()));
+        Optional<String> result = restService.postWithOutParams(properties.getUriDictum(), request, Optional.of(new HashMap<>()));
         Assert.assertNotNull(result);
     }
 
