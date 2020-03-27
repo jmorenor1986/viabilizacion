@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "${dictum.service-name}", url = "${dictum.url}")
+@FeignClient(name = "dictum-service", url = "${dictum.url}")
 public interface DictumClient {
 
     @RequestMapping(value = "/consultarHC2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

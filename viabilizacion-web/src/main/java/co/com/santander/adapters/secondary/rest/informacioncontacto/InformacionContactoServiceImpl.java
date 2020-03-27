@@ -37,7 +37,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
     private String tokenReconocer;
 
     @Autowired
-    public InformacionContactoServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestService restService
+    public InformacionContactoServiceImpl(@Qualifier("proxyRestServiceImpl") RestService restService
             , ClientesProperties properties
             , JsonUtilities jsonUtilities
             , InformacionContactoMapperImpl mapper

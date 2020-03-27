@@ -29,7 +29,7 @@ public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
     private final DictumMapperImpl dictumMapper;
 
     @Autowired
-    public DictumServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestService restService, ClientesProperties clientesProperties, DictumMapperImpl dictumMapper, JsonUtilities jsonUtilities) {
+    public DictumServiceImpl(@Qualifier("proxyRestServiceImpl") RestService restService, ClientesProperties clientesProperties, DictumMapperImpl dictumMapper, JsonUtilities jsonUtilities) {
         this.restService = restService;
         this.clientesProperties = clientesProperties;
         this.dictumMapper = dictumMapper;

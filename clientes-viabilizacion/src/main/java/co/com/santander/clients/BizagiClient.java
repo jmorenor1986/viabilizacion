@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "${bizagi.service-name}", url = "${bizagi.url}")
+@FeignClient(name = "bizagi-service", url = "${bizagi.url}")
 public interface BizagiClient {
 
 

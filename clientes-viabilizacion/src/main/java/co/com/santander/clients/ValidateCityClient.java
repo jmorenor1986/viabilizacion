@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "${validarciudad.service-name}", url = "${validarciudad.url}")
+@FeignClient(value = "validar-ciudad-service", url = "${validarciudad.url}")
 public interface ValidateCityClient {
 
     @RequestMapping(value = "ciudad/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

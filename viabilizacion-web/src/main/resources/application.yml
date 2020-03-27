@@ -53,7 +53,25 @@ servicios:
     tipoIdentificacion: CC
     identificacion: 1040
 
+
+vigia:
+  url: https://vigia.free.beeceptor.com
+  service-name: vigia-service
+validarciudad:
+  url: http://localhost:5001/validacion/v1/
+  service-name: validar-ciudad-service
 dictum:
+  url: https://dictum.free.beeceptor.com/
+  service-name: dictum-service
   parametros:
     clave: 06BRZ
     producto: 64
+ubica:
+  url: https://ubica.free.beeceptor.com
+  service-name: ubica-service
+reconocer:
+  url: http://localhost:8080/reconocer/
+  service-name: ubica-service
+bizagi:
+  url: http://localhost:5002/bizagi/v1/
+  service: bizagi_service

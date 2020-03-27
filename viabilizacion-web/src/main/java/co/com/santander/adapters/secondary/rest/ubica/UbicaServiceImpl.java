@@ -26,7 +26,7 @@ public class UbicaServiceImpl extends ServiceRestAbs implements UbicaService {
     private final InformacionContactoMapperImpl mapper;
 
     @Autowired
-    public UbicaServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestService restService
+    public UbicaServiceImpl(@Qualifier("restServiceImpl") RestService restService
             , JsonUtilities jsonUtilities
             , InformacionContactoMapperImpl mapper) {
         this.restService = restService;

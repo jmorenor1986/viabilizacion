@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "${reconocer.service-name}", url = "${reconocer.url}")
+@FeignClient(name = "reconocer-service", url = "${reconocer.url}")
 public interface ReconocerClient {
 
     @RequestMapping(value = "/obtenerToken", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

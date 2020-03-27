@@ -27,7 +27,7 @@ public class BizagiServiceImpl extends ServiceRestAbs implements BizagiService {
     private final BizagiMapperImpl bizagiMapper;
 
     @Autowired
-    public BizagiServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestService restService, ClientesProperties properties, JsonUtilities jsonUtilities, BizagiMapperImpl bizagiMapper, BizagiMapperImpl bizagiMapper1) {
+    public BizagiServiceImpl(@Qualifier("restServiceImpl") RestService restService, ClientesProperties properties, JsonUtilities jsonUtilities, BizagiMapperImpl bizagiMapper, BizagiMapperImpl bizagiMapper1) {
         this.restService = restService;
         this.properties = properties;
         this.bizagiMapper = bizagiMapper1;
