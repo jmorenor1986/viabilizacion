@@ -4,6 +4,7 @@ import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
+import co.com.santander.dto.dictum.PrincipalRequestDictumDTO;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.persistencia.constants.ServicioEnum;
 import co.com.santander.persistencia.service.CacheUsrService;

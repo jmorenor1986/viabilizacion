@@ -6,6 +6,7 @@ import co.com.santander.core.errors.MandatoryFieldException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
+import co.com.santander.dto.generic.RequestHeader;
 import co.com.santander.persistencia.entity.PrincipalRequest;
 import co.com.santander.persistencia.service.LogService;
 import co.com.santander.persistencia.service.PrincipalRequestService;

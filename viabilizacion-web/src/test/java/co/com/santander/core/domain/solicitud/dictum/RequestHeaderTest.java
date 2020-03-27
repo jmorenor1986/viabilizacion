@@ -1,7 +1,7 @@
 package co.com.santander.core.domain.solicitud.dictum;
 
 
-import co.com.santander.adapters.dto.RequestHeader;
+import co.com.santander.dto.generic.RequestHeader;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

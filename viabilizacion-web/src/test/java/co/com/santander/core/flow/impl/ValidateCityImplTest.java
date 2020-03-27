@@ -1,11 +1,11 @@
 package co.com.santander.core.flow.impl;
 
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.dto.RequestHeader;
 import co.com.santander.dto.ciudad.ValidarCiudad;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.RequestHeader;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import co.com.santander.utils.impl.GenerateUniqueIdImpl;
 import org.junit.Assert;
@@ -48,7 +48,7 @@ public class ValidateCityImplTest {
     public void testValidateCityImplSuccess() {
         Long requestId = Long.valueOf("1");
         Cliente cliente = Cliente.builder()
-                .requestHeader(new co.com.santander.core.domain.solicitud.RequestHeader())
+                .requestHeader(new RequestHeader())
                 .tipoIdentificacion("CC")
                 .numeroIdentificacion("1015")
                 .nombres("Pepito")
@@ -72,7 +72,7 @@ public class ValidateCityImplTest {
     public void testValidateCityImplError() {
         Long requestId = Long.valueOf("1");
         Cliente cliente = Cliente.builder()
-                .requestHeader(new co.com.santander.core.domain.solicitud.RequestHeader())
+                .requestHeader(new RequestHeader())
                 .tipoIdentificacion("CC")
                 .numeroIdentificacion("1015")
                 .nombres("Pepito")

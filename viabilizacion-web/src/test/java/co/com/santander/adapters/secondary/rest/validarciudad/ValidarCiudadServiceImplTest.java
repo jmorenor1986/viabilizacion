@@ -1,12 +1,15 @@
 
 package co.com.santander.adapters.secondary.rest.validarciudad;
 
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.dto.RequestHeader;
+
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.dto.ciudad.ValidarCiudad;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.RequestHeader;
+import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.persistencia.constants.ServicioEnum;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,26 +33,29 @@ public class ValidarCiudadServiceImplTest {
     @Mock
     private JsonUtilities jsonUtilities;
 
+    private Optional<Map<String, String>> genericHeaders;
+
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
         properties = new ClientesProperties();
         properties.setUriValidarCiudad(URI);
         validarCiudadService = new ValidarCiudadServiceImpl(restService, properties, jsonUtilities);
+        //Generamos Cabeceras
+        Map<String, String> headers = new HashMap<>();
+        headers.put("idRequest", "123");
+        genericHeaders = Optional.of(headers);
     }
 
     @Test
     public void testValidarCiudadReturnTrue() {
-        Map<String, String> headers = new HashMap<>();
-        headers.put("idRequest", "123");
         GeneralPayload<ValidarCiudad> validaCiudad = GeneralPayload.<ValidarCiudad>builder()
                 .requestHeader(new RequestHeader())
                 .requestBody(ValidarCiudad.builder()
                         .ciudad(NOMBRE_CIUDAD)
                         .build())
                 .build();
-
-        Mockito.when(restService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("true"));
+        Mockito.when(restService.callService(validaCiudad, ServicioEnum.VALIDATE_CITY, genericHeaders ) ).thenReturn(Optional.of(ResponseDto.builder().codRespuesta("1").respuestaServicio("true").build()));
         String result = validarCiudadService.validarCodigoCiudad(validaCiudad, Long.valueOf("123"));
         Assert.assertEquals("false", result);
     }
@@ -65,7 +71,7 @@ public class ValidarCiudadServiceImplTest {
                         .build())
                 .build();
 
-        Mockito.when(restService.getWithPathParams(properties.getUriValidarCiudad(), new ArrayList<>(Arrays.asList(NOMBRE_CIUDAD)), Optional.of(headers))).thenReturn(Optional.of("false"));
+        Mockito.when(restService.callService(validaCiudad, ServicioEnum.VALIDATE_CITY, genericHeaders ) ).thenReturn(Optional.of(ResponseDto.builder().codRespuesta("1").respuestaServicio("false").build()));
         String result = validarCiudadService.validarCodigoCiudad(validaCiudad, Long.valueOf("123"));
         Assert.assertEquals("false", result);
     }

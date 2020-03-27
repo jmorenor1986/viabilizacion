@@ -1,10 +1,13 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.dto.RequestHeader;
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.core.domain.solicitud.dictum.Parametros;
+import co.com.santander.dto.dictum.ParametrosDTO;
+import co.com.santander.dto.dictum.RequestDictumDTO;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.RequestHeader;
+import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.persistencia.constants.ServicioEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,8 +40,8 @@ public class DictumTest_IT {
         requestHeader.setIpOrigen("127.0.0.1");
         requestHeader.setNumeroSolicitudCredito("00012");
         requestHeader.setSesionId("fb2e77d.47a0479900504cb3ab4a1f626d174d2d");
-        List<Parametros> parametros = new ArrayList<>();
-        Parametros parametro = new Parametros();
+        List<ParametrosDTO> parametros = new ArrayList<>();
+        ParametrosDTO parametro = new ParametrosDTO();
         parametro.setNombre("ANIO_NACIMIENTO");
         parametro.setTipo("T");
         parametro.setValor("1980");
@@ -54,7 +57,7 @@ public class DictumTest_IT {
         GeneralPayload<RequestDictumDTO> request = new GeneralPayload<>();
         request.setRequestBody(requestBody);
         request.setRequestHeader(requestHeader);
-        Optional<String> result = restService.postWithOutParams(properties.getUriDictum(), request, Optional.of(new HashMap<>()));
+        Optional<ResponseDto> result = restService.callService(request, ServicioEnum.DICTUM, Optional.of(new HashMap<>()));
         Assert.assertNotNull(result);
     }
 

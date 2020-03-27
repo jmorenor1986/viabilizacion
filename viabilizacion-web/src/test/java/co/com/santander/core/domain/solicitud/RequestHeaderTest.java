@@ -1,5 +1,6 @@
 package co.com.santander.core.domain.solicitud;
 
+import co.com.santander.dto.generic.RequestHeader;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
