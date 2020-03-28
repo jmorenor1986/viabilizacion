@@ -6,7 +6,7 @@ import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
 import co.com.santander.dto.dictum.PrincipalRequestDictumDTO;
 import co.com.santander.dto.generic.ResponseDto;
-import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.service.CacheUsrService;
 import co.com.santander.persistencia.service.ServicioService;
 import co.com.santander.ports.secondary.solicitud.DictumService;

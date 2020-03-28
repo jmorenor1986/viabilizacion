@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import co.com.santander.persistencia.constants.EstadoEnum;
+import co.com.santander.persistencia.common.EstadoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

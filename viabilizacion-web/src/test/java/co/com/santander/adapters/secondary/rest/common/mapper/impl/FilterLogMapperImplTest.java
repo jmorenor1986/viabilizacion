@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
