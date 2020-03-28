@@ -1,0 +1,8 @@
+server:
+  servlet:
+    context-path: /logsViabilizacion
+  port: 5003
+
+spring:
+  profiles:
+    active: dev

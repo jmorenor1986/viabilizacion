@@ -1,7 +1,7 @@
 package co.com.santander.core.services.log;
 
-import co.com.santander.persistencia.constants.FlowOperationEnum;
-import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
+import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.entity.ServicioEntity;
 import co.com.santander.persistencia.repository.ILogOperationRepository;
@@ -61,7 +61,7 @@ public class LogServiceImplTest {
 
     @Test
     public void testInsertaLogRestSuccess() {
-    	LogPayload logGeneral = LogPayload.builder()
+        LogPayload logGeneral = LogPayload.builder()
                 .url("http://localhost:5001/validacion/v1/ciudad/")
                 .fecha(new Date())
                 .httpStatus(HttpStatus.CONTINUE)

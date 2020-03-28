@@ -4,11 +4,10 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import co.com.santander.persistencia.common.EstadoEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
-
-import co.com.santander.persistencia.constants.EstadoEnum;
 import co.com.santander.persistencia.entity.CacheUsrEntity;
 
 @Repository

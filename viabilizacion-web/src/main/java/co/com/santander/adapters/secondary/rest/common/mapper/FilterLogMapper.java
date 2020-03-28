@@ -1,7 +1,6 @@
 package co.com.santander.adapters.secondary.rest.common.mapper;
 
-import co.com.santander.persistencia.constants.FlowOperationEnum;
-import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.service.dto.LogPayload;
 
 public interface FilterLogMapper {
