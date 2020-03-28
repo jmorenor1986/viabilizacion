@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.http.HttpStatus;
 
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.constants.FlowOperationEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.common.constants.ServicioEnum;
 import co.com.santander.persistencia.entity.ServicioEntity;
 
 @Repository

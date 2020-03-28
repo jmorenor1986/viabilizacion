@@ -11,6 +11,7 @@
     <artifactId>acceso-datos-logs-viabilizacion</artifactId>
     <properties>
         <start-class>co.com.santander.persistencia.LogsApplication</start-class>
+        <h2.version>1.4.200</h2.version>
     </properties>
     <dependencies>
         <!-- Acceso a datos -->
@@ -21,6 +22,13 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
