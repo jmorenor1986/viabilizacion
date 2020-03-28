@@ -55,13 +55,13 @@ servicios:
 
 
 vigia:
-  url: https://vigia.free.beeceptor.com
+  url: http://localhost:8080/vigia/
   service-name: vigia-service
 validarciudad:
   url: http://localhost:5001/validacion/v1/
   service-name: validar-ciudad-service
 dictum:
-  url: https://dictum.free.beeceptor.com/
+  url: http://localhost:8080/dictum/
   service-name: dictum-service
   parametros:
     clave: 06BRZ
@@ -74,4 +74,12 @@ reconocer:
   service-name: ubica-service
 bizagi:
   url: http://localhost:5002/bizagi/v1/
-  service: bizagi_service
+  service-name: bizagi-service
+
+logging:
+  level:
+    co:
+      com:
+        santander:
+          clients: DEBUG
+
