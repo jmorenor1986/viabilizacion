@@ -1,6 +1,7 @@
 package co.com.santander.adapters.secondary.rest.access.impl;
 
 import co.com.santander.adapters.secondary.rest.access.RestService;
+import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.clients.*;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
@@ -22,14 +23,16 @@ public class RestServiceImpl implements RestService {
     private final ReconocerClient reconocerClient;
     private final UbicaClient ubicaClient;
     private final BizagiClient bizagiClient;
+    private final JsonUtilities jsonUtilities;
 
     @Autowired
-    public RestServiceImpl(ValidateCityClient validateCityClient
+    public RestServiceImpl(JsonUtilities jsonUtilities, ValidateCityClient validateCityClient
             , VigiaClient vigiaClient
             , DictumClient dictumClient
             , ReconocerClient reconocerClient
             , UbicaClient ubicaClient
             , BizagiClient bizagiClient) {
+        this.jsonUtilities = jsonUtilities;
         this.validateCityClient = validateCityClient;
         this.vigiaClient = vigiaClient;
         this.dictumClient = dictumClient;
@@ -50,9 +53,11 @@ public class RestServiceImpl implements RestService {
             case VIGIA:
                 return Optional.of(vigiaClient.consultaVigia(request));
             case DICTUM:
-                return Optional.of(dictumClient.consultarHC2(request));
+                String rta = dictumClient.consultarHC2(request);
+                return Optional.of(jsonUtilities.getGeneralResponse(rta));
             case TOKEN_RECONOCER:
-                return Optional.of(reconocerClient.obtenerToken(request));
+                String rtaToken = reconocerClient.obtenerToken(request);
+                return Optional.of(jsonUtilities.getGeneralResponse(rtaToken));
             case RECONOCER:
                 return Optional.of(reconocerClient.firmaElectronica(request));
             case UBICA:

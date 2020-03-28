@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface DictumClient {
 
     @RequestMapping(value = "/consultarHC2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseDto consultarHC2(@RequestBody GeneralPayload<RequestDictumDTO> request);
+    String consultarHC2(@RequestBody GeneralPayload<RequestDictumDTO> request);
 }

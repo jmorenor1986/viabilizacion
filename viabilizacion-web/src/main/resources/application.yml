@@ -67,7 +67,7 @@ dictum:
     clave: 06BRZ
     producto: 64
 ubica:
-  url: https://ubica.free.beeceptor.com
+  url:  http://localhost:8080/ubica/
   service-name: ubica-service
 reconocer:
   url: http://localhost:8080/reconocer/

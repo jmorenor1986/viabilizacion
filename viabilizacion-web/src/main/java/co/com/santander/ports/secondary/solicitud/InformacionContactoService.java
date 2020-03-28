@@ -28,8 +28,7 @@ public interface InformacionContactoService {
 
 
     default String extractTokenReconocer(String response){
-        ResponseDto responseDto = getJsonUtilities().getGeneralResponse(response);
-        String respuestaServicio = responseDto.getRespuestaServicio();
+        String respuestaServicio = response;
         //Eliminar caracteres extranios
         Integer inicio = respuestaServicio.indexOf("{");
         Integer fin = respuestaServicio.indexOf("}");

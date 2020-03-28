@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ReconocerClient {
 
     @RequestMapping(value = "/obtenerToken", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseDto obtenerToken(@RequestBody GeneralPayload<String> request);
+    String obtenerToken(@RequestBody GeneralPayload<String> request);
 
     @RequestMapping(value = "/consultaReconocer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseDto firmaElectronica(@RequestBody GeneralPayload<String> request);
