@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
-import co.com.santander.persistencia.common.constants.FlowOperationEnum;
-import co.com.santander.persistencia.common.constants.ServicioEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
+import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.entity.PrincipalRequest;
 import co.com.santander.persistencia.entity.ServicioEntity;

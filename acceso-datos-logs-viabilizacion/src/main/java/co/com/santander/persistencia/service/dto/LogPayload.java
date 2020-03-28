@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.http.HttpStatus;
 
-import co.com.santander.persistencia.common.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

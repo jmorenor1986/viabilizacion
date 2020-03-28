@@ -1,4 +1,4 @@
-package co.com.santander.persistencia.common.constants;
+package co.com.santander.persistencia.common;
 
 public enum ServicioEnum {
 	VALIDATE_CITY, DICTUM, VIGIA, RECONOCER, UBICA, BIZAGI, NO_APLICA

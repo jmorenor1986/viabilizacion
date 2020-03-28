@@ -3,11 +3,11 @@ package co.com.santander.persistencia.service.impl;
 import java.util.Date;
 import java.util.Optional;
 
+import co.com.santander.persistencia.common.EstadoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.com.santander.persistencia.common.constants.EstadoEnum;
-import co.com.santander.persistencia.common.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.entity.CacheUsrEntity;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.repository.ICacheUsrRepository;
