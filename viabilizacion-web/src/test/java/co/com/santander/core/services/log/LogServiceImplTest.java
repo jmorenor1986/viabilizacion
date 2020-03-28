@@ -13,8 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import co.com.santander.persistencia.constants.FlowOperationEnum;
-import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
+import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.entity.ServicioEntity;
 import co.com.santander.persistencia.repository.ILogOperationRepository;

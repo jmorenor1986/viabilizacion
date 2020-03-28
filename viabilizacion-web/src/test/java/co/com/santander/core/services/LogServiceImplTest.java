@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.repository.ILogOperationRepository;
 import co.com.santander.persistencia.repository.IServicioRepository;
 import co.com.santander.persistencia.service.CacheUsrService;

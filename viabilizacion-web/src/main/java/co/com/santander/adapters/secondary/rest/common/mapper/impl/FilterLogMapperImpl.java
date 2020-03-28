@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.service.dto.LogPayload;
 
 @Component

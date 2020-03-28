@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 
 import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.service.LogService;
 import co.com.santander.persistencia.service.dto.LogPayload;
 import lombok.Getter;

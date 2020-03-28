@@ -13,7 +13,7 @@ import co.com.santander.core.domain.solicitud.ClienteValidator;
 import co.com.santander.core.errors.MandatoryFieldException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.entity.PrincipalRequest;
 import co.com.santander.persistencia.service.LogService;
 import co.com.santander.persistencia.service.PrincipalRequestService;

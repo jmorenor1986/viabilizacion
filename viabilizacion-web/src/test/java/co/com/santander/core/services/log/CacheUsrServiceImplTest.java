@@ -11,8 +11,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import co.com.santander.persistencia.constants.EstadoEnum;
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.entity.CacheUsrEntity;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.entity.ServicioEntity;

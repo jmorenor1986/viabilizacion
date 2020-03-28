@@ -13,7 +13,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpResponse;
 
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 
 @SpringBootTest
 public class FilterLogMapperImplTest {

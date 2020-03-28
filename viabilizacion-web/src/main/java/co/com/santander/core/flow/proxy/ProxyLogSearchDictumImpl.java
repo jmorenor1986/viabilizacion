@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.service.LogService;
 import co.com.santander.persistencia.service.dto.LogPayload;
 import lombok.Getter;

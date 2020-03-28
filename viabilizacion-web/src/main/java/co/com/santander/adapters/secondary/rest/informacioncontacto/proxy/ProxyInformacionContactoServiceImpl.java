@@ -16,7 +16,7 @@ import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.Principa
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
-import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.service.CacheUsrService;
 import co.com.santander.persistencia.service.ServicioService;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
