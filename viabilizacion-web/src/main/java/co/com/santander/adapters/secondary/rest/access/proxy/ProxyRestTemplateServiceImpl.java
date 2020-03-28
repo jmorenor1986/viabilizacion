@@ -34,8 +34,6 @@ public class ProxyRestTemplateServiceImpl implements RestService {
     @Getter @Setter
     private Optional<Map<String, String>> headers;
     @Getter @Setter
-    private String uri;
-    @Getter @Setter
     private String body;
     @Getter @Setter
     private FlowOperationEnum operation;
@@ -51,22 +49,21 @@ public class ProxyRestTemplateServiceImpl implements RestService {
     }
 
 
-    private void generateLog(String uri, Object body, Optional<Map<String, String>> headers ){
+    private void generateLog(Object body, Optional<Map<String, String>> headers, ServicioEnum servicio ){
         setHeaders(headers);
-        setUri(uri);
         setBody(new Gson().toJson(body));
 
         findHeadersLog();
-        logRequest();
+        logRequest(servicio);
     }
 
-    private void logResponse(String body) {
-        LogPayload logEntity = filterLogMapper.toLogResponse(getOperation(), getIdRequest(), body, getUri());
+    private void logResponse(String body, ServicioEnum servicio) {
+        LogPayload logEntity = filterLogMapper.toLogResponse(servicio, body, getIdRequest());
         logService.insertaLogRest(logEntity, getIdCache());
     }
 
-    private void logRequest(){
-    	LogPayload logEntity = filterLogMapper.toLogRequest(getUri(), getBody() , getIdRequest());
+    private void logRequest(ServicioEnum servicio){
+    	LogPayload logEntity = filterLogMapper.toLogRequest(servicio, getBody() , getIdRequest());
         setOperation( logEntity.getTipo() );
         logService.insertaLogRest(logEntity, getIdCache());
     }
@@ -84,9 +81,9 @@ public class ProxyRestTemplateServiceImpl implements RestService {
 
     @Override
     public Optional<ResponseDto> callService(GeneralPayload request, ServicioEnum servicio, Optional<Map<String, String>> cache) {
-        generateLog(uri,request, cache);
+        generateLog(request, cache, servicio);
         Optional<ResponseDto> rta = restService.callService(request, servicio, cache);
-        logResponse(new Gson().toJson(rta.get()));
+        logResponse(new Gson().toJson(rta.get()), servicio);
         return rta.isPresent() ? rta : Optional.empty();
     }
 }
