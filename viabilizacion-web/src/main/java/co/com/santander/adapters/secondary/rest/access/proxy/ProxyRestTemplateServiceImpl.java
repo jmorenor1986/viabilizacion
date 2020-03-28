@@ -1,16 +1,18 @@
 package co.com.santander.adapters.secondary.rest.access.proxy;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import co.com.santander.adapters.secondary.rest.access.RestService;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.persistencia.constants.ServicioEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
 import co.com.santander.persistencia.constants.FlowOperationEnum;
 import co.com.santander.persistencia.service.LogService;
@@ -18,10 +20,10 @@ import co.com.santander.persistencia.service.dto.LogPayload;
 import lombok.Getter;
 import lombok.Setter;
 
-@Service("proxyRestTemplateServiceImpl")
-public class ProxyRestTemplateServiceImpl implements RestTemplateService {
+@Service("proxyRestServiceImpl")
+public class ProxyRestTemplateServiceImpl implements RestService {
 
-    private RestTemplateService restTemplateService;
+    private RestService restService;
     private LogService logService;
     private FilterLogMapper filterLogMapper;
 
@@ -32,70 +34,36 @@ public class ProxyRestTemplateServiceImpl implements RestTemplateService {
     @Getter @Setter
     private Optional<Map<String, String>> headers;
     @Getter @Setter
-    private String uri;
-    @Getter @Setter
     private String body;
     @Getter @Setter
     private FlowOperationEnum operation;
 
 
     @Autowired
-    public ProxyRestTemplateServiceImpl(@Qualifier("restTemplateServiceImpl") RestTemplateService restTemplateService
+    public ProxyRestTemplateServiceImpl(@Qualifier("restServiceImpl") RestService restService
             , LogService logService
             , FilterLogMapper filterLogMapper) {
-        this.restTemplateService = restTemplateService;
+        this.restService = restService;
         this.logService = logService;
         this.filterLogMapper = filterLogMapper;
     }
 
-    @Override
-    public Optional<String> getWithPathParams(String uri, List<String> pathParams, Optional<Map<String, String>> headers) {
-        generateLog(uri,pathParams, headers);
-        Optional<String> rta = restTemplateService.getWithPathParams(uri, pathParams, headers);
-        logResponse(rta.get());
-        return rta.isPresent() ? rta : Optional.empty();
-    }
 
-    @Override
-    public Optional<String> postWithOutParams(String uri, Object request, Optional<Map<String, String>> headers) {
-        generateLog(uri,request, headers);
-        Optional<String> rta = restTemplateService.postWithOutParams(uri, request, headers);
-        logResponse(rta.get());
-        return rta.isPresent() ? rta : Optional.empty();
-    }
-
-    @Override
-    public Optional<String> getWithOutParams(String uri, Object request, Optional<Map<String, String>> headers) {
-        generateLog(uri,request, headers);
-        Optional<String> rta = restTemplateService.getWithOutParams(uri, request, headers);
-        logResponse(rta.get());
-        return rta.isPresent() ? rta : Optional.empty();
-    }
-
-    @Override
-    public Optional<String> getWithParams(String uri, Map<String, Object> params, Optional<Map<String, String>> headers) {
-        generateLog(uri,params, headers);
-        Optional<String> rta = restTemplateService.getWithParams(uri, params, headers);
-        logResponse(rta.get());
-        return rta.isPresent() ? rta : Optional.empty();
-    }
-
-    private void generateLog(String uri, Object body, Optional<Map<String, String>> headers ){
+    private void generateLog(Object body, Optional<Map<String, String>> headers, ServicioEnum servicio ){
         setHeaders(headers);
-        setUri(uri);
         setBody(new Gson().toJson(body));
 
         findHeadersLog();
-        logRequest();
+        logRequest(servicio);
     }
 
-    private void logResponse(String body) {
-        LogPayload logEntity = filterLogMapper.toLogResponse(getOperation(), getIdRequest(), body, getUri());
+    private void logResponse(String body, ServicioEnum servicio) {
+        LogPayload logEntity = filterLogMapper.toLogResponse(servicio, body, getIdRequest());
         logService.insertaLogRest(logEntity, getIdCache());
     }
 
-    private void logRequest(){
-    	LogPayload logEntity = filterLogMapper.toLogRequest(getUri(), getBody() , getIdRequest());
+    private void logRequest(ServicioEnum servicio){
+    	LogPayload logEntity = filterLogMapper.toLogRequest(servicio, getBody() , getIdRequest());
         setOperation( logEntity.getTipo() );
         logService.insertaLogRest(logEntity, getIdCache());
     }
@@ -111,4 +79,11 @@ public class ProxyRestTemplateServiceImpl implements RestTemplateService {
         }
     }
 
+    @Override
+    public Optional<ResponseDto> callService(GeneralPayload request, ServicioEnum servicio, Optional<Map<String, String>> cache) {
+        generateLog(request, cache, servicio);
+        Optional<ResponseDto> rta = restService.callService(request, servicio, cache);
+        logResponse(new Gson().toJson(rta.get()), servicio);
+        return rta.isPresent() ? rta : Optional.empty();
+    }
 }

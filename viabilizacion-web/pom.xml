@@ -23,25 +23,19 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-        <!-- Acceso a datos -->
-        <!-- dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency-->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            
         </dependency>
         <dependency>
-        	<groupId>co.com.santander</groupId>
-        	<artifactId>acceso-datos-logs-viabilizacion</artifactId>
-        	<version>1.0.6</version>
+            <groupId>co.com.santander</groupId>
+            <artifactId>acceso-datos-logs-viabilizacion</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>co.com.santander</groupId>
+            <artifactId>clientes-viabilizacion</artifactId>
+            <version>1.0.6</version>
         </dependency>
     </dependencies>
     <build>
@@ -83,14 +77,18 @@
                                         <exclude>co.com.santander.core.domain.solicitud.dictum.Dictum</exclude>
                                         <exclude>co.com.santander.core.domain.solicitud.RequestHeader</exclude>
                                         <exclude>co.com.santander.core.services.solicitud.MapperClienteImpl</exclude>
-                                        <exclude>co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO</exclude>
+                                        <exclude>co.com.santander.dto.dictum.RequestDictumDTO
+                                        </exclude>
                                         <exclude>
                                             co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto
                                         </exclude>
                                         <exclude>co.com.santander.config.*</exclude>
                                         <exclude>co.com.santander.utils.impl.GenerateUniqueIdImpl</exclude>
-                                        <exclude>co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor</exclude>
-                                        <exclude>co.com.santander.core.errors.CustomResponseEntityExceptionHandler</exclude>
+                                        <exclude>
+                                            co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor
+                                        </exclude>
+                                        <exclude>co.com.santander.core.errors.CustomResponseEntityExceptionHandler
+                                        </exclude>
                                     </excludes>
                                     <limits>
                                         <limit>

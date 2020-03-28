@@ -1,7 +1,12 @@
 package co.com.santander.core.services;
 
-import java.util.Date;
-
+import co.com.santander.persistencia.constants.FlowOperationEnum;
+import co.com.santander.persistencia.repository.ILogOperationRepository;
+import co.com.santander.persistencia.repository.IServicioRepository;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.service.LogService;
+import co.com.santander.persistencia.service.dto.LogPayload;
+import co.com.santander.persistencia.service.impl.LogServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,13 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import co.com.santander.persistencia.constants.FlowOperationEnum;
-import co.com.santander.persistencia.repository.ILogOperationRepository;
-import co.com.santander.persistencia.repository.IServicioRepository;
-import co.com.santander.persistencia.service.CacheUsrService;
-import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.service.dto.LogPayload;
-import co.com.santander.persistencia.service.impl.LogServiceImpl;
+import java.util.Date;
 
 @SpringBootTest
 public class LogServiceImplTest {

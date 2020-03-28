@@ -1,5 +1,6 @@
 package co.com.santander.adapters.secondary.rest.dictum.dto;
 
+import co.com.santander.dto.dictum.PrincipalRequestDictumDTO;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

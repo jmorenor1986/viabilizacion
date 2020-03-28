@@ -98,5 +98,6 @@
         <module>acceso-datos-ciudad-web</module>
         <module>bizagi-web</module>
         <module>acceso-datos-logs-viabilizacion</module>
+        <module>clientes-viabilizacion</module>
     </modules>
 </project>

@@ -53,7 +53,33 @@ servicios:
     tipoIdentificacion: CC
     identificacion: 1040
 
+
+vigia:
+  url: http://localhost:8080/vigia/
+  service-name: vigia-service
+validarciudad:
+  url: http://localhost:5001/validacion/v1/
+  service-name: validar-ciudad-service
 dictum:
+  url: http://localhost:8080/dictum/
+  service-name: dictum-service
   parametros:
     clave: 06BRZ
     producto: 64
+ubica:
+  url:  http://localhost:8080/ubica/
+  service-name: ubica-service
+reconocer:
+  url: http://localhost:8080/reconocer/
+  service-name: ubica-service
+bizagi:
+  url: http://localhost:5002/bizagi/v1/
+  service-name: bizagi-service
+
+logging:
+  level:
+    co:
+      com:
+        santander:
+          clients: DEBUG
+

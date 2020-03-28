@@ -1,11 +1,11 @@
 package co.com.santander.core.flow.impl;
 
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.dto.RequestHeader;
-import co.com.santander.adapters.secondary.rest.validarciudad.dto.ValidarCiudad;
+
+import co.com.santander.dto.ciudad.ValidarCiudad;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,7 +56,7 @@ public class ValidateCityImpl implements ValidateRequest {
 
     public String callService(){
         return validarCiudadService.validarCodigoCiudad(GeneralPayload.<ValidarCiudad>builder()
-                .requestHeader(mapper.map(getCliente().getRequestHeader(), RequestHeader.class))
+                .requestHeader(getCliente().getRequestHeader())
                 .requestBody(ValidarCiudad.builder()
                         .ciudad(getCliente().getCiudad())
                         .build())

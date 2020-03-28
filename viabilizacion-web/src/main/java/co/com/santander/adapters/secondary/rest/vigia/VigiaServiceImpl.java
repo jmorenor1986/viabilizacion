@@ -1,17 +1,19 @@
 package co.com.santander.adapters.secondary.rest.vigia;
 
-import co.com.santander.adapters.dto.GeneralPayload;
+
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
-import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.adapters.secondary.rest.common.properties.VigiaProperties;
 import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
-import co.com.santander.adapters.secondary.rest.vigia.dto.VigiaDTO;
 import co.com.santander.adapters.secondary.rest.vigia.mapper.VigiaMapperImpl;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
+import co.com.santander.dto.vigia.VigiaDTO;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.persistencia.constants.ServicioEnum;
 import co.com.santander.ports.secondary.solicitud.VigiaService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +26,17 @@ import java.util.Optional;
 @Service("vigiaServiceImpl")
 public class VigiaServiceImpl extends ServiceRestAbs implements VigiaService {
 
-    private final RestTemplateService restTemplateService;
+    private final RestService restService;
     private final ClientesProperties properties;
     private final VigiaProperties vigiaProperties;
     private final VigiaMapperImpl vigiaMapper;
 
     @Autowired
-    public VigiaServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities, VigiaMapperImpl vigiaMapper) {
-        this.restTemplateService = restTemplateService;
+    public VigiaServiceImpl(@Qualifier("proxyRestServiceImpl") RestService restService
+            , ClientesProperties properties
+            , JsonUtilities jsonUtilities
+            , VigiaMapperImpl vigiaMapper) {
+        this.restService = restService;
         this.properties = properties;
         this.vigiaProperties = properties.getVigiaProperties();
         this.jsonUtilities = jsonUtilities;
@@ -46,11 +51,10 @@ public class VigiaServiceImpl extends ServiceRestAbs implements VigiaService {
                 .tipoIdentificacion(datosBasicosCliente.getTipoIdentificacion())
                 .numeroIdentificacion(datosBasicosCliente.getNumeroIdentificacion())
                 .build()));
-        ResponseDto result = extractGenericResponse(restTemplateService.postWithOutParams(vigiaProperties.getUriVigia(), request, headersMap).get());
-        if(result.getCodRespuesta().equalsIgnoreCase("1")){
-            return buscarRespuesta(result.getRespuestaServicio());
+        Optional<ResponseDto> result = restService.callService(request, ServicioEnum.VIGIA, headersMap);
+        if(result.isPresent() && result.get().getCodRespuesta().equalsIgnoreCase("1")){
+            return buscarRespuesta(result.get().getRespuestaServicio());
         }
         return ListaCliente.builder().build();
     }
-
 }

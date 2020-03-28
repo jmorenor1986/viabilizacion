@@ -5,16 +5,21 @@ import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
 
 public interface VigiaService {
-    //Metodo principal de la interfaz
+    /**
+     * Metodo encargado de retornar el objeto solicitado por vigia
+     * @param datosBasicosCliente
+     * @param idRequest
+     * @return
+     */
     ListaCliente consultarListasCliente(Cliente datosBasicosCliente, Long idRequest);
 
     JsonUtilities getJsonUtilities();
 
-    default ListaCliente buscarRespuesta(String objeto){
+    default ListaCliente buscarRespuesta(String respuestaServicio){
         return ListaCliente.builder()
-                .resultado(getJsonUtilities().getPropertyObjectWithKey("Data.", "Listas", objeto))
-                .encontradoId(getJsonUtilities().getPropertyObjectWithKey("Data.", "EncontradoID", objeto))
-                .encontradoNombre(getJsonUtilities().getPropertyObjectWithKey("Data.", "EncontradoNombre", objeto))
+                .resultado(getJsonUtilities().getPropertyObjectWithKey("Data.", "Listas", respuestaServicio))
+                .encontradoId(getJsonUtilities().getPropertyObjectWithKey("Data.", "EncontradoID", respuestaServicio))
+                .encontradoNombre(getJsonUtilities().getPropertyObjectWithKey("Data.", "EncontradoNombre", respuestaServicio))
                 .build();
     }
 }

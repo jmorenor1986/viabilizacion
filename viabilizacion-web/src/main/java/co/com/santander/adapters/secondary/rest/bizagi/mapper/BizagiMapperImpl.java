@@ -1,9 +1,9 @@
 package co.com.santander.adapters.secondary.rest.bizagi.mapper;
 
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.bizagi.dto.BizagiDTO;
+import co.com.santander.dto.bizagi.BizagiDTO;
 import co.com.santander.adapters.secondary.rest.common.mapper.RestRequestMapper;
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.dto.generic.GeneralPayload;
 import org.springframework.stereotype.Service;
 
 @Service

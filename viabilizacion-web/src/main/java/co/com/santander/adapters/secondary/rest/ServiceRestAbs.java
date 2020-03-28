@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
-import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
+import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.persistencia.constants.ServicioEnum;
 import co.com.santander.persistencia.entity.ServicioEntity;
 import co.com.santander.persistencia.service.CacheUsrService;
