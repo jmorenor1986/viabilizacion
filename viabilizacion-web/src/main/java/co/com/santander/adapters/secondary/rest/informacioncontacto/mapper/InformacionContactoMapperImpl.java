@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.informacioncontacto.mapper;
 
 import co.com.santander.adapters.secondary.rest.common.mapper.RestRequestMapper;
-import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.InformacionContactoDTO;
+import co.com.santander.dto.reconocer.InformacionContactoDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.dto.generic.GeneralPayload;

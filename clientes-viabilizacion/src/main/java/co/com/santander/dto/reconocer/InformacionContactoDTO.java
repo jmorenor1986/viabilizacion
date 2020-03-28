@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.informacioncontacto.dto;
+package co.com.santander.dto.reconocer;
 
 import lombok.Builder;
 import lombok.Data;

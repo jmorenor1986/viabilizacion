@@ -2,7 +2,7 @@ package co.com.santander.adapters.secondary.rest.informacioncontacto.proxy;
 
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
-import co.com.santander.adapters.secondary.rest.informacioncontacto.dto.PrincipalReconocerDTO;
+import co.com.santander.dto.reconocer.PrincipalReconocerDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
