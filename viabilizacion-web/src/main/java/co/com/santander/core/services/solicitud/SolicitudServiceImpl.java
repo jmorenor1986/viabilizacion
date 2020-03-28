@@ -1,13 +1,5 @@
 package co.com.santander.core.services.solicitud;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import com.google.gson.Gson;
-
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ClienteValidator;
 import co.com.santander.core.errors.MandatoryFieldException;
@@ -19,8 +11,14 @@ import co.com.santander.persistencia.service.LogService;
 import co.com.santander.persistencia.service.PrincipalRequestService;
 import co.com.santander.persistencia.service.dto.LogPayload;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
+import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class SolicitudServiceImpl implements SolicitudService {

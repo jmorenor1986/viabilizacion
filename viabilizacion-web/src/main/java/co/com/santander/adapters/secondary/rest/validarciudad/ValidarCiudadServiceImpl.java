@@ -1,12 +1,13 @@
 package co.com.santander.adapters.secondary.rest.validarciudad;
 
-import co.com.santander.adapters.dto.GeneralPayload;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
-import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.adapters.secondary.rest.validarciudad.dto.ValidarCiudad;
+import co.com.santander.dto.ciudad.ValidarCiudad;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.persistencia.constants.ServicioEnum;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
@@ -20,12 +21,12 @@ import java.util.Optional;
 @Service
 public class ValidarCiudadServiceImpl extends ServiceRestAbs implements ValidarCiudadService {
 
-    private final RestTemplateService restTemplateService;
+    private final RestService restService;
     private final ClientesProperties clientesProperties;
 
     @Autowired
-    public ValidarCiudadServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties properties, JsonUtilities jsonUtilities) {
-        this.restTemplateService = restTemplateService;
+    public ValidarCiudadServiceImpl(@Qualifier("restServiceImpl") RestService restService, ClientesProperties properties, JsonUtilities jsonUtilities) {
+        this.restService = restService;
         this.clientesProperties = properties;
         this.jsonUtilities = jsonUtilities;
     }
@@ -36,19 +37,18 @@ public class ValidarCiudadServiceImpl extends ServiceRestAbs implements ValidarC
                 .key("idRequest")
                 .value(idRequest.toString())
                 .build());
-        Optional<String> responseService = restTemplateService.postWithOutParams(clientesProperties.getUriValidarCiudad()
-                , ciudad
+        Optional<ResponseDto> responseService = restService.callService(ciudad
+                , ServicioEnum.VALIDATE_CITY
                 , headers
         );
-        return extractResult(responseService.isPresent() ? responseService.get() : "");
+        return extractResult(responseService.isPresent() ? responseService.get().getRespuestaServicio() : "");
     }
 
-    private String extractResult(String json) {
-        if ("".equalsIgnoreCase(json)) {
+    private String extractResult(String respuesta) {
+        if ("".equalsIgnoreCase(respuesta)) {
             return "false";
         }
-        ResponseDto responseDto = extractGenericResponse(json);
-        return responseDto.getRespuestaServicio();
+        return respuesta;
     }
 
 }

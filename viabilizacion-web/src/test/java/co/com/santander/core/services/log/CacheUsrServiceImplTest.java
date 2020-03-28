@@ -1,7 +1,13 @@
 package co.com.santander.core.services.log;
 
-import java.util.Date;
-
+import co.com.santander.persistencia.common.EstadoEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
+import co.com.santander.persistencia.entity.CacheUsrEntity;
+import co.com.santander.persistencia.entity.LogEntity;
+import co.com.santander.persistencia.entity.ServicioEntity;
+import co.com.santander.persistencia.repository.ICacheUsrRepository;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.service.impl.CacheUsrServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,13 +17,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import co.com.santander.persistencia.common.FlowOperationEnum;
-import co.com.santander.persistencia.entity.CacheUsrEntity;
-import co.com.santander.persistencia.entity.LogEntity;
-import co.com.santander.persistencia.entity.ServicioEntity;
-import co.com.santander.persistencia.repository.ICacheUsrRepository;
-import co.com.santander.persistencia.service.CacheUsrService;
-import co.com.santander.persistencia.service.impl.CacheUsrServiceImpl;
+import java.util.Date;
 
 @SpringBootTest
 public class CacheUsrServiceImplTest {
@@ -27,13 +27,13 @@ public class CacheUsrServiceImplTest {
     private ICacheUsrRepository cacheUsrRepository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         this.cacheUsrService = new CacheUsrServiceImpl(cacheUsrRepository);
     }
 
     @Test
-    public void test(){
+    public void test() {
         LogEntity logEntity = LogEntity.builder()
                 .id(Long.valueOf("1"))
                 .fecha(new Date())
@@ -49,7 +49,7 @@ public class CacheUsrServiceImplTest {
                 .tipo("REQUEST")
                 .build();
         Mockito.when(cacheUsrRepository.save(cacheUsrEntity)).thenReturn(cacheUsrEntity);
-        CacheUsrEntity cache =  this.cacheUsrService.insertLogCacheUsr(logEntity, "{}");
+        CacheUsrEntity cache = this.cacheUsrService.insertLogCacheUsr(logEntity, "{}");
         Assert.assertNotNull(cache);
     }
 }

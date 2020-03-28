@@ -1,21 +1,19 @@
 package co.com.santander.core.flow.proxy;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
-import com.google.gson.Gson;
-
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.service.LogService;
 import co.com.santander.persistencia.service.dto.LogPayload;
+import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component("proxyLogSearchBizagi")
 public class ProxyLogSearchBizagi implements ValidateRequest {

@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.informacioncontacto;
 
 import co.com.santander.adapters.secondary.rest.MockGenericRequestClient;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
+import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilitiesImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
@@ -12,6 +12,7 @@ import co.com.santander.adapters.secondary.rest.informacioncontacto.mapper.Infor
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
+import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -34,7 +35,7 @@ public class InformacionContactoServiceImplTest {
     private ClientesProperties properties;
 
     @Mock
-    private RestTemplateService restTemplateService;
+    private RestService restService;
 
     private Map<String, String> headers;
 
@@ -83,22 +84,19 @@ public class InformacionContactoServiceImplTest {
         properties.setInformacionContactoProperties(informacionContactoProperties);
         properties.setReconocerProperties(reconocerProperties);
         properties.setUbicaProperties(ubicaProperties);
-        informacionContactoService = new InformacionContactoServiceImpl(restTemplateService, properties, jsonUtilities, informacionContactoMapper);
+        informacionContactoService = new InformacionContactoServiceImpl(restService, properties, jsonUtilities, informacionContactoMapper);
         headers = new HashMap<>();
         headers.put("idRequest", "123");
     }
 
     @Test
     public void testReturnTelefonosOrDireccionesReconocer() {
-        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockReconocerService.response));
+        Mockito.when(restService.callService(Mockito.any(), Mockito.any(), Mockito.any()))
+                .thenReturn(Optional.of(ResponseDto.builder().codRespuesta("1")
+                        .respuestaServicio(MockReconocerService.response)
+                        .build()));
         Optional<ResponseInformacionContacto> result = informacionContactoService.consultarDatosUsuario(cliente, informacionContacto, 1L);
         Assert.assertNotNull(result);
     }
 
-    @Test
-    public void testConsultarTelefonosDireccionesUbica() {
-        Mockito.when(restTemplateService.postWithOutParams(Mockito.anyString(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(MockUbicaService.response));
-        Optional<ResponseInformacionContacto> result = informacionContactoService.consultarInformacionContacto(cliente, informacionContacto, 1L);
-        Assert.assertNotNull(result);
-    }
 }

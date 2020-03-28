@@ -1,5 +1,6 @@
 package co.com.santander.adapters.dto;
 
+import co.com.santander.dto.generic.GeneralPayload;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

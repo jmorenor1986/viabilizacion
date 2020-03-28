@@ -6,6 +6,7 @@ import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInform
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
+import co.com.santander.ports.secondary.solicitud.UbicaService;
 import co.com.santander.utils.ValidatorInformacionContacto;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,14 +26,14 @@ public class SearchUbicaImpl implements ValidateRequest {
 	private Cliente cliente;
 	@Getter @Setter
 	private Long idRequest;
-
-	private InformacionContactoService informacionContactoService;
+	private UbicaService ubicaService;
 	
 	@Autowired
-	public SearchUbicaImpl(@Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequest, @Qualifier("proxyInformacionContactoServiceImpl") InformacionContactoService informacionContactoService) {
+	public SearchUbicaImpl(@Qualifier("proxyLogSearchBizagi")ValidateRequest validateRequest
+			, @Qualifier("proxyUbicaServiceImpl") UbicaService ubicaService ) {
 		super();
 		this.validateRequest = validateRequest;
-		this.informacionContactoService = informacionContactoService;
+		this.ubicaService = ubicaService;
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public class SearchUbicaImpl implements ValidateRequest {
 	}
 
 	public void callService(){
-		Optional<ResponseInformacionContacto> respuesta = informacionContactoService.consultarInformacionContacto(getCliente(), InformacionContacto.builder().build(), getIdRequest());
+		Optional<ResponseInformacionContacto> respuesta = ubicaService.consultarInformacionContacto(getCliente(), InformacionContacto.builder().build(), getIdRequest());
 		if(respuesta.isPresent()){
 			getCliente().setValidaUbica(ValidatorInformacionContacto.builder().build().evaluaDatosContacto(respuesta.get(),cliente));
 		}

@@ -1,37 +1,36 @@
 package co.com.santander.adapters.secondary.rest.dictum;
 
-import java.util.Map;
-import java.util.Optional;
-
+import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
+import co.com.santander.adapters.secondary.rest.access.RestService;
+import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.adapters.secondary.rest.common.mapper.impl.DictumMapperImpl;
+import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
+import co.com.santander.dto.dictum.RequestDictumDTO;
+import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.dictum.Dictum;
+import co.com.santander.dto.dictum.PrincipalRequestDictumDTO;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.ports.secondary.solicitud.DictumService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
-import co.com.santander.adapters.secondary.rest.access.RestTemplateService;
-import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
-import co.com.santander.adapters.secondary.rest.common.dto.ResponseDto;
-import co.com.santander.adapters.secondary.rest.common.mapper.impl.DictumMapperImpl;
-import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.adapters.secondary.rest.dictum.dto.PrincipalRequestDictumDTO;
-import co.com.santander.adapters.secondary.rest.dictum.dto.RequestDictumDTO;
-import co.com.santander.core.domain.solicitud.Cliente;
-import co.com.santander.core.domain.solicitud.dictum.Dictum;
-import co.com.santander.ports.secondary.solicitud.DictumService;
+import java.util.Map;
+import java.util.Optional;
 
 @Service("dictumServiceImpl")
 public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
 
-    private final RestTemplateService restTemplateService;
+    private final RestService restService;
     private final ClientesProperties clientesProperties;
     private final DictumMapperImpl dictumMapper;
 
     @Autowired
-    public DictumServiceImpl(@Qualifier("proxyRestTemplateServiceImpl") RestTemplateService restTemplateService, ClientesProperties clientesProperties, DictumMapperImpl dictumMapper, JsonUtilities jsonUtilities) {
-        this.restTemplateService = restTemplateService;
+    public DictumServiceImpl(@Qualifier("proxyRestServiceImpl") RestService restService, ClientesProperties clientesProperties, DictumMapperImpl dictumMapper, JsonUtilities jsonUtilities) {
+        this.restService = restService;
         this.clientesProperties = clientesProperties;
         this.dictumMapper = dictumMapper;
         this.jsonUtilities = jsonUtilities;
@@ -48,9 +47,9 @@ public class DictumServiceImpl extends ServiceRestAbs implements DictumService {
                 .ingresos(cliente.getIngresos())
                 .actividadEconomica(cliente.getActividad())
                 .build()));
-        ResponseDto result = extractGenericResponse(restTemplateService.postWithOutParams(clientesProperties.getUriDictum(), requestDictumDTO, headersMap).get());
-        if (result.getCodRespuesta().equalsIgnoreCase("1"))
-            return consultarDecisionDictum(result.getRespuestaServicio());
+        Optional<ResponseDto> result = restService.callService(requestDictumDTO, ServicioEnum.DICTUM, headersMap);
+        if (result.isPresent() && "1".equalsIgnoreCase(result.get().getCodRespuesta()))
+            return consultarDecisionDictum(result.get().getRespuestaServicio());
         return Optional.empty();
     }
 

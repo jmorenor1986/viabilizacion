@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest;
 
 import co.com.santander.core.domain.solicitud.Cliente;
-import co.com.santander.core.domain.solicitud.RequestHeader;
+import co.com.santander.dto.generic.RequestHeader;
 
 public class MockGenericRequestClient {
 

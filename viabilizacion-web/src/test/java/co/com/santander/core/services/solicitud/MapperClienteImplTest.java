@@ -1,8 +1,9 @@
 package co.com.santander.core.services.solicitud;
 
-import co.com.santander.adapters.dto.GeneralPayload;
-import co.com.santander.adapters.dto.RequestHeader;
+
 import co.com.santander.adapters.primary.rest.solicitud.dto.ClientePayLoad;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.RequestHeader;
 import co.com.santander.ports.primary.solicitud.MapperCliente;
 import org.junit.Assert;
 import org.junit.Before;

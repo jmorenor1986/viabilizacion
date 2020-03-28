@@ -1,5 +1,6 @@
 package co.com.santander.core.domain.solicitud;
 
+import co.com.santander.dto.generic.RequestHeader;
 import lombok.*;
 
 @Getter
