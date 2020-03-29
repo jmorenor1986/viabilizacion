@@ -5,7 +5,7 @@ import co.com.santander.persistencia.repository.ILogOperationRepository;
 import co.com.santander.persistencia.repository.IServicioRepository;
 import co.com.santander.persistencia.service.CacheUsrService;
 import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.service.dto.LogPayload;
+import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
 import co.com.santander.persistencia.service.impl.LogServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
