@@ -2,7 +2,6 @@ package co.com.santander.clients;
 
 import co.com.santander.dto.dictum.RequestDictumDTO;
 import co.com.santander.dto.generic.GeneralPayload;
-import co.com.santander.dto.generic.ResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;

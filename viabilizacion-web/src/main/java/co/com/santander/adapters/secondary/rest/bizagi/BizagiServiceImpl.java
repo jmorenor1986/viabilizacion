@@ -2,11 +2,11 @@ package co.com.santander.adapters.secondary.rest.bizagi;
 
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.access.RestService;
-import co.com.santander.dto.bizagi.BizagiDTO;
 import co.com.santander.adapters.secondary.rest.bizagi.mapper.BizagiMapperImpl;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.dto.bizagi.BizagiDTO;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.persistencia.constants.ServicioEnum;
