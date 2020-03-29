@@ -67,7 +67,8 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>co.com.santander.BizagiApplication</exclude>
+                                        <exclude>co.com.santander.persistencia.LogsApplication</exclude>
+                                        <exclude>co.com.santander.persistencia.service.dto.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>

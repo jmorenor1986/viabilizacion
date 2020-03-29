@@ -3,8 +3,8 @@ package co.com.santander.adapters.secondary.rest.vigia.mapper;
 import co.com.santander.adapters.secondary.rest.common.mapper.RestRequestMapper;
 import co.com.santander.adapters.secondary.rest.common.properties.VigiaProperties;
 import co.com.santander.core.domain.solicitud.Cliente;
-import co.com.santander.dto.vigia.VigiaDTO;
 import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.vigia.VigiaDTO;
 import org.springframework.stereotype.Service;
 
 @Service

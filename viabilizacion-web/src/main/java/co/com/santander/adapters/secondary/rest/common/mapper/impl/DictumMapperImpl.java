@@ -1,11 +1,10 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
 import co.com.santander.adapters.secondary.rest.common.mapper.RestRequestMapper;
-import co.com.santander.dto.dictum.ParametrosDTO;
-import co.com.santander.dto.dictum.RequestDictumDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
-import co.com.santander.core.domain.solicitud.dictum.Parametros;
+import co.com.santander.dto.dictum.ParametrosDTO;
+import co.com.santander.dto.dictum.RequestDictumDTO;
 import co.com.santander.dto.generic.GeneralPayload;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
