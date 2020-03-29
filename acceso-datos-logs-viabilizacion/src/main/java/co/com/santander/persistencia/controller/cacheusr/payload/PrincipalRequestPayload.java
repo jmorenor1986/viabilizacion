@@ -7,4 +7,5 @@ import lombok.Data;
 @Builder
 public class PrincipalRequestPayload {
     private Long id;
+    private String json;
 }

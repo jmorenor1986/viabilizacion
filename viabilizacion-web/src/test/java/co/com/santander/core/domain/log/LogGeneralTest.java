@@ -1,6 +1,6 @@
 package co.com.santander.core.domain.log;
 
-import co.com.santander.persistencia.service.dto.LogPayload;
+import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
