@@ -5,7 +5,6 @@ import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionCon
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import co.com.santander.ports.secondary.solicitud.UbicaService;
 import co.com.santander.utils.ValidatorInformacionContacto;
 import lombok.Getter;

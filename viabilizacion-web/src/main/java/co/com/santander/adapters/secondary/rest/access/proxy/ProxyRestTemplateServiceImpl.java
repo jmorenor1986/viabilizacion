@@ -1,24 +1,22 @@
 package co.com.santander.adapters.secondary.rest.access.proxy;
 
-import java.util.Map;
-import java.util.Optional;
-
 import co.com.santander.adapters.secondary.rest.access.RestService;
+import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.constants.ServicioEnum;
+import co.com.santander.persistencia.service.LogService;
+import co.com.santander.persistencia.service.dto.LogPayload;
+import com.google.gson.Gson;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-
-import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
-import co.com.santander.persistencia.common.FlowOperationEnum;
-import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.service.dto.LogPayload;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Map;
+import java.util.Optional;
 
 @Service("proxyRestServiceImpl")
 public class ProxyRestTemplateServiceImpl implements RestService {

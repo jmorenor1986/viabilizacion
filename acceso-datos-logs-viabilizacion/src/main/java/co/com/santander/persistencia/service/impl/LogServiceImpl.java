@@ -1,15 +1,5 @@
 package co.com.santander.persistencia.service.impl;
 
-import java.util.Optional;
-
-import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.google.gson.Gson;
-
 import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.entity.LogEntity;
@@ -20,6 +10,14 @@ import co.com.santander.persistencia.repository.IServicioRepository;
 import co.com.santander.persistencia.service.CacheUsrService;
 import co.com.santander.persistencia.service.LogService;
 import co.com.santander.persistencia.service.dto.LogPayload;
+import com.google.gson.Gson;
+import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class LogServiceImpl implements LogService {

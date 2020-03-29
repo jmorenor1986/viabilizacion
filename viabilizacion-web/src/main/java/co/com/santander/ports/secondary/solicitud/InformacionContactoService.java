@@ -4,10 +4,8 @@ import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
-import co.com.santander.dto.generic.ResponseDto;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 public interface InformacionContactoService {

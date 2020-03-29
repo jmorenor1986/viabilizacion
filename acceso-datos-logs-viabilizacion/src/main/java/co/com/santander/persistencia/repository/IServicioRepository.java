@@ -1,12 +1,11 @@
 package co.com.santander.persistencia.repository;
 
-import java.util.Optional;
-
+import co.com.santander.persistencia.common.ServicioEnum;
+import co.com.santander.persistencia.entity.ServicioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import co.com.santander.persistencia.common.ServicioEnum;
-import co.com.santander.persistencia.entity.ServicioEntity;
+import java.util.Optional;
 
 @Repository
 public interface IServicioRepository extends JpaRepository<ServicioEntity, Long> {

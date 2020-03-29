@@ -4,7 +4,6 @@ import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.persistencia.constants.ServicioEnum;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

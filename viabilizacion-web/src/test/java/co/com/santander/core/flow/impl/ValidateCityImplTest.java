@@ -1,9 +1,9 @@
 package co.com.santander.core.flow.impl;
 
-import co.com.santander.dto.ciudad.ValidarCiudad;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.dto.ciudad.ValidarCiudad;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.RequestHeader;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
