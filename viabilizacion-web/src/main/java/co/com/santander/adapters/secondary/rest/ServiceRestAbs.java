@@ -1,11 +1,10 @@
 package co.com.santander.adapters.secondary.rest;
 
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.core.common.ServicioEnum;
 import co.com.santander.dto.generic.ResponseDto;
-import co.com.santander.persistencia.common.ServicioEnum;
-import co.com.santander.persistencia.entity.ServicioEntity;
-import co.com.santander.persistencia.service.CacheUsrService;
-import co.com.santander.persistencia.service.ServicioService;
+import co.com.santander.ports.secondary.accesodatos.CacheUsrService;
+import co.com.santander.ports.secondary.accesodatos.ServicioService;
 import co.com.santander.utils.CreateHeadersMap;
 import co.com.santander.utils.dto.HeaderDto;
 import lombok.Getter;
@@ -54,7 +53,7 @@ public abstract class ServiceRestAbs {
 
     protected Boolean consultaCacheServicio(ServicioEnum servicioEnum) {
         //Obetenemos el objeto con el cual se va ha validar el cache
-        Optional<ServicioEntity> servicio = servicioService.findServiceByService(servicioEnum);
+        Optional<ServicioPayload> servicio = servicioService.findServiceByService(servicioEnum);
         if (servicio.isPresent()) {
             //Valido si el tiempo es superior a 0
             setVigencia(servicio.get().getVigencia());

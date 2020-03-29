@@ -15,6 +15,7 @@ public class Cliente {
 
     private String fechaNacimiento;
     private String telefonoResidencia;
+    private String celularPersonal;
     private String correoPersonal;
     private String ingresosMensuales;
     private String valorSolicitado;

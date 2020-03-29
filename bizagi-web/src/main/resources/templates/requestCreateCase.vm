@@ -17,6 +17,7 @@
                                       <InformacionContacto>
                                         <TelefonoResidencia>$telefono</TelefonoResidencia>
                                         <CorreoPersonal>$correo</CorreoPersonal>
+                                        <CelularPersonal>$celular</CelularPersonal>
                                       </InformacionContacto>
                                       <InformacionFinanciera>
                                         <IngresosMensualesViabiliza>$ingresosmensuales</IngresosMensualesViabiliza>

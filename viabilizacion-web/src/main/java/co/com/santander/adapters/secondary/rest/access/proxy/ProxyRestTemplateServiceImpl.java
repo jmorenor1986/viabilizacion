@@ -2,12 +2,11 @@ package co.com.santander.adapters.secondary.rest.access.proxy;
 
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
+import co.com.santander.core.common.FlowOperationEnum;
+import co.com.santander.core.common.ServicioEnum;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
-import co.com.santander.persistencia.common.FlowOperationEnum;
-import co.com.santander.persistencia.constants.ServicioEnum;
-import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.service.dto.LogPayload;
+import co.com.santander.ports.secondary.accesodatos.LogService;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;

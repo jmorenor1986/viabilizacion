@@ -100,6 +100,7 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
 
         context.put("fechanacimiento", cliente.getFechaNacimiento());
         context.put("telefono", cliente.getTelefonoResidencia());
+        context.put("celular", cliente.getCelularPersonal());
         context.put("correo", cliente.getCorreoPersonal());
         context.put("ingresosmensuales", cliente.getIngresosMensuales());
         context.put("valorvehiculo", cliente.getValorSolicitado());
