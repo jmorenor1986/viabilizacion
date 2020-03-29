@@ -1,4 +1,4 @@
-package co.com.santander.persistencia.controller.payload;
+package co.com.santander.persistencia.controller.cacheusr.payload;
 
 import lombok.Builder;
 import lombok.Data;
