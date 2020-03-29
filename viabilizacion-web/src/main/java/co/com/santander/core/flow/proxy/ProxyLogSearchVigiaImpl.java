@@ -5,7 +5,7 @@ import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.service.dto.LogPayload;
+import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;

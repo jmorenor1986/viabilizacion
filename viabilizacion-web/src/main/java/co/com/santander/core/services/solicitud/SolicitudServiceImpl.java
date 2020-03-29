@@ -9,7 +9,7 @@ import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.entity.PrincipalRequest;
 import co.com.santander.persistencia.service.LogService;
 import co.com.santander.persistencia.service.PrincipalRequestService;
-import co.com.santander.persistencia.service.dto.LogPayload;
+import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
 import com.google.gson.Gson;
 import lombok.Getter;
