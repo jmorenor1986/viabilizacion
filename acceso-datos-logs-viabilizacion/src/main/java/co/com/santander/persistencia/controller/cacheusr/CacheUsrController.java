@@ -3,7 +3,7 @@ package co.com.santander.persistencia.controller.cacheusr;
 import co.com.santander.persistencia.controller.cacheusr.payload.LogPayload;
 import co.com.santander.persistencia.controller.cacheusr.payload.ValidateLogUserPayload;
 import co.com.santander.persistencia.controller.payload.GeneralPayload;
-import co.com.santander.persistencia.entity.CacheUsrEntity;
+import co.com.santander.persistencia.controller.payload.ResponsePayLoad;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.service.CacheUsrService;
 import org.modelmapper.ModelMapper;
@@ -30,13 +30,19 @@ public class CacheUsrController {
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CacheUsrEntity> insertLogCacheUsr(@RequestBody GeneralPayload<LogPayload> cacheUsrPayload) {
+    public ResponseEntity<ResponsePayLoad> insertLogCacheUsr(@RequestBody GeneralPayload<LogPayload> cacheUsrPayload) {
         LogEntity logEntity = modelMapper.map(cacheUsrPayload, LogEntity.class);
-        return new ResponseEntity<>(cacheUsrService.insertLogCacheUsr(logEntity, cacheUsrPayload.getRequestBody().getCache()), HttpStatus.OK);
+        return new ResponseEntity<>(ResponsePayLoad.builder()
+                .codRespuesta(1L)
+                .respuestaServicio(cacheUsrService.insertLogCacheUsr(logEntity, cacheUsrPayload.getRequestBody().getCache()))
+                .build(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/validarLog", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> validateLogUser(@RequestBody GeneralPayload<ValidateLogUserPayload> validityLogUserPayload) {
-        return new ResponseEntity<>(cacheUsrService.validityLogUser(validityLogUserPayload.getRequestBody().getCache(), validityLogUserPayload.getRequestBody().getVig()).get(), HttpStatus.OK);
+    public ResponseEntity<ResponsePayLoad> validateLogUser(@RequestBody GeneralPayload<ValidateLogUserPayload> validityLogUserPayload) {
+        return new ResponseEntity<>(ResponsePayLoad.builder()
+                .codRespuesta(1L)
+                .respuestaServicio(cacheUsrService.validityLogUser(validityLogUserPayload.getRequestBody().getCache(), validityLogUserPayload.getRequestBody().getVig()).get())
+                .build(), HttpStatus.OK);
     }
 }
