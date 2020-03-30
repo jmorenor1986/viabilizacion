@@ -56,8 +56,8 @@ public class ProxyRestTemplateServiceImpl implements RestService {
     }
 
     private void logResponse(String body, ServicioEnum servicio) {
-        LogPayload logPayload = filterLogMapper.toLogResponse(servicio, body, getIdRequest());
-        logService.insertaLogRest(logPayload, getIdCache());
+        LogPayload logEntity = filterLogMapper.toLogResponse(servicio, body, getIdRequest());
+        logService.insertaLogRest(logEntity, getIdCache());
     }
 
     private void logRequest(ServicioEnum servicio){

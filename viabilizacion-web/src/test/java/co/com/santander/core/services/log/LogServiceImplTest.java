@@ -1,6 +1,14 @@
 package co.com.santander.core.services.log;
 
-
+import co.com.santander.persistencia.common.FlowOperationEnum;
+import co.com.santander.persistencia.common.ServicioEnum;
+import co.com.santander.persistencia.entity.LogEntity;
+import co.com.santander.persistencia.entity.ServicioEntity;
+import co.com.santander.persistencia.repository.ILogOperationRepository;
+import co.com.santander.persistencia.repository.IServicioRepository;
+import co.com.santander.persistencia.service.CacheUsrService;
+import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
+import co.com.santander.persistencia.service.impl.LogServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
