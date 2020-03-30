@@ -4,6 +4,7 @@ package co.com.santander.persistencia.controller.logservice;
 import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
 import co.com.santander.persistencia.controller.logservice.payload.LogServicePayload;
 import co.com.santander.persistencia.controller.payload.GeneralPayload;
+import co.com.santander.persistencia.controller.payload.ResponsePayLoad;
 import co.com.santander.persistencia.service.LogService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,19 @@ public class LogServiceController {
     }
 
     @PostMapping(value = "/logOperation", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> insertLogOperation(@RequestBody GeneralPayload<LogPayload> payload) {
-        return new ResponseEntity<>(logService.insertLogOperation(payload.getRequestBody()), HttpStatus.OK);
+    public ResponseEntity<ResponsePayLoad> insertLogOperation(@RequestBody GeneralPayload<LogPayload> payload) {
+        return new ResponseEntity<>(ResponsePayLoad.builder()
+                .respuestaServicio(logService.insertLogOperation(payload.getRequestBody()))
+                .codRespuesta(1L)
+                .build(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/logRest", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> insertaLogRest(@RequestBody GeneralPayload<LogServicePayload> payload) {
-        return new ResponseEntity<>(logService.insertaLogRest(payload.getRequestBody().getLog(), payload.getRequestBody().getIdCache()), HttpStatus.OK);
+    public ResponseEntity<ResponsePayLoad> insertaLogRest(@RequestBody GeneralPayload<LogServicePayload> payload) {
+        return new ResponseEntity<>(ResponsePayLoad.builder()
+                .respuestaServicio(logService.insertaLogRest(payload.getRequestBody().getLog(), payload.getRequestBody().getIdCache()))
+                .codRespuesta(1L)
+                .build(), HttpStatus.OK);
     }
 
 }

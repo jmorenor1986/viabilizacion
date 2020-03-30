@@ -1,6 +1,7 @@
 package co.com.santander.persistencia.controller.principalrequest;
 
 import co.com.santander.persistencia.controller.payload.GeneralPayload;
+import co.com.santander.persistencia.controller.payload.ResponsePayLoad;
 import co.com.santander.persistencia.entity.PrincipalRequest;
 import co.com.santander.persistencia.service.PrincipalRequestService;
 import org.modelmapper.ModelMapper;
@@ -27,9 +28,12 @@ public class PrincipalRequestController {
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PrincipalRequest> insertaPrincipalRequest(@RequestBody GeneralPayload<String> payload) {
+    public ResponseEntity<ResponsePayLoad> insertaPrincipalRequest(@RequestBody GeneralPayload<String> payload) {
         PrincipalRequest principalRequest = modelMapper.map(payload.getRequestHeader(), PrincipalRequest.class);
         principalRequest.setJson(payload.getRequestBody());
-        return new ResponseEntity<>(principalRequestService.insertaPrincipalRequest(principalRequest), HttpStatus.OK);
+        return new ResponseEntity<>(ResponsePayLoad.builder()
+                .codRespuesta(1L)
+                .respuestaServicio(principalRequestService.insertaPrincipalRequest(principalRequest))
+                .build(), HttpStatus.OK);
     }
 }
