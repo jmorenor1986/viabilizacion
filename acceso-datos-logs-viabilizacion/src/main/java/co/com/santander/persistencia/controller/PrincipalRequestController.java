@@ -1,7 +1,7 @@
-package co.com.santander.persistencia.controller.principalrequest;
+package co.com.santander.persistencia.controller;
 
-import co.com.santander.persistencia.controller.payload.GeneralPayload;
-import co.com.santander.persistencia.controller.payload.ResponsePayLoad;
+import co.com.santander.persistencia.controller.payload.general.GeneralPayload;
+import co.com.santander.persistencia.controller.payload.general.ResponsePayLoad;
 import co.com.santander.persistencia.entity.PrincipalRequest;
 import co.com.santander.persistencia.service.PrincipalRequestService;
 import org.modelmapper.ModelMapper;

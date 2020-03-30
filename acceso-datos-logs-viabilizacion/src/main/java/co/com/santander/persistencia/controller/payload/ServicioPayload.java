@@ -1,4 +1,4 @@
-package co.com.santander.persistencia.controller.cacheusr.payload;
+package co.com.santander.persistencia.controller.payload;
 
 import co.com.santander.persistencia.common.ServicioEnum;
 import lombok.Builder;

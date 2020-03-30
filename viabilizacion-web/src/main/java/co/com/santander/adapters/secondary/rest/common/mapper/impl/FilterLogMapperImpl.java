@@ -4,7 +4,7 @@ import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.common.ServicioEnum;
-import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
+import co.com.santander.persistencia.controller.payload.LogPayload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package co.com.santander.persistencia.controller.payload;
+package co.com.santander.persistencia.controller.payload.general;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

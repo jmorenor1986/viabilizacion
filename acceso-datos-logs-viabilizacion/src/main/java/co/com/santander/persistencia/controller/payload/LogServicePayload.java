@@ -1,4 +1,4 @@
-package co.com.santander.persistencia.controller.logservice.payload;
+package co.com.santander.persistencia.controller.payload;
 
 import lombok.Builder;
 import lombok.Data;

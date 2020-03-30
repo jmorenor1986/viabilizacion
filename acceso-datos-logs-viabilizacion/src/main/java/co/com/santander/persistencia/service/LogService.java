@@ -1,6 +1,6 @@
 package co.com.santander.persistencia.service;
 
-import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
+import co.com.santander.persistencia.controller.payload.LogPayload;
 
 public interface LogService {
 

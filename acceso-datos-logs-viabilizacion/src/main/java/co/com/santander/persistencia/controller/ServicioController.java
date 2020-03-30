@@ -1,7 +1,7 @@
-package co.com.santander.persistencia.controller.servicio;
+package co.com.santander.persistencia.controller;
 
 import co.com.santander.persistencia.common.ServicioEnum;
-import co.com.santander.persistencia.controller.payload.ResponsePayLoad;
+import co.com.santander.persistencia.controller.payload.general.ResponsePayLoad;
 import co.com.santander.persistencia.service.ServicioService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

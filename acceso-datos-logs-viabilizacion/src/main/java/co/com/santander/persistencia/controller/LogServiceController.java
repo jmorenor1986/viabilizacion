@@ -1,10 +1,10 @@
-package co.com.santander.persistencia.controller.logservice;
+package co.com.santander.persistencia.controller;
 
 
-import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
-import co.com.santander.persistencia.controller.logservice.payload.LogServicePayload;
-import co.com.santander.persistencia.controller.payload.GeneralPayload;
-import co.com.santander.persistencia.controller.payload.ResponsePayLoad;
+import co.com.santander.persistencia.controller.payload.LogPayload;
+import co.com.santander.persistencia.controller.payload.LogServicePayload;
+import co.com.santander.persistencia.controller.payload.general.GeneralPayload;
+import co.com.santander.persistencia.controller.payload.general.ResponsePayLoad;
 import co.com.santander.persistencia.service.LogService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

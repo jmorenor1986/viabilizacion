@@ -1,9 +1,8 @@
 package co.com.santander.persistencia.controller;
 
-import co.com.santander.persistencia.controller.cacheusr.CacheUsrController;
-import co.com.santander.persistencia.controller.cacheusr.payload.LogPayload;
-import co.com.santander.persistencia.controller.cacheusr.payload.ValidateLogUserPayload;
-import co.com.santander.persistencia.controller.payload.GeneralPayload;
+import co.com.santander.persistencia.controller.payload.CacheLogPayload;
+import co.com.santander.persistencia.controller.payload.ValidateLogUserPayload;
+import co.com.santander.persistencia.controller.payload.general.GeneralPayload;
 import co.com.santander.persistencia.entity.CacheUsrEntity;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.service.CacheUsrService;
@@ -38,10 +37,10 @@ public class CacheUsrControllerTest {
 
     @Test
     public void testInsertLogCacheUsr() {
-        LogPayload cacheUsrPayload = LogPayload.builder()
+        CacheLogPayload cacheUsrPayload = CacheLogPayload.builder()
                 .cache("cache")
                 .build();
-        GeneralPayload<LogPayload> logPayloadGeneral = new GeneralPayload<>();
+        GeneralPayload<CacheLogPayload> logPayloadGeneral = new GeneralPayload<>();
         logPayloadGeneral.setRequestBody(cacheUsrPayload);
         LogEntity logEntity = LogEntity.builder().build();
         Mockito.when(modelMapper.map(cacheUsrPayload, LogEntity.class)).thenReturn(logEntity);
