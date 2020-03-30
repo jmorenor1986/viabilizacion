@@ -3,7 +3,7 @@ package co.com.santander.core.flow.proxy;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.persistencia.service.LogService;
+import co.com.santander.ports.secondary.accesodatos.LogService;
 import co.com.santander.utils.impl.GenerateUniqueIdImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +20,7 @@ public class ProxyLogValidateCityImplTest {
     
     private GenerateUniqueIdImpl generateUniqueId;
     @Mock
-    private LogService logService; 
+    private LogService logService;
     
     @Mock
     private ValidateRequest next;

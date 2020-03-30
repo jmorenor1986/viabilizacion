@@ -2,6 +2,7 @@ package co.com.santander.adapters.secondary.rest.access.proxy;
 
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
+import co.com.santander.adapters.secondary.rest.accesodatos.payload.LogPayload;
 import co.com.santander.core.common.FlowOperationEnum;
 import co.com.santander.core.common.ServicioEnum;
 import co.com.santander.dto.generic.GeneralPayload;
@@ -55,8 +56,8 @@ public class ProxyRestTemplateServiceImpl implements RestService {
     }
 
     private void logResponse(String body, ServicioEnum servicio) {
-        LogPayload logEntity = filterLogMapper.toLogResponse(servicio, body, getIdRequest());
-        logService.insertaLogRest(logEntity, getIdCache());
+        LogPayload logPayload = filterLogMapper.toLogResponse(servicio, body, getIdRequest());
+        logService.insertaLogRest(logPayload, getIdCache());
     }
 
     private void logRequest(ServicioEnum servicio){

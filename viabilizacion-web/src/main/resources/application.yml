@@ -76,6 +76,11 @@ bizagi:
   url: http://localhost:5002/bizagi/v1/
   service-name: bizagi-service
 
+viabilizacion:
+  principal-request:
+    url: http://localhost:5003/logsViabilizacion/v1/principalrequest
+    service-name: viabilizacion-principal-request
+
 logging:
   level:
     co:

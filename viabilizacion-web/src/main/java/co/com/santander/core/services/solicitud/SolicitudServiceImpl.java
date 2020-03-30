@@ -1,16 +1,16 @@
 package co.com.santander.core.services.solicitud;
 
+import co.com.santander.adapters.secondary.rest.accesodatos.payload.LogPayload;
+import co.com.santander.adapters.secondary.rest.accesodatos.payload.PrincipalRequestPayload;
+import co.com.santander.core.common.FlowOperationEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ClienteValidator;
 import co.com.santander.core.errors.MandatoryFieldException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.persistencia.common.FlowOperationEnum;
-import co.com.santander.persistencia.entity.PrincipalRequest;
-import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.service.PrincipalRequestService;
-import co.com.santander.persistencia.controller.logservice.payload.LogPayload;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
+import co.com.santander.ports.secondary.accesodatos.LogService;
+import co.com.santander.ports.secondary.accesodatos.PrincipalRequestService;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
@@ -60,8 +60,8 @@ public class SolicitudServiceImpl implements SolicitudService {
     }
 
     private void generatePrincipalRequest(Cliente cliente) {
-        PrincipalRequest principalRequest = principalRequestService.insertaPrincipalRequest(
-                PrincipalRequest.builder()
+        PrincipalRequestPayload principalRequest = principalRequestService.insertaPrincipalRequest(
+                PrincipalRequestPayload.builder()
                         .codigoAliado(cliente.getRequestHeader().getCodAliado())
                         .usuarioAliado(cliente.getRequestHeader().getUsuarioAliado())
                         .ipOrigen(cliente.getRequestHeader().getIpOrigen())

@@ -1,8 +1,10 @@
 package co.com.santander.ports.secondary.accesodatos;
 
+import co.com.santander.adapters.secondary.rest.accesodatos.payload.LogPayload;
+
 public interface LogService {
 
-    public Boolean insertLogOperation(LogPayload log);
+    Boolean insertLogOperation(LogPayload log);
 
-    public Boolean insertaLogRest(LogPayload log, String idCache);
+    Boolean insertaLogRest(LogPayload log, String idCache);
 }
