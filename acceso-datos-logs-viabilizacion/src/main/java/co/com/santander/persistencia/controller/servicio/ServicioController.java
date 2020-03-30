@@ -1,14 +1,17 @@
 package co.com.santander.persistencia.controller.servicio;
 
 import co.com.santander.persistencia.common.ServicioEnum;
-import co.com.santander.persistencia.entity.ServicioEntity;
+import co.com.santander.persistencia.controller.payload.ResponsePayLoad;
 import co.com.santander.persistencia.service.ServicioService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("v1/servicio")
@@ -23,8 +26,11 @@ public class ServicioController {
     }
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ServicioEntity> findServiceByService(@RequestBody ServicioEnum servicio) {
-        return new ResponseEntity<>(servicioService.findServiceByService(servicio).get(), HttpStatus.OK);
+    public ResponseEntity<ResponsePayLoad> findServiceByService(@RequestBody ServicioEnum servicio) {
+        return new ResponseEntity<>(ResponsePayLoad.builder()
+                .respuestaServicio(servicioService.findServiceByService(servicio).get())
+                .codRespuesta(1L)
+                .build(), HttpStatus.OK);
     }
 
 }
