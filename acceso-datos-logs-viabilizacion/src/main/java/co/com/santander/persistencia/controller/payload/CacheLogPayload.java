@@ -1,4 +1,4 @@
-package co.com.santander.persistencia.controller.cacheusr.payload;
+package co.com.santander.persistencia.controller.payload;
 
 import co.com.santander.persistencia.common.FlowOperationEnum;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Builder
-public class LogPayload {
+public class CacheLogPayload {
     private String cache;
     private String usuarioMicro;
     private FlowOperationEnum tipo;

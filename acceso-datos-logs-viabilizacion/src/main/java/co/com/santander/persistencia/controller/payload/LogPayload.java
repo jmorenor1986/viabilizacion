@@ -1,4 +1,4 @@
-package co.com.santander.persistencia.controller.logservice.payload;
+package co.com.santander.persistencia.controller.payload;
 
 import co.com.santander.persistencia.common.FlowOperationEnum;
 import lombok.*;
