@@ -8,5 +8,6 @@ import lombok.Data;
 public class LogServicePayload {
     private LogPayload log;
     private String idCache;
+    private Long idServicio;
 
 }

@@ -15,11 +15,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     generate-ddl: true
-  flyway:
-    schemas: public
-    table: viabilizacion_web_flyway_schema_history
-    locations: classpath:/db/migration
-    baselineOnMigrate: true
+
 
 servicios:
   reconocerProperties:
@@ -69,6 +65,9 @@ viabilizacion:
   log:
     url: http://localhost:5003/logsViabilizacion/v1/logs
     service-name: viabilizacion-validar-ciudad
+  servicio:
+    url: http://localhost:5003/logsViabilizacion/v1/servicio
+    service-name: viabilizacion-servicio
 
 logging:
   level:

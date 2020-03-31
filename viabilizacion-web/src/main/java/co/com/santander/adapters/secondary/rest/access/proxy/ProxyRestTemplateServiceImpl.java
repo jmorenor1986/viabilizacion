@@ -53,7 +53,7 @@ public class ProxyRestTemplateServiceImpl implements RestService {
         setBody(new Gson().toJson(body));
 
         findHeadersLog();
-        logRequest(servicio);
+        logRequest(servicio, header);
     }
 
     private void logResponse(String body, ServicioEnum servicio) {
@@ -64,10 +64,11 @@ public class ProxyRestTemplateServiceImpl implements RestService {
         logService.insertaLogRest(requestLog, getIdCache());
     }
 
-    private void logRequest(ServicioEnum servicio){
+    private void logRequest(ServicioEnum servicio, RequestHeader header ){
     	LogPayload logEntity = filterLogMapper.toLogRequest(servicio, getBody() , getIdRequest());
     	GeneralPayload< LogPayload > requestLog = GeneralPayload.<LogPayload>builder()
                 .requestBody(logEntity)
+                .requestHeader(header)
                 .build();
         setOperation( logEntity.getTipo() );
         logService.insertaLogRest(requestLog, getIdCache());

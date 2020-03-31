@@ -10,3 +10,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     generate-ddl: true
+  flyway:
+    schemas: public
+    table: viabilizacion_web_flyway_schema_history
+    locations: classpath:/db/migration
+    baselineOnMigrate: true
