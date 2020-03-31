@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.accesodatos.payload;
+package co.com.santander.dto.viabilizacion;
 
 import lombok.Builder;
 import lombok.Data;

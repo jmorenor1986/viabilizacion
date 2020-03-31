@@ -5,7 +5,7 @@ import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.core.common.ServicioEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.reconocer.InformacionContactoDTO;
 import co.com.santander.dto.reconocer.PrincipalReconocerDTO;
 import co.com.santander.adapters.secondary.rest.informacioncontacto.mapper.InformacionContactoMapperImpl;

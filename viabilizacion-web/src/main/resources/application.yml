@@ -80,6 +80,9 @@ viabilizacion:
   principal-request:
     url: http://localhost:5003/logsViabilizacion/v1/principalrequest
     service-name: viabilizacion-principal-request
+  log:
+    url: http://localhost:5003/logsViabilizacion/v1/logs
+    service-name: viabilizacion-validar-ciudad
 
 logging:
   level:

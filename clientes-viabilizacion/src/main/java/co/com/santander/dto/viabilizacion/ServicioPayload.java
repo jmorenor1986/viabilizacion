@@ -1,6 +1,7 @@
-package co.com.santander.adapters.secondary.rest.accesodatos.payload;
+package co.com.santander.dto.viabilizacion;
 
-import co.com.santander.core.common.ServicioEnum;
+
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import lombok.Builder;
 import lombok.Data;
 

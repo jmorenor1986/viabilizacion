@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface UbicaClient {
 
     @RequestMapping(value = "/ubicaService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseDto ubicaPostService(@RequestBody GeneralPayload<RequestUbicaDTO> request);
+    String ubicaPostService(@RequestBody GeneralPayload<RequestUbicaDTO> request);
 }

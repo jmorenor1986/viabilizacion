@@ -35,7 +35,7 @@ public class PrincipalRequestController {
         principalRequest.setJson(new Gson().toJson(payload.getRequestHeader()));
         return new ResponseEntity<>(ResponsePayLoad.builder()
                 .codRespuesta(1L)
-                .respuestaServicio(principalRequestService.insertaPrincipalRequest(principalRequest))
+                .respuestaServicio(new Gson().toJson(principalRequestService.insertaPrincipalRequest(principalRequest)))
                 .build(), HttpStatus.OK);
     }
 }

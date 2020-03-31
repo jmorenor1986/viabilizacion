@@ -2,9 +2,9 @@ package co.com.santander.adapters.secondary.rest.access.proxy;
 
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.LogPayload;
-import co.com.santander.core.common.FlowOperationEnum;
-import co.com.santander.core.common.ServicioEnum;
+import co.com.santander.dto.viabilizacion.LogPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.ports.secondary.accesodatos.LogService;

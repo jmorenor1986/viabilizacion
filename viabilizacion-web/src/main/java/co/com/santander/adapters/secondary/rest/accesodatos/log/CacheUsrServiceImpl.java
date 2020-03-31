@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.accesodatos.log;
 
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.CachePayload;
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.LogPayload;
+import co.com.santander.dto.viabilizacion.CachePayload;
+import co.com.santander.dto.viabilizacion.LogPayload;
 import co.com.santander.ports.secondary.accesodatos.CacheUsrService;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,10 @@
 package co.com.santander.ports.secondary.accesodatos;
 
 
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.PrincipalRequestPayload;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.PrincipalRequestPayload;
 
 public interface PrincipalRequestService {
 
-    PrincipalRequestPayload insertaPrincipalRequest(PrincipalRequestPayload principalRequest);
+    PrincipalRequestPayload insertaPrincipalRequest(GeneralPayload<PrincipalRequestPayload> principalRequest);
 }

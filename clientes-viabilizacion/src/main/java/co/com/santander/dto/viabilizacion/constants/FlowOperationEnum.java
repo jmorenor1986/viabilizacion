@@ -1,4 +1,4 @@
-package co.com.santander.core.common;
+package co.com.santander.dto.viabilizacion.constants;
 
 public enum FlowOperationEnum {
 	

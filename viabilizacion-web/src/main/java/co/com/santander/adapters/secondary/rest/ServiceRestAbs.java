@@ -1,8 +1,8 @@
 package co.com.santander.adapters.secondary.rest;
 
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.ServicioPayload;
-import co.com.santander.core.common.ServicioEnum;
+import co.com.santander.dto.viabilizacion.ServicioPayload;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.ports.secondary.accesodatos.CacheUsrService;
 import co.com.santander.ports.secondary.accesodatos.ServicioService;

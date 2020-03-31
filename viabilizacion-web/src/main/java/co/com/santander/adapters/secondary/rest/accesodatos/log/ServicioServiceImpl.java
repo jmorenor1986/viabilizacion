@@ -1,7 +1,7 @@
 package co.com.santander.adapters.secondary.rest.accesodatos.log;
 
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.ServicioPayload;
-import co.com.santander.core.common.ServicioEnum;
+import co.com.santander.dto.viabilizacion.ServicioPayload;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.ports.secondary.accesodatos.ServicioService;
 import org.springframework.stereotype.Service;
 

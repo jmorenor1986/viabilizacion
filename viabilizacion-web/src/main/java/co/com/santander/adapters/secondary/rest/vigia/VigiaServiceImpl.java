@@ -8,7 +8,7 @@ import co.com.santander.adapters.secondary.rest.common.properties.ClientesProper
 import co.com.santander.adapters.secondary.rest.common.properties.VigiaProperties;
 import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import co.com.santander.adapters.secondary.rest.vigia.mapper.VigiaMapperImpl;
-import co.com.santander.core.common.ServicioEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
 import co.com.santander.dto.generic.GeneralPayload;

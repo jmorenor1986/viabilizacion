@@ -1,7 +1,8 @@
 package co.com.santander.core.flow.proxy;
 
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.LogPayload;
-import co.com.santander.core.common.FlowOperationEnum;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.LogPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
@@ -38,11 +39,15 @@ public class ProxyLogSearchReconocerImpl implements ValidateRequest {
 	
 	public void generarLog(Cliente cliente ) {
 		String gsonCliente = new Gson().toJson(cliente);
-		logService.insertLogOperation(LogPayload.builder()
-    			.usuarioMicro("jsierra")
-    			.idRequest(getIdRequest())
-    			.traza(gsonCliente)
-    			.tipo(FlowOperationEnum.INVOKE_RECONOCER)
-    			.build());
+		GeneralPayload<LogPayload> request = GeneralPayload.<LogPayload>builder()
+				.requestHeader(cliente.getRequestHeader())
+				.requestBody(LogPayload.builder()
+						.usuarioMicro("jsierra")
+						.idRequest(getIdRequest())
+						.traza(gsonCliente)
+						.tipo(FlowOperationEnum.INVOKE_RECONOCER)
+						.build())
+				.build();
+		logService.insertLogOperation(request);
 	}
 }

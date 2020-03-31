@@ -2,7 +2,7 @@ package co.com.santander.adapters.secondary.rest.dictum;
 
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.core.common.ServicioEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.dictum.ParametrosDTO;
 import co.com.santander.dto.dictum.RequestDictumDTO;
 import co.com.santander.dto.generic.GeneralPayload;

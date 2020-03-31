@@ -1,4 +1,4 @@
-package co.com.santander.adapters.secondary.rest.accesodatos.payload;
+package co.com.santander.dto.viabilizacion;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,8 +7,9 @@ import lombok.Data;
 @Builder
 public class PrincipalRequestPayload {
     private Long id;
-    private String json;
     private String codigoAliado;
+    private  String ipOrigen;
     private String usuarioAliado;
-    private String ipOrigen;
+    private String json;
+
 }

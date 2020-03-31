@@ -1,6 +1,5 @@
 package co.com.santander.ports.primary.solicitud;
 
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.PrincipalRequestPayload;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ClienteValidator;
 import co.com.santander.core.errors.MandatoryFieldException;
@@ -8,6 +7,7 @@ import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
 import co.com.santander.dto.generic.RequestHeader;
+import co.com.santander.dto.viabilizacion.PrincipalRequestPayload;
 import co.com.santander.ports.secondary.accesodatos.LogService;
 import co.com.santander.ports.secondary.accesodatos.PrincipalRequestService;
 import com.google.gson.Gson;

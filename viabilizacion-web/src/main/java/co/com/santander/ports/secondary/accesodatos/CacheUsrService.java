@@ -1,7 +1,7 @@
 package co.com.santander.ports.secondary.accesodatos;
 
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.CachePayload;
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.LogPayload;
+import co.com.santander.dto.viabilizacion.CachePayload;
+import co.com.santander.dto.viabilizacion.LogPayload;
 
 import java.util.Optional;
 

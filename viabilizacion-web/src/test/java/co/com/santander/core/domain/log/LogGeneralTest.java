@@ -1,6 +1,6 @@
 package co.com.santander.core.domain.log;
 
-import co.com.santander.adapters.secondary.rest.accesodatos.payload.LogPayload;
+import co.com.santander.dto.viabilizacion.LogPayload;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

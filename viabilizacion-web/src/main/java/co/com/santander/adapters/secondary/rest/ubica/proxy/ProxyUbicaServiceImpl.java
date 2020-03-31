@@ -2,7 +2,7 @@ package co.com.santander.adapters.secondary.rest.ubica.proxy;
 
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
-import co.com.santander.core.common.ServicioEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.reconocer.PrincipalUbicaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;

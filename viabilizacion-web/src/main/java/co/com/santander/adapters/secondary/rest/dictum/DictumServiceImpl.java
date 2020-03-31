@@ -5,7 +5,7 @@ import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.mapper.impl.DictumMapperImpl;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
-import co.com.santander.core.common.ServicioEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
 import co.com.santander.dto.dictum.PrincipalRequestDictumDTO;

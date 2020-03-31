@@ -1,6 +1,6 @@
-package co.com.santander.adapters.secondary.rest.accesodatos.payload;
+package co.com.santander.dto.viabilizacion;
 
-import co.com.santander.core.common.FlowOperationEnum;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -9,8 +9,7 @@ import java.util.Date;
 
 @Data
 @Builder
-public class LogPayload {
-    private Long id;
+public class CacheLogPayload {
     private String cache;
     private String usuarioMicro;
     private FlowOperationEnum tipo;
@@ -21,7 +20,4 @@ public class LogPayload {
     private CachePayload cacheUsr;
     private String url;
     private PrincipalRequestPayload principalRequest;
-    private Long idRequest;
-
-
 }
