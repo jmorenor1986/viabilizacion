@@ -22,28 +22,16 @@ spring:
     baselineOnMigrate: true
 
 servicios:
-  uriValidarCiudad: http://localhost:5001/validacion/v1/ciudad/
-  #uriDictum: http://dictum-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultarHC2
-  uriDictum: https://dictum.free.beeceptor.com/
-  uriBizagi: http://localhost:5002/bizagi/v1/bizagi/
   reconocerProperties:
-    uri: http://localhost:8080/reconocer/
-    #uri: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaReconocer
-    uriToken: http://localhost:8080/reconocer/obtenerToken
-    #uriToken: http://reconocer-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/obtenerToken
     nit: 900468987
     tipoIdBuscar: 1
     numeroIdBuscar: 1010101010
     validarNombre: true
   ubicaProperties:
-    uri: https://ubica.free.beeceptor.com
     codigoInformacion: 5632
     motivoConsulta: 1
   vigiaProperties:
-    uriVigia: https://vigia.free.beeceptor.com
-    #uriVigia: http://vigia-credito-consumo-dev.apps.sv-bsnc-arquitectura-openshift.itac.com.co/consultaVigia
     porcentaje: 76
-
   dictumProperties:
     codAliado: abcd
     usuarioAliado: alberto
@@ -52,7 +40,6 @@ servicios:
     numeroSolicitudCredito: 12345678
     tipoIdentificacion: CC
     identificacion: 1040
-
 
 vigia:
   url: http://localhost:8080/vigia/
@@ -73,9 +60,8 @@ reconocer:
   url: http://localhost:8080/reconocer/
   service-name: ubica-service
 bizagi:
-  url: http://localhost:5002/bizagi/v1/
+  url: http://localhost:8080/bizagi/
   service-name: bizagi-service
-
 viabilizacion:
   principal-request:
     url: http://localhost:5003/logsViabilizacion/v1/principalrequest

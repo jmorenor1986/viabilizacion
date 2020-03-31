@@ -7,5 +7,5 @@ public interface LogService {
 
     Boolean insertLogOperation(GeneralPayload<LogPayload> log);
 
-    Boolean insertaLogRest(LogPayload log, String idCache);
+    Boolean insertaLogRest(GeneralPayload<LogPayload> log, String idCache);
 }

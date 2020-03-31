@@ -2,6 +2,7 @@ package co.com.santander.adapters.secondary.rest.access.proxy;
 
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
+import co.com.santander.dto.generic.RequestHeader;
 import co.com.santander.dto.viabilizacion.LogPayload;
 import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
@@ -47,7 +48,7 @@ public class ProxyRestTemplateServiceImpl implements RestService {
     }
 
 
-    private void generateLog(Object body, Optional<Map<String, String>> headers, ServicioEnum servicio ){
+    private void generateLog(Object body, RequestHeader header, Optional<Map<String, String>> headers, ServicioEnum servicio ){
         setHeaders(headers);
         setBody(new Gson().toJson(body));
 
@@ -57,13 +58,19 @@ public class ProxyRestTemplateServiceImpl implements RestService {
 
     private void logResponse(String body, ServicioEnum servicio) {
         LogPayload logEntity = filterLogMapper.toLogResponse(servicio, body, getIdRequest());
-        logService.insertaLogRest(logEntity, getIdCache());
+        GeneralPayload< LogPayload > requestLog = GeneralPayload.<LogPayload>builder()
+                .requestBody(logEntity)
+                .build();
+        logService.insertaLogRest(requestLog, getIdCache());
     }
 
     private void logRequest(ServicioEnum servicio){
     	LogPayload logEntity = filterLogMapper.toLogRequest(servicio, getBody() , getIdRequest());
+    	GeneralPayload< LogPayload > requestLog = GeneralPayload.<LogPayload>builder()
+                .requestBody(logEntity)
+                .build();
         setOperation( logEntity.getTipo() );
-        logService.insertaLogRest(logEntity, getIdCache());
+        logService.insertaLogRest(requestLog, getIdCache());
     }
 
     private void findHeadersLog(){
@@ -79,7 +86,7 @@ public class ProxyRestTemplateServiceImpl implements RestService {
 
     @Override
     public Optional<ResponseDto> callService(GeneralPayload request, ServicioEnum servicio, Optional<Map<String, String>> cache) {
-        generateLog(request, cache, servicio);
+        generateLog(request,request.getRequestHeader(), cache, servicio);
         Optional<ResponseDto> rta = restService.callService(request, servicio, cache);
         logResponse(new Gson().toJson(rta.get()), servicio);
         return rta.isPresent() ? rta : Optional.empty();

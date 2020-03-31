@@ -26,7 +26,7 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Boolean insertaLogRest(LogPayload log, String idCache) {
+    public Boolean insertaLogRest(GeneralPayload<LogPayload> log, String idCache) {
         return null;
     }
 }
