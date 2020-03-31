@@ -1,5 +1,6 @@
 package co.com.santander.adapters.secondary.rest.informacioncontacto.dto;
 
+import co.com.santander.dto.reconocer.RequestUbicaDTO;
 import com.google.code.beanmatchers.BeanMatchers;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

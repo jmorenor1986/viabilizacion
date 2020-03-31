@@ -12,4 +12,11 @@ public class Cliente {
     private String Apellido2;
     private String Nombre1;
     private String Nombre2;
+
+    private String fechaNacimiento;
+    private String telefonoResidencia;
+    private String celularPersonal;
+    private String correoPersonal;
+    private String ingresosMensuales;
+    private String valorSolicitado;
 }

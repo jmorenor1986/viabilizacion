@@ -3,9 +3,9 @@ package co.com.santander.adapters.secondary.rest.access.impl;
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.clients.*;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
-import co.com.santander.persistencia.constants.ServicioEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +49,8 @@ public class RestServiceImpl implements RestService {
             case VALIDATE_CITY:
                 return Optional.of(validateCityClient.consultaCity(request));
             case VIGIA:
-                return Optional.of(vigiaClient.consultaVigia(request));
+                String rta_vigia = vigiaClient.consultaVigia(request);
+                return Optional.of( jsonUtilities.getGeneralResponse(rta_vigia) );
             case DICTUM:
                 String rta = dictumClient.consultarHC2(request);
                 return Optional.of(jsonUtilities.getGeneralResponse(rta));
@@ -59,7 +60,8 @@ public class RestServiceImpl implements RestService {
             case RECONOCER:
                 return Optional.of(reconocerClient.firmaElectronica(request));
             case UBICA:
-                return Optional.of(ubicaClient.ubicaPostService(request));
+                String rta_ubica = ubicaClient.ubicaPostService(request);
+                return Optional.of(jsonUtilities.getGeneralResponse(rta_ubica));
             case BIZAGI:
                 return Optional.of(bizagiClient.consultarHC2(request));
             default:

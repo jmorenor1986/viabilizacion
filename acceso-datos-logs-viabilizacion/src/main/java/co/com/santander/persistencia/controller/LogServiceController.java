@@ -6,6 +6,7 @@ import co.com.santander.persistencia.controller.payload.LogServicePayload;
 import co.com.santander.persistencia.controller.payload.general.GeneralPayload;
 import co.com.santander.persistencia.controller.payload.general.ResponsePayLoad;
 import co.com.santander.persistencia.service.LogService;
+import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class LogServiceController {
     @PostMapping(value = "/logOperation", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponsePayLoad> insertLogOperation(@RequestBody GeneralPayload<LogPayload> payload) {
         return new ResponseEntity<>(ResponsePayLoad.builder()
-                .respuestaServicio(logService.insertLogOperation(payload.getRequestBody()))
+                .respuestaServicio(new Gson().toJson( logService.insertLogOperation(payload.getRequestBody())))
                 .codRespuesta(1L)
                 .build(), HttpStatus.OK);
     }
@@ -40,7 +41,7 @@ public class LogServiceController {
     @PostMapping(value = "/logRest", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponsePayLoad> insertaLogRest(@RequestBody GeneralPayload<LogServicePayload> payload) {
         return new ResponseEntity<>(ResponsePayLoad.builder()
-                .respuestaServicio(logService.insertaLogRest(payload.getRequestBody().getLog(), payload.getRequestBody().getIdCache()))
+                .respuestaServicio(new Gson().toJson(logService.insertaLogRest(payload.getRequestBody().getLog(), payload.getRequestBody().getIdCache())))
                 .codRespuesta(1L)
                 .build(), HttpStatus.OK);
     }

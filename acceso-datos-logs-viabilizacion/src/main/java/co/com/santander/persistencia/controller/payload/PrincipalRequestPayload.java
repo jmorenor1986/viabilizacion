@@ -7,5 +7,9 @@ import lombok.Data;
 @Builder
 public class PrincipalRequestPayload {
     private Long id;
+    private String codigoAliado;
+    private  String ipOrigen;
+    private String usuarioAliado;
     private String json;
+
 }

@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class ResponsePayLoad {
     private Long codRespuesta;
-    private Object respuestaServicio;
+    private String respuestaServicio;
     private String mensajeError;
 }

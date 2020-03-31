@@ -2,12 +2,12 @@ package co.com.santander.adapters.secondary.rest.dictum;
 
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.dictum.ParametrosDTO;
 import co.com.santander.dto.dictum.RequestDictumDTO;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.RequestHeader;
 import co.com.santander.dto.generic.ResponseDto;
-import co.com.santander.persistencia.constants.ServicioEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

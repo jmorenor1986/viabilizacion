@@ -3,6 +3,7 @@ package co.com.santander.persistencia.controller;
 import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.controller.payload.general.ResponsePayLoad;
 import co.com.santander.persistencia.service.ServicioService;
+import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class ServicioController {
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponsePayLoad> findServiceByService(@RequestBody ServicioEnum servicio) {
         return new ResponseEntity<>(ResponsePayLoad.builder()
-                .respuestaServicio(servicioService.findServiceByService(servicio).get())
+                .respuestaServicio(new Gson().toJson(servicioService.findServiceByService(servicio).get()))
                 .codRespuesta(1L)
                 .build(), HttpStatus.OK);
     }

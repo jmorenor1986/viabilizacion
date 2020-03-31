@@ -24,15 +24,6 @@
             <artifactId>gson</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>co.com.santander</groupId>
-            <artifactId>acceso-datos-logs-viabilizacion</artifactId>
-            <version>1.0.6</version>
-        </dependency>
-        <dependency>
             <groupId>co.com.santander</groupId>
             <artifactId>clientes-viabilizacion</artifactId>
             <version>1.0.6</version>

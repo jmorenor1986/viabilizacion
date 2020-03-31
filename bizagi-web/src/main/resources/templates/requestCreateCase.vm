@@ -13,7 +13,19 @@
                                       <Apellido2>$apellido2</Apellido2>
                                       <Nombre1>$nombre1</Nombre1>
                                       <Nombre2>$nombre2</Nombre2>
+                                      <FechaNacimiento>$fechanacimiento</FechaNacimiento>
+                                      <InformacionContacto>
+                                        <TelefonoResidencia>$telefono</TelefonoResidencia>
+                                        <CorreoPersonal>$correo</CorreoPersonal>
+                                        <CelularPersonal>$celular</CelularPersonal>
+                                      </InformacionContacto>
+                                      <InformacionFinanciera>
+                                        <IngresosMensualesViabiliza>$ingresosmensuales</IngresosMensualesViabiliza>
+                                      </InformacionFinanciera>
                                    </Cliente>
+                                   <Vehiculo>
+                                        <ValorVehiculo>$valorvehiculo</ValorVehiculo>
+                                   </Vehiculo>
                                    <AutorizaConsultaaCentrales>$autorizaCentrales</AutorizaConsultaaCentrales>
                                 </SolicitudCredito>
                              </Entities>

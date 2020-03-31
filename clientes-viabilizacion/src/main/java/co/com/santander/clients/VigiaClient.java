@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface VigiaClient {
 
     @RequestMapping(value = "/consultaVigia", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseDto consultaVigia(@RequestBody GeneralPayload<VigiaDTO> request);
+    String consultaVigia(@RequestBody GeneralPayload<VigiaDTO> request);
 }

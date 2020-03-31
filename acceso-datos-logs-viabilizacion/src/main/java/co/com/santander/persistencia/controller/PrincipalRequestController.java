@@ -1,9 +1,11 @@
 package co.com.santander.persistencia.controller;
 
+import co.com.santander.persistencia.controller.payload.PrincipalRequestPayload;
 import co.com.santander.persistencia.controller.payload.general.GeneralPayload;
 import co.com.santander.persistencia.controller.payload.general.ResponsePayLoad;
 import co.com.santander.persistencia.entity.PrincipalRequest;
 import co.com.santander.persistencia.service.PrincipalRequestService;
+import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,12 +30,12 @@ public class PrincipalRequestController {
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponsePayLoad> insertaPrincipalRequest(@RequestBody GeneralPayload<String> payload) {
-        PrincipalRequest principalRequest = modelMapper.map(payload.getRequestHeader(), PrincipalRequest.class);
-        principalRequest.setJson(payload.getRequestBody());
+    public ResponseEntity<ResponsePayLoad> insertaPrincipalRequest(@RequestBody GeneralPayload<PrincipalRequestPayload> payload) {
+        PrincipalRequest principalRequest = modelMapper.map(payload.getRequestBody(), PrincipalRequest.class);
+        principalRequest.setJson(new Gson().toJson(payload.getRequestHeader()));
         return new ResponseEntity<>(ResponsePayLoad.builder()
                 .codRespuesta(1L)
-                .respuestaServicio(principalRequestService.insertaPrincipalRequest(principalRequest))
+                .respuestaServicio(new Gson().toJson(principalRequestService.insertaPrincipalRequest(principalRequest)))
                 .build(), HttpStatus.OK);
     }
 }

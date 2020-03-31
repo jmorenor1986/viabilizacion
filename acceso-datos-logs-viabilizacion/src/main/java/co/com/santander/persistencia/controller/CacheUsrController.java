@@ -6,6 +6,7 @@ import co.com.santander.persistencia.controller.payload.general.GeneralPayload;
 import co.com.santander.persistencia.controller.payload.general.ResponsePayLoad;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.service.CacheUsrService;
+import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class CacheUsrController {
         LogEntity logEntity = modelMapper.map(cacheUsrPayload, LogEntity.class);
         return new ResponseEntity<>(ResponsePayLoad.builder()
                 .codRespuesta(1L)
-                .respuestaServicio(cacheUsrService.insertLogCacheUsr(logEntity, cacheUsrPayload.getRequestBody().getCache()))
+                .respuestaServicio(new Gson().toJson(cacheUsrService.insertLogCacheUsr(logEntity, cacheUsrPayload.getRequestBody().getCache())))
                 .build(), HttpStatus.OK);
     }
 

@@ -1,11 +1,12 @@
 package co.com.santander.core.flow.proxy;
 
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.LogPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
-import co.com.santander.persistencia.common.FlowOperationEnum;
-import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.controller.payload.LogPayload;
+import co.com.santander.ports.secondary.accesodatos.LogService;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,12 +39,16 @@ public class ProxyLogSearchBizagi implements ValidateRequest {
 	
 	public void generarLog(Cliente cliente ) {
 		String gsonCliente = new Gson().toJson(cliente);
-		logService.insertLogOperation(LogPayload.builder()
-    			.usuarioMicro("jsierra")
-    			.idRequest(getIdRequest())
-    			.traza(gsonCliente)
-    			.tipo(FlowOperationEnum.CASO_BIZAGI)
-    			.build());
+		GeneralPayload<LogPayload> request = GeneralPayload.<LogPayload>builder()
+				.requestHeader(cliente.getRequestHeader())
+				.requestBody(LogPayload.builder()
+						.usuarioMicro("jsierra")
+						.idRequest(getIdRequest())
+						.traza(gsonCliente)
+						.tipo(FlowOperationEnum.CASO_BIZAGI)
+						.build())
+				.build();
+		logService.insertLogOperation(request);
 	}
 	
 }

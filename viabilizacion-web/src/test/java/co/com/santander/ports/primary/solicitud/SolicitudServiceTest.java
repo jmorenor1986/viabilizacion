@@ -7,9 +7,9 @@ import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.core.services.solicitud.SolicitudServiceImpl;
 import co.com.santander.dto.generic.RequestHeader;
-import co.com.santander.persistencia.entity.PrincipalRequest;
-import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.service.PrincipalRequestService;
+import co.com.santander.dto.viabilizacion.PrincipalRequestPayload;
+import co.com.santander.ports.secondary.accesodatos.LogService;
+import co.com.santander.ports.secondary.accesodatos.PrincipalRequestService;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
@@ -70,13 +70,13 @@ public class SolicitudServiceTest {
                 .requestHeader(requestHeader)
                 .build();
 
-        PrincipalRequest principalRequest = PrincipalRequest.builder()
+        PrincipalRequestPayload principalRequest = PrincipalRequestPayload.builder()
                 .codigoAliado(clienteLocal.getRequestHeader().getCodAliado())
                 .usuarioAliado(clienteLocal.getRequestHeader().getUsuarioAliado())
                 .ipOrigen(clienteLocal.getRequestHeader().getIpOrigen())
                 .json(new Gson().toJson(clienteLocal.getRequestHeader()))
                 .build();
-        PrincipalRequest principalRequestResponse = PrincipalRequest.builder()
+        PrincipalRequestPayload principalRequestResponse = PrincipalRequestPayload.builder()
                 .id(Long.valueOf("1"))
                 .codigoAliado(clienteLocal.getRequestHeader().getCodAliado())
                 .usuarioAliado(clienteLocal.getRequestHeader().getUsuarioAliado())
