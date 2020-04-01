@@ -2,6 +2,7 @@ package co.com.santander.adapters.secondary.rest.ubica.proxy;
 
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.reconocer.PrincipalUbicaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
@@ -42,7 +43,11 @@ public class ProxyUbicaServiceImpl extends ServiceRestAbs implements UbicaServic
     public Optional<ResponseInformacionContacto> consultarInformacionContacto(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
         setCliente(cliente);
         generateObjectCacheUbica();
-        if (!consultaCacheServicio(ServicioEnum.UBICA)) {
+        GeneralPayload<ServicioEnum> general = GeneralPayload.<ServicioEnum>builder()
+                .requestHeader(cliente.getRequestHeader())
+                .requestBody(ServicioEnum.UBICA)
+                .build();
+        if (!consultaCacheServicio(general)) {
             return ubicaService.consultarInformacionContacto(cliente, informacionContacto, idRequest);
         }
         Optional<ResponseInformacionContacto> respuesta = generateResponseUbica();

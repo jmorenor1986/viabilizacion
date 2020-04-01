@@ -1,0 +1,3 @@
+vigia:
+  url: ${vigia.proto}://${vigia.host}.${ocp.service.namespace}.svc.cluster.local:${vigia.port}
+  service-name: ${vigia.service-name}

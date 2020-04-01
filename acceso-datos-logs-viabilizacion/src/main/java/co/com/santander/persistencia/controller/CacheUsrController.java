@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("v1/cache")
 public class CacheUsrController {
@@ -41,9 +43,21 @@ public class CacheUsrController {
 
     @PostMapping(value = "/validarLog", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponsePayLoad> validateLogUser(@RequestBody GeneralPayload<ValidateLogUserPayload> validityLogUserPayload) {
+        String rtaString = "";
+        Long codigo = Long.valueOf("2");
+        String mensaje = "";
+        Optional< String > rta =  cacheUsrService.validityLogUser(validityLogUserPayload.getRequestBody().getCache(), validityLogUserPayload.getRequestBody().getVig());
+        if(rta.isPresent()){
+            rtaString = rta.get();
+            codigo = Long.valueOf("1");
+        }else{
+            mensaje = "NO EXISTE INFORMACION";
+        }
+
         return new ResponseEntity<>(ResponsePayLoad.builder()
-                .codRespuesta(1L)
-                .respuestaServicio(cacheUsrService.validityLogUser(validityLogUserPayload.getRequestBody().getCache(), validityLogUserPayload.getRequestBody().getVig()).get())
+                .codRespuesta(codigo)
+                .respuestaServicio(rtaString)
+                .mensajeError(mensaje)
                 .build(), HttpStatus.OK);
     }
 }

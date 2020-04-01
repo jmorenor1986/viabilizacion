@@ -68,6 +68,10 @@ viabilizacion:
   servicio:
     url: http://localhost:5003/logsViabilizacion/v1/servicio
     service-name: viabilizacion-servicio
+  cache:
+    url: http://localhost:5003/logsViabilizacion/v1/cache
+    service-name: viabilizacion-cache
+
 
 logging:
   level:

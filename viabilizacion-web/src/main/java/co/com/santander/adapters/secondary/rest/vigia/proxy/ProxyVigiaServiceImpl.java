@@ -3,6 +3,7 @@ package co.com.santander.adapters.secondary.rest.vigia.proxy;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
+import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
@@ -49,7 +50,11 @@ public class ProxyVigiaServiceImpl extends ServiceRestAbs implements VigiaServic
     public ListaCliente consultarListasCliente(Cliente datosBasicosCliente, Long idRequest) {
         setCliente(datosBasicosCliente);
         generateObjectCache();
-        if (!consultaCacheServicio(ServicioEnum.VIGIA)) {
+        GeneralPayload<ServicioEnum> general = GeneralPayload.<ServicioEnum>builder()
+                .requestHeader(cliente.getRequestHeader())
+                .requestBody(ServicioEnum.VIGIA)
+                .build();
+        if (!consultaCacheServicio(general)) {
             return vigiaService.consultarListasCliente(datosBasicosCliente, idRequest);
         }
         ListaCliente respuesta = generateResponse();

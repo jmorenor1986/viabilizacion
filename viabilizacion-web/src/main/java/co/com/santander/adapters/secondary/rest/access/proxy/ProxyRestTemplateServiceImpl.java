@@ -51,7 +51,6 @@ public class ProxyRestTemplateServiceImpl implements RestService {
     private void generateLog(Object body, RequestHeader header, Optional<Map<String, String>> headers, ServicioEnum servicio ){
         setHeaders(headers);
         setBody(new Gson().toJson(body));
-
         findHeadersLog();
         logRequest(servicio, header);
     }

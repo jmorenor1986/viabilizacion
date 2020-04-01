@@ -2,6 +2,7 @@ package co.com.santander.adapters.secondary.rest.informacioncontacto.proxy;
 
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.reconocer.PrincipalReconocerDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
@@ -43,7 +44,11 @@ public class ProxyInformacionContactoServiceImpl extends ServiceRestAbs implemen
     public Optional<ResponseInformacionContacto> consultarDatosUsuario(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
         setCliente(cliente);
         generateObjectCacheReconocer();
-        if (!consultaCacheServicio(ServicioEnum.RECONOCER)) {
+        GeneralPayload<ServicioEnum> general = GeneralPayload.<ServicioEnum>builder()
+                .requestHeader(cliente.getRequestHeader())
+                .requestBody(ServicioEnum.RECONOCER)
+                .build();
+        if (!consultaCacheServicio(general)) {
             return informacionContactoService.consultarDatosUsuario(cliente, informacionContacto, idRequest);
         }
         ResponseInformacionContacto respuesta = generateResponseReconocer();

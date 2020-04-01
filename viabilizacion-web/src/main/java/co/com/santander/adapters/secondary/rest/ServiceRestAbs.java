@@ -1,6 +1,7 @@
 package co.com.santander.adapters.secondary.rest;
 
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
+import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.viabilizacion.ServicioPayload;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.generic.ResponseDto;
@@ -52,7 +53,7 @@ public abstract class ServiceRestAbs {
         return Optional.of(headers);
     }
 
-    protected Boolean consultaCacheServicio(ServicioEnum servicioEnum) {
+    protected Boolean consultaCacheServicio(GeneralPayload<ServicioEnum> servicioEnum) {
         //Obetenemos el objeto con el cual se va ha validar el cache
         Optional<ServicioPayload> servicio = servicioService.findServiceByService(servicioEnum);
         if (servicio.isPresent()) {

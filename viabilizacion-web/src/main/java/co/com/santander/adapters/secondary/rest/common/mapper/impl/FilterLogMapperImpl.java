@@ -36,7 +36,7 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     @Override
     public LogPayload toLogResponse(ServicioEnum tipoServicio, String body, Long idRequest) {
         return LogPayload.builder()
-                .tipo(validateTipo(tipoServicio, REQUEST_TYPE.REQUEST_TYPE))
+                .tipo(validateTipo(tipoServicio, REQUEST_TYPE.RESPONSE_TYPE))
                 .httpStatus(HttpStatus.OK)
                 .idRequest(idRequest)
                 //TODO Se debe poner el usuario logeado
