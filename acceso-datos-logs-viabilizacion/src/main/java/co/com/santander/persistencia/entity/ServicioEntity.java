@@ -4,6 +4,7 @@ import co.com.santander.persistencia.common.ServicioEnum;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "servicio")
-public class ServicioEntity {
+public class ServicioEntity implements Serializable {
 
     @Id
     @Column(name = "id")

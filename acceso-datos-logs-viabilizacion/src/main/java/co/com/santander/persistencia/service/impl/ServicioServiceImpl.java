@@ -5,6 +5,7 @@ import co.com.santander.persistencia.entity.ServicioEntity;
 import co.com.santander.persistencia.repository.IServicioRepository;
 import co.com.santander.persistencia.service.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ServicioServiceImpl implements ServicioService {
     }
 
     @Override
+    @Cacheable(value = "servicios")
     public Optional<ServicioEntity> findServiceByService(ServicioEnum servicio) {
         return servicioRepository.findByServicio(servicio);
     }
