@@ -15,5 +15,5 @@ public interface ReconocerClient {
     String obtenerToken(@RequestBody GeneralPayload<String> request);
 
     @RequestMapping(value = "/consultaReconocer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseDto firmaElectronica(@RequestBody GeneralPayload<String> request);
+    String firmaElectronica(@RequestBody GeneralPayload<String> request);
 }
