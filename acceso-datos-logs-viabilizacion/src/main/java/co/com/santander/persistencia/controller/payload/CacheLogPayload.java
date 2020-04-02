@@ -1,14 +1,18 @@
 package co.com.santander.persistencia.controller.payload;
 
 import co.com.santander.persistencia.common.FlowOperationEnum;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CacheLogPayload {
     private String cache;
     private String usuarioMicro;
