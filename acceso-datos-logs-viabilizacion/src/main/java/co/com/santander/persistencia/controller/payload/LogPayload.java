@@ -6,23 +6,27 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
-@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter
+@EqualsAndHashCode
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class LogPayload {
 
-	private Long id;
-	
-	private String usuarioMicro;
-	
-	private FlowOperationEnum tipo;
-	
-	private String traza;
-	
-	private Long idRequest;
-	
-	private Date fecha;
+    private Long id;
 
-	private HttpStatus httpStatus;
+    private String usuarioMicro;
 
-	private String url;
-	
+    private FlowOperationEnum tipo;
+
+    private String traza;
+
+    private Long idRequest;
+
+    private Date fecha;
+
+    private HttpStatus httpStatus;
+
+    private String url;
+
 }

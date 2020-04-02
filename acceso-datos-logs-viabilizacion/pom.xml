@@ -81,6 +81,7 @@
                                     <excludes>
                                         <exclude>co.com.santander.persistencia.LogsApplication</exclude>
                                         <exclude>co.com.santander.persistencia.service.dto.*</exclude>
+                                        <exclude>co.com.santander.persistencia.common.config.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>

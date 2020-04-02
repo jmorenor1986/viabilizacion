@@ -2,7 +2,6 @@ package co.com.santander.persistencia.repository;
 
 import co.com.santander.persistencia.common.EstadoEnum;
 import co.com.santander.persistencia.common.FlowOperationEnum;
-import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.entity.CacheUsrEntity;
 import org.junit.Assert;
 import org.junit.Test;
