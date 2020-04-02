@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
-@Data
+@Getter @Setter
+@EqualsAndHashCode
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

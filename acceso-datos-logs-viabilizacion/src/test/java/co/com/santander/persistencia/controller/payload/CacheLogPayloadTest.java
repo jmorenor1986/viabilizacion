@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 public class CacheLogPayloadTest {
     @Test
