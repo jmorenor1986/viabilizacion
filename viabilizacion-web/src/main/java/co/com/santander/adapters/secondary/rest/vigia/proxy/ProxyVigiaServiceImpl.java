@@ -4,6 +4,7 @@ import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.vigia.dto.PrincipalVigiaDTO;
 import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ListaCliente;
@@ -62,7 +63,7 @@ public class ProxyVigiaServiceImpl extends ServiceRestAbs implements VigiaServic
     }
 
     private ListaCliente generateResponse() {
-        Optional<String> respuesta = obtenerValorCache();
+        Optional<String> respuesta = obtenerValorCache(FlowOperationEnum.INVOKE_VIGIA_RESPONSE);
         if (respuesta.isPresent()) {
             ResponseDto result = extractGenericResponse(respuesta.get());
             if (result.getCodRespuesta().equalsIgnoreCase("1"))

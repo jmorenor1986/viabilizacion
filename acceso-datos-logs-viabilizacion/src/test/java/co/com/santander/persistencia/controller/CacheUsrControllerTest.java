@@ -1,5 +1,6 @@
 package co.com.santander.persistencia.controller;
 
+import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.controller.payload.CacheLogPayload;
 import co.com.santander.persistencia.controller.payload.ValidateLogUserPayload;
 import co.com.santander.persistencia.controller.payload.general.GeneralPayload;
@@ -59,7 +60,7 @@ public class CacheUsrControllerTest {
                 .vig(1L)
                 .build();
         generalPayload.setRequestBody(validityLogUserPayload);
-        Mockito.when(cacheUsrService.validityLogUser(validityLogUserPayload.getCache(), validityLogUserPayload.getVig())).thenReturn(Optional.of("dasdasd"));
+        Mockito.when(cacheUsrService.validityLogUser(validityLogUserPayload.getCache(), validityLogUserPayload.getVig(), FlowOperationEnum.INVOKE_VIGIA_RESPONSE)).thenReturn(Optional.of("dasdasd"));
         ResponseEntity<ResponsePayLoad> result = cacheController.validateLogUser(generalPayload);
         Assert.assertNotNull(result);
     }

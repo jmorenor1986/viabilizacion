@@ -58,7 +58,8 @@ public class RestServiceImpl implements RestService {
                 String rtaToken = reconocerClient.obtenerToken(request);
                 return Optional.of(jsonUtilities.getGeneralResponse(rtaToken));
             case RECONOCER:
-                return Optional.of(reconocerClient.firmaElectronica(request));
+                String rtaReconocer = reconocerClient.firmaElectronica(request);
+                return Optional.of(jsonUtilities.getGeneralResponse(rtaReconocer));
             case UBICA:
                 String rta_ubica = ubicaClient.ubicaPostService(request);
                 return Optional.of(jsonUtilities.getGeneralResponse(rta_ubica));

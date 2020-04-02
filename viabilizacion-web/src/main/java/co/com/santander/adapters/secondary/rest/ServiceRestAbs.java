@@ -3,6 +3,7 @@ package co.com.santander.adapters.secondary.rest;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.viabilizacion.ServicioPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.ports.secondary.accesodatos.CacheUsrService;
@@ -66,8 +67,8 @@ public abstract class ServiceRestAbs {
         return Boolean.FALSE;
     }
 
-    protected Optional<String> obtenerValorCache() {
-        Optional<String> traza = cacheUsrService.validityLogUser(getKeyCache(), getVigencia());
+    protected Optional<String> obtenerValorCache(FlowOperationEnum servicio) {
+        Optional<String> traza = cacheUsrService.validityLogUser(getKeyCache(), getVigencia(), servicio);
         if (traza.isPresent()) {
             return Optional.of(traza.get());
         }
