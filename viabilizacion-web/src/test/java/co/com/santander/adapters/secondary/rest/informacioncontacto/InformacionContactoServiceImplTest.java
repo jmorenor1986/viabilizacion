@@ -89,14 +89,5 @@ public class InformacionContactoServiceImplTest {
         headers.put("idRequest", "123");
     }
 
-    @Test
-    public void testReturnTelefonosOrDireccionesReconocer() {
-        Mockito.when(restService.callService(Mockito.any(), Mockito.any(), Mockito.any()))
-                .thenReturn(Optional.of(ResponseDto.builder().codRespuesta("1")
-                        .respuestaServicio(MockReconocerService.response)
-                        .build()));
-        Optional<ResponseInformacionContacto> result = informacionContactoService.consultarDatosUsuario(cliente, informacionContacto, 1L);
-        Assert.assertNotNull(result);
-    }
 
 }

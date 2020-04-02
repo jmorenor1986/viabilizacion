@@ -59,7 +59,7 @@ public class ValidarCiudadServiceImplTest {
                 .build();
         Mockito.when(restService.callService(validaCiudad, ServicioEnum.VALIDATE_CITY, genericHeaders ) ).thenReturn(Optional.of(ResponseDto.builder().codRespuesta("1").respuestaServicio("true").build()));
         String result = validarCiudadService.validarCodigoCiudad(validaCiudad, Long.valueOf("123"));
-        Assert.assertEquals("false", result);
+        Assert.assertEquals("true", result);
     }
 
     @Test
