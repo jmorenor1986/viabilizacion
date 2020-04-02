@@ -46,7 +46,7 @@ public class CacheUsrController {
         String rtaString = "";
         Long codigo = Long.valueOf("2");
         String mensaje = "";
-        Optional< String > rta =  cacheUsrService.validityLogUser(validityLogUserPayload.getRequestBody().getCache(), validityLogUserPayload.getRequestBody().getVig());
+        Optional< String > rta =  cacheUsrService.validityLogUser(validityLogUserPayload.getRequestBody().getCache(), validityLogUserPayload.getRequestBody().getVig(), validityLogUserPayload.getRequestBody().getServicio());
         if(rta.isPresent()){
             rtaString = rta.get();
             codigo = Long.valueOf("1");

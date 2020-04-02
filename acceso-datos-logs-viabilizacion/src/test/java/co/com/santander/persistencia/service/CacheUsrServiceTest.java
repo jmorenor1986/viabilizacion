@@ -48,13 +48,13 @@ public class CacheUsrServiceTest {
 
     @Test
     public void testValidityLogUserIsPresent() {
-        Mockito.when(cacheUsrRepository.findByParamBusqAndEstadoAndTipo("cache", EstadoEnum.ACTIVO, "RESPONSE"))
+        Mockito.when(cacheUsrRepository.findLogInCache("cache", EstadoEnum.ACTIVO, "RESPONSE", FlowOperationEnum.INVOKE_VIGIA_RESPONSE))
                 .thenReturn(Optional.of(CacheUsrEntity.builder()
                         .logs(LogEntity.builder()
                                 .fecha(new Date())
                                 .build())
                         .build()));
-        Optional<String> result = cacheUsrService.validityLogUser("cache", 0L);
+        Optional<String> result = cacheUsrService.validityLogUser("cache", 0L, FlowOperationEnum.INVOKE_VIGIA_RESPONSE);
         Assert.assertNotNull(result);
 
     }

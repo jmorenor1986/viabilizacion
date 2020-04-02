@@ -3,6 +3,7 @@ package co.com.santander.adapters.secondary.rest.ubica.proxy;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.reconocer.PrincipalUbicaDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
@@ -63,7 +64,7 @@ public class ProxyUbicaServiceImpl extends ServiceRestAbs implements UbicaServic
     }
 
     private Optional<ResponseInformacionContacto> generateResponseUbica(){
-        Optional<String> respuesta = obtenerValorCache();
+        Optional<String> respuesta = obtenerValorCache(FlowOperationEnum.INVOKE_UBICA_RESPONSE);
         if(respuesta.isPresent()){
             ResponseDto result = extractGenericResponse(respuesta.get());
             if ("1".equalsIgnoreCase(result.getCodRespuesta()))

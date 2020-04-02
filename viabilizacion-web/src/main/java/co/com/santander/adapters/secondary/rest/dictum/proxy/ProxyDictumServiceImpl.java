@@ -3,6 +3,7 @@ package co.com.santander.adapters.secondary.rest.dictum.proxy;
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
@@ -57,7 +58,7 @@ public class ProxyDictumServiceImpl extends ServiceRestAbs implements DictumServ
     }
 
     private Optional<String> generateResponse(){
-        Optional<String> respuesta = obtenerValorCache();
+        Optional<String> respuesta = obtenerValorCache(FlowOperationEnum.INVOKE_DICTUM_RESPONSE);
         if(respuesta.isPresent()){
             ResponseDto result = extractGenericResponse(respuesta.get());
             if (result.getCodRespuesta().equalsIgnoreCase("1"))

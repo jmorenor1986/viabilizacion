@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cache_usr")
 @NamedQueries({
-        @NamedQuery(name = "CacheUsrEntity.inactiveCacheUsr", query = "update CacheUsrEntity set estado = 'INACTIVO' where estado = 'ACTIVO' and  paramBusq = :paramBusq and tipo = :tipo ")
+        @NamedQuery(name = "CacheUsrEntity.inactiveCacheUsr", query = "update CacheUsrEntity set estado = 'INACTIVO' where estado = 'ACTIVO' and  paramBusq = :paramBusq and tipo = :tipo "),
+        @NamedQuery(name = "CacheUsrEntity.findLogInCache" , query = "from CacheUsrEntity cu join fetch cu.logs lo where  cu.paramBusq = :paramBusq and cu.estado = :estado and cu.tipo = :tipo and lo.tipo = :operation ")
 })
 @Builder
 @Data

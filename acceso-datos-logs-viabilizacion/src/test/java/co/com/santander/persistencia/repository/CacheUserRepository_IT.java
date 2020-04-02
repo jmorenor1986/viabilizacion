@@ -1,6 +1,8 @@
 package co.com.santander.persistencia.repository;
 
 import co.com.santander.persistencia.common.EstadoEnum;
+import co.com.santander.persistencia.common.FlowOperationEnum;
+import co.com.santander.persistencia.common.ServicioEnum;
 import co.com.santander.persistencia.entity.CacheUsrEntity;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,7 +29,7 @@ public class CacheUserRepository_IT {
 
     @Test
     public void testFindByParamBusqAndEstadoAndTipo() {
-        Optional<CacheUsrEntity> result = cacheUsrRepository.findByParamBusqAndEstadoAndTipo("param", EstadoEnum.ACTIVO, "tipo");
+        Optional<CacheUsrEntity> result = cacheUsrRepository.findLogInCache("param", EstadoEnum.ACTIVO, "tipo", FlowOperationEnum.INVOKE_VIGIA_RESPONSE);
         Assert.assertEquals(Optional.empty(), result);
     }
 

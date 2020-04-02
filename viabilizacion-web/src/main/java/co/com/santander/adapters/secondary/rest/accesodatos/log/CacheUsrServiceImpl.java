@@ -30,11 +30,12 @@ public class CacheUsrServiceImpl implements CacheUsrService {
     }
 
     @Override
-    public Optional<String> validityLogUser(String cache, Long vig) {
+    public Optional<String> validityLogUser(String cache, Long vig, FlowOperationEnum servicio) {
         GeneralPayload<ValidateLogUserPayload> request = GeneralPayload.<ValidateLogUserPayload>builder()
                 .requestBody(ValidateLogUserPayload.builder()
                         .cache(cache)
                         .vig(vig)
+                        .servicio(servicio)
                         .build())
                 .build();
         ResponseDto responseDto = cacheClient.validateLogUser(request).getBody();

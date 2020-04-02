@@ -34,8 +34,8 @@ public class CacheUsrServiceImpl implements CacheUsrService {
     }
 
     @Override
-    public Optional<String> validityLogUser(String cache, Long vig) {
-        Optional< CacheUsrEntity > cacheEntity = cacheUsrRepository.findByParamBusqAndEstadoAndTipo(cache, EstadoEnum.ACTIVO, "RESPONSE");
+    public Optional<String> validityLogUser(String cache, Long vig, FlowOperationEnum operation) {
+        Optional< CacheUsrEntity > cacheEntity = cacheUsrRepository.findLogInCache(cache, EstadoEnum.ACTIVO, "RESPONSE", operation);
         if(cacheEntity.isPresent()){
             return isValidLogDate(cacheEntity.get().getLogs().getFecha(), vig) ?  Optional.of(cacheEntity.get().getLogs().getTraza()) : Optional.empty();
         }
