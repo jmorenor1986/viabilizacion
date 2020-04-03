@@ -20,12 +20,12 @@ CREATE TABLE cache_usr (
 CREATE TABLE log (
     id                      int8         not null   ,
     fecha                   timestamp               ,
-    httpStatus              varchar(255)            ,
+    http_status              varchar(255)            ,
     tipo                    varchar(255)            ,
     traza                   TEXT                    ,
     url                     varchar(255)            ,
     usuario_micro           varchar(255) not null   ,
-    principalRequest_id     int8                    ,
+    principal_request_id     int8                    ,
     servicio_id             int8                    ,
     PRIMARY KEY (id)
 );

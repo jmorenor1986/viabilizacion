@@ -39,7 +39,7 @@ public class LogEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private PrincipalRequest principalRequest;
 
-	@Column(name = "httpStatus" )
+	@Column(name = "http_status" )
 	@Enumerated(value = EnumType.STRING)
 	private HttpStatus httpStatus;
 
