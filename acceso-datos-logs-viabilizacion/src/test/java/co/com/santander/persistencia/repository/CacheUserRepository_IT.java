@@ -22,7 +22,7 @@ public class CacheUserRepository_IT {
 
     @Test
     public void testInactiveCacheUsr() {
-        Integer result = cacheUsrRepository.inactiveCacheUsr("param", "tipo");
+        Integer result = cacheUsrRepository.inactiveCacheUsr("param", "tipo", FlowOperationEnum.INVOKE_VIGIA_REQUEST);
         Assert.assertEquals(Optional.of(0), Optional.of(result));
     }
 

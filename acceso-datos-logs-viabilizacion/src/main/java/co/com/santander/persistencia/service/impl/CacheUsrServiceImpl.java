@@ -24,12 +24,13 @@ public class CacheUsrServiceImpl implements CacheUsrService {
 
     @Override
     public CacheUsrEntity insertLogCacheUsr(LogEntity log, String cache) {
-        cacheUsrRepository.inactiveCacheUsr(cache, evaluoTipo(log.getTipo()));
+        cacheUsrRepository.inactiveCacheUsr(cache, evaluoTipo(log.getTipo()), log.getTipo());
         return cacheUsrRepository.save(CacheUsrEntity.builder()
                 .logs(log)
                 .estado(EstadoEnum.ACTIVO)
                 .paramBusq(cache)
                 .tipo(evaluoTipo(log.getTipo()))
+                .tipoLog(log.getTipo())
                 .build());
     }
 

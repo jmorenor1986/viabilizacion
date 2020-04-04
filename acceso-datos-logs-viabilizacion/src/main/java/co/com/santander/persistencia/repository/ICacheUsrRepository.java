@@ -16,7 +16,7 @@ public interface ICacheUsrRepository extends JpaRepository<CacheUsrEntity, Long>
 
     @Transactional
     @Modifying
-    Integer inactiveCacheUsr(String paramBusq, String tipo);
+    Integer inactiveCacheUsr(String paramBusq, String tipo, FlowOperationEnum tipoLog);
 
     Optional< CacheUsrEntity > findLogInCache(String paramBusq, EstadoEnum estado, String tipo, FlowOperationEnum operation);
 
