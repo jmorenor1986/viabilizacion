@@ -33,15 +33,19 @@ public class CacheUsrServiceTest {
     @Test
     public void testInsertLogCacheUsr() {
         LogEntity logEntity = LogEntity.builder()
-                .tipo(FlowOperationEnum.CASO_BIZAGI)
+                .tipo(FlowOperationEnum.CASO_BIZAGI_REQUEST)
                 .build();
+
         CacheUsrEntity cacheUsrEntity = CacheUsrEntity.builder()
+                .logs(logEntity)
                 .estado(EstadoEnum.ACTIVO)
                 .paramBusq("cache")
-                .tipo("NA")
-                .logs(logEntity)
+                .tipo("REQUEST")
+                .tipoLog(FlowOperationEnum.CASO_BIZAGI_REQUEST)
                 .build();
-        Mockito.when(cacheUsrRepository.save(cacheUsrEntity)).thenReturn(CacheUsrEntity.builder().build());
+
+
+        Mockito.when(cacheUsrRepository.save(cacheUsrEntity)).thenReturn(CacheUsrEntity.builder().id(Long.valueOf("1")).build());
         CacheUsrEntity result = cacheUsrService.insertLogCacheUsr(logEntity, "cache");
         Assert.assertNotNull(result);
     }
