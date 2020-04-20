@@ -25,8 +25,6 @@ public class MapperClienteImplTest {
     @Test
     public void testObject() {
         ClientePayLoad cliente = new ClientePayLoad();
-        cliente.setTipoIdentificacion("1");
-        cliente.setNumeroIdentificacion("1030585312");
         //Creo el objeto necesario para probar
         payload = GeneralPayload.<ClientePayLoad>builder()
                 .requestHeader(RequestHeader.builder()
