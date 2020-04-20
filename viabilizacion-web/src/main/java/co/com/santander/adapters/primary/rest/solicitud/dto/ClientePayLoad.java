@@ -4,8 +4,6 @@ import lombok.Data;
 
 @Data
 public class ClientePayLoad {
-    private String tipoIdentificacion;
-    private String numeroIdentificacion;
     private String nombres;
     private String apellidos;
     private String direccion;

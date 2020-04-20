@@ -21,6 +21,8 @@ public class MapperClienteImpl implements MapperCliente {
     @Override
     public Cliente fromGeneralPayLoad(GeneralPayload<ClientePayLoad> payload) {
         Cliente cliente = mapper.map(payload.getRequestBody(), Cliente.class);
+        cliente.setTipoIdentificacion(payload.getRequestHeader().getTipoIdentificacion());
+        cliente.setNumeroIdentificacion(payload.getRequestHeader().getIdentificacion());
         cliente.setRequestHeader(payload.getRequestHeader());
         return cliente;
     }
