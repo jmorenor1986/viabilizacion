@@ -1,7 +1,9 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
+import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.mapper.FilterLogMapper;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
+import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.dto.viabilizacion.LogPayload;
 import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
@@ -13,11 +15,13 @@ import org.springframework.stereotype.Component;
 public class FilterLogMapperImpl implements FilterLogMapper {
 
     private final ClientesProperties clientesProperties;
+    private final JsonUtilities jsonUtilities;
     enum  REQUEST_TYPE{ REQUEST_TYPE, RESPONSE_TYPE };
 
     @Autowired
-    public FilterLogMapperImpl(ClientesProperties clientesProperties) {
+    public FilterLogMapperImpl(ClientesProperties clientesProperties, JsonUtilities jsonUtilities) {
         this.clientesProperties = clientesProperties;
+        this.jsonUtilities = jsonUtilities;
     }
 
     @Override
@@ -37,13 +41,21 @@ public class FilterLogMapperImpl implements FilterLogMapper {
     public LogPayload toLogResponse(ServicioEnum tipoServicio, String body, Long idRequest) {
         return LogPayload.builder()
                 .tipo(validateTipo(tipoServicio, REQUEST_TYPE.RESPONSE_TYPE))
-                .httpStatus(HttpStatus.OK)
+                .httpStatus(evaluateResponse(body))
                 .idRequest(idRequest)
                 //TODO Se debe poner el usuario logeado
                 .usuarioMicro("jsierra")
                 .traza(body)
                 .url("")
                 .build();
+    }
+    //Metodo que evalua la respuesta enviada ya que puede ser fallida pero el estatus http correcto
+    public HttpStatus evaluateResponse(String body){
+        ResponseDto rta = jsonUtilities.getGeneralResponse(body);
+        if(!"1".equals(rta.getCodRespuesta())){
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return HttpStatus.OK;
     }
 
     private FlowOperationEnum validateTipo(ServicioEnum servicio, REQUEST_TYPE type  ){

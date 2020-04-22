@@ -1,5 +1,6 @@
 package co.com.santander.adapters.secondary.rest.common.mapper.impl;
 
+import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.adapters.secondary.rest.common.properties.ClientesProperties;
 import org.junit.Before;
 import org.mockito.Mock;
@@ -16,6 +17,8 @@ public class FilterLogMapperImplTest {
     private HttpRequest request;
     @Mock
     private ClientHttpResponse response;
+    @Mock
+    private JsonUtilities jsonUtilities;
 
     private ClientesProperties clientesProperties;
 
@@ -24,7 +27,7 @@ public class FilterLogMapperImplTest {
         MockitoAnnotations.initMocks(this);
         this.clientesProperties = new ClientesProperties();
         this.clientesProperties.setUriValidarCiudad("http://localhost:5001/validacion/v1/ciudad/");
-        this.filterLogMapper = new FilterLogMapperImpl(clientesProperties);
+        this.filterLogMapper = new FilterLogMapperImpl(clientesProperties, jsonUtilities);
     }
 
 }
