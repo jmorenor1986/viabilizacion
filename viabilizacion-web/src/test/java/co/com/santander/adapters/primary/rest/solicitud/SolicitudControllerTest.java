@@ -53,7 +53,7 @@ public class SolicitudControllerTest {
 
         Mockito.when(solicitudService.cumplimientoSolicitud(cliente)).thenReturn(Optional.of(ResponseFlow.UNEXPECTED_ERROR));
         ResponseEntity<ResponsePayLoad> result = solicitudController.solicitud(clientePayLoad);
-        Assert.assertEquals(ResponseFlow.UNEXPECTED_ERROR.toString(), result.getBody().getRespuestaServicio());
+        Assert.assertEquals(ResponseFlow.UNEXPECTED_ERROR.toString(), result.getBody().getRespuestaServicio().getSolicitud());
     }
 
 }
