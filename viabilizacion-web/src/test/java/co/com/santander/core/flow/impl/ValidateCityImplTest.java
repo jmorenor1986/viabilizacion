@@ -64,7 +64,7 @@ public class ValidateCityImplTest {
                         .build())
                 .build();
         Mockito.when(validarCiudadService.validarCodigoCiudad(envio,requestId)).thenReturn("true");
-        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
+        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO);
         Assert.assertNotNull( result );
     }
 
@@ -88,7 +88,7 @@ public class ValidateCityImplTest {
                         .build())
                 .build();
         Mockito.when(validarCiudadService.validarCodigoCiudad(envio,requestId)).thenReturn("false");
-        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
+        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO);
         Assert.assertNotNull( result );
     }
 }

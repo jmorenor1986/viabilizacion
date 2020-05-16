@@ -43,7 +43,7 @@ public class SearchVigiaImplTest {
         Long requestId = Long.valueOf("1");
         Cliente cliente = Cliente.builder().tipoIdentificacion("CC").numeroIdentificacion("1015").nombres("Pepito")
                 .apellidos("Perez").direccion("cra 34 calle 26 - 75 sur").telefono("2365417").build();
-        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
+        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();
         Assert.assertNotNull(result);
     }
 
@@ -53,7 +53,7 @@ public class SearchVigiaImplTest {
         Cliente cliente = Mockito.mock(Cliente.class);
         Mockito.when(vigiaService.consultarListasCliente(cliente, Long.valueOf("1"))).thenReturn(
                 ListaCliente.builder().encontradoId("S").encontradoNombre("N").resultado(RESPUESTA_LISTAS).build());
-        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
+        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();
         Assert.assertNotNull(result);
     }
 
@@ -63,7 +63,7 @@ public class SearchVigiaImplTest {
         Cliente cliente = Mockito.mock(Cliente.class);
         Mockito.when(vigiaService.consultarListasCliente(cliente, Long.valueOf("1"))).thenReturn(
                 ListaCliente.builder().encontradoId("S").encontradoNombre("S").resultado(RESPUESTA_LISTAS).build());
-        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
+        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();
         Assert.assertNotNull(result);
     }
 
@@ -73,7 +73,7 @@ public class SearchVigiaImplTest {
         Cliente cliente = Mockito.mock(Cliente.class);
         Mockito.when(vigiaService.consultarListasCliente(cliente, Long.valueOf("1"))).thenReturn(
                 ListaCliente.builder().encontradoId("N").encontradoNombre("N").resultado(RESPUESTA_LISTAS).build());
-        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
+        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();
         Assert.assertNotNull(result);
     }
 

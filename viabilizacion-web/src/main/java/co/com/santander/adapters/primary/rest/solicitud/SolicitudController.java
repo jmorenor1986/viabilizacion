@@ -2,6 +2,7 @@ package co.com.santander.adapters.primary.rest.solicitud;
 
 import co.com.santander.adapters.primary.rest.solicitud.dto.ClientePayLoad;
 import co.com.santander.adapters.primary.rest.solicitud.dto.ResponsePayLoad;
+import co.com.santander.adapters.primary.rest.solicitud.dto.SolicitudPayLoad;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.ports.primary.solicitud.MapperCliente;
@@ -40,7 +41,7 @@ public class SolicitudController {
         return new ResponseEntity<>(
                 ResponsePayLoad.builder()
                         .codRespuesta(Long.valueOf("1"))
-                        .respuestaServicio(respuestaServicio)
+                        .respuestaServicio(SolicitudPayLoad.builder().solicitud(respuestaServicio).build())
                         .mensajeError("OK")
                         .build()
                 , HttpStatus.OK);

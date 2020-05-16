@@ -54,7 +54,7 @@ public class ProxyLogSearchBizagiImplTest {
 	@Test
 	public void testSearchReconocerImplSuccess() {
 		Long requestId = Long.valueOf("1");
-		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
+		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();
 		Assert.assertNotNull(result);
 	}
 

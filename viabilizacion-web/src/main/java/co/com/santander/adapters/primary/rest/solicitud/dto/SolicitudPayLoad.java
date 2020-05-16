@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponsePayLoad {
+public class SolicitudPayLoad {
 
-    private Long codRespuesta;
-    private SolicitudPayLoad respuestaServicio;
-    private String mensajeError;
+    private String solicitud;
 
 }

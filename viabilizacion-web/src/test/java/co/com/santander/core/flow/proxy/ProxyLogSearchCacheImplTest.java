@@ -54,7 +54,7 @@ public class ProxyLogSearchCacheImplTest {
     @Test
     public void testSearchCacheImplSuccess(){
         requestId = Long.valueOf("1");
-        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
+        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO);
         Assert.assertNotNull(result);
     }
 }

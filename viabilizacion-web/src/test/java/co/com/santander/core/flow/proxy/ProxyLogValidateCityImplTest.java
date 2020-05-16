@@ -53,7 +53,7 @@ public class ProxyLogValidateCityImplTest {
     @Test
     public void testValidateCityImplSuccess() {
         requestId = Long.valueOf("1");
-        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED);
+        ResponseFlow result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO);
         Assert.assertNotNull( result );
     }
 }

@@ -42,7 +42,7 @@ public class SearchReconocerImplTest {
     @Test
     public void testSearchReconocerImplSuccess(){
         requestId = Long.valueOf("1");
-        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.DENIED).toString();
+        String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();
         Assert.assertNotNull(result);
     }
 

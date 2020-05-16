@@ -49,7 +49,7 @@ public class SearchDictumImpl implements ValidateRequest {
             getCliente().setDecision(respuestaDictum);
             return validateRequest.process(getCliente(), idRequest);
         }
-        return Optional.of(ResponseFlow.DENIED);
+        return Optional.of(ResponseFlow.NEGADO);
     }
 
     public Boolean callService() {
