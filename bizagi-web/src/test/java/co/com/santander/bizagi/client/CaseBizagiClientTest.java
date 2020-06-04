@@ -47,7 +47,7 @@ public class CaseBizagiClientTest {
         System.setProperty(SystemProperties.JAVAX_NET_SSL_KEY_STORE_PASSWORD, serviciosProperties.getKeyStorePassword());
         System.setProperty(SystemProperties.ORG_APACHE_CXF_STAX_ALLOW_INSECURE_PARSER, SystemProperties.VALUE_ALLOW_INSECURE_PARSER);
         Mockito.when(workflowEngineSOA.getWorkflowEngineSOASoap()).thenReturn(workflowEngineSOASoap);
-        caseBizagiClient = new CaseBizagiClientImpl(serviciosProperties, workflowEngineSOA);
+        caseBizagiClient = new CaseBizagiClientImpl(workflowEngineSOA);
     }
 
     @Test

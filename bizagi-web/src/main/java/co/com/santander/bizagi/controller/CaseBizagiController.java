@@ -30,13 +30,12 @@ public class CaseBizagiController {
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponsePayLoad> createCase(@RequestBody(required = true) GeneralPayload<Cliente> clientePayload) throws MalformedURLException, JSONException {
-        ResponseEntity<ResponsePayLoad> respuesta = new ResponseEntity<>(ResponsePayLoad.builder()
-                        .codRespuesta(Long.valueOf("1"))
-                        .respuestaServicio(this.caseBizagiService.createCaseString(clientePayload.getRequestBody()))
-                        .mensajeError("OK")
-                        .build()
-                ,HttpStatus.OK);
-        return respuesta;
+        return new ResponseEntity<>(ResponsePayLoad.builder()
+                .codRespuesta(Long.valueOf("1"))
+                .respuestaServicio(this.caseBizagiService.createCaseString(clientePayload.getRequestBody()))
+                .mensajeError("OK")
+                .build()
+                , HttpStatus.OK);
     }
 
     @PostMapping(value = "/create-case", produces = MediaType.APPLICATION_JSON_VALUE)

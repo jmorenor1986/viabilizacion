@@ -1,7 +1,6 @@
 package co.com.santander.bizagi.client.impl;
 
 import co.com.santander.bizagi.client.CaseBizagiClient;
-import co.com.santander.bizagi.common.properties.ServiciosProperties;
 import co.com.santander.bizagi.dto.BizAgiWSParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +14,10 @@ import java.util.Collections;
 
 @Service
 public class CaseBizagiClientImpl implements CaseBizagiClient {
-    private final ServiciosProperties serviciosProperties;
-    private final WorkflowEngineSOA workflowEngineSOA;
     private WorkflowEngineSOASoap workflowEngineSOASoap;
 
     @Autowired
-    public CaseBizagiClientImpl(ServiciosProperties serviciosProperties, WorkflowEngineSOA workflowEngineSOA) {
-        this.serviciosProperties = serviciosProperties;
-        this.workflowEngineSOA = workflowEngineSOA;
+    public CaseBizagiClientImpl(WorkflowEngineSOA workflowEngineSOA) {
         this.workflowEngineSOASoap = workflowEngineSOA.getWorkflowEngineSOASoap();
     }
 

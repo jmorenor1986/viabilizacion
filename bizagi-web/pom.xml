@@ -11,6 +11,13 @@
 
     <artifactId>bizagi-web</artifactId>
     <properties>
+        <sonar.coverage.exclusions>
+            src/main/java/co/com/santander/bizagi/common/config/**/*,
+            src/main/java/co/com/santander/bizagi/dto/**/*,
+            src/main/java/org/tempuri/**/*,
+            **/*BizagiApplication.java,
+            **/*ValidatorHandler.java
+        </sonar.coverage.exclusions>
         <start-class>co.com.santander.BizagiApplication</start-class>
         <velocity-tools-version>2.0</velocity-tools-version>
         <velocity-version>1.7</velocity-version>
@@ -73,11 +80,10 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.BizagiApplication</exclude>
+                                        <exclude>co.com.santander.bizagi.common.handler.*</exclude>
                                         <exclude>co.com.santander.bizagi.common.config.*</exclude>
                                         <exclude>org.tempuri.*</exclude>
                                         <exclude>co.com.santander.bizagi.dto.*</exclude>
-                                        <exclude>co.com.santander.bizagi.common.handler.*</exclude>
-                                        <exclude>co.com.santander.bizagi.controller.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>

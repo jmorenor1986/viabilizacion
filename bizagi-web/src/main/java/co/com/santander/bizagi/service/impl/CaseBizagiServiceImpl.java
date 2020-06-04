@@ -43,7 +43,6 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
     @Override
     public String createCaseString(Cliente cliente) throws MalformedURLException, JSONException {
         String requestString = putParametersVelocity(cliente).replaceAll("\r", "");
-        //System.out.println(requestString);
         return stringUtilities.xmlToJson(
                 stringUtilities.cdataToJson(
                         caseBizagiClient.createCaseString(requestString)));
@@ -106,7 +105,7 @@ public class CaseBizagiServiceImpl implements CaseBizagiService {
         context.put("valorvehiculo", cliente.getValorSolicitado());
 
         context.put("autorizaCentrales", serviciosProperties.getAutorizaConsultaaCentrales());
-        StringWriter writer =  new StringWriter();
+        StringWriter writer = new StringWriter();
         template.merge(context, writer);
         return writer.toString();
     }

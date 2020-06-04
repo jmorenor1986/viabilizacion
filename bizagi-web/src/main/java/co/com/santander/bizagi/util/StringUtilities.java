@@ -20,16 +20,14 @@ public class StringUtilities {
     }
 
     private String replaceXml(String xmlResponse) {
-        return xmlResponse.replaceAll(REGEX_REPLACE, REPLACEMENT);
+        return xmlResponse.replace(REGEX_REPLACE, REPLACEMENT);
     }
 
 
     public String cdataToJson(String xmlResponse) {
-        System.out.println(xmlResponse);
-        String response= xmlResponse.replaceAll("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "")
+        String response = xmlResponse.replaceAll("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "")
                 .replaceAll("<!\\[CDATA\\[", "")
                 .replaceAll("]]>", "");
-        System.out.println(response);
         return response;
 
     }
