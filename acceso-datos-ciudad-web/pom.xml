@@ -12,6 +12,10 @@
     <artifactId>acceso-datos-ciudad-web</artifactId>
     <properties>
         <start-class>co.com.santander.ValidationApplication</start-class>
+        <sonar.coverage.exclusions>
+            src/main/java/co/com/santander/validation/common/config/**/*,
+            **/*ValidationApplication.java,
+        </sonar.coverage.exclusions>
     </properties>
 
     <dependencies>

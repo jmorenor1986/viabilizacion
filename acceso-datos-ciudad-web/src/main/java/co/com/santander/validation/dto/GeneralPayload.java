@@ -12,6 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GeneralPayload<T> implements Serializable {
+    private static final long serialVersionUID = 1905122041950251207L;
 
     private RequestHeader requestHeader;
     private T requestBody;
