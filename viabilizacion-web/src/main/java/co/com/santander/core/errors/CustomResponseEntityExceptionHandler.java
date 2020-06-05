@@ -19,32 +19,28 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ResponsePayLoad> handleAllExceptions(Exception ex, WebRequest request) {
         String mensaje = ex.getMessage() + " " + ex.toString();
-        System.out.println(
-                "**************************Mensaje Controlado por aspecto (ExceptionHandler)*******************************************");
-        ex.printStackTrace();
-        System.out.println("*********************************************************************");
-        if(ex instanceof ConnectionException){
+        if (ex instanceof ConnectionException) {
             ConnectionException exception = ((ConnectionException) ex);
-            mensaje = new Gson().toJson( ConnectionErrorDto.builder()
-                    .mensaje( ex.getMessage() )
+            mensaje = new Gson().toJson(ConnectionErrorDto.builder()
+                    .mensaje(ex.getMessage())
                     .method(exception.getMethod())
                     .params(exception.getParams())
                     .url(exception.getUrl())
                     .build());
-        }else if(ex instanceof MandatoryFieldException){
+        } else if (ex instanceof MandatoryFieldException) {
             MandatoryFieldException exception = (MandatoryFieldException) ex;
             mensaje = exception.getMessage();
-        }else if(ex instanceof  NumberException){
+        } else if (ex instanceof NumberException) {
             NumberException exception = (NumberException) ex;
             mensaje = exception.getMessage();
-        }else if(ex instanceof  BusinessException){
+        } else if (ex instanceof BusinessException) {
             BusinessException exception = (BusinessException) ex;
             mensaje = exception.getMessage();
         }
         return new ResponseEntity<>(ResponsePayLoad.builder()
-                        .codRespuesta(Long.valueOf("3"))
-                        .mensajeError( mensaje )
-                        .build()
+                .codRespuesta(Long.valueOf("3"))
+                .mensajeError(mensaje)
+                .build()
                 , HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

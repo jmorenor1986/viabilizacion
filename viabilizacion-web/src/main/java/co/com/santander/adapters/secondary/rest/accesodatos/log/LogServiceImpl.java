@@ -40,9 +40,9 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public Boolean insertaLogRest(GeneralPayload<LogPayload> log, String idCache) {
-        if(validateEspecificCacheService(log.getRequestBody().getTipo())){
+        if (validateEspecificCacheService(log.getRequestBody().getTipo())) {
             Optional<Long> idServicio = getIdServicio(validaServicio(log.getRequestBody().getTipo()), log.getRequestHeader());
-            if(idServicio.isPresent()){
+            if (idServicio.isPresent()) {
                 LogServicePayload logService = LogServicePayload.builder()
                         .idCache(idCache)
                         .log(log.getRequestBody())
@@ -54,14 +54,13 @@ public class LogServiceImpl implements LogService {
                         .requestBody(logService)
                         .build();
                 ResponseDto respuesta = logClient.insertaLogRest(logGeneralPayload).getBody();
-                System.out.println(idServicio.get());
             }
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
     }
 
-    private Optional<Long> getIdServicio(ServicioEnum servicio, RequestHeader header){
+    private Optional<Long> getIdServicio(ServicioEnum servicio, RequestHeader header) {
         GeneralPayload<ServicioEnum> requestServicio = GeneralPayload.<ServicioEnum>builder()
                 .requestHeader(header)
                 .requestBody(servicio)
@@ -73,6 +72,7 @@ public class LogServiceImpl implements LogService {
 
     /**
      * Metodo con el cual se valida cuales servicios se debe almacenar una auditoria estricta
+     *
      * @param servicioEnum
      * @return
      */
@@ -100,9 +100,9 @@ public class LogServiceImpl implements LogService {
             return ServicioEnum.DICTUM;
         } else if (FlowOperationEnum.INVOKE_RECONOCER.equals(operationEnum) || FlowOperationEnum.INVOKE_RECONOCER_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_RECONOCER_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.RECONOCER;
-        }else if (FlowOperationEnum.INVOKE_UBICA.equals(operationEnum) || FlowOperationEnum.INVOKE_UBICA_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_UBICA_RESPONSE.equals(operationEnum)) {
+        } else if (FlowOperationEnum.INVOKE_UBICA.equals(operationEnum) || FlowOperationEnum.INVOKE_UBICA_REQUEST.equals(operationEnum) || FlowOperationEnum.INVOKE_UBICA_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.RECONOCER;
-        }else if (FlowOperationEnum.CASO_BIZAGI.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_RESPONSE.equals(operationEnum)) {
+        } else if (FlowOperationEnum.CASO_BIZAGI.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.BIZAGI;
         }
         return ServicioEnum.NO_APLICA;

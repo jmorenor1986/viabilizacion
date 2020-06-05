@@ -12,6 +12,12 @@
     <properties>
         <start-class>co.com.santander.persistencia.LogsApplication</start-class>
         <h2.version>1.4.200</h2.version>
+        <sonar.coverage.exclusions>
+            src/main/java/co/com/santander/persistencia/common/**/*,
+            src/main/java/co/com/santander/persistencia/entity/**/*,
+            src/main/java/co/com/santander/persistencia/repository/**/*,
+            **/*LogsApplication.java,
+        </sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <!-- Acceso a datos -->
@@ -84,9 +90,9 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.persistencia.LogsApplication</exclude>
-                                        <exclude>co.com.santander.persistencia.service.dto.*</exclude>
-                                        <exclude>co.com.santander.persistencia.common.config.*</exclude>
-                                        <exclude>co.com.santander.persistencia.*</exclude>
+                                        <exclude>co.com.santander.persistencia.common.*</exclude>
+                                        <exclude>co.com.santander.persistencia.entity.*</exclude>
+                                        <exclude>co.com.santander.persistencia.repository.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
