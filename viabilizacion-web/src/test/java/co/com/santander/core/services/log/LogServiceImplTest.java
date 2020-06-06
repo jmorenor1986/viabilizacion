@@ -1,17 +1,6 @@
 package co.com.santander.core.services.log;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-
-import java.util.Date;
-import java.util.Optional;
 
 @SpringBootTest
 public class LogServiceImplTest {

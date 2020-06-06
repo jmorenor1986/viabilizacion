@@ -1,7 +1,6 @@
 package co.com.santander.clients;
 
 import co.com.santander.dto.generic.GeneralPayload;
-import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.dto.vigia.VigiaDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;

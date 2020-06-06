@@ -8,18 +8,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "cache_usr")
 @NamedQueries({
         @NamedQuery(name = "CacheUsrEntity.inactiveCacheUsr", query = "update CacheUsrEntity set estado = 'INACTIVO' where estado = 'ACTIVO' and  paramBusq = :paramBusq and tipo = :tipo and tipoLog = :tipoLog"),
-        @NamedQuery(name = "CacheUsrEntity.findLogInCache" , query = "from CacheUsrEntity cu join fetch cu.logs lo where  cu.paramBusq = :paramBusq and cu.estado = :estado and cu.tipo = :tipo and lo.tipo = :operation ")
+        @NamedQuery(name = "CacheUsrEntity.findLogInCache", query = "from CacheUsrEntity cu join fetch cu.logs lo where  cu.paramBusq = :paramBusq and cu.estado = :estado and cu.tipo = :tipo and lo.tipo = :operation ")
 })
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CacheUsrEntity {
+public class CacheUsrEntity implements Serializable {
+    private static final long serialVersionUID = 1905122041950251207L;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cache_usr_generator")
@@ -39,12 +41,12 @@ public class CacheUsrEntity {
     @Enumerated(value = EnumType.STRING)
     private FlowOperationEnum tipoLog;
 
-    public void setLogs(LogEntity logs){
-        if(logs == null){
-            if(this.logs != null){
+    public void setLogs(LogEntity logs) {
+        if (logs == null) {
+            if (this.logs != null) {
                 this.logs.setCacheUsr(null);
             }
-        }else{
+        } else {
             logs.setCacheUsr(this);
         }
         this.logs = logs;

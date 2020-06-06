@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class ServicioServiceImpl implements ServicioService {
 
-    private IServicioRepository servicioRepository;
+    private final IServicioRepository servicioRepository;
 
     @Autowired
     public ServicioServiceImpl(IServicioRepository servicioRepository) {

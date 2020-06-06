@@ -15,6 +15,8 @@ import java.util.Optional;
 @Service
 public class CacheUsrServiceImpl implements CacheUsrService {
 
+    public static final String RESPONSE = "RESPONSE";
+    public static final String REQUEST = "REQUEST";
     private ICacheUsrRepository cacheUsrRepository;
 
     @Autowired
@@ -36,26 +38,27 @@ public class CacheUsrServiceImpl implements CacheUsrService {
 
     @Override
     public Optional<String> validityLogUser(String cache, Long vig, FlowOperationEnum operation) {
-        Optional< CacheUsrEntity > cacheEntity = cacheUsrRepository.findLogInCache(cache, EstadoEnum.ACTIVO, "RESPONSE", operation);
-        if(cacheEntity.isPresent()){
-            return isValidLogDate(cacheEntity.get().getLogs().getFecha(), vig) ?  Optional.of(cacheEntity.get().getLogs().getTraza()) : Optional.empty();
+        Optional<CacheUsrEntity> cacheEntity = cacheUsrRepository.findLogInCache(cache, EstadoEnum.ACTIVO, RESPONSE, operation);
+        if (cacheEntity.isPresent()) {
+            return isValidLogDate(cacheEntity.get().getLogs().getFecha(), vig).equals(Boolean.TRUE) ? Optional.of(cacheEntity.get().getLogs().getTraza()) : Optional.empty();
         }
         return Optional.empty();
     }
 
-    private Boolean isValidLogDate(Date logDate, Long vig){
+    private Boolean isValidLogDate(Date logDate, Long vig) {
         Long diffTime = new Date().getTime() - logDate.getTime();
         Long diffDays = diffTime / (1000 * 60 * 60 * 24);
-        if(diffDays < vig){
+        if (diffDays < vig) {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
     }
+
     public String evaluoTipo(FlowOperationEnum operation) {
-        if (operation.toString().contains("REQUEST")) {
-            return "REQUEST";
-        } else if (operation.toString().contains("RESPONSE")) {
-            return "RESPONSE";
+        if (operation.toString().contains(REQUEST)) {
+            return REQUEST;
+        } else if (operation.toString().contains(RESPONSE)) {
+            return RESPONSE;
         } else {
             return "NA";
         }

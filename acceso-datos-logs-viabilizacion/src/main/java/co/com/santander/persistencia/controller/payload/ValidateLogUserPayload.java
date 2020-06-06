@@ -1,7 +1,6 @@
 package co.com.santander.persistencia.controller.payload;
 
 import co.com.santander.persistencia.common.FlowOperationEnum;
-import co.com.santander.persistencia.common.ServicioEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

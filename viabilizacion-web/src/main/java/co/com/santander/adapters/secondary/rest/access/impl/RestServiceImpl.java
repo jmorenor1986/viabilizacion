@@ -3,9 +3,9 @@ package co.com.santander.adapters.secondary.rest.access.impl;
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.clients.*;
-import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

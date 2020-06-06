@@ -7,7 +7,6 @@ import co.com.santander.persistencia.controller.payload.general.GeneralPayload;
 import co.com.santander.persistencia.controller.payload.general.ResponsePayLoad;
 import co.com.santander.persistencia.service.LogService;
 import com.google.gson.Gson;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,12 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogServiceController {
 
     private final LogService logService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public LogServiceController(LogService logService, ModelMapper modelMapper) {
+    public LogServiceController(LogService logService) {
         this.logService = logService;
-        this.modelMapper = modelMapper;
     }
 
     @PostMapping(value = "/logOperation", produces = MediaType.APPLICATION_JSON_VALUE)

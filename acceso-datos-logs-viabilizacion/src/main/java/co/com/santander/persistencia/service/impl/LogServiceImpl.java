@@ -2,6 +2,7 @@ package co.com.santander.persistencia.service.impl;
 
 import co.com.santander.persistencia.common.FlowOperationEnum;
 import co.com.santander.persistencia.common.ServicioEnum;
+import co.com.santander.persistencia.controller.payload.LogPayload;
 import co.com.santander.persistencia.entity.LogEntity;
 import co.com.santander.persistencia.entity.PrincipalRequest;
 import co.com.santander.persistencia.entity.ServicioEntity;
@@ -9,7 +10,6 @@ import co.com.santander.persistencia.repository.ILogOperationRepository;
 import co.com.santander.persistencia.repository.IServicioRepository;
 import co.com.santander.persistencia.service.CacheUsrService;
 import co.com.santander.persistencia.service.LogService;
-import co.com.santander.persistencia.controller.payload.LogPayload;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;

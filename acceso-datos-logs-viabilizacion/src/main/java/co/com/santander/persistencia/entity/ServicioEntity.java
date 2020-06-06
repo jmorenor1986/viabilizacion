@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "servicio")
 public class ServicioEntity implements Serializable {
-
+    private static final long serialVersionUID = 1905122041950251207L;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "servicio_generator")

@@ -1,11 +1,11 @@
 package co.com.santander.core.flow.proxy;
 
-import co.com.santander.dto.generic.GeneralPayload;
-import co.com.santander.dto.viabilizacion.LogPayload;
-import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.LogPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.ports.secondary.accesodatos.LogService;
 import com.google.gson.Gson;
 import lombok.Getter;

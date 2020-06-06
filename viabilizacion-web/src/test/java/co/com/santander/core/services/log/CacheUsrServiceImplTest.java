@@ -2,15 +2,10 @@ package co.com.santander.core.services.log;
 
 
 import co.com.santander.ports.secondary.accesodatos.CacheUsrService;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-
-import java.util.Date;
 
 @SpringBootTest
 public class CacheUsrServiceImplTest {

@@ -2,14 +2,14 @@ package co.com.santander.adapters.secondary.rest.informacioncontacto.proxy;
 
 import co.com.santander.adapters.secondary.rest.ServiceRestAbs;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
-import co.com.santander.dto.generic.GeneralPayload;
-import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
-import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
-import co.com.santander.dto.reconocer.PrincipalReconocerDTO;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
+import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.dto.reconocer.PrincipalReconocerDTO;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.ports.secondary.accesodatos.CacheUsrService;
 import co.com.santander.ports.secondary.accesodatos.ServicioService;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;

@@ -3,15 +3,19 @@ package co.com.santander.persistencia.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "principal_request")
 @Builder
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
-public class PrincipalRequest {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class PrincipalRequest implements Serializable {
+    private static final long serialVersionUID = 1905122041950251207L;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "principal_request_generator")
@@ -20,7 +24,7 @@ public class PrincipalRequest {
     @Column(name = "codigo_aliado")
     private String codigoAliado;
     @Column(name = "ip_origen")
-    private  String ipOrigen;
+    private String ipOrigen;
     @Column(name = "usuario_aliado")
     private String usuarioAliado;
     @Column(name = "json")

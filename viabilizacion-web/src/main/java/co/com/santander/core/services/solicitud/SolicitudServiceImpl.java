@@ -1,14 +1,14 @@
 package co.com.santander.core.services.solicitud;
 
-import co.com.santander.dto.generic.GeneralPayload;
-import co.com.santander.dto.viabilizacion.LogPayload;
-import co.com.santander.dto.viabilizacion.PrincipalRequestPayload;
-import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.ClienteValidator;
 import co.com.santander.core.errors.MandatoryFieldException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.LogPayload;
+import co.com.santander.dto.viabilizacion.PrincipalRequestPayload;
+import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.ports.primary.solicitud.SolicitudService;
 import co.com.santander.ports.secondary.accesodatos.LogService;
 import co.com.santander.ports.secondary.accesodatos.PrincipalRequestService;

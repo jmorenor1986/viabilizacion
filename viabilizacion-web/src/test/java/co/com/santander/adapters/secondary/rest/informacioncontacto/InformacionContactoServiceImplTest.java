@@ -12,20 +12,15 @@ import co.com.santander.adapters.secondary.rest.informacioncontacto.mapper.Infor
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
-import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @SpringBootTest
 public class InformacionContactoServiceImplTest {
