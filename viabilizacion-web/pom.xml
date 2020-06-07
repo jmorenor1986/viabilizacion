@@ -72,8 +72,12 @@
                                         <exclude>co.com.santander.core.domain.*</exclude>
                                         <exclude>co.com.santander.dto.*</exclude>
                                         <exclude>co.com.santander.config.*</exclude>
-                                        <exclude>co.com.santander.core.errors.CustomResponseEntityExceptionHandler
-                                        </exclude>
+                                        <exclude>co.com.santander.adapters.secondary.rest.common.properties.*</exclude>
+                                        <exclude>co.com.santander.adapters.primary.rest.solicitud.dto.*</exclude>
+                                        <exclude>co.com.santander.adapters.secondary.rest.vigia.dto.*</exclude>
+                                        <exclude>co.com.santander.adapters.secondary.rest.dictum.common.*</exclude>
+                                        <exclude>co.com.santander.core.errors.*</exclude>
+                                        <exclude>co.com.santander.utils.dto*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
