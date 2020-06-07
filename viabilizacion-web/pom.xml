@@ -18,7 +18,7 @@
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gs.RestServiceImplon -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
