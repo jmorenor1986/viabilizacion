@@ -69,19 +69,9 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.Application</exclude>
-                                        <exclude>co.com.santander.core.domain.solicitud.dictum.Dictum</exclude>
-                                        <exclude>co.com.santander.core.domain.solicitud.RequestHeader</exclude>
-                                        <exclude>co.com.santander.core.services.solicitud.MapperClienteImpl</exclude>
-                                        <exclude>co.com.santander.dto.dictum.RequestDictumDTO
-                                        </exclude>
-                                        <exclude>
-                                            co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto
-                                        </exclude>
+                                        <exclude>co.com.santander.core.domain.*</exclude>
+                                        <exclude>co.com.santander.dto.*</exclude>
                                         <exclude>co.com.santander.config.*</exclude>
-                                        <exclude>co.com.santander.utils.impl.GenerateUniqueIdImpl</exclude>
-                                        <exclude>
-                                            co.com.santander.adapters.secondary.rest.common.HttpRequestInterceptor
-                                        </exclude>
                                         <exclude>co.com.santander.core.errors.CustomResponseEntityExceptionHandler
                                         </exclude>
                                     </excludes>
@@ -89,7 +79,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0%</minimum>
+                                            <minimum>80%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
