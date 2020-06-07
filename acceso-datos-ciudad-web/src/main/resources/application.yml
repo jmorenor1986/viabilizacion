@@ -19,3 +19,10 @@ spring:
             dialect: org.hibernate.dialect.PostgreSQLDialect
       show-sql: true
       generate-ddl: true
+
+keycloak:
+  realm: RealmSpringBoot
+  auth-server-url: http://localhost:8080/auth
+  resource: login
+  principal-attribute: preferred_username
+  public-client: true
