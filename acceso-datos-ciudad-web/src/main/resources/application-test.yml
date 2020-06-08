@@ -9,6 +9,8 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: password
+    main:
+      allow-bean-definition-overriding: true
   flyway:
     schemas: public
     table: validar_ciudad_web_flyway_schema_history
@@ -26,3 +28,6 @@ keycloak:
   resource: login
   principal-attribute: preferred_username
   public-client: true
+  security-constraints[0]:
+    auth-roles: user
+
