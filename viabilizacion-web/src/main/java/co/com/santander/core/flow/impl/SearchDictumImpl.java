@@ -3,8 +3,10 @@ package co.com.santander.core.flow.impl;
 import co.com.santander.adapters.secondary.rest.dictum.common.DecisionDictum;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.dictum.Dictum;
+import co.com.santander.core.exception.BussinesException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
 import co.com.santander.ports.secondary.solicitud.DictumService;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,7 +51,7 @@ public class SearchDictumImpl implements ValidateRequest {
             getCliente().setDecision(respuestaDictum);
             return validateRequest.process(getCliente(), idRequest);
         }
-        return Optional.of(ResponseFlow.NEGADO);
+        throw new BussinesException("Solicitud negada por dictum", ServicioEnum.DICTUM, ResponseFlow.NEGADO.toString());
     }
 
     public Boolean callService() {

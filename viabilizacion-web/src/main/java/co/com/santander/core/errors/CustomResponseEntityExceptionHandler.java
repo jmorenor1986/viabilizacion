@@ -1,7 +1,9 @@
 package co.com.santander.core.errors;
 
 import co.com.santander.adapters.primary.rest.solicitud.dto.ResponsePayLoad;
+import co.com.santander.adapters.primary.rest.solicitud.dto.SolicitudPayLoad;
 import co.com.santander.core.errors.dto.ConnectionErrorDto;
+import co.com.santander.core.exception.BussinesException;
 import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +44,16 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                 .mensajeError(mensaje)
                 .build()
                 , HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(BussinesException.class)
+    public final ResponseEntity<Object> handlerInvalidNumVerificadorException(BussinesException ex, WebRequest request) {
+        return new ResponseEntity<>(
+                ResponsePayLoad.builder()
+                        .codRespuesta(Long.valueOf("0"))
+                        .respuestaServicio(SolicitudPayLoad.builder().solicitud(ex.getRespuesta()).build())
+                        .mensajeError("OK")
+                        .build()
+                , HttpStatus.OK);
     }
 }

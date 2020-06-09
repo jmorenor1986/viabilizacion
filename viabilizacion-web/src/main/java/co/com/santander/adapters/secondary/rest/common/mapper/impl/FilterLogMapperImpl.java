@@ -16,6 +16,7 @@ public class FilterLogMapperImpl implements FilterLogMapper {
 
     private final ClientesProperties clientesProperties;
     private final JsonUtilities jsonUtilities;
+
     enum  REQUEST_TYPE{ REQUEST_TYPE, RESPONSE_TYPE };
 
     @Autowired

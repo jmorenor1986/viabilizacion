@@ -8,6 +8,7 @@ import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.dto.viabilizacion.LogPayload;
 import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
+import co.com.santander.ports.primary.FindUrlService;
 import co.com.santander.ports.secondary.accesodatos.LogService;
 import com.google.gson.Gson;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class ProxyRestTemplateServiceImpl implements RestService {
     private RestService restService;
     private LogService logService;
     private FilterLogMapper filterLogMapper;
+    private final FindUrlService findUrlService;
 
     @Getter @Setter
     private Long idRequest;
@@ -41,10 +43,12 @@ public class ProxyRestTemplateServiceImpl implements RestService {
     @Autowired
     public ProxyRestTemplateServiceImpl(@Qualifier("restServiceImpl") RestService restService
             , LogService logService
-            , FilterLogMapper filterLogMapper) {
+            , FilterLogMapper filterLogMapper
+            , FindUrlService findUrlService) {
         this.restService = restService;
         this.logService = logService;
         this.filterLogMapper = filterLogMapper;
+        this.findUrlService = findUrlService;
     }
 
 
@@ -65,6 +69,12 @@ public class ProxyRestTemplateServiceImpl implements RestService {
 
     private void logRequest(ServicioEnum servicio, RequestHeader header ){
     	LogPayload logEntity = filterLogMapper.toLogRequest(servicio, getBody() , getIdRequest());
+    	Optional<String> url = findUrlService.getUrlFrom(servicio);
+    	if(url.isPresent()){
+            logEntity.setUrl(url.get());
+        }else{
+    	    logEntity.setUrl("NO_EXISTE_INFORMACION");
+        }
     	GeneralPayload< LogPayload > requestLog = GeneralPayload.<LogPayload>builder()
                 .requestBody(logEntity)
                 .requestHeader(header)
