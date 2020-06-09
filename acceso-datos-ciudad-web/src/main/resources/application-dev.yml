@@ -1,7 +1,7 @@
 server:
   servlet:
-    context-path: /logsViabilizacion
-  port: 5003
+    context-path: /validacion
+  port: 5001
 
 spring:
   datasource:
@@ -9,6 +9,10 @@ spring:
     url: jdbc:postgresql://192.168.0.15:5432/samtel
     username: postgres
     password: 12345678
+  flyway:
+    schemas: credito_consumo_acceso_datos_logs_viabilizacion_srv
+    table: validar_ciudad_web_flyway_schema_history
+    baseline-on-migrate: true
   jpa:
     properties:
       hibernate:
@@ -16,8 +20,3 @@ spring:
         default_schema: credito_consumo_acceso_datos_logs_viabilizacion_srv
     show-sql: true
     generate-ddl: false
-  flyway:
-    schemas: credito_consumo_acceso_datos_logs_viabilizacion_srv
-    table: acceso_datos_logs_viabilizacion_flyway_schema_history
-    locations: classpath:/db/migration
-    baselineOnMigrate: true
