@@ -10,13 +10,13 @@ spring:
     username: postgres
     password: 12345678
   flyway:
-    schemas: credito_consumo_acceso_datos_logs_viabilizacion_srv
+    schemas: credito_consumo_acceso_datos_ciudad_web_srv
     table: validar_ciudad_web_flyway_schema_history
     baseline-on-migrate: true
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: credito_consumo_acceso_datos_logs_viabilizacion_srv
+        default_schema: credito_consumo_acceso_datos_ciudad_web_srv
     show-sql: true
-    generate-ddl: false
+    generate-ddl: true
