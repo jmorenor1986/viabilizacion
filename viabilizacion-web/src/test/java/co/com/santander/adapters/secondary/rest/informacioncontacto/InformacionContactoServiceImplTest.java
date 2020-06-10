@@ -12,15 +12,23 @@ import co.com.santander.adapters.secondary.rest.informacioncontacto.mapper.Infor
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
+import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.generic.RequestHeader;
+import co.com.santander.dto.generic.ResponseDto;
+import co.com.santander.dto.reconocer.InformacionContactoDTO;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @SpringBootTest
 public class InformacionContactoServiceImplTest {
@@ -41,6 +49,7 @@ public class InformacionContactoServiceImplTest {
     private ResponseInformacionContacto responseInformacionContacto;
     private InformacionContactoProperties informacionContactoProperties;
     private Cliente cliente;
+    @Mock
     private InformacionContactoMapperImpl informacionContactoMapper;
 
 
@@ -85,4 +94,20 @@ public class InformacionContactoServiceImplTest {
     }
 
 
+    @Test
+    public void testConsultarDatosUsuario() {
+        ResponseDto responseDto = ResponseDto.builder()
+                .respuestaServicio("{access_token=12121}")
+                .build();
+        GeneralPayload<InformacionContactoDTO> generalPayload = GeneralPayload.<InformacionContactoDTO>builder()
+                .requestBody(InformacionContactoDTO.builder().build())
+                .build();
+        RequestHeader requestHeader = RequestHeader.builder().build();
+        Mockito.when(informacionContactoMapper.setHeader(Mockito.any())).thenReturn(requestHeader);
+        Mockito.when(informacionContactoMapper.dtoToRequest(Mockito.any(), Mockito.any())).thenReturn(generalPayload);
+        Mockito.when(restService.callService(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(responseDto));
+        Mockito.when(restService.callService(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(responseDto));
+        Optional<ResponseInformacionContacto> result = informacionContactoService.consultarDatosUsuario(Cliente.builder().build(), InformacionContacto.builder().build(), 1L);
+        Assert.assertNotNull(result);
+    }
 }

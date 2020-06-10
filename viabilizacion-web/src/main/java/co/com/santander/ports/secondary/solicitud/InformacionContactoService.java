@@ -14,7 +14,7 @@ public interface InformacionContactoService {
 
     JsonUtilities getJsonUtilities();
 
-    default ResponseInformacionContacto buscarRespuestaReconocer(String objeto){
+    default ResponseInformacionContacto buscarRespuestaReconocer(String objeto) {
         return ResponseInformacionContacto.builder()
                 .numeroCelular(Arrays.asList(new String(getJsonUtilities().getPropertyObjectWithKey("reporte.celulares", "celular", objeto))))
                 .numerosTelefono(Arrays.asList(new String(getJsonUtilities().getPropertyObjectWithKey("reporte.telefonos", "telefono", objeto))))
@@ -24,20 +24,19 @@ public interface InformacionContactoService {
     }
 
 
-
-    default String extractTokenReconocer(String response){
+    default String extractTokenReconocer(String response) {
         String respuestaServicio = response;
         //Eliminar caracteres extranios
         Integer inicio = respuestaServicio.indexOf("{");
         Integer fin = respuestaServicio.indexOf("}");
-        String json = respuestaServicio.substring(inicio,fin);
+        String json = respuestaServicio.substring(inicio, fin);
         //Extraigo el valor del token
-        inicio= json.indexOf("access_token=");
+        inicio = json.indexOf("access_token=");
         fin = json.indexOf("scope=");
-        String token = json.substring(inicio,fin);
+        String token = json.substring(inicio, fin);
         //Quitamos La propiedad
-        inicio= token.indexOf("=");
-        token = token.substring(inicio+1,token.length() -2);
+        inicio = token.indexOf("=");
+        token = token.substring(inicio + 1, token.length() - 2);
         return token;
     }
 }

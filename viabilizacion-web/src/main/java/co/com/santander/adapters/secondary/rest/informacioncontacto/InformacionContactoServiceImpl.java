@@ -28,12 +28,13 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service("informacionContactoServiceImpl")
-public class InformacionContactoServiceImpl  extends ServiceRestAbs implements InformacionContactoService {
+public class InformacionContactoServiceImpl extends ServiceRestAbs implements InformacionContactoService {
 
     private final ClientesProperties clientesProperties;
     private final RestService restService;
     private final InformacionContactoMapperImpl mapper;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String tokenReconocer;
 
     @Autowired
@@ -51,7 +52,7 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
     @Override
     public Optional<ResponseInformacionContacto> consultarDatosUsuario(Cliente cliente, InformacionContacto informacionContacto, Long idRequest) {
         Optional<ResponseDto> responseService;
-        if(generateTokenServiceReconocer(cliente, idRequest)){
+        if (generateTokenServiceReconocer(cliente, idRequest)) {
             GeneralPayload<InformacionContactoDTO> requestObject = mapper.dtoToRequest(informacionContacto, cliente);
             requestObject.getRequestBody().setToken(getTokenReconocer());
             try {
@@ -60,23 +61,22 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
                         , generateGenericsHeaders(
                                 idRequest,
                                 new Gson().toJson(PrincipalReconocerDTO.builder()
-                                .numeroIdentificacion(cliente.getNumeroIdentificacion())
-                                .tipoIdentificacion(cliente.getTipoIdentificacion())
-                                .build())));
-            }catch (Exception e){
-                //Si genera alguna excepcion al llamar al servicio de reconocer retorna empty para luego llamar a ubica
+                                        .numeroIdentificacion(cliente.getNumeroIdentificacion())
+                                        .tipoIdentificacion(cliente.getTipoIdentificacion())
+                                        .build())));
+            } catch (Exception e) {
                 return Optional.empty();
             }
-        }else{
+        } else {
             return Optional.empty();
         }
-        if("1".equalsIgnoreCase(responseService.get().getCodRespuesta())){
-            return Optional.of( buscarRespuestaReconocer(responseService.get().getRespuestaServicio()) );
+        if ("1".equalsIgnoreCase(responseService.get().getCodRespuesta())) {
+            return Optional.of(buscarRespuestaReconocer(responseService.get().getRespuestaServicio()));
         }
         return Optional.empty();
     }
 
-    private Boolean generateTokenServiceReconocer(Cliente cliente, Long idRequest){
+    private Boolean generateTokenServiceReconocer(Cliente cliente, Long idRequest) {
         GeneralPayload<String> requestToken = GeneralPayload.<String>builder()
                 .requestHeader(mapper.setHeader(cliente.getRequestHeader()))
                 .build();
@@ -84,10 +84,10 @@ public class InformacionContactoServiceImpl  extends ServiceRestAbs implements I
                 .key("idRequest")
                 .value(idRequest.toString())
                 .build());
-        Optional<ResponseDto> response = restService.callService(requestToken , ServicioEnum.TOKEN_RECONOCER, headersMap);
-        if(response.isPresent()){
+        Optional<ResponseDto> response = restService.callService(requestToken, ServicioEnum.TOKEN_RECONOCER, headersMap);
+        if (response.isPresent()) {
             setTokenReconocer(extractTokenReconocer(response.get().getRespuestaServicio()));
-        }else{
+        } else {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;

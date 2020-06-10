@@ -1,29 +1,34 @@
 package co.com.santander.core.flow.impl;
 
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
 import co.com.santander.utils.impl.GenerateUniqueIdImpl;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 
 @SpringBootTest
 public class SearchReconocerImplTest {
 
     private ValidateRequest validateRequest;
-    
+
     private GenerateUniqueIdImpl generateUniqueId;
     @Mock
     private ValidateRequest next;
     @Mock
     private Cliente cliente;
-    
+
     private Long requestId;
     @Mock
     private InformacionContactoService informacionContactoService;
@@ -32,18 +37,27 @@ public class SearchReconocerImplTest {
     private ValidateRequest validateRequestBiz;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
-        validateRequest = new SearchReconocerImpl(next, validateRequestBiz,informacionContactoService );
+        validateRequest = new SearchReconocerImpl(next, validateRequestBiz, informacionContactoService);
         generateUniqueId = new GenerateUniqueIdImpl();
 
     }
 
     @Test
-    public void testSearchReconocerImplSuccess(){
+    public void testSearchReconocerImplSuccess() {
         requestId = Long.valueOf("1");
         String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();
         Assert.assertNotNull(result);
+    }
+
+    @Test
+    @Ignore
+    public void testCallService() {
+        //TODO ValidatorInformacionContacto test builder
+        ResponseInformacionContacto responseInformacionContacto = ResponseInformacionContacto.builder().build();
+        Mockito.when(informacionContactoService.consultarDatosUsuario(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(Optional.of(responseInformacionContacto));
+        requestId = Long.valueOf("1");
     }
 
 }
