@@ -6,6 +6,8 @@ import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.viabilizacion.LogPayload;
 import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
+import co.com.santander.ports.primary.FindUrlService;
 import co.com.santander.ports.secondary.accesodatos.LogService;
 import com.google.gson.Gson;
 import lombok.Getter;
@@ -21,13 +23,15 @@ public class ProxyLogValidateCityImpl implements ValidateRequest {
 
 	private ValidateRequest validateRequest;
 	private final LogService logService;
+	private final FindUrlService findUrlService;
 	@Getter @Setter
 	private Long requestId;
 	
 	@Autowired
-	public ProxyLogValidateCityImpl(@Qualifier("validateCity") ValidateRequest validateRequest,LogService logService) {
+	public ProxyLogValidateCityImpl(@Qualifier("validateCity") ValidateRequest validateRequest,LogService logService, FindUrlService findUrlService) {
 		this.validateRequest = validateRequest;
 		this.logService = logService;
+		this.findUrlService = findUrlService;
 	}
 
 	@Override
@@ -46,6 +50,7 @@ public class ProxyLogValidateCityImpl implements ValidateRequest {
 						.idRequest(getRequestId())
 						.traza(gsonCliente)
 						.tipo(FlowOperationEnum.VALIDATE_CITY)
+						.url(findUrlService.getUrlFrom(ServicioEnum.VALIDATE_CITY).get())
 						.build())
 				.build();
 		logService.insertLogOperation(request);

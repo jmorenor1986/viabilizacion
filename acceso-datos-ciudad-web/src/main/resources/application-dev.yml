@@ -1,0 +1,22 @@
+server:
+  servlet:
+    context-path: /validacion
+  port: 5001
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.0.15:5432/samtel
+    username: postgres
+    password: 12345678
+  flyway:
+    schemas: credito_consumo_acceso_datos_ciudad_web_srv
+    table: validar_ciudad_web_flyway_schema_history
+    baseline-on-migrate: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: credito_consumo_acceso_datos_ciudad_web_srv
+    show-sql: true
+    generate-ddl: true

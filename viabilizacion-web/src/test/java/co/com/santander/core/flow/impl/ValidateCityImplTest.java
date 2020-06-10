@@ -1,6 +1,7 @@
 package co.com.santander.core.flow.impl;
 
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.exception.BussinesException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.dto.ciudad.ValidarCiudad;
@@ -68,7 +69,7 @@ public class ValidateCityImplTest {
         Assert.assertNotNull( result );
     }
 
-    @Test
+    @Test(expected = BussinesException.class)
     public void testValidateCityImplError() {
         Long requestId = Long.valueOf("1");
         Cliente cliente = Cliente.builder()

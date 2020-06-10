@@ -6,6 +6,8 @@ import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.viabilizacion.LogPayload;
 import co.com.santander.dto.viabilizacion.constants.FlowOperationEnum;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
+import co.com.santander.ports.primary.FindUrlService;
 import co.com.santander.ports.secondary.accesodatos.LogService;
 import com.google.gson.Gson;
 import lombok.Getter;
@@ -21,15 +23,17 @@ public class ProxyLogSearchVigiaImpl implements ValidateRequest {
 	
 	private ValidateRequest validateRequest;
 	private final LogService logService;
+	private final FindUrlService findUrlService;
 	@Getter @Setter
 	private Long requestId;
 	
 	
 	@Autowired
-	public ProxyLogSearchVigiaImpl(@Qualifier("searchVigia")ValidateRequest validateRequest, LogService logService) {
+	public ProxyLogSearchVigiaImpl(@Qualifier("searchVigia")ValidateRequest validateRequest, LogService logService, FindUrlService findUrlService) {
 		super();
 		this.validateRequest = validateRequest;
 		this.logService = logService;
+		this.findUrlService = findUrlService;
 	}
 
 
@@ -49,6 +53,7 @@ public class ProxyLogSearchVigiaImpl implements ValidateRequest {
 						.idRequest(getRequestId())
 						.traza(gsonCliente)
 						.tipo(FlowOperationEnum.INVOKE_VIGIA)
+						.url(findUrlService.getUrlFrom(ServicioEnum.VIGIA).get())
 						.build())
 				.build();
 		logService.insertLogOperation(request);
