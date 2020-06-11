@@ -1,6 +1,9 @@
 package co.com.santander.validation.service;
 
 import co.com.santander.validation.entity.Ciudad;
+
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,5 +31,10 @@ public class CiudadRepository_IT {
         Assert.assertNull(result);
     }
 
+    @Test
+    public void testGetALL() {
+        List<Ciudad> result = repository.findAll();
+        Assert.assertNotNull(result);
+    }
 
 }
