@@ -2,8 +2,13 @@ package co.com.santander.validation.controller;
 
 import co.com.santander.validation.dto.GeneralPayload;
 import co.com.santander.validation.dto.ResponsePayLoad;
+import co.com.santander.validation.dto.TraerCiudad;
 import co.com.santander.validation.dto.ValidarCiudad;
+import co.com.santander.validation.entity.Ciudad;
 import co.com.santander.validation.service.CiudadService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,4 +40,14 @@ public class CiudadController {
                 , HttpStatus.OK);
     }
 
+    @PostMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> traerCiudades(@RequestBody GeneralPayload<TraerCiudad> ciudades){
+    	List<Ciudad> cities = ciudadService.traerCiudades();
+    	return new ResponseEntity<>(ResponsePayLoad.builder()
+                .codRespuesta(Long.valueOf("1"))
+                .respuestaServicio(cities)
+                .mensajeError("OK")
+                .build()
+        , HttpStatus.OK);
+    }
 }

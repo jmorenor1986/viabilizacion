@@ -2,6 +2,10 @@ package co.com.santander.validation.service;
 
 import co.com.santander.validation.entity.Ciudad;
 import co.com.santander.validation.service.impl.CiudadServiceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,4 +52,20 @@ public class CiudadServiceTest {
         Boolean respuesta = ciudadService.validarCiudad(NOMBRE_CIUDAD);
         Assert.assertEquals(Boolean.TRUE, respuesta);
     }
+    
+    @Test
+    public void testFindAllSuccess() {
+    	List<Ciudad> ciuList = new ArrayList<Ciudad>();
+    	Ciudad ciu = new Ciudad();
+    	ciu.setId((long) 1);
+    	ciu.setCodigo("0012");
+    	ciu.setEstado("ACTIVO");
+    	ciu.setNombre("BOGOTA");
+    	ciuList.add(ciu);
+    	
+        Mockito.when(ciudadRepository.findAll()).thenReturn(ciuList);
+        List<Ciudad> ciuResp = ciudadService.traerCiudades();
+        Assert.assertEquals(ciuList, ciuResp);
+    }
+
 }
