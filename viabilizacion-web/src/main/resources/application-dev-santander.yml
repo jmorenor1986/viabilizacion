@@ -24,10 +24,10 @@ servicios:
     identificacion: 1040
 
 vigia:
-  url: http://localhost:8080/vigia/
+  url: http://vigia-dev-ccf-service.cloudapps.cosanpre.corp
   service-name: vigia-service
 validarciudad:
-  url: http://localhost:5001/validacion/v1/
+  url: http://acceso-datos-ciudad-web-dev-ccf-common.cloudapps.cosanpre.corp/validacion/v1/
   service-name: validar-ciudad-service
 dictum:
   url: http://localhost:8080/dictum/
@@ -46,16 +46,16 @@ bizagi:
   service-name: bizagi-service
 viabilizacion:
   principal-request:
-    url: http://localhost:5003/logsViabilizacion/v1/principalrequest
+    url: http://jodete-con-tu-ruta-logs.cloudapps.cosanpre.corp/logsViabilizacion/v1/principalrequest
     service-name: viabilizacion-principal-request
   log:
-    url: http://localhost:5003/logsViabilizacion/v1/logs
+    url: http://jodete-con-tu-ruta-logs.cloudapps.cosanpre.corp/logsViabilizacion/v1/logs
     service-name: viabilizacion-validar-ciudad
   servicio:
-    url: http://localhost:5003/logsViabilizacion/v1/servicio
+    url: http://jodete-con-tu-ruta-logs.cloudapps.cosanpre.corp/logsViabilizacion/v1/servicio
     service-name: viabilizacion-servicio
   cache:
-    url: http://localhost:5003/logsViabilizacion/v1/cache
+    url: http://jodete-con-tu-ruta-logs.cloudapps.cosanpre.corp/logsViabilizacion/v1/cache
     service-name: viabilizacion-cache
 
 
