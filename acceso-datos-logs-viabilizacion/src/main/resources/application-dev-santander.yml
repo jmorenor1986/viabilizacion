@@ -1,0 +1,22 @@
+server:
+  servlet:
+    context-path: /validacion
+  port: 5001
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://180.26.136.135:8081/database
+    username: postgres
+    password: 12345678
+  flyway:
+    schemas: credito_consumo_acceso_datos_logs_viabilizacion_srv
+    table: acceso_datos_logs_viabilizacion_flyway_schema_history
+    baseline-on-migrate: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: credito_consumo_acceso_datos_logs_viabilizacion_srv
+    show-sql: true
+    generate-ddl: false

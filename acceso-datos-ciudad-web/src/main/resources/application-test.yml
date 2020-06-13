@@ -5,20 +5,14 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:samtel
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
-    main:
-      allow-bean-definition-overriding: true
-  flyway:
-    schemas: public
-    table: validar_ciudad_web_flyway_schema_history
-    baseline-on-migrate: true
+    driver-class-name: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:5432/samtel
+    username: postgres
+    password: 12345678
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     generate-ddl: true
 

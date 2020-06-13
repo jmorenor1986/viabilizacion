@@ -2,6 +2,7 @@ package co.com.santander.core.flow.impl;
 
 import co.com.santander.adapters.secondary.rest.common.mapper.impl.DictumMapperImpl;
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.exception.BussinesException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.ports.secondary.solicitud.DictumService;
@@ -39,7 +40,7 @@ public class SearchDictumImplTest {
         generateUniqueId = new GenerateUniqueIdImpl();
     }
 
-    @Test
+    @Test(expected = BussinesException.class)
     public void testSearchReconocerImplSuccess() {
         requestId = Long.valueOf("1");
         String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();

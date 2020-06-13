@@ -13,7 +13,9 @@ import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.domain.solicitud.informacioncontacto.InformacionContacto;
 import co.com.santander.core.domain.solicitud.informacioncontacto.ResponseInformacionContacto;
 import co.com.santander.ports.secondary.solicitud.InformacionContactoService;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,6 +43,7 @@ public class InformacionContactoServiceImplTest {
     private ResponseInformacionContacto responseInformacionContacto;
     private InformacionContactoProperties informacionContactoProperties;
     private Cliente cliente;
+    @Mock
     private InformacionContactoMapperImpl informacionContactoMapper;
 
 
@@ -84,5 +87,8 @@ public class InformacionContactoServiceImplTest {
         headers.put("idRequest", "123");
     }
 
-
+    @Testf
+    public void test() {
+        Assert.assertNotNull(true);
+    }
 }

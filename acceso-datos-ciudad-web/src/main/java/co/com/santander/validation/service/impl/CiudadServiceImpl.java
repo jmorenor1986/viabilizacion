@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -30,4 +31,10 @@ public class CiudadServiceImpl implements CiudadService {
         	return Boolean.TRUE;
         return Boolean.FALSE;
     }
+    
+    @Override
+	@Cacheable(value = "ciudadesALL")
+	public List<Ciudad> traerCiudades() {
+		return ciudadRepository.findAll();
+	}
 }

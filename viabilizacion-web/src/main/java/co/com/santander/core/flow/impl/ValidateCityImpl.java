@@ -2,10 +2,13 @@ package co.com.santander.core.flow.impl;
 
 
 import co.com.santander.core.domain.solicitud.Cliente;
+import co.com.santander.core.exception.BussinesException;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.dto.ciudad.ValidarCiudad;
 import co.com.santander.dto.generic.GeneralPayload;
+import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
+import co.com.santander.ports.primary.FindUrlService;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,18 +26,21 @@ public class ValidateCityImpl implements ValidateRequest {
 
     private static final Logger log = LoggerFactory.getLogger(ValidateCityImpl.class);
 
-    private ValidateRequest validateRequest;
 
-    private ValidarCiudadService validarCiudadService;
 
-    private ModelMapper mapper;
+    private final ValidateRequest validateRequest;
 
+    private final ValidarCiudadService validarCiudadService;
+
+    private final ModelMapper mapper;
     @Getter
     @Setter
     private Cliente cliente;
     @Getter
     @Setter
     private Long requestId;
+
+
 
     @Autowired
     public ValidateCityImpl(@Qualifier("proxyLogSearchVigia") ValidateRequest validateRequest, ValidarCiudadService validarCiudadService, ModelMapper mapper) {
@@ -49,9 +55,8 @@ public class ValidateCityImpl implements ValidateRequest {
         setRequestId(requestId);
         if ("true".equalsIgnoreCase(callService())) {
             return validateRequest.process(getCliente(), requestId);
-        } else {
-            return Optional.of(ResponseFlow.INVALID_CITY);
         }
+        throw new BussinesException("Ciudad Invalida", ServicioEnum.VALIDATE_CITY, ResponseFlow.INVALID_CITY.toString());
     }
 
     public String callService(){

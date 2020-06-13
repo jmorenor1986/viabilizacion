@@ -55,10 +55,8 @@ public abstract class ServiceRestAbs {
     }
 
     protected Boolean consultaCacheServicio(GeneralPayload<ServicioEnum> servicioEnum) {
-        //Obetenemos el objeto con el cual se va ha validar el cache
         Optional<ServicioPayload> servicio = servicioService.findServiceByService(servicioEnum);
         if (servicio.isPresent()) {
-            //Valido si el tiempo es superior a 0
             setVigencia(servicio.get().getVigencia());
             if (getVigencia().compareTo(Long.valueOf(0)) > 0) {
                 return Boolean.TRUE;

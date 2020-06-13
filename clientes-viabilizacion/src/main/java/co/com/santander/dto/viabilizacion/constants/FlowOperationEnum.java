@@ -1,7 +1,8 @@
 package co.com.santander.dto.viabilizacion.constants;
 
 public enum FlowOperationEnum {
-	
+
+	START_PROCESS,
 	VALIDATE_CITY, VALIDATE_CITY_REQUEST, VALIDATE_CITY_RESPONSE,
 	CHECK_LISTS, SEARCH_CACHE,
 	INVOKE_DICTUM, INVOKE_DICTUM_REQUEST, INVOKE_DICTUM_RESPONSE,

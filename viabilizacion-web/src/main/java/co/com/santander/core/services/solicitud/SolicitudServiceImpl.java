@@ -62,7 +62,7 @@ public class SolicitudServiceImpl implements SolicitudService {
                         .usuarioMicro("jsierra")
                         .idRequest(getPrincipalRequestId())
                         .traza(gsonCliente)
-                        .tipo(FlowOperationEnum.VALIDATE_CITY)
+                        .tipo(FlowOperationEnum.START_PROCESS)
                         .build())
                 .build();
         logService.insertLogOperation(request);

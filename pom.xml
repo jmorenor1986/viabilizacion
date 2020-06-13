@@ -99,6 +99,7 @@
         <module>bizagi-web</module>
         <module>acceso-datos-logs-viabilizacion</module>
         <module>clientes-viabilizacion</module>
+        <module>security</module>
     </modules>
     <build>
         <pluginManagement>
