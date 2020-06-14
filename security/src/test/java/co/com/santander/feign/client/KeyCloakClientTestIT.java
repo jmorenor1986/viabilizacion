@@ -1,5 +1,6 @@
 package co.com.santander.feign.client;
 
+import co.com.santander.feign.config.KeyCloakConfig;
 import co.com.santander.feign.dto.ResponseKeyCloakDTO;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
@@ -25,6 +26,10 @@ public class KeyCloakClientTestIT {
     @Autowired
     private KeyCloakClient keyCloakClient;
 
+    @Autowired
+    private KeyCloakConfig keyCloakConfig;
+
+
     @Before
     public void setUp() {
         wireMockRule.stubFor(post(WireMock.urlPathMatching("/auth/realms/3scale-api/protocol/openid-connect/token"))
@@ -35,7 +40,7 @@ public class KeyCloakClientTestIT {
 
     @Test
     public void testCallClientKeyCloakSuccess() {
-        ResponseEntity<ResponseKeyCloakDTO> result = keyCloakClient.getToken();
+        ResponseEntity<ResponseKeyCloakDTO> result = keyCloakClient.getToken(keyCloakConfig);
         Assert.assertNotNull(result);
     }
 

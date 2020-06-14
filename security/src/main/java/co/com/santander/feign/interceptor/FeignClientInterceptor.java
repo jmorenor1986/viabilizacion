@@ -1,6 +1,7 @@
 package co.com.santander.feign.interceptor;
 
 import co.com.santander.feign.client.KeyCloakClient;
+import co.com.santander.feign.config.KeyCloakConfig;
 import co.com.santander.feign.dto.ResponseKeyCloakDTO;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -15,12 +16,14 @@ public class FeignClientInterceptor implements RequestInterceptor {
 
 
     @Autowired
-
     private KeyCloakClient keyCloakClient;
+
+    @Autowired
+    private KeyCloakConfig keyCloakConfig;
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        ResponseEntity<ResponseKeyCloakDTO> keyCloakResult = keyCloakClient.getToken();
+        ResponseEntity<ResponseKeyCloakDTO> keyCloakResult = keyCloakClient.getToken(keyCloakConfig);
         requestTemplate.header(AUTHORIZATION_HEADER, String.format("%s %s", TOKEN_TYPE, keyCloakResult.getBody().getAccesToken()));
     }
 }
