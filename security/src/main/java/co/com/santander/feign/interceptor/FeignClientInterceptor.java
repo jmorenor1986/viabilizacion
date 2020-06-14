@@ -1,18 +1,26 @@
 package co.com.santander.feign.interceptor;
 
+import co.com.santander.feign.client.KeyCloakClient;
+import co.com.santander.feign.dto.ResponseKeyCloakDTO;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty("keycloak.enabled")
 public class FeignClientInterceptor implements RequestInterceptor {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String TOKEN_TYPE = "Bearer";
 
+
+    @Autowired
+
+    private KeyCloakClient keyCloakClient;
+
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        //TODO set header
+        ResponseEntity<ResponseKeyCloakDTO> keyCloakResult = keyCloakClient.getToken();
+        requestTemplate.header(AUTHORIZATION_HEADER, String.format("%s %s", TOKEN_TYPE, keyCloakResult.getBody().getAccesToken()));
     }
 }

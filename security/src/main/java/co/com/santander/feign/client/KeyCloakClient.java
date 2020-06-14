@@ -1,5 +1,6 @@
 package co.com.santander.feign.client;
 
+import co.com.santander.feign.config.KeyCloakConfig;
 import co.com.santander.feign.dto.ResponseKeyCloakDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -10,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "${keycloak.client.service-name}", url = "${keycloak.client.url}")
 public interface KeyCloakClient {
     @RequestMapping(value = "/token", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseKeyCloakDTO> getToken();
+    public ResponseEntity<ResponseKeyCloakDTO> getToken(KeyCloakConfig data);
 }

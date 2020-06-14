@@ -1,0 +1,4 @@
+keycloak:
+  client:
+    service-name: keycloak
+    url: http://localhost:1234/auth/realms/3scale-api/protocol/openid-connect

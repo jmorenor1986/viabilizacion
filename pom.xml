@@ -100,6 +100,7 @@
         <module>acceso-datos-logs-viabilizacion</module>
         <module>clientes-viabilizacion</module>
         <module>security</module>
+        <module>viabilizacion-test-integration</module>
     </modules>
     <build>
         <pluginManagement>

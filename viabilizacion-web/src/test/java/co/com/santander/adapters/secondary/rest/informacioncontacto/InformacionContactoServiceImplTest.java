@@ -87,7 +87,7 @@ public class InformacionContactoServiceImplTest {
         headers.put("idRequest", "123");
     }
 
-    @Testf
+    @Test
     public void test() {
         Assert.assertNotNull(true);
     }
