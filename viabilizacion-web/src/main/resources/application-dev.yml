@@ -65,3 +65,8 @@ logging:
       com:
         santander:
           clients: DEBUG
+
+keycloak:
+  client:
+    service-name: keycloak
+    url: http://localhost:8080/auth/realms/3scale-api/protocol/openid-connect
