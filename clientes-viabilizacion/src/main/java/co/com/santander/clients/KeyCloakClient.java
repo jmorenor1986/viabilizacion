@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "${keycloak.client.service-name}", url = "${keycloak.client.url}")
 public interface KeyCloakClient {
     @RequestMapping(value = "/token", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseKeyCloakDto> getToken(KeyCloakRequestDto data);
+    ResponseEntity<ResponseKeyCloakDto> getToken(KeyCloakRequestDto data);
 }

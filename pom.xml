@@ -20,6 +20,8 @@
         <swagger.version>2.9.2</swagger.version>
         <guava.version>20.0</guava.version>
         <modelmapper.version>2.3.0</modelmapper.version>
+
+        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
@@ -99,6 +101,7 @@
         <module>bizagi-web</module>
         <module>acceso-datos-logs-viabilizacion</module>
         <module>clientes-viabilizacion</module>
+        <module>feign-oauth-viabilizacion</module>
     </modules>
     <build>
         <pluginManagement>
