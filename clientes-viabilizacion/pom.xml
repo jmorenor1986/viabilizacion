@@ -25,10 +25,9 @@
             <artifactId>slf4j-ext</artifactId>
         </dependency>
         <dependency>
-            <artifactId>feign-oauth-viabilizacion</artifactId>
-            <groupId>co.com.santander</groupId>
-            <version>1.0.6</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5</version>
         </dependency>
-
     </dependencies>
 </project>
