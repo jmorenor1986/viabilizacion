@@ -69,4 +69,7 @@ logging:
 keycloak:
   client:
     service-name: keycloak
-    url: http://localhost:8080/auth/realms/3scale-api/protocol/openid-connect
+    url: http://192.168.0.25:8080/auth/realms/RealmViabilizacion/protocol/openid-connect
+    client-id: cliente_viabilizacion
+    client-secret: c50e3c70-9f8d-4d18-bcb8-b351245b32f8
+    grant-type: client_credentials

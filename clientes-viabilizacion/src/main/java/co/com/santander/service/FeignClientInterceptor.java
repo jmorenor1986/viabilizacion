@@ -24,7 +24,7 @@ public class FeignClientInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         if (!template.url().contains("token")) {
-            ResponseEntity<ResponseKeyCloakDto> result = keyCloakClient.getToken(keyCloakRequestDto);
+            ResponseEntity<ResponseKeyCloakDto> result = keyCloakClient.getToken(keyCloakRequestDto.getParams());
             template.header(AUTHORIZATION_HEADER, String.format("%s %s", TOKEN_TYPE, result.getBody().getAccess_token()));
         }
     }
