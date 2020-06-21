@@ -23,48 +23,12 @@ servicios:
     tipoIdentificacion: CC
     identificacion: 1040
 
-vigia:
-  url: http://vigia-dev-ccf-service.cloudapps.cosanpre.corp
-  service-name: vigia-service
-validarciudad:
-  url: http://acceso-datos-ciudad-web-dev-ccf-common.cloudapps.cosanpre.corp/validacion/v1/
-  service-name: validar-ciudad-service
+
 dictum:
-  url: http://localhost:8080/dictum/
-  service-name: dictum-service
   parametros:
     clave: 06BRZ
     producto: 64
-ubica:
-  url:  http://localhost:8080/ubica/
-  service-name: ubica-service
-reconocer:
-  url: http://localhost:8080/reconocer/
-  service-name: ubica-service
-bizagi:
-  url: http://localhost:8080/bizagi/
-  service-name: bizagi-service
-viabilizacion:
-  principal-request:
-    url: http://jodete-con-tu-ruta-logs.cloudapps.cosanpre.corp/logsViabilizacion/v1/principalrequest
-    service-name: viabilizacion-principal-request
-  log:
-    url: http://jodete-con-tu-ruta-logs.cloudapps.cosanpre.corp/logsViabilizacion/v1/logs
-    service-name: viabilizacion-validar-ciudad
-  servicio:
-    url: http://jodete-con-tu-ruta-logs.cloudapps.cosanpre.corp/logsViabilizacion/v1/servicio
-    service-name: viabilizacion-servicio
-  cache:
-    url: http://jodete-con-tu-ruta-logs.cloudapps.cosanpre.corp/logsViabilizacion/v1/cache
-    service-name: viabilizacion-cache
 
-
-logging:
-  level:
-    co:
-      com:
-        santander:
-          clients: DEBUG
 
 
 keycloak:
