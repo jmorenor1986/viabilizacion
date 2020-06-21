@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "reconocer-service", url = "${reconocer.url}")
 public interface ReconocerClient {
 
-    @RequestMapping(value = "/obtenerToken", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "${reconocer.metodo.consulta-token}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String obtenerToken(@RequestBody GeneralPayload<String> request);
 
-    @RequestMapping(value = "/consultaReconocer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "${reconocer.metodo.consulta-reconocer}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String firmaElectronica(@RequestBody GeneralPayload<String> request);
+
 }

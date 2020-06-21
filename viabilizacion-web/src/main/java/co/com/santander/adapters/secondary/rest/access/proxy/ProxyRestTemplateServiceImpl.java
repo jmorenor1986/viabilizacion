@@ -59,8 +59,18 @@ public class ProxyRestTemplateServiceImpl implements RestService {
         logRequest(servicio, header);
     }
 
+    private String findUrlService(ServicioEnum servicio){
+        Optional<String> url = findUrlService.getUrlFrom(servicio);
+        if(url.isPresent()){
+            return url.get();
+        }else{
+            return "NO_EXISTE_INFORMACION";
+        }
+    }
+
     private void logResponse(String body, ServicioEnum servicio) {
         LogPayload logEntity = filterLogMapper.toLogResponse(servicio, body, getIdRequest());
+        logEntity.setUrl(findUrlService(servicio));
         GeneralPayload< LogPayload > requestLog = GeneralPayload.<LogPayload>builder()
                 .requestBody(logEntity)
                 .build();
@@ -69,12 +79,7 @@ public class ProxyRestTemplateServiceImpl implements RestService {
 
     private void logRequest(ServicioEnum servicio, RequestHeader header ){
     	LogPayload logEntity = filterLogMapper.toLogRequest(servicio, getBody() , getIdRequest());
-    	Optional<String> url = findUrlService.getUrlFrom(servicio);
-    	if(url.isPresent()){
-            logEntity.setUrl(url.get());
-        }else{
-    	    logEntity.setUrl("NO_EXISTE_INFORMACION");
-        }
+    	logEntity.setUrl(findUrlService(servicio));
     	GeneralPayload< LogPayload > requestLog = GeneralPayload.<LogPayload>builder()
                 .requestBody(logEntity)
                 .requestHeader(header)

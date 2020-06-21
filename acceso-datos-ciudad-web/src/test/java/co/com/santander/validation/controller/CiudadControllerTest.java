@@ -6,10 +6,6 @@ import co.com.santander.validation.dto.TraerCiudad;
 import co.com.santander.validation.dto.ValidarCiudad;
 import co.com.santander.validation.entity.Ciudad;
 import co.com.santander.validation.service.CiudadService;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +14,9 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootTest

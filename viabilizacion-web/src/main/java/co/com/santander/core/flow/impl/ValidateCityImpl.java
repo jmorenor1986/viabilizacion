@@ -8,7 +8,6 @@ import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.dto.ciudad.ValidarCiudad;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
-import co.com.santander.ports.primary.FindUrlService;
 import co.com.santander.ports.secondary.solicitud.ValidarCiudadService;
 import lombok.Getter;
 import lombok.Setter;

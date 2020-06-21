@@ -2,10 +2,6 @@ package co.com.santander.validation.service;
 
 import co.com.santander.validation.entity.Ciudad;
 import co.com.santander.validation.service.impl.CiudadServiceImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +9,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootTest

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,11 +25,11 @@ public class KeyCloakRequestDto {
     @JsonProperty("url")
     private String url;
 
-    public Map<String, String> getParams(){
-        Map<String, String> parametros = new HashMap<>();
-        parametros.put("client_secret",getClientSecret());
-        parametros.put("grant_type",getGrantType());
-        parametros.put("client_id",getClientId());
-        return parametros;
+    public MultiValueMap<String, String> getParams() {
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("client_secret", getClientSecret());
+        map.add("grant_type", getGrantType());
+        map.add("client_id", getClientId());
+        return map;
     }
 }

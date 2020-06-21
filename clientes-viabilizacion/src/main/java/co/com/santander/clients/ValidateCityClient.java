@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(value = "validar-ciudad-service", url = "${validarciudad.url}")
 public interface ValidateCityClient {
 
-    @RequestMapping(value = "ciudad/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "${validarciudad.metodo.consultar-ciudad}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseDto consultaCity(@RequestBody GeneralPayload<ValidarCiudad> request);
 }

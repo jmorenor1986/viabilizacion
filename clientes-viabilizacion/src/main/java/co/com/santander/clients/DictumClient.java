@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "dictum-service", url = "${dictum.url}")
 public interface DictumClient {
 
-    @RequestMapping(value = "/consultarHC2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "${dictum.metodo.consultar-dictum}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String consultarHC2(@RequestBody GeneralPayload<RequestDictumDTO> request);
 }

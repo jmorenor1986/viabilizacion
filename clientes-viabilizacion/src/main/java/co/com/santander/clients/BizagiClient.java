@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "${bizagi.service-name}", url = "${bizagi.url}")
 public interface BizagiClient {
 
-
-    @RequestMapping(value = "/bizagi/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "${bizagi.metodo.create-case}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseDto consultarHC2(@RequestBody GeneralPayload<RequestDictumDTO> request);
+
 }

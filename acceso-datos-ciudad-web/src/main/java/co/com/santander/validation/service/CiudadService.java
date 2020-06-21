@@ -1,8 +1,8 @@
 package co.com.santander.validation.service;
 
-import java.util.List;
-
 import co.com.santander.validation.entity.Ciudad;
+
+import java.util.List;
 
 public interface CiudadService {
     Boolean validarCiudad(String nombreCiudad);

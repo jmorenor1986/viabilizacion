@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(value = "${ubica.service-name}", url = "${ubica.url}")
 public interface UbicaClient {
 
-    @RequestMapping(value = "/ubicaService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "${ubica.metodo.consultar-ubica}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String ubicaPostService(@RequestBody GeneralPayload<RequestUbicaDTO> request);
 }

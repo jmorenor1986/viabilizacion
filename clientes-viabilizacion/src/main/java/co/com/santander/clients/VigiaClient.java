@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(value = "${vigia.service-name}", url = "${vigia.url}")
 public interface VigiaClient {
 
-    @RequestMapping(value = "/consultaVigia", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "${vigia.metodo.consultar-vigia}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String consultaVigia(@RequestBody GeneralPayload<VigiaDTO> request);
+
 }
