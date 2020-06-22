@@ -5,6 +5,7 @@ import co.com.santander.adapters.primary.rest.solicitud.dto.SolicitudPayLoad;
 import co.com.santander.core.errors.dto.ConnectionErrorDto;
 import co.com.santander.core.exception.BussinesException;
 import com.google.gson.Gson;
+import feign.FeignException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -53,6 +54,19 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                         .codRespuesta(Long.valueOf("0"))
                         .respuestaServicio(SolicitudPayLoad.builder().solicitud(ex.getRespuesta()).build())
                         .mensajeError("OK")
+                        .build()
+                , HttpStatus.OK);
+    }
+
+    @ExceptionHandler(FeignException.class)
+    public final ResponseEntity<Object> handlerFeignException(FeignException ex, WebRequest request) {
+        return new ResponseEntity<>(
+                ResponsePayLoad.builder()
+                        .codRespuesta(Long.valueOf("3"))
+                        .respuestaServicio(SolicitudPayLoad.builder()
+                                .solicitud("Error de conexion: Url: " + ex.request().url() + " Estado: " + ex.status())
+                                .build())
+                        .mensajeError("Error")
                         .build()
                 , HttpStatus.OK);
     }

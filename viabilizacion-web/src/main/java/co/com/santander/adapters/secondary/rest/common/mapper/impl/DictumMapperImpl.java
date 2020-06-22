@@ -70,6 +70,11 @@ public class DictumMapperImpl extends RestRequestMapper<RequestDictumDTO, Dictum
                 .nombre("ACTIVIDAD")
                 .valor(cliente.getActividad())
                 .build());
+        parametrosList.add(ParametrosDTO.builder()
+                .tipo("T")
+                .nombre("ANIO_NACIMIENTO")
+                .valor(cliente.getAnoNacimiento())
+                .build());
         return parametrosList;
     }
 }

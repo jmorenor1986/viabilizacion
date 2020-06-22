@@ -35,7 +35,7 @@ public class BizagiMapperImpl extends RestRequestMapper<BizagiDTO, BizagiDTO> {
 
     private String getSecondWord(String totalWord){
         String[] wordsArray = totalWord.split(" ");
-        if(wordsArray.length == 0 ){
+        if(wordsArray.length < 2 ){
             return " ";
         }
         return wordsArray[1];
