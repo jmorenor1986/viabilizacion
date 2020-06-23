@@ -44,7 +44,7 @@ public class UbicaServiceImpl extends ServiceRestAbs implements UbicaService {
         Optional<ResponseDto> respuesta = restService.callService(mapper.dtoToRequest(informacionContacto, cliente)
                 , ServicioEnum.UBICA
                 , mapHeaders);
-        if (respuesta.isPresent()) {
+        if (respuesta.isPresent() && "1".equals(respuesta.get().getCodRespuesta())) {
             return buscarRespuestaUbica(respuesta.get().getRespuestaServicio());
         } else {
             return Optional.empty();
