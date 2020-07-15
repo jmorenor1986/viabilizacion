@@ -32,7 +32,7 @@ public class SearchBizagiImpl implements ValidateRequest {
 	public Optional<ResponseFlow> process(Cliente cliente, Long idRequest) {
 		setCliente(cliente);
 		setRequestId(idRequest);
-		callService();
+		//callService();
 		if(Boolean.TRUE.equals(cliente.getVigia())) {
 			return Optional.of(ResponseFlow.PREAPROBADO_CON_DOCUMENTOS);
 		}
