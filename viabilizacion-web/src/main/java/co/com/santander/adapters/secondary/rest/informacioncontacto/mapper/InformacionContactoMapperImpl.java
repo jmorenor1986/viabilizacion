@@ -18,6 +18,7 @@ public class InformacionContactoMapperImpl extends RestRequestMapper<Informacion
                 .primerApellidoBuscar(cliente.getApellidos())
                 //TODO este valor siempre es false o cambia por algun motivo
                 .validarNombre("false")
+                .motivoConsulta("2")
                 .build());
         return result;
     }

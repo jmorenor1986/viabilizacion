@@ -8,5 +8,6 @@ import lombok.Data;
 public class InformacionContactoDTO {
     private String primerApellidoBuscar;
     private String validarNombre;
+    private String motivoConsulta;
     private String token;
 }
