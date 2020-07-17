@@ -61,9 +61,17 @@ public class SearchDictumImpl implements ValidateRequest {
             if (DecisionDictum.SIN_RESPUESTA.equalsIgnoreCase(respuesta.get())
                     || DecisionDictum.ERROR_EN_PROCESO.equalsIgnoreCase(respuesta.get())
                     || DecisionDictum.NEGADO.equalsIgnoreCase(respuesta.get())
-            )
+                ){
+                //Si llega aquí quiere que dictum dio viabilidad para el credito
                 return Boolean.FALSE;
-            //Si llega aquí quiere que dictum dio viabilidad para el credito
+            }
+            //En caso que coincida en vigia se valida si ha sido sido aprobado por dictum
+            if(Boolean.TRUE.equals(getCliente().getVigia())){
+                if(DecisionDictum.APROBADO.equalsIgnoreCase(respuesta.get())){
+                    setRespuestaDictum(DecisionDictum.PREAPROBADO_SIN_DOCUMENTOS);
+                }
+            }
+            getCliente().setDecision(respuesta.get());
             return Boolean.TRUE;
         } else {
             return Boolean.FALSE;

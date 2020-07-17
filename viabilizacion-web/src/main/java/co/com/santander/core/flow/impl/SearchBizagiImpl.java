@@ -36,7 +36,7 @@ public class SearchBizagiImpl implements ValidateRequest {
 		if(Boolean.TRUE.equals(cliente.getVigia())) {
 			return Optional.of(ResponseFlow.PREAPROBADO_CON_DOCUMENTOS);
 		}
-		return Optional.of(ResponseFlow.FAST_TRACK);
+		return Optional.of(ResponseFlow.APROBADO);
 	}
 
 	private void callService(){
