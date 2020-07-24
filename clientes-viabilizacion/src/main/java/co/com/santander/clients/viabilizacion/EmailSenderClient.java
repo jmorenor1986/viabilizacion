@@ -1,11 +1,9 @@
 package co.com.santander.clients.viabilizacion;
 
 import co.com.santander.dto.generic.GeneralPayload;
-import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.dto.mail.MailPayload;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -13,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface EmailSenderClient {
 
     @PostMapping(value = "/email/v1/email/sendEmail", produces = MediaType.APPLICATION_JSON_VALUE , consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<ResponseDto> sendMail(@RequestBody GeneralPayload<MailPayload> payload);
+    String sendMail(@RequestBody GeneralPayload<MailPayload> payload);
 }

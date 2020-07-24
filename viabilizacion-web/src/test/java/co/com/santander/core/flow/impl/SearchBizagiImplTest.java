@@ -4,6 +4,7 @@ import co.com.santander.adapters.secondary.rest.bizagi.BizagiServiceImpl;
 import co.com.santander.core.domain.solicitud.Cliente;
 import co.com.santander.core.flow.ValidateRequest;
 import co.com.santander.core.response.ResponseFlow;
+import co.com.santander.ports.secondary.solicitud.EnvioCorreoService;
 import co.com.santander.utils.impl.GenerateUniqueIdImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,17 +21,18 @@ public class SearchBizagiImplTest {
 
 	private GenerateUniqueIdImpl generateUniqueId;
 	
-	@Mock
-	private Cliente cliente;
+
 	@Mock
 	private BizagiServiceImpl bizagiService;
+	@Mock
+	private EnvioCorreoService envioCorreoService;
 
 	private Long requestId;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		validateRequest = new SearchBizagiImpl(bizagiService);
+		validateRequest = new SearchBizagiImpl(bizagiService, envioCorreoService);
 		generateUniqueId = new GenerateUniqueIdImpl();
 
 	}
@@ -38,6 +40,9 @@ public class SearchBizagiImplTest {
 	@Test
 	public void testSearchReconocerImplSuccess() {
 		requestId = Long.valueOf("1");
+		Cliente cliente = Cliente.builder()
+				.decisionFinal(ResponseFlow.PREAPROBADO_SIN_DOCUMENTOS)
+				.build();
 		String result = validateRequest.process(cliente, requestId).orElse(ResponseFlow.NEGADO).toString();
 		Assert.assertNotNull(result);
 	}

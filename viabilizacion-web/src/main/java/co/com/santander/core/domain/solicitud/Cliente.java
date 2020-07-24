@@ -1,5 +1,6 @@
 package co.com.santander.core.domain.solicitud;
 
+import co.com.santander.core.response.ResponseFlow;
 import co.com.santander.dto.generic.RequestHeader;
 import lombok.*;
 
@@ -33,5 +34,7 @@ public class Cliente {
     private Boolean validaUbica;
 
     private RequestHeader requestHeader;
+
+    private ResponseFlow decisionFinal;
     
 }

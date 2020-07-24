@@ -3,6 +3,7 @@ package co.com.santander.adapters.secondary.rest.access.impl;
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.clients.*;
+import co.com.santander.clients.viabilizacion.EmailSenderClient;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
@@ -32,12 +33,14 @@ public class RestServiceImplTest {
     @Mock
     private BizagiClient bizagiClient;
     @Mock
+    private EmailSenderClient emailSenderClient;
+    @Mock
     private JsonUtilities jsonUtilities;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        restService = new RestServiceImpl(jsonUtilities, validateCityClient, vigiaClient, dictumClient, reconocerClient, ubicaClient, bizagiClient);
+        restService = new RestServiceImpl(jsonUtilities, validateCityClient, vigiaClient, dictumClient, reconocerClient, ubicaClient, bizagiClient, emailSenderClient);
         Mockito.when(validateCityClient.consultaCity(Mockito.any())).thenReturn(ResponseDto.builder().build());
         Mockito.when(jsonUtilities.getGeneralResponse(Mockito.any())).thenReturn(ResponseDto.builder().build());
         Mockito.when(bizagiClient.consultarHC2(Mockito.any())).thenReturn(ResponseDto.builder().build());

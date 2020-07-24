@@ -3,9 +3,11 @@ package co.com.santander.adapters.secondary.rest.access.impl;
 import co.com.santander.adapters.secondary.rest.access.RestService;
 import co.com.santander.adapters.secondary.rest.common.JsonUtilities;
 import co.com.santander.clients.*;
+import co.com.santander.clients.viabilizacion.EmailSenderClient;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
+import io.vavr.control.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ public class RestServiceImpl implements RestService {
     private final ReconocerClient reconocerClient;
     private final UbicaClient ubicaClient;
     private final BizagiClient bizagiClient;
+    private final EmailSenderClient emailSenderClient;
     private final JsonUtilities jsonUtilities;
 
     @Autowired
@@ -29,7 +32,8 @@ public class RestServiceImpl implements RestService {
             , DictumClient dictumClient
             , ReconocerClient reconocerClient
             , UbicaClient ubicaClient
-            , BizagiClient bizagiClient) {
+            , BizagiClient bizagiClient
+            , EmailSenderClient emailSenderClient) {
         this.jsonUtilities = jsonUtilities;
         this.validateCityClient = validateCityClient;
         this.vigiaClient = vigiaClient;
@@ -37,6 +41,7 @@ public class RestServiceImpl implements RestService {
         this.reconocerClient = reconocerClient;
         this.ubicaClient = ubicaClient;
         this.bizagiClient = bizagiClient;
+        this.emailSenderClient = emailSenderClient;
     }
 
     @Override
@@ -50,7 +55,7 @@ public class RestServiceImpl implements RestService {
                 return Optional.of(validateCityClient.consultaCity(request));
             case VIGIA:
                 String rta_vigia = vigiaClient.consultaVigia(request);
-                return Optional.of( jsonUtilities.getGeneralResponse(rta_vigia) );
+                return Optional.of(jsonUtilities.getGeneralResponse(rta_vigia));
             case DICTUM:
                 String rta = dictumClient.consultarHC2(request);
                 return Optional.of(jsonUtilities.getGeneralResponse(rta));
@@ -65,6 +70,9 @@ public class RestServiceImpl implements RestService {
                 return Optional.of(jsonUtilities.getGeneralResponse(rta_ubica));
             case BIZAGI:
                 return Optional.of(bizagiClient.consultarHC2(request));
+            case EMAIL_SENDER:
+                String rta_email = emailSenderClient.sendMail(request);
+                return Optional.of(jsonUtilities.getGeneralResponse(rta_email));
             default:
                 return Optional.empty();
         }
