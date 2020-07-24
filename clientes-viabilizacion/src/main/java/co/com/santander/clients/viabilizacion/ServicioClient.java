@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "${viabilizacion.servicio.service-name}", url = "${viabilizacion.servicio.url}")
 public interface ServicioClient {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<ResponseDto> findServiceByService(@RequestBody GeneralPayload<ServicioEnum> servicio);
 
 }

@@ -15,3 +15,6 @@ VALUES (5,'Servicio Ubica','UBICA',30);
 
 INSERT INTO servicio (id,descripcion,nombre,vigencia)
 VALUES (6,'Servicio Bizagi','BIZAGI',0);
+
+INSERT INTO servicio (id,descripcion,nombre,vigencia)
+VALUES (7,'Servicio Correo','EMAIL_SENDER',0);

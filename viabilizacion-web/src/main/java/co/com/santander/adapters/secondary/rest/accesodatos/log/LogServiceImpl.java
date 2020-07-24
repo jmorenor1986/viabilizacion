@@ -84,7 +84,9 @@ public class LogServiceImpl implements LogService {
                 FlowOperationEnum.INVOKE_RECONOCER_REQUEST.equals(servicioEnum) ||
                 FlowOperationEnum.INVOKE_RECONOCER_RESPONSE.equals(servicioEnum) ||
                 FlowOperationEnum.INVOKE_UBICA_REQUEST.equals(servicioEnum) ||
-                FlowOperationEnum.INVOKE_UBICA_RESPONSE.equals(servicioEnum)
+                FlowOperationEnum.INVOKE_UBICA_RESPONSE.equals(servicioEnum) ||
+                FlowOperationEnum.EMAIL_SENDER_REQUEST.equals(servicioEnum) ||
+                FlowOperationEnum.EMAIL_SENDER_RESPONSE.equals(servicioEnum)
         ) {
             return Boolean.TRUE;
         }
@@ -104,6 +106,8 @@ public class LogServiceImpl implements LogService {
             return ServicioEnum.UBICA;
         } else if (FlowOperationEnum.CASO_BIZAGI.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.BIZAGI;
+        } else if (FlowOperationEnum.EMAIL_SENDER.equals(operationEnum) || FlowOperationEnum.EMAIL_SENDER_REQUEST.equals(operationEnum) || FlowOperationEnum.EMAIL_SENDER_RESPONSE.equals(operationEnum)) {
+            return ServicioEnum.EMAIL_SENDER;
         }
         return ServicioEnum.NO_APLICA;
     }

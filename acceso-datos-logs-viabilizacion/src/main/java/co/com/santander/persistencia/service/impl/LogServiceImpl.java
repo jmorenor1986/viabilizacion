@@ -103,6 +103,8 @@ public class LogServiceImpl implements LogService {
             return ServicioEnum.RECONOCER;
         } else if (FlowOperationEnum.CASO_BIZAGI.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_REQUEST.equals(operationEnum) || FlowOperationEnum.CASO_BIZAGI_RESPONSE.equals(operationEnum)) {
             return ServicioEnum.BIZAGI;
+        } else if (FlowOperationEnum.EMAIL_SENDER.equals(operationEnum) || FlowOperationEnum.EMAIL_SENDER_REQUEST.equals(operationEnum) || FlowOperationEnum.EMAIL_SENDER_RESPONSE.equals(operationEnum)) {
+            return ServicioEnum.EMAIL_SENDER;
         }
         return ServicioEnum.NO_APLICA;
     }

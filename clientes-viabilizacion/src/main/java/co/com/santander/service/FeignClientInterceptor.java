@@ -4,6 +4,7 @@ import co.com.santander.dto.keycloak.KeyCloakRequestDto;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,10 +18,13 @@ public class FeignClientInterceptor implements RequestInterceptor {
 
     @Autowired
     private KeyCloakRequestDto keyCloakRequestDto;
+    @Value("${vaibilizacion.token-active}")
+    private String activeToken;
 
     @Override
     public void apply(RequestTemplate template) {
-        if (!template.url().contains("token")) {
+        System.out.println(activeToken);
+        if ( "true".equals(activeToken)  && !template.url().contains("token")) {
             template.header(AUTHORIZATION_HEADER, String.format("%s %s", TOKEN_TYPE, tokenService.getToken()));
         }
     }

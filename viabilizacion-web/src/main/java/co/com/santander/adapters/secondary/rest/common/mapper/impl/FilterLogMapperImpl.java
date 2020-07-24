@@ -75,6 +75,8 @@ public class FilterLogMapperImpl implements FilterLogMapper {
                 return type.equals(REQUEST_TYPE.REQUEST_TYPE) ? FlowOperationEnum.INVOKE_UBICA_REQUEST : FlowOperationEnum.INVOKE_UBICA_RESPONSE;
             case BIZAGI:
                 return type.equals(REQUEST_TYPE.REQUEST_TYPE) ? FlowOperationEnum.CASO_BIZAGI_REQUEST : FlowOperationEnum.CASO_BIZAGI_RESPONSE;
+            case EMAIL_SENDER:
+                return type.equals(REQUEST_TYPE.REQUEST_TYPE) ? FlowOperationEnum.EMAIL_SENDER_REQUEST : FlowOperationEnum.EMAIL_SENDER_RESPONSE;
             default:
                 return FlowOperationEnum.NO_APLICA;
         }

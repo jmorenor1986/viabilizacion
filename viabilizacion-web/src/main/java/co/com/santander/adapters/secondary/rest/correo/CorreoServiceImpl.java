@@ -29,7 +29,7 @@ public class CorreoServiceImpl implements EnvioCorreoService {
     @Override
     public Optional<String> envioCorreo(Cliente cliente, Long idRequest) {
         GeneralPayload<MailPayload> request = correoMapper.dtoToRequest(cliente);
-        restService.callService(request, ServicioEnum.EMAIL_SENDER,null);
+        restService.callService(request, ServicioEnum.EMAIL_SENDER,Optional.empty());
         return Optional.empty();
     }
 }
