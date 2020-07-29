@@ -7,7 +7,6 @@ import co.com.santander.clients.viabilizacion.EmailSenderClient;
 import co.com.santander.dto.generic.GeneralPayload;
 import co.com.santander.dto.generic.ResponseDto;
 import co.com.santander.dto.viabilizacion.constants.ServicioEnum;
-import io.vavr.control.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

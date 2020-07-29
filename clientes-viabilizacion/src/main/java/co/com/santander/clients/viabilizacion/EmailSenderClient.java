@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "${viabilizacion.email.service-name}", url = "${viabilizacion.email.url}")
 public interface EmailSenderClient {
 
-    @PostMapping(value = "/v1/email/sendEmail", produces = MediaType.APPLICATION_JSON_VALUE , consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/email/v1/email/sendEmail", produces = MediaType.APPLICATION_JSON_VALUE , consumes = MediaType.APPLICATION_JSON_VALUE)
     String sendMail(@RequestBody GeneralPayload<MailPayload> payload);
 }
