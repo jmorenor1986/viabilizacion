@@ -52,6 +52,7 @@ public class SearchDictumImpl implements ValidateRequest {
             getCliente().setDecision(respuestaDictum);
             return validateRequest.process(getCliente(), idRequest);
         }
+        getCliente().setDecisionFinal( ResponseFlow.evaluaRespuesta( "NEGADO" ));
         throw new BusinessDeniedRequestException(ServicioEnum.DICTUM, ResponseFlow.NEGADO.toString(), cliente, idRequest );
     }
 
