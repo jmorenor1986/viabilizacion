@@ -15,6 +15,7 @@ public class CorreoMapperImpl implements CorreoMapper {
         MailPayload body = MailPayload.builder()
                 .decision(cliente.getDecision())
                 .emailTO(cliente.getCorreoElectronico())
+                .numberRequest(cliente.getRequestHeader().getNumeroSolicitudCredito())
                 .customer(CustomerPayload.builder()
                         .firstName(cliente.getNombres())
                         .lastName(cliente.getApellidos())
