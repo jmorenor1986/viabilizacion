@@ -13,7 +13,7 @@ public class CorreoMapperImpl implements CorreoMapper {
     @Override
     public GeneralPayload<MailPayload> dtoToRequest(Cliente cliente) {
         MailPayload body = MailPayload.builder()
-                .decision(cliente.getDecision())
+                .decision(cliente.getDecisionFinal().toString())
                 .emailTO(cliente.getCorreoElectronico())
                 .numberRequest(cliente.getRequestHeader().getNumeroSolicitudCredito())
                 .customer(CustomerPayload.builder()
