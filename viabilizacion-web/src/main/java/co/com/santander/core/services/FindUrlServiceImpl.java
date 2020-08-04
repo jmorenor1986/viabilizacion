@@ -42,6 +42,11 @@ public class FindUrlServiceImpl implements FindUrlService {
     @Value("${bizagi.metodo.create-case}")
     private String BIZAGI_MT_CREATE_CASE;
 
+    @Value("${viabilizacion.email.url}")
+    private String EMAIL_SENDER;
+    @Value("${viabilizacion.email.metodo}")
+    private String EMAIL_SENDER_SENDMAIL;
+
 
     @Override
     public Optional<String> getUrlFrom(ServicioEnum servicio) {
@@ -59,6 +64,8 @@ public class FindUrlServiceImpl implements FindUrlService {
             return Optional.of(RECONOCER.concat(RECONOCER_MT_TOKEN));
         }else if(ServicioEnum.BIZAGI.equals(servicio)) {
             return Optional.of(BIZAGI.concat(BIZAGI_MT_CREATE_CASE));
+        }else if(ServicioEnum.EMAIL_SENDER.equals(servicio)){
+            return Optional.of(EMAIL_SENDER.concat(EMAIL_SENDER_SENDMAIL));
         }
         return Optional.empty();
     }

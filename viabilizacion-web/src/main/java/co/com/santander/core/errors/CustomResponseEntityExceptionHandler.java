@@ -3,9 +3,12 @@ package co.com.santander.core.errors;
 import co.com.santander.adapters.primary.rest.solicitud.dto.ResponsePayLoad;
 import co.com.santander.adapters.primary.rest.solicitud.dto.SolicitudPayLoad;
 import co.com.santander.core.errors.dto.ConnectionErrorDto;
+import co.com.santander.core.exception.BusinessDeniedRequestException;
 import co.com.santander.core.exception.BussinesException;
+import co.com.santander.ports.secondary.solicitud.EnvioCorreoService;
 import com.google.gson.Gson;
 import feign.FeignException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,6 +20,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 @RestController
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @Autowired
+    private EnvioCorreoService envioCorreoService;
+
 
     @SuppressWarnings("rawtypes")
     @ExceptionHandler(Exception.class)
@@ -69,5 +76,18 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                         .mensajeError("Error")
                         .build()
                 , HttpStatus.OK);
+    }
+
+    @ExceptionHandler(BusinessDeniedRequestException.class)
+    public final ResponseEntity<Object> handlerBusinessDeniedRequestException(BusinessDeniedRequestException ex, WebRequest request) {
+        envioCorreoService.envioCorreo(ex.getCliente(), ex.getIdRequest());
+        return new ResponseEntity<>(
+                ResponsePayLoad.builder()
+                        .codRespuesta(Long.valueOf("0"))
+                        .respuestaServicio(SolicitudPayLoad.builder().solicitud(ex.getRespuesta()).build())
+                        .mensajeError("OK")
+                        .build()
+                , HttpStatus.OK);
+
     }
 }
