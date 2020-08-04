@@ -85,7 +85,7 @@ public class InformacionContactoServiceImpl extends ServiceRestAbs implements In
                 .value(idRequest.toString())
                 .build());
         Optional<ResponseDto> response = restService.callService(requestToken, ServicioEnum.TOKEN_RECONOCER, headersMap);
-        if (response.isPresent()) {
+        if (response.isPresent() && "1".equalsIgnoreCase(response.get().getCodRespuesta())) {
             setTokenReconocer(extractTokenReconocer(response.get().getRespuestaServicio()));
         } else {
             return Boolean.FALSE;

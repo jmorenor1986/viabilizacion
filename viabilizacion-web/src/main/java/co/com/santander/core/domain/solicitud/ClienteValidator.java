@@ -51,7 +51,7 @@ public class ClienteValidator extends GenericValidator<Cliente> {
     private boolean validateCanalOrigen(Cliente dto){
         if("1".equalsIgnoreCase(dto.getCanalOrigen())){
             BigInteger valorSolicitado = new BigInteger(dto.getValorSolicitado());
-            if(valorSolicitado.compareTo(new BigInteger(VALOR_MAXIMO_SOLICTADO)) ==1){
+            if(valorSolicitado.compareTo(new BigInteger(VALOR_MAXIMO_SOLICTADO)) == 1){
                 DecimalFormat formatter = new DecimalFormat("###,###.##");
                 String valor = formatter.format( new BigInteger(dto.getValorSolicitado() ) );
                 throw new BusinessException(String.format(MESSAGE_CANAL_ORIGEN, valor , dto.getCanalOrigen()) ,CODE_MANDATORY);
