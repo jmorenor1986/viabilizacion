@@ -77,21 +77,23 @@ public class InformacionContactoServiceImpl extends ServiceRestAbs implements In
     }
 
     private Boolean generateTokenServiceReconocer(Cliente cliente, Long idRequest) {
-        GeneralPayload<String> requestToken = GeneralPayload.<String>builder()
-                .requestHeader(mapper.setHeader(cliente.getRequestHeader()))
-                .build();
-        Optional<Map<String, String>> headersMap = CreateHeadersMap.generateMap(HeaderDto.builder()
-                .key("idRequest")
-                .value(idRequest.toString())
-                .build());
-        Optional<ResponseDto> response = restService.callService(requestToken, ServicioEnum.TOKEN_RECONOCER, headersMap);
-        if (response.isPresent() && "1".equalsIgnoreCase(response.get().getCodRespuesta())) {
-            setTokenReconocer(extractTokenReconocer(response.get().getRespuestaServicio()));
-        } else {
+        try {
+            GeneralPayload<String> requestToken = GeneralPayload.<String>builder()
+                    .requestHeader(mapper.setHeader(cliente.getRequestHeader()))
+                    .build();
+            Optional<Map<String, String>> headersMap = CreateHeadersMap.generateMap(HeaderDto.builder()
+                    .key("idRequest")
+                    .value(idRequest.toString())
+                    .build());
+            Optional<ResponseDto> response = restService.callService(requestToken, ServicioEnum.TOKEN_RECONOCER, headersMap);
+            if (response.isPresent() && "1".equalsIgnoreCase(response.get().getCodRespuesta())) {
+                setTokenReconocer(extractTokenReconocer(response.get().getRespuestaServicio()));
+            } else {
+                return Boolean.FALSE;
+            }
+            return Boolean.TRUE;
+        } catch (Exception e) {
             return Boolean.FALSE;
         }
-        return Boolean.TRUE;
     }
-
-
 }
