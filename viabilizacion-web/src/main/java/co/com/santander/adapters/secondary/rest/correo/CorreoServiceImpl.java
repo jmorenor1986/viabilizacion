@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -28,8 +30,10 @@ public class CorreoServiceImpl implements EnvioCorreoService {
 
     @Override
     public Optional<String> envioCorreo(Cliente cliente, Long idRequest) {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("idRequest", idRequest.toString());
         GeneralPayload<MailPayload> request = correoMapper.dtoToRequest(cliente);
-        restService.callService(request, ServicioEnum.EMAIL_SENDER,Optional.empty());
+        restService.callService(request, ServicioEnum.EMAIL_SENDER,Optional.of(headers));
         return Optional.empty();
     }
 }
